@@ -39,11 +39,11 @@ O diagrama foi desenhado no GUI do **CORE**, para efeitos de ilustração, mas a
 
 Para gerar tráfego de exemplo, utilizamos também as funcionalidades do **Mininet**. Para fazer isso simulamos as diferentes caraterísticas dos três tipos de tráfego pedidos como exemplo.
 
-- VoIP precisa de baixa largura de banda, mas precisa de baixa latência e jitter.
+- VoIP requer baixa largura de banda, mas precisa de baixa latência e jitter.
 - Streaming precisa de uso alto de largura de banda e jitter moderado.
-- Transferência de Dados não tem limite fixo (best effort), mas não permite perdas.
+- Dados em massa não permitem perdas.
 
-Com essas carateristicas, fazemos um iperf que obriga o uso específico desses três casos para funcionar como um exemplo válido de tráfego.
+Com essas carateristicas, iazemos um iperf que obriga o uso específico desses três casos para funcionar como um exemplo válido de tráfego.
 
 - VoIP: iperf -u -b 100K
 - Streaming: iperf -u -b 5M
