@@ -5,27 +5,31 @@
 Para este trabalho, decidimos focar-nos nos seguintes aspetos de QoS:
 
 - Classificação
+- Controlo de Acesso
 - Policiamento
 - Monitorização
-- Controlo de Acesso
 
-O objetivo principal de definir estas VNFs será priorizar _streaming_ local de vídeos.
+O objetivo principal de definir estas VNFs é priorizar _streaming_ local de vídeos.
 
 ### VNF de Classificação
 
-Para aplicar estes aspetos a nossa ideia para a aplicação iniciaria com a identificação de cada pacote de tráfego com o IP de origem/destino, tamanho, TTL e distinguir o seu protocolo (HTTP, TCP, RTP), utilizando a ferramenta _Scapy_ em Python, com o objetivo de priorizar pacotes menores e protocolos relacionados com _streaming_ tal como RTP.
-
-### VNF de Policiamento
-
-De seguida, para testar o _streaming_ de um vídeo com alguma limitação, iremos utilizar a ferramenta `tc` já definida no Linux para entender os comportamentos ao aplicar atraso num pacote ou limitar o débito no recetor.
-
-### VNF de Monitorização
-
-Para monitorizar o tráfego a aplicação será responsável pela medição de métricas como débito, perda de pacotes e delay utilizando a ferramenta _Prometheus_ e visualizando os resultados através do _Grafana_.
+Para aplicar estes aspetos, a aplicação inicia com a identificação de cada pacote de tráfego com o IP de origem/destino, tamanho, TTL e distingue o seu protocolo (HTTP, TCP, RTP), utilizando a ferramenta _Scapy_ em Python, com o objetivo de priorizar pacotes menores e protocolos relacionados com _streaming_ tal como RTP.
 
 ### VNF de Controlo de Acesso
 
-Para dar prioridade a tráfego necessário para _streaming_, e com a informação definida pela VNF de Classificação, será implementada uma _firewall_ virtual que será então responsável por dar prioridade a esses pacotes como RTP e, no caso de _streaming_ para um website, HTTP.
+Para dar prioridade a tráfego necessário para _streaming_, e com a informação definida pela VNF de Classificação, é implementada uma _firewall_ virtual que é então responsável por dar prioridade a esses pacotes como RTP e, no caso de _streaming_ para um website, HTTP.
+
+### VNF de Policiamento
+
+De seguida, para testar o _streaming_ de um vídeo com alguma limitação, utilizamos a ferramenta `tc` já definida no Linux para entender os comportamentos ao aplicar atraso num pacote ou limitar o débito no recetor.
+
+### VNF de Monitorização
+
+Para monitorizar o tráfego a aplicação é responsável pela medição de métricas como débito, perda de pacotes e delay utilizando a ferramenta _Prometheus_ e visualizando os resultados através do _Grafana_.
+
+## Cadeia da Arquitetura
+
+Assim, a cadeia de VNFs é **Classificação -> Controlo de Acesso -> Policiamento -> Monitorização**. 
 
 ## Topologia
 
@@ -43,7 +47,7 @@ Para gerar tráfego de exemplo, utilizamos também as funcionalidades do **Minin
 - Streaming precisa de uso alto de largura de banda e jitter moderado.
 - Dados em massa não permitem perdas.
 
-Com essas carateristicas, iazemos um iperf que obriga o uso específico desses três casos para funcionar como um exemplo válido de tráfego.
+Com essas carateristicas, fazemos um iperf que obriga o uso específico desses três casos para funcionar como um exemplo válido de tráfego.
 
 - VoIP: iperf -u -b 100K
 - Streaming: iperf -u -b 5M
