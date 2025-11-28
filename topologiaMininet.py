@@ -7,6 +7,7 @@ from mininet.cli import CLI
 from mininet.log import setLogLevel, info
 import ipaddress
 import time
+import sys
 from collections import deque, defaultdict
 
 
@@ -306,7 +307,7 @@ def ip_assign(net):
     info("*** Routing installed\n")
 
 
-def run():
+def run(flag):
     topo = Topology()
     net = Mininet(topo=topo, controller=None)
     net.start()
@@ -319,9 +320,10 @@ def run():
         info(net.get(r).cmd("ip -4 addr show"))
         info(net.get(r).cmd("ip route show"))
 
-    info("\n*** Running pingAll\n")
-    loss = net.pingAll()
-    info(f"PingAll loss = {loss}%\n")
+    if flag == "test":
+        info("\n*** Running pingAll\n")
+        loss = net.pingAll()
+        info(f"PingAll loss = {loss}%\n")
 
     CLI(net)
     net.stop()
@@ -329,4 +331,5 @@ def run():
 
 if __name__ == "__main__":
     setLogLevel("info")
-    run()
+    flag = sys.argv[1] if len(sys.argv) > 1 else None
+    run(flag)
