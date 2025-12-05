@@ -2,7 +2,7 @@
 import subprocess
 import time
 
-BRIDGE = "br0"
+BRIDGE = "s1"
 
 def run(cmd):
     print("[Classifier]", cmd)
