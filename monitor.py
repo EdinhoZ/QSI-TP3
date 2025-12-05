@@ -1,144 +1,84 @@
 #!/usr/bin/env python3
-
 import time
-import threading
-import os
-import sys
-from scapy.all import sniff
-from collections import defaultdict
+import logging
+import argparse
 from prometheus_client import Gauge, start_http_server
+from pysflow import SFlowReceiver, SFlowDatagram
 
-# === Optional: Redirect logs to file ===
-# LOGFILE = "monitor.log"
-# log_file = open(LOGFILE, "a", buffering=1)  # line-buffered
-# sys.stdout = log_file
-# sys.stderr = log_file
-# =======================================
-
-# Configuration
-
-def get_first_iface():
-    for iface in os.listdir("/sys/class/net"):
-        if iface != "lo":
-            return iface
-    return None
-
-INTERFACE = get_first_iface()
 SCRAPE_PORT = 9100
-STATS_INTERVAL = 1
+STATS_INTERVAL = 1  # (segundos)
+LOGFILE = "monitor.log"
 
-# Prometheus Gauges
 throughput_g = Gauge("vnf_throughput_mbps", "Total throughput (Mbps)")
-delay_g      = Gauge("vnf_delay_ms",        "Estimated packet delay (ms)")
-jitter_g     = Gauge("vnf_jitter_ms",       "Estimated jitter (ms)")
-loss_g       = Gauge("vnf_loss_rate",       "Estimated loss ratio")
+flow_count_g = Gauge("vnf_flow_count", "Number of active flows")
+avg_packet_size_g = Gauge("vnf_avg_packet_size_bytes", "Average packet size in bytes")
 
-# Internal monitoring storage
-flow_last_timestamp = defaultdict(lambda: None)
-flow_packet_count   = defaultdict(int)
-flow_expected_count = defaultdict(int)
-flow_last_delay = defaultdict(float)
-flow_last_jitter = defaultdict(float)
+logging.basicConfig(filename=LOGFILE, level=logging.INFO,
+                    format='[%(asctime)s] %(message)s', datefmt='%H:%M:%S')
 
-def get_stats():
-    stats = {}
-    with open("/proc/net/dev") as f:
-        for line in f:
-            if INTERFACE in line:
-                parts = line.split()
-                stats["rx_bytes"] = int(parts[1])
-                stats["rx_packets"] = int(parts[2])
-                stats["tx_bytes"] = int(parts[9])
-                stats["tx_packets"] = int(parts[10])
-                return stats
-    return None
 
-# Packet processing (Scapy)
-def process_packet(pkt):
-    now = time.time()
-    if "IP" in pkt:
-        ip = pkt["IP"]
-        flow_id = (ip.src, ip.dst, ip.proto)
+class Monitor:
+    def __init__(self):
+        self.total_bytes = 0
+        self.total_packets = 0
+        self.flow_counts = {}
+        self.last_time = time.time()
 
-        # Update packet counts
-        flow_packet_count[flow_id] += 1
-        flow_expected_count[flow_id] += 1  # Simplified for demo
+    def handle_sflow(self, datagram: SFlowDatagram):
+        for flow_sample in datagram.flow_samples:
+            for record in flow_sample.flow_records:
+                if hasattr(record, 'header_protocol'):
+                    # contar pacotes IP
+                    if record.header_protocol in ('IP', 'IPv4', 'IPv6'):
+                        self.total_bytes += record.header_len
+                        self.total_packets += 1
+                        key = (record.src_ip, record.dst_ip)
+                        self.flow_counts[key] = self.flow_counts.get(key, 0) + 1
 
-        # Delay estimate
+    def export_metrics(self):
+        now = time.time()
+        interval = now - self.last_time
+        if interval <= 0:
+            interval = 1
 
-        last_timestamp = flow_last_timestamp[flow_id]
+        throughput_mbps = (self.total_bytes * 8) / (interval * 1e6)
+        throughput_g.set(throughput_mbps)
 
-        if last_timestamp is not None:
-            inter_arrival = now - last_timestamp # in seconds
-            estimated_delay = inter_arrival * 1000  # ms
+        flow_count_g.set(len(self.flow_counts))
 
-            flow_last_delay[flow_id] = estimated_delay
-            flow_last_timestamp[flow_id] = now
+        avg_packet_size = self.total_bytes / max(self.total_packets, 1)
+        avg_packet_size_g.set(avg_packet_size)
 
-            # Jitter estimate
-            old_jitter = flow_last_jitter[flow_id]
-            diff = abs(estimated_delay - old_jitter)
-            new_jitter = old_jitter + (diff - old_jitter) / 16.0
-            flow_last_jitter[flow_id] = new_jitter
-        else:
-            # First packet
-            flow_last_timestamp[flow_id] = now
+        logging.info(f"Throughput: {throughput_mbps:.3f} Mbps | "
+                     f"Flows: {len(self.flow_counts)} | "
+                     f"Avg pkt size: {avg_packet_size:.1f} bytes")
 
-# Scapy sniffer thread
-def start_sniffer():
-    sniff(iface=INTERFACE, prn=process_packet, store=False)
+        self.total_bytes = 0
+        self.total_packets = 0
+        self.flow_counts.clear()
+        self.last_time = now
 
-def monitor_loop():
-    prev = get_stats()
-    print("[Monitor] Started monitoring loop")
-    
-    while True:
-        time.sleep(STATS_INTERVAL)
-        curr = get_stats()
-
-        if not curr or not prev:
-            continue
-
-        # Throughput (Mbps)
-        rx_rate = (curr["rx_bytes"] - prev["rx_bytes"]) * 8 / STATS_INTERVAL
-        tx_rate = (curr["tx_bytes"] - prev["tx_bytes"]) * 8 / STATS_INTERVAL
-        total_mbps = (rx_rate + tx_rate) / 1e6
-
-        avg_delay = 0.0
-        avg_jitter = 0.0
-        avg_loss = 0.0
-
-        flows = len(flow_packet_count)
-        if flows > 0:
-            avg_delay = sum(flow_last_delay.values()) / flows
-            avg_jitter = sum(flow_last_jitter.values()) / flows
-
-            delivered = sum(flow_packet_count.values())
-            expected = sum(flow_expected_count.values())
-
-            if expected > 0:
-                avg_loss = 1 - (delivered / expected)
-
-        # Prometheus exports
-        throughput_g.set(total_mbps)
-        delay_g.set(avg_delay)
-        jitter_g.set(avg_jitter)
-        loss_g.set(avg_loss)
-
-        # Debug print
-        print(
-            f"[Monitor] Throughput: {total_mbps:.3f} Mbps, "
-            f"Delay: {avg_delay:.2f} ms, Jitter: {avg_jitter:.2f} ms, "
-            f"Loss: {avg_loss:.4f}"
-        )
-
-        prev = curr
-
-if __name__ == "__main__":
-    print("[Monitor] Initializing...")
+def main(listen_addr: str, listen_port: int):
+    monitor = Monitor()
 
     start_http_server(SCRAPE_PORT)
-    sniffer_thread = threading.Thread(target=start_sniffer, daemon=True)
-    sniffer_thread.start()
-    
-    monitor_loop()
+    logging.info(f"[Monitor] Prometheus metrics exposed on port {SCRAPE_PORT}")
+
+    receiver = SFlowReceiver(host=listen_addr, port=listen_port, handler=monitor.handle_sflow)
+    receiver.start()
+    logging.info(f"[Monitor] Listening for sFlow datagrams on {listen_addr}:{listen_port}")
+
+    try:
+        while True:
+            time.sleep(STATS_INTERVAL)
+            monitor.export_metrics()
+    except KeyboardInterrupt:
+        logging.info("[Monitor] Stopping...")
+        receiver.stop()
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="sFlow-based monitor VNF")
+    parser.add_argument("--addr", default="0.0.0.0", help="IP address to listen for sFlow")
+    parser.add_argument("--port", default=6343, type=int, help="UDP port for sFlow datagrams")
+    args = parser.parse_args()
+    main(args.addr, args.port)

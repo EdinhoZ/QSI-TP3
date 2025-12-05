@@ -10,7 +10,6 @@ import time
 import sys
 from collections import deque, defaultdict
 
-
 class Router(Node):
     def config(self, **params):
         super().config(**params)
@@ -20,18 +19,12 @@ class Router(Node):
         self.cmd("sysctl net.ipv4.ip_forward=0")
         super().terminate()
 
-
 class Topology(Topo):
 
     def build(self):
-
-        # Create routers
-
         routers = {}
         for r in ["r1", "r2", "r3", "r4", "r5"]:
             routers[r] = self.addNode(r, cls=Router)
-
-        # Create switches and hosts
 
         # r1 LAN
         s1 = self.addSwitch("s1", cls=OVSBridge)
@@ -58,8 +51,6 @@ class Topology(Topo):
         # r5 LAN
         h11 = self.addHost("h11")
 
-        # Connect hosts to switches
-
         for h in [h1, h2, h3]:
             self.addLink(s1, h)
 
@@ -74,8 +65,6 @@ class Topology(Topo):
 
         self.addLink(routers["r5"], h11)
 
-        # Connect routers (p2p links)
-
         router_links = [
             ("r1", "r2"),
             ("r1", "r3"),
@@ -85,13 +74,10 @@ class Topology(Topo):
             ("r4", "r5")
         ]
 
-        # track p2p links so we can assign IPs later
         self.p2p_links = []
         for (a, b) in router_links:
             self.p2p_links.append((a, b))
             self.addLink(routers[a], routers[b])
-
-        # Connect routers to switches
 
         self.addLink(routers["r1"], s1)
         self.addLink(routers["r2"], s2)
@@ -119,7 +105,6 @@ def ip_assign(net):
         intfA, intfB = conns[0]
         return intfA, intfB
 
-    # Assign LAN IPs for routers & hosts
     for rname, (switch_name, router, subnet) in lan_map.items():
         net_sub = ipaddress.ip_network(subnet)
         ip_iter = iter(net_sub.hosts())
@@ -128,8 +113,8 @@ def ip_assign(net):
             sw = net.get(switch_name)
             r_intf, sw_intf = connected_intf(router, sw)
             if r_intf is None:
-                info(f"WARNING: router {rname} has no connection to switch {switch_name}; using defaultIntf()\n")
-                r_intf_name = router.defaultIntf().name
+                info(f"WARNING: router {rname} has no connection to switch {switch_name}; using defaultintf()\n")
+                r_intf_name = router.defaultintf().name
             else:
                 r_intf_name = r_intf.name
             r_ip = next(ip_iter)
@@ -147,7 +132,7 @@ def ip_assign(net):
                 h.cmd(f"ip route add default via {r_ip}")
 
         else:
-            # r5 case: router has no switch; pick its interface connected to h11
+            # caso do r5 (nenhum switch)
             found = False
             for h in net.hosts:
                 intf_r, intf_h = connected_intf(router, h)
@@ -160,16 +145,15 @@ def ip_assign(net):
                     found = True
                     break
             if not found:
-                info(f"WARNING: r5 had no direct host connection found; assigned IP to defaultIntf()\n")
+                info(f"WARNING: r5 had no direct host connection found; assigned IP to defaultintf()\n")
                 r_ip = next(ip_iter)
-                router.setIP(str(r_ip), prefixLen=24, intf=router.defaultIntf().name)
+                router.setIP(str(r_ip), prefixLen=24, intf=router.defaultintf().name)
 
     info("*** Assigning p2p links (/30)\n")
 
     base = ipaddress.ip_network("192.168.0.0/16")
     sub_iter = base.subnets(new_prefix=30)
 
-    # map for routing
     r_adj = defaultdict(set)
     link_ip = {}   # (r1, r2) -> (ip1, ip2, subnet)
 
@@ -185,7 +169,7 @@ def ip_assign(net):
 
         intfA, intfB = connected_intf(ra, rb)
         if intfA is None or intfB is None:
-            info(f"ERROR: no interface between {a} and {b} detected\n")
+            info(f"ERROR: no intf between {a} and {b} detected\n")
             continue
 
         ra.setIP(str(ipA), prefixLen=30, intf=intfA.name)
@@ -243,7 +227,6 @@ def ip_assign(net):
     base = ipaddress.ip_network("192.168.0.0/16")
     sub_iter = base.subnets(new_prefix=30)
 
-    # map for routing
     r_adj = defaultdict(set)
     link_ip = {}   # (r1, r2) -> (ip1, ip2, subnet)
 
@@ -257,7 +240,6 @@ def ip_assign(net):
         ra = net.get(a)
         rb = net.get(b)
 
-        # find correct interfaces
         intfA = ra.connectionsTo(rb)[0][0]
         intfB = rb.connectionsTo(ra)[0][0]
 
@@ -306,7 +288,6 @@ def ip_assign(net):
 
     info("*** Routing installed\n")
 
-
 def run(flag):
     topo = Topology()
     net = Mininet(topo=topo, controller=None)
@@ -314,7 +295,7 @@ def run(flag):
 
     ip_assign(net)
 
-    info("\n*** Interface dump\n")
+    info("\n*** intf dump\n")
     for r in ["r1", "r2", "r3", "r4", "r5"]:
         info(f"\n=== {r} ===\n")
         info(net.get(r).cmd("ip -4 addr show"))
@@ -327,7 +308,6 @@ def run(flag):
 
     CLI(net)
     net.stop()
-
 
 if __name__ == "__main__":
     setLogLevel("info")
