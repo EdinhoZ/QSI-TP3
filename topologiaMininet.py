@@ -198,6 +198,7 @@ def ip_assign(net):
                     q.append(path + [nb])
         return None
 
+    # Add routes to all LAN subnets AND all p2p /30s
     for rname in ["r1", "r2", "r3", "r4", "r5"]:
         r = net.get(rname)
 
@@ -205,86 +206,24 @@ def ip_assign(net):
             if target == rname:
                 continue
 
+            # 1. Route to target LAN (10.x.0.0/24)
             path = bfs(rname, target)
             if not path:
                 continue
 
             next_hop = path[1]
-            nh_ip = link_ip.get((rname, next_hop))
-            if not nh_ip:
-                info(f"WARNING: no link_ip entry for {rname} -> {next_hop}\n")
+            nh_entry = link_ip.get((rname, next_hop))
+            if not nh_entry:
                 continue
-            nh_ip = nh_ip[1]  # neighbor's IP on the link
+            nh_ip = nh_entry[1]
 
-            subnet = router_subnet[target]
-            r.cmd(f"ip route add {subnet} via {nh_ip}")
+            # LAN route
+            r.cmd(f"ip route add {router_subnet[target]} via {nh_ip}")
 
-    info("*** Routing installed\n")
-
-    info("*** Assigning p2p links (/30)\n")
-
-    p2p_subnets = []
-    base = ipaddress.ip_network("192.168.0.0/16")
-    sub_iter = base.subnets(new_prefix=30)
-
-    r_adj = defaultdict(set)
-    link_ip = {}   # (r1, r2) -> (ip1, ip2, subnet)
-
-    topo = net.topo
-
-    for (a, b) in topo.p2p_links:
-        subnet = next(sub_iter)
-        hosts = list(subnet.hosts())
-        ipA, ipB = hosts[0], hosts[1]
-
-        ra = net.get(a)
-        rb = net.get(b)
-
-        intfA = ra.connectionsTo(rb)[0][0]
-        intfB = rb.connectionsTo(ra)[0][0]
-
-        ra.setIP(str(ipA), prefixLen=30, intf=intfA)
-        rb.setIP(str(ipB), prefixLen=30, intf=intfB)
-
-        r_adj[a].add(b)
-        r_adj[b].add(a)
-        link_ip[(a, b)] = (str(ipA), str(ipB), str(subnet))
-        link_ip[(b, a)] = (str(ipB), str(ipA), str(subnet))
-
-    info("*** Installing static routes\n")
-
-    router_subnet = {r: lan_map[r][2] for r in lan_map}
-
-    def bfs(src, dst):
-        q = deque([[src]])
-        seen = {src}
-        while q:
-            path = q.popleft()
-            cur = path[-1]
-            if cur == dst:
-                return path
-            for nb in r_adj[cur]:
-                if nb not in seen:
-                    seen.add(nb)
-                    q.append(path + [nb])
-        return None
-
-    for rname in ["r1", "r2", "r3", "r4", "r5"]:
-        r = net.get(rname)
-
-        for target in ["r1", "r2", "r3", "r4", "r5"]:
-            if target == rname:
-                continue
-
-            path = bfs(rname, target)
-            if not path:
-                continue
-
-            next_hop = path[1]
-            nh_ip = link_ip[(rname, next_hop)][1]
-
-            subnet = router_subnet[target]
-            r.cmd(f"ip route add {subnet} via {nh_ip}")
+            # 2. Route to every p2p /30 subnet attached to 'target'
+            for (a, b), (ipa, ipb, subnet) in link_ip.items():
+                if a == target:          # subnets connected to 'target'
+                    r.cmd(f"ip route add {subnet} via {nh_ip}")
 
     info("*** Routing installed\n")
 
