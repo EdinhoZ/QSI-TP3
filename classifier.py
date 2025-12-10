@@ -1,38 +1,68 @@
 #!/usr/bin/env python3
+import argparse
 import subprocess
+import sys
 import time
+import os
 
-BRIDGE = "br0"
+def run(cmd: str):
+    print(f"[Classifier] {cmd}")
+    proc = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    if proc.returncode != 0:
+        print(f"[Classifier] ERROR running '{cmd}'")
+        print(proc.stderr.strip())
+    return proc.returncode, proc.stdout, proc.stderr
 
-def run(cmd):
-    print("[Classifier]", cmd)
-    subprocess.run(cmd, shell=True, check=False)
+def detect_bridge_name() -> str:
+    bridges = []
+    for dev in os.listdir("/sys/class/net"):
+        if dev.startswith("s") and dev[1:].isdigit():
+            bridges.append(dev)
 
-def install_flows():
-    run(f"ovs-ofctl del-flows {BRIDGE}")
+    if not bridges:
+        raise RuntimeError("Could not auto-detect any Mininet OVS bridge.")
 
-    # HTTP (port 80) -> AF41 (DSCP 34)
-    run(f"ovs-ofctl add-flow {BRIDGE} \"ip,nw_proto=6,tp_dst=80,actions=set_field:34->ip_dscp,normal\"")
+    if len(bridges) == 1:
+        print(f"[Classifier] Auto-detected bridge: {bridges[0]}")
+        return bridges[0]
 
-    # RTP / VoIP (UDP 5004, 5005) -> EF (DSCP 46)
-    run(f"ovs-ofctl add-flow {BRIDGE} \"udp,tp_dst=5004,actions=set_field:46->ip_dscp,normal\"")
-    run(f"ovs-ofctl add-flow {BRIDGE} \"udp,tp_dst=5005,actions=set_field:46->ip_dscp,normal\"")
+    print(f"[Classifier] Multiple bridges detected: {bridges}. Using s1 by default.")
+    return "s1"
 
-    # DNS -> low priority (DSCP 8)
-    run(f"ovs-ofctl add-flow {BRIDGE} \"udp,tp_dst=53,actions=set_field:8->ip_dscp,normal\"")
+def install_default_flows(bridge: str):
+    print(f"[Classifier] Clearing old flows...")
+    run(f"ovs-ofctl del-flows {bridge}")
 
-    # SSH -> medium (DSCP 16)
-    run(f"ovs-ofctl add-flow {BRIDGE} \"tcp,tp_dst=22,actions=set_field:16->ip_dscp,normal\"")
+    # Flow table (DSCP policy)
+    dscp_policies = [
+        ("HTTP",     "ip,nw_proto=6,tp_dst=80",    34),  # AF41
+        ("RTP1",     "udp,tp_dst=5004",            46),  # EF
+        ("RTP2",     "udp,tp_dst=5005",            46),  # EF
+        ("DNS",      "udp,tp_dst=53",               8),
+        ("SSH",      "tcp,tp_dst=22",              16),
+        ("DEFAULT",  "ip",                          0),
+    ]
 
-    # Default -> best effort
-    run(f"ovs-ofctl add-flow {BRIDGE} \"ip,actions=set_field:0->ip_dscp,normal\"")
+    print(f"[Classifier] Installing DSCP classifier rules...")
+
+    for name, match, dscp_value in dscp_policies:
+        flow = f"{match},actions=set_field:{dscp_value}->ip_dscp,normal"
+        run(f"ovs-ofctl add-flow {bridge} \"{flow}\"")
+        print(f"[Classifier] Installed {name}:  DSCP {dscp_value}")
+
+    print(f"[Classifier] Flow installation complete.")
 
 def main():
-    print("[Classifier] Installing QoS flows into OVS...")
-    install_flows()
-    print("[Classifier] Rules installed. Sleeping forever.")
-    while True:
-        time.sleep(3600)
+    parser = argparse.ArgumentParser(description="QoS Classifier for OVS (DSCP setter)")
+    parser.add_argument("--bridge", "-b", help="Name of the OVS bridge (default: auto-detect)")
+    args = parser.parse_args()
+
+    bridge = args.bridge or detect_bridge_name()
+
+    print(f"[Classifier] Installing flows on bridge: {bridge}")
+    install_default_flows(bridge)
+
+    print(f"[Classifier] Rules installed.")
 
 if __name__ == "__main__":
     main()

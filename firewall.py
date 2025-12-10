@@ -8,8 +8,10 @@ import subprocess
 import sys
 from typing import List, Tuple, Optional
 
-LOGFILE = "firewall.log"
-CHAIN_NAME = "VNF-FW"  # custom chain name for iptables / nft
+LOGFILE = "vnf_logs/firewall.log"
+CHAIN_NAME = "VNF-FW"
+TABLE = "filter"
+HOOK_CHAIN = "forward"
 
 logging.basicConfig(
     filename=LOGFILE,
@@ -22,22 +24,40 @@ console.setLevel(logging.INFO)
 console.setFormatter(logging.Formatter("%(asctime)s %(levelname)s: %(message)s", "%H:%M:%S"))
 logging.getLogger().addHandler(console)
 
-
-def run_cmd(cmd: str, fail_ok: bool = False, dry_run: bool = False):
-    logging.debug(f"[cmd] {cmd}")
+def run_cmd(cmd, dry_run=False):
     if dry_run:
-        print("[DRY RUN]", cmd)
-        return 0
-    try:
-        proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
-        if proc.stdout:
-            logging.debug(proc.stdout.strip())
-        return proc.returncode
-    except subprocess.CalledProcessError as e:
-        logging.error(f"Command failed: {cmd}\nrc={e.returncode} stdout={e.stdout.strip()} stderr={e.stderr.strip()}")
-        if fail_ok:
-            return e.returncode
-        raise
+        print(f"[DRY RUN] {cmd}")
+        return
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+    return proc.stdout.strip()
+
+def nft_hook_chain():
+        try:
+            # Create forward chain if it doesn't exist
+            try:
+                run_cmd(f"nft list chain inet {TABLE} {HOOK_CHAIN}")
+            except subprocess.CalledProcessError:
+                print(f"[INFO] Forward chain '{HOOK_CHAIN}' not found, creating...")
+                run_cmd(f'nft add chain inet {TABLE} {HOOK_CHAIN} "{{ type filter hook forward priority 0 ; policy accept ; }}"')
+
+            # Create VNF-FW chain if it doesn't exist
+            try:
+                run_cmd(f"nft list chain inet {TABLE} {CHAIN_NAME}")
+            except subprocess.CalledProcessError:
+                print(f"[INFO] VNF chain '{CHAIN_NAME}' not found, creating...")
+                run_cmd(f"nft add chain inet {TABLE} {CHAIN_NAME} {{ type filter hook none ; }}")
+
+            # Hook VNF-FW into forward chain if not already hooked
+            try:
+                output = run_cmd(f"nft list chain inet {TABLE} {HOOK_CHAIN}")
+                if f"jump {CHAIN_NAME}" not in output:
+                    print(f"[INFO] Hooking '{CHAIN_NAME}' into '{HOOK_CHAIN}'")
+                    run_cmd(f"nft insert rule inet {TABLE} {HOOK_CHAIN} jump {CHAIN_NAME}")
+            except subprocess.CalledProcessError as e:
+                print(f"[ERROR] Could not hook VNF-FW: {e}")
+        except subprocess.CalledProcessError as e:
+            print(f"[ERROR] nft command failed: {e}")
+
 
 def has_command(cmdname: str) -> bool:
     return subprocess.run(f"which {shlex.quote(cmdname)}", shell=True, stdout=subprocess.DEVNULL).returncode == 0
@@ -63,57 +83,50 @@ class FirewallVNF:
         self.use_nft = use_nft
         self.dry_run = dry_run
 
-    def nft_flush_table(self, table_name="filter"):
-        run_cmd(f"nft flush table inet {table_name}", fail_ok=True, dry_run=self.dry_run)
-
     def nft_create_table_and_chain(self, table="filter", chain=CHAIN_NAME):
-        # Ensure table exists and our chain exists; use family inet (works for IPv4 & IPv6)
-        run_cmd(f"nft add table inet {table}", fail_ok=True, dry_run=self.dry_run)
-        # Create a chain in table `inet filter` with type filter hook forward priority 0; policy accept default
-        run_cmd(f"nft add chain inet {table} {chain} {{ type filter hook forward priority 0 ; policy accept ; }}",
-                fail_ok=True, dry_run=self.dry_run)
+        # Create table if missing
+        run_cmd(f"nft list tables | grep -q 'inet {table}' || nft add table inet {table}", dry_run=self.dry_run)
+
+        # Create chain if missing
+        try:
+            run_cmd(f"nft list chain inet {table} {chain}", dry_run=self.dry_run)
+        except subprocess.CalledProcessError:
+            # Old nft versions: create chain without hook first
+            run_cmd(f"nft add chain inet {table} {chain}", dry_run=self.dry_run)
+            logging.info(f"nft chain {chain} created in table {table}")
+
+            # Then insert hook rule separately
+            nft_hook_chain()
 
     def nft_add_rule(self, rule: Rule):
         name, action, proto, src, dst, sport, dport, dscp = rule
-        parts = []
-        # family inet table filter chain VNF-FW
+        chain = "VNF-FW"
+
+        cmd = f"nft add rule inet filter {chain} "
+
         if proto != "all":
-            parts.append(proto)
-        parts.append(f"ip saddr {src}")
-        parts.append(f"ip daddr {dst}")
+            cmd += f"{proto} "
         if sport:
-            parts.append(f"{proto} sport {sport}")
+            cmd += f"sport {sport} "
         if dport:
-            parts.append(f"{proto} dport {dport}")
+            cmd += f"dport {dport} "
         if dscp is not None:
-            parts.append(f"ip dscp {dscp}")
+            cmd += f"ip dscp set {dscp} "
 
-        # action mapping
-        if action == "ACCEPT":
-            act = "accept"
-        elif action == "DROP":
-            act = "drop"
-        elif action == "REJECT":
-            act = "reject"
-        elif action == "LOG":
-            # log then accept by default
-            run_cmd(f"nft add rule inet filter {CHAIN_NAME} {' '.join(parts)} counter log prefix \"FW[{name}] \"", dry_run=self.dry_run)
-            logging.info(f"nft rule added (LOG) {name}: {' '.join(parts)}")
-            return
-        else:
-            raise ValueError(f"Unknown action {action}")
+        # Use accept/drop/etc. in lowercase
+        cmd += f"counter {action.lower()}"
 
-        cmd = f"nft add rule inet filter {CHAIN_NAME} {' '.join(parts)} counter {act}"
         run_cmd(cmd, dry_run=self.dry_run)
-        logging.info(f"nft rule added {name}: {cmd}")
 
-    def nft_hook_chain(self):
-        # ensure FORWARD traffic jumps through our chain: add rule at top of forward chain to jump
-        run_cmd(f"nft insert rule inet filter forward jump {CHAIN_NAME}", fail_ok=True, dry_run=self.dry_run)
 
     def nft_cleanup(self):
-        # Remove jump rule(s) and delete our chain
-        run_cmd(f"nft delete rule inet filter forward jump {CHAIN_NAME}", fail_ok=True, dry_run=self.dry_run)
+        # Delete jump rule if exists
+        try:
+            run_cmd(f"nft list chain inet filter forward | grep 'jump {CHAIN_NAME}'", dry_run=self.dry_run)
+            run_cmd(f"nft delete rule inet filter forward jump {CHAIN_NAME}", fail_ok=True, dry_run=self.dry_run)
+        except Exception:
+            pass
+        # Delete chain
         run_cmd(f"nft delete chain inet filter {CHAIN_NAME}", fail_ok=True, dry_run=self.dry_run)
         logging.info("nft cleanup completed")
 
@@ -178,7 +191,7 @@ class FirewallVNF:
             # Create table/chain and add jump rule
             self.nft_create_table_and_chain()
             # ensure forward hooks -> jump
-            self.nft_hook_chain()
+            nft_hook_chain()
             for r in rules:
                 self.nft_add_rule(r)
         else:

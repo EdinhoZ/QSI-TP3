@@ -1,0 +1,7 @@
+# Log files
+
+vnf_logs/
+traffic_logs/
+
+# Temporary files
+index.html

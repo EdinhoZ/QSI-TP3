@@ -1,0 +1,15 @@
+# HTTP traffic, allow (DSCP 34)
+ALLOW_HTTP:ACCEPT:tcp:0.0.0.0/0:0.0.0.0/0:80:80:34
+
+# RTP/VoIP traffic, allow (DSCP 46)
+ALLOW_RTP1:ACCEPT:udp:0.0.0.0/0:0.0.0.0/0:5004:5004:46
+ALLOW_RTP2:ACCEPT:udp:0.0.0.0/0:0.0.0.0/0:5005:5005:46
+
+# DNS traffic, allow but low priority (DSCP 8)
+ALLOW_DNS:ACCEPT:udp:0.0.0.0/0:0.0.0.0/0:53:53:8
+
+# SSH traffic, allow medium priority (DSCP 16)
+ALLOW_SSH:ACCEPT:tcp:0.0.0.0/0:0.0.0.0/0:22:22:16
+
+# Default catch-all, drop everything else (best-effort)
+DROP_DEFAULT:DROP:all:0.0.0.0/0:0.0.0.0/0::
