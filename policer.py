@@ -47,7 +47,10 @@ def detect_interface() -> str:
     raise RuntimeError("No network interface found")
 
 def ensure_ingress_qdisc(dev: str):
+    # Clean up any existing filters and qdiscs first
+    run_cmd(f"tc filter del dev {dev} parent ffff:", fail_ok=True)
     run_cmd(f"tc qdisc del dev {dev} ingress", fail_ok=True)
+    # Now add fresh ingress qdisc
     run_cmd(f"tc qdisc add dev {dev} handle ffff: ingress")
     logging.info(f"ingress qdisc added on {dev}")
 
@@ -55,17 +58,8 @@ def add_ingress_police(dev: str, dscp: int, rate: str, burst: str, prio: int = 1
     tos_val = (dscp << 2) & 0xff
     tos_hex = hex(tos_val)
     police_action = f"police rate {rate} burst {burst} drop flowid :1"
-    cmd_flower = (
-        f"tc filter add dev {dev} protocol ip parent ffff: prio {prio} "
-        f"flower ip_tos {tos_hex} action {police_action}"
-    )
-    try:
-        run_cmd(cmd_flower)
-        logging.info(f"Installed ingress police (flower) on {dev} for DSCP={dscp} (tos={tos_hex}) rate={rate} burst={burst}")
-        return
-    except Exception:
-        logging.warning("flower classifier failed or not available, falling back to u32 match")
-
+    
+    # Use u32 directly (more reliable in Mininet than flower)
     cmd_u32 = (
         f"tc filter add dev {dev} parent ffff: protocol ip prio {prio} "
         f"u32 match ip tos {tos_val} 0xff action {police_action}"
