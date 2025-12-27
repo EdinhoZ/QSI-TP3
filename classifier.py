@@ -25,8 +25,9 @@ def detect_bridge_name() -> str:
     return "s1"
 
 def install_flows(bridge: str):
-    print(f"[Classifier] Clearing existing flows...")
-    run(f"ovs-ofctl del-flows {bridge}")
+    # Don't delete all flows - OVS needs its learning flows for connectivity
+    # Instead, we just add our DSCP marking flows with lower priority so they don't interfere
+    print(f"[Classifier] Installing DSCP classifier rules (preserving existing flows)...")
 
     # DSCP rules
     dscp_policies = [
@@ -38,9 +39,8 @@ def install_flows(bridge: str):
         ("DEFAULT", "ip",                           0),
     ]
 
-    print(f"[Classifier] Installing DSCP classifier rules...")
     for name, match, dscp in dscp_policies:
-        flow = f"{match},actions=set_field:{dscp}->ip_dscp,normal"
+        flow = f"priority=10,{match},actions=set_field:{dscp}->ip_dscp,normal"
         ret, _, _ = run(f'ovs-ofctl add-flow {bridge} "{flow}"')
         if ret == 0:
             print(f"[Classifier] Installed {name} rule with DSCP {dscp}")

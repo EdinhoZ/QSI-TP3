@@ -1,0 +1,2923 @@
+15:40:16 INFO: Starting scheduler on s1-eth3 with 3 bands
+15:40:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+15:40:16 ERROR: Command failed: tc qdisc del dev s1-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+15:40:16 INFO: Starting scheduler on s1-eth1 with 3 bands
+15:40:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+15:40:16 INFO: Starting scheduler on s1-eth2 with 3 bands
+15:40:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+15:40:16 ERROR: Command failed: tc qdisc del dev s1-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+15:40:16 INFO: Installed prio qdisc on s1-eth3 with 3 bands
+15:40:16 INFO: Starting scheduler on s2-eth2 with 3 bands
+15:40:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+15:40:16 INFO: Starting scheduler on s2-eth1 with 3 bands
+15:40:16 INFO: Starting scheduler on s4-eth2 with 3 bands
+15:40:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+15:40:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+15:40:16 INFO: Installed prio qdisc on s1-eth1 with 3 bands
+15:40:16 ERROR: Command failed: tc qdisc del dev s1-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+15:40:16 ERROR: Command failed: tc qdisc del dev s2-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+15:40:16 INFO: Starting scheduler on s1-eth4 with 3 bands
+15:40:16 INFO: Installed flower filter on s1-eth3: DSCP=46 -> band=0 (flowid=1:1)
+15:40:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+15:40:16 ERROR: Command failed: tc qdisc del dev s2-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+15:40:16 ERROR: Command failed: tc qdisc del dev s4-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+15:40:16 ERROR: Command failed: tc filter add dev s1-eth1 protocol ip parent 1: prio 1 flower ip_tos 0xb8 action skbedit priority 0 flowid 1:1
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+15:40:16 INFO: Installed prio qdisc on s2-eth2 with 3 bands
+15:40:16 INFO: Installed prio qdisc on s1-eth2 with 3 bands
+15:40:16 INFO: Installed prio qdisc on s2-eth1 with 3 bands
+15:40:16 INFO: Installed prio qdisc on s4-eth2 with 3 bands
+15:40:16 INFO: Starting scheduler on s3-eth1 with 3 bands
+15:40:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+15:40:16 INFO: Starting scheduler on s3-eth2 with 3 bands
+15:40:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+15:40:16 ERROR: Command failed: tc qdisc del dev s1-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+15:40:16 INFO: Installed flower filter on s1-eth3: DSCP=34 -> band=1 (flowid=1:2)
+15:40:16 INFO: Installed u32 filter on s1-eth1: DSCP=46 -> band=0 (flowid=1:1)
+15:40:16 INFO: Starting scheduler on s2-eth3 with 3 bands
+15:40:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+15:40:16 ERROR: Command failed: tc qdisc del dev s3-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+15:40:16 INFO: Installed flower filter on s1-eth2: DSCP=46 -> band=0 (flowid=1:1)
+15:40:16 INFO: Installed flower filter on s2-eth2: DSCP=46 -> band=0 (flowid=1:1)
+15:40:16 INFO: Installed flower filter on s4-eth2: DSCP=46 -> band=0 (flowid=1:1)
+15:40:16 ERROR: Command failed: tc qdisc del dev s2-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+15:40:16 INFO: Installed flower filter on s2-eth1: DSCP=46 -> band=0 (flowid=1:1)
+15:40:16 INFO: Installed flower filter on s2-eth2: DSCP=34 -> band=1 (flowid=1:2)
+15:40:16 ERROR: Command failed: tc qdisc del dev s3-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+15:40:16 INFO: Starting scheduler on s3-eth4 with 3 bands
+15:40:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+15:40:16 INFO: Installed flower filter on s1-eth3: DSCP=0 -> band=2 (flowid=1:3)
+15:40:16 INFO: Scheduler installed. Running.
+15:40:16 INFO: Installed prio qdisc on s1-eth4 with 3 bands
+15:40:16 INFO: Starting scheduler on s3-eth3 with 3 bands
+15:40:16 INFO: Installed flower filter on s2-eth2: DSCP=0 -> band=2 (flowid=1:3)
+15:40:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+15:40:16 INFO: Starting scheduler on s4-eth3 with 3 bands
+15:40:16 INFO: Scheduler installed. Running.
+15:40:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+15:40:16 INFO: Installed flower filter on s1-eth1: DSCP=34 -> band=1 (flowid=1:2)
+15:40:16 INFO: Installed prio qdisc on s3-eth1 with 3 bands
+15:40:16 INFO: Installed flower filter on s1-eth2: DSCP=34 -> band=1 (flowid=1:2)
+15:40:16 ERROR: Command failed: tc qdisc del dev s4-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+15:40:16 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+15:40:16 INFO: Installed flower filter on s4-eth2: DSCP=34 -> band=1 (flowid=1:2)
+15:40:16 INFO: Installed flower filter on s1-eth1: DSCP=0 -> band=2 (flowid=1:3)
+15:40:16 INFO: Scheduler installed. Running.
+15:40:16 INFO: Installed prio qdisc on s3-eth3 with 3 bands
+15:40:16 INFO: Installed flower filter on s3-eth1: DSCP=46 -> band=0 (flowid=1:1)
+15:40:16 INFO: Installed flower filter on s1-eth2: DSCP=0 -> band=2 (flowid=1:3)
+15:40:16 INFO: Installed flower filter on s4-eth2: DSCP=0 -> band=2 (flowid=1:3)
+15:40:16 INFO: Scheduler installed. Running.
+15:40:16 INFO: Scheduler installed. Running.
+15:40:16 INFO: Installed flower filter on s2-eth1: DSCP=34 -> band=1 (flowid=1:2)
+15:40:16 INFO: Installed prio qdisc on s4-eth3 with 3 bands
+15:40:16 INFO: Starting scheduler on s4-eth1 with 3 bands
+15:40:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+15:40:16 INFO: Installed flower filter on s4-eth3: DSCP=46 -> band=0 (flowid=1:1)
+15:40:16 INFO: Installed flower filter on s3-eth1: DSCP=34 -> band=1 (flowid=1:2)
+15:40:16 INFO: Installed prio qdisc on s2-eth3 with 3 bands
+15:40:16 ERROR: Command failed: tc qdisc del dev s4-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+15:40:16 INFO: Installed flower filter on s3-eth3: DSCP=46 -> band=0 (flowid=1:1)
+15:40:16 INFO: Installed flower filter on s2-eth3: DSCP=46 -> band=0 (flowid=1:1)
+15:40:16 INFO: Installed flower filter on s2-eth1: DSCP=0 -> band=2 (flowid=1:3)
+15:40:16 INFO: Scheduler installed. Running.
+15:40:16 ERROR: Command failed: tc qdisc del dev s3-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+15:40:16 INFO: Installed flower filter on s3-eth3: DSCP=34 -> band=1 (flowid=1:2)
+15:40:16 INFO: Installed prio qdisc on s4-eth1 with 3 bands
+15:40:16 INFO: Installed flower filter on s1-eth4: DSCP=46 -> band=0 (flowid=1:1)
+15:40:16 INFO: Installed prio qdisc on s3-eth2 with 3 bands
+15:40:16 ERROR: Command failed: tc qdisc add dev s3-eth4 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+15:40:16 INFO: Installed flower filter on s4-eth3: DSCP=34 -> band=1 (flowid=1:2)
+15:40:16 INFO: Installed flower filter on s1-eth4: DSCP=34 -> band=1 (flowid=1:2)
+15:40:16 INFO: Installed flower filter on s4-eth1: DSCP=46 -> band=0 (flowid=1:1)
+15:40:16 INFO: Installed flower filter on s3-eth1: DSCP=0 -> band=2 (flowid=1:3)
+15:40:16 INFO: Scheduler installed. Running.
+15:40:16 INFO: Installed flower filter on s1-eth4: DSCP=0 -> band=2 (flowid=1:3)
+15:40:16 INFO: Scheduler installed. Running.
+15:40:16 INFO: Installed flower filter on s4-eth1: DSCP=34 -> band=1 (flowid=1:2)
+15:40:16 INFO: Installed flower filter on s3-eth3: DSCP=0 -> band=2 (flowid=1:3)
+15:40:16 INFO: Installed flower filter on s2-eth3: DSCP=34 -> band=1 (flowid=1:2)
+15:40:16 INFO: Scheduler installed. Running.
+15:40:16 INFO: Installed flower filter on s3-eth2: DSCP=46 -> band=0 (flowid=1:1)
+15:40:16 INFO: Installed flower filter on s4-eth3: DSCP=0 -> band=2 (flowid=1:3)
+15:40:16 INFO: Scheduler installed. Running.
+15:40:16 INFO: Installed flower filter on s3-eth2: DSCP=34 -> band=1 (flowid=1:2)
+15:40:16 INFO: Installed flower filter on s4-eth1: DSCP=0 -> band=2 (flowid=1:3)
+15:40:16 INFO: Scheduler installed. Running.
+15:40:16 INFO: Installed flower filter on s2-eth3: DSCP=0 -> band=2 (flowid=1:3)
+15:40:16 INFO: Scheduler installed. Running.
+15:40:16 INFO: Installed flower filter on s3-eth2: DSCP=0 -> band=2 (flowid=1:3)
+15:40:16 INFO: Scheduler installed. Running.
+15:41:57 INFO: Stopping scheduler and cleaning qdisc...
+15:41:57 INFO: Stopping scheduler and cleaning qdisc...
+15:41:57 INFO: Stopping scheduler and cleaning qdisc...
+15:41:57 INFO: Stopping scheduler and cleaning qdisc...
+15:41:57 INFO: Stopping scheduler and cleaning qdisc...
+15:41:57 INFO: Stopping scheduler and cleaning qdisc...
+15:41:57 INFO: Stopping scheduler and cleaning qdisc...
+15:41:57 INFO: Stopping scheduler and cleaning qdisc...
+15:41:57 INFO: Stopping scheduler and cleaning qdisc...
+15:41:57 INFO: Stopping scheduler and cleaning qdisc...
+15:41:57 INFO: Stopping scheduler and cleaning qdisc...
+15:41:57 INFO: Stopping scheduler and cleaning qdisc...
+15:41:57 INFO: Stopping scheduler and cleaning qdisc...
+15:41:57 INFO: Cleared root qdisc on s3-eth3
+15:41:57 INFO: Cleared root qdisc on s3-eth1
+15:41:57 ERROR: Command failed: tc qdisc del dev s3-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+15:41:57 INFO: Cleared root qdisc on s3-eth2
+15:41:57 INFO: Cleared root qdisc on s4-eth2
+15:41:57 INFO: Cleared root qdisc on s4-eth3
+15:41:57 INFO: Cleared root qdisc on s1-eth1
+15:41:57 INFO: Cleared root qdisc on s4-eth1
+15:41:57 INFO: Cleared root qdisc on s2-eth3
+15:41:57 INFO: Cleared root qdisc on s1-eth4
+15:41:57 INFO: Cleared root qdisc on s2-eth1
+15:41:57 ERROR: Command failed: tc qdisc del dev s1-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+15:41:57 INFO: Cleared root qdisc on s1-eth2
+15:41:57 ERROR: Command failed: tc qdisc del dev s2-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+15:41:57 INFO: Cleared root qdisc on s2-eth2
+15:41:57 ERROR: Command failed: tc qdisc del dev s1-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+15:41:57 INFO: Cleared root qdisc on s1-eth3
+09:37:18 INFO: Starting scheduler on s1-eth2 with 3 bands
+09:37:18 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:37:18 ERROR: Command failed: tc qdisc del dev s1-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:37:18 INFO: Installed prio qdisc on s1-eth2 with 3 bands
+09:37:18 INFO: Installed flower filter on s1-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:37:18 INFO: Installed flower filter on s1-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:37:18 INFO: Installed flower filter on s1-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:37:18 INFO: Scheduler installed. Running.
+09:37:18 INFO: Starting scheduler on s3-eth2 with 3 bands
+09:37:18 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:37:18 INFO: Starting scheduler on s2-eth3 with 3 bands
+09:37:18 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:37:18 ERROR: Command failed: tc qdisc del dev s3-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:37:18 ERROR: Command failed: tc qdisc del dev s2-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:37:18 INFO: Installed prio qdisc on s2-eth3 with 3 bands
+09:37:18 INFO: Installed prio qdisc on s3-eth2 with 3 bands
+09:37:18 INFO: Installed flower filter on s2-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:37:18 INFO: Installed flower filter on s3-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:37:18 INFO: Starting scheduler on s4-eth1 with 3 bands
+09:37:18 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:37:18 INFO: Installed flower filter on s2-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:37:18 INFO: Installed flower filter on s3-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:37:18 INFO: Starting scheduler on s1-eth4 with 3 bands
+09:37:18 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:37:18 INFO: Starting scheduler on s2-eth1 with 3 bands
+09:37:18 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:37:18 ERROR: Command failed: tc qdisc del dev s4-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:37:18 INFO: Starting scheduler on s1-eth3 with 3 bands
+09:37:18 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:37:18 INFO: Installed flower filter on s2-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:37:18 INFO: Scheduler installed. Running.
+09:37:18 INFO: Installed flower filter on s3-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:37:18 INFO: Scheduler installed. Running.
+09:37:18 INFO: Installed prio qdisc on s4-eth1 with 3 bands
+09:37:18 INFO: Starting scheduler on s1-eth1 with 3 bands
+09:37:18 ERROR: Command failed: tc qdisc del dev s2-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:37:18 INFO: Starting scheduler on s2-eth2 with 3 bands
+09:37:18 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:37:18 ERROR: Command failed: tc qdisc del dev s1-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:37:18 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:37:18 ERROR: Command failed: tc qdisc del dev s1-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:37:18 INFO: Installed flower filter on s4-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:37:18 INFO: Starting scheduler on s4-eth3 with 3 bands
+09:37:18 ERROR: Command failed: tc qdisc del dev s1-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:37:18 INFO: Starting scheduler on s3-eth3 with 3 bands
+09:37:18 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:37:18 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:37:18 INFO: Installed prio qdisc on s1-eth3 with 3 bands
+09:37:18 ERROR: Command failed: tc qdisc del dev s4-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:37:18 INFO: Installed flower filter on s4-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:37:18 INFO: Starting scheduler on s3-eth1 with 3 bands
+09:37:18 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:37:18 INFO: Installed prio qdisc on s1-eth1 with 3 bands
+09:37:18 ERROR: Command failed: tc qdisc del dev s2-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:37:18 INFO: Starting scheduler on s3-eth4 with 3 bands
+09:37:18 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:37:18 INFO: Installed prio qdisc on s4-eth3 with 3 bands
+09:37:18 INFO: Installed prio qdisc on s2-eth2 with 3 bands
+09:37:18 INFO: Installed flower filter on s4-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:37:18 INFO: Installed prio qdisc on s1-eth4 with 3 bands
+09:37:18 INFO: Installed prio qdisc on s2-eth1 with 3 bands
+09:37:18 INFO: Starting scheduler on s4-eth2 with 3 bands
+09:37:18 INFO: Installed flower filter on s1-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:37:18 ERROR: Command failed: tc qdisc del dev s3-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:37:18 INFO: Installed flower filter on s1-eth4: DSCP=46 -> band=0 (flowid=1:1)
+09:37:18 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:37:18 INFO: Installed flower filter on s4-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:37:18 INFO: Installed flower filter on s2-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:37:18 INFO: Installed flower filter on s1-eth4: DSCP=34 -> band=1 (flowid=1:2)
+09:37:18 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:37:18 INFO: Installed flower filter on s2-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:37:18 INFO: Installed flower filter on s1-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:37:18 INFO: Installed flower filter on s1-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:37:18 INFO: Installed flower filter on s4-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:37:18 INFO: Scheduler installed. Running.
+09:37:18 INFO: Installed prio qdisc on s3-eth3 with 3 bands
+09:37:18 INFO: Installed flower filter on s3-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:37:18 INFO: Installed flower filter on s4-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:37:18 INFO: Scheduler installed. Running.
+09:37:18 INFO: Installed flower filter on s3-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:37:18 INFO: Installed flower filter on s2-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:37:18 ERROR: Command failed: tc qdisc del dev s3-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:37:18 INFO: Installed prio qdisc on s3-eth4 with 3 bands
+09:37:18 INFO: Installed flower filter on s1-eth4: DSCP=0 -> band=2 (flowid=1:3)
+09:37:18 INFO: Installed flower filter on s1-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:37:18 INFO: Installed flower filter on s2-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:37:18 INFO: Scheduler installed. Running.
+09:37:19 INFO: Scheduler installed. Running.
+09:37:19 ERROR: Command failed: tc qdisc del dev s4-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:37:19 INFO: Installed flower filter on s2-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:37:19 INFO: Installed prio qdisc on s3-eth1 with 3 bands
+09:37:19 INFO: Installed flower filter on s1-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:37:19 INFO: Scheduler installed. Running.
+09:37:19 INFO: Installed flower filter on s1-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:37:19 INFO: Scheduler installed. Running.
+09:37:19 INFO: Installed flower filter on s3-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:37:19 INFO: Scheduler installed. Running.
+09:37:19 INFO: Installed flower filter on s2-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:37:19 INFO: Scheduler installed. Running.
+09:37:19 INFO: Installed prio qdisc on s4-eth2 with 3 bands
+09:37:19 ERROR: Command failed: tc filter add dev s3-eth1 protocol ip parent 1: prio 1 flower ip_tos 0xb8 action skbedit priority 0 flowid 1:1
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+09:37:19 INFO: Installed flower filter on s3-eth4: DSCP=46 -> band=0 (flowid=1:1)
+09:37:19 INFO: Installed flower filter on s4-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:37:19 INFO: Installed u32 filter on s3-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:37:19 INFO: Installed flower filter on s3-eth4: DSCP=34 -> band=1 (flowid=1:2)
+09:37:19 INFO: Installed flower filter on s3-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:37:19 INFO: Installed flower filter on s3-eth4: DSCP=0 -> band=2 (flowid=1:3)
+09:37:19 INFO: Scheduler installed. Running.
+09:37:19 INFO: Installed flower filter on s3-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:37:19 INFO: Scheduler installed. Running.
+09:37:19 INFO: Installed flower filter on s4-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:37:19 INFO: Installed flower filter on s4-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:37:19 INFO: Scheduler installed. Running.
+09:41:28 INFO: Starting scheduler on s1-eth1 with 3 bands
+09:41:28 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:41:28 INFO: Installed prio qdisc on s1-eth1 with 3 bands
+09:41:28 INFO: Installed flower filter on s1-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:41:28 INFO: Installed flower filter on s1-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:41:28 INFO: Starting scheduler on s3-eth1 with 3 bands
+09:41:28 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:41:28 INFO: Starting scheduler on s2-eth3 with 3 bands
+09:41:28 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:41:28 INFO: Installed flower filter on s1-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:41:28 INFO: Scheduler installed. Running.
+09:41:28 INFO: Starting scheduler on s4-eth1 with 3 bands
+09:41:28 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:41:28 INFO: Installed prio qdisc on s3-eth1 with 3 bands
+09:41:28 INFO: Starting scheduler on s1-eth3 with 3 bands
+09:41:28 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:41:28 INFO: Installed prio qdisc on s2-eth3 with 3 bands
+09:41:28 INFO: Starting scheduler on s2-eth2 with 3 bands
+09:41:28 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:41:28 INFO: Installed prio qdisc on s4-eth1 with 3 bands
+09:41:28 INFO: Starting scheduler on s1-eth2 with 3 bands
+09:41:28 INFO: Installed flower filter on s3-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:41:28 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:41:28 INFO: Installed flower filter on s2-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:41:28 INFO: Installed prio qdisc on s1-eth3 with 3 bands
+09:41:28 INFO: Starting scheduler on s3-eth2 with 3 bands
+09:41:28 INFO: Installed flower filter on s4-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:41:28 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:41:28 INFO: Installed prio qdisc on s2-eth2 with 3 bands
+09:41:28 INFO: Installed flower filter on s3-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:41:28 INFO: Installed flower filter on s1-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:41:28 INFO: Installed flower filter on s2-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:41:28 INFO: Installed flower filter on s4-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:41:28 INFO: Installed flower filter on s3-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:41:28 INFO: Scheduler installed. Running.
+09:41:28 INFO: Installed flower filter on s2-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:41:28 INFO: Installed flower filter on s1-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:41:28 INFO: Starting scheduler on s2-eth1 with 3 bands
+09:41:28 INFO: Installed flower filter on s4-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:41:28 INFO: Scheduler installed. Running.
+09:41:28 INFO: Installed flower filter on s2-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:41:28 INFO: Scheduler installed. Running.
+09:41:28 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:41:28 INFO: Installed prio qdisc on s1-eth2 with 3 bands
+09:41:28 INFO: Installed flower filter on s2-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:41:28 INFO: Installed prio qdisc on s3-eth2 with 3 bands
+09:41:28 INFO: Installed flower filter on s1-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:41:28 INFO: Scheduler installed. Running.
+09:41:28 INFO: Starting scheduler on s4-eth2 with 3 bands
+09:41:28 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:41:28 INFO: Installed prio qdisc on s2-eth1 with 3 bands
+09:41:28 INFO: Installed flower filter on s1-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:41:28 INFO: Starting scheduler on s3-eth4 with 3 bands
+09:41:28 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:41:28 INFO: Starting scheduler on s3-eth3 with 3 bands
+09:41:28 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:41:28 INFO: Starting scheduler on s1-eth4 with 3 bands
+09:41:28 INFO: Installed flower filter on s3-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:41:28 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:41:28 INFO: Installed flower filter on s2-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:41:28 INFO: Scheduler installed. Running.
+09:41:28 INFO: Installed flower filter on s3-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:41:28 INFO: Installed flower filter on s2-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:41:28 INFO: Installed prio qdisc on s3-eth4 with 3 bands
+09:41:28 INFO: Installed flower filter on s1-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:41:28 INFO: Installed prio qdisc on s4-eth2 with 3 bands
+09:41:28 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:41:28 INFO: Installed flower filter on s4-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:41:28 INFO: Starting scheduler on s4-eth3 with 3 bands
+09:41:28 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:41:28 INFO: Installed prio qdisc on s3-eth3 with 3 bands
+09:41:28 INFO: Installed flower filter on s3-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:41:28 INFO: Scheduler installed. Running.
+09:41:28 INFO: Installed flower filter on s2-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:41:28 INFO: Installed prio qdisc on s4-eth3 with 3 bands
+09:41:28 INFO: Installed prio qdisc on s1-eth4 with 3 bands
+09:41:28 INFO: Installed flower filter on s3-eth4: DSCP=46 -> band=0 (flowid=1:1)
+09:41:28 INFO: Installed flower filter on s4-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:41:28 INFO: Installed flower filter on s1-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:41:28 INFO: Scheduler installed. Running.
+09:41:28 INFO: Installed flower filter on s1-eth4: DSCP=46 -> band=0 (flowid=1:1)
+09:41:28 INFO: Installed flower filter on s4-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:41:28 INFO: Installed flower filter on s3-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:41:28 INFO: Installed flower filter on s4-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:41:28 INFO: Installed flower filter on s4-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:41:28 INFO: Scheduler installed. Running.
+09:41:28 INFO: Installed flower filter on s3-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:41:28 INFO: Installed flower filter on s2-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:41:28 INFO: Scheduler installed. Running.
+09:41:28 INFO: Installed flower filter on s3-eth4: DSCP=34 -> band=1 (flowid=1:2)
+09:41:28 INFO: Installed flower filter on s1-eth4: DSCP=34 -> band=1 (flowid=1:2)
+09:41:28 INFO: Installed flower filter on s4-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:41:28 INFO: Installed flower filter on s3-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:41:28 INFO: Scheduler installed. Running.
+09:41:28 INFO: Scheduler installed. Running.
+09:41:28 INFO: Installed flower filter on s3-eth4: DSCP=0 -> band=2 (flowid=1:3)
+09:41:28 INFO: Scheduler installed. Running.
+09:41:28 INFO: Installed flower filter on s1-eth4: DSCP=0 -> band=2 (flowid=1:3)
+09:41:28 INFO: Scheduler installed. Running.
+09:47:58 INFO: Stopping scheduler and cleaning qdisc...
+09:47:58 INFO: Stopping scheduler and cleaning qdisc...
+09:47:58 INFO: Stopping scheduler and cleaning qdisc...
+09:47:58 INFO: Stopping scheduler and cleaning qdisc...
+09:47:58 INFO: Stopping scheduler and cleaning qdisc...
+09:47:58 INFO: Stopping scheduler and cleaning qdisc...
+09:47:58 INFO: Stopping scheduler and cleaning qdisc...
+09:47:58 INFO: Stopping scheduler and cleaning qdisc...
+09:47:58 INFO: Stopping scheduler and cleaning qdisc...
+09:47:58 INFO: Stopping scheduler and cleaning qdisc...
+09:47:58 INFO: Stopping scheduler and cleaning qdisc...
+09:47:58 INFO: Stopping scheduler and cleaning qdisc...
+09:47:58 INFO: Stopping scheduler and cleaning qdisc...
+09:47:58 INFO: Stopping scheduler and cleaning qdisc...
+09:47:58 INFO: Cleared root qdisc on s1-eth3
+09:47:58 INFO: Cleared root qdisc on s1-eth2
+09:47:58 INFO: Cleared root qdisc on s2-eth2
+09:47:58 ERROR: Command failed: tc qdisc del dev s1-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:47:58 INFO: Cleared root qdisc on s1-eth4
+09:47:58 INFO: Cleared root qdisc on s2-eth1
+09:47:58 INFO: Cleared root qdisc on s3-eth1
+09:47:58 INFO: Cleared root qdisc on s2-eth3
+09:47:58 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:47:58 INFO: Cleared root qdisc on s3-eth3
+09:47:58 ERROR: Command failed: tc qdisc del dev s3-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:47:58 INFO: Cleared root qdisc on s3-eth2
+09:47:58 INFO: Cleared root qdisc on s1-eth1
+09:47:58 INFO: Cleared root qdisc on s4-eth1
+09:47:58 INFO: Cleared root qdisc on s4-eth3
+09:47:58 INFO: Cleared root qdisc on s4-eth2
+09:47:58 ERROR: Command failed: tc qdisc del dev s3-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:47:58 INFO: Cleared root qdisc on s3-eth4
+09:48:46 INFO: Stopping scheduler and cleaning qdisc...
+09:48:46 INFO: Stopping scheduler and cleaning qdisc...
+09:48:46 INFO: Stopping scheduler and cleaning qdisc...
+09:48:46 INFO: Stopping scheduler and cleaning qdisc...
+09:48:46 INFO: Stopping scheduler and cleaning qdisc...
+09:48:46 INFO: Stopping scheduler and cleaning qdisc...
+09:48:46 INFO: Stopping scheduler and cleaning qdisc...
+09:48:46 INFO: Stopping scheduler and cleaning qdisc...
+09:48:46 INFO: Stopping scheduler and cleaning qdisc...
+09:48:46 INFO: Stopping scheduler and cleaning qdisc...
+09:48:46 INFO: Stopping scheduler and cleaning qdisc...
+09:48:46 INFO: Stopping scheduler and cleaning qdisc...
+09:48:46 INFO: Stopping scheduler and cleaning qdisc...
+09:48:46 INFO: Stopping scheduler and cleaning qdisc...
+09:48:46 ERROR: Command failed: tc qdisc del dev s2-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:48:46 ERROR: Command failed: tc qdisc del dev s1-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:48:46 ERROR: Command failed: tc qdisc del dev s2-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:48:46 ERROR: Command failed: tc qdisc del dev s4-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:48:46 ERROR: Command failed: tc qdisc del dev s1-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:48:46 ERROR: Command failed: tc qdisc del dev s3-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:48:46 ERROR: Command failed: tc qdisc del dev s3-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:48:46 ERROR: Command failed: tc qdisc del dev s2-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:48:46 ERROR: Command failed: tc qdisc del dev s1-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:48:46 ERROR: Command failed: tc qdisc del dev s4-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:48:46 ERROR: Command failed: tc qdisc del dev s1-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:48:46 INFO: Cleared root qdisc on s1-eth4
+09:48:46 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:48:46 ERROR: Command failed: tc qdisc del dev s3-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:48:46 INFO: Cleared root qdisc on s3-eth2
+09:48:46 INFO: Cleared root qdisc on s3-eth3
+09:48:46 INFO: Cleared root qdisc on s2-eth2
+09:48:46 INFO: Cleared root qdisc on s1-eth2
+09:48:46 INFO: Cleared root qdisc on s2-eth3
+09:48:46 ERROR: Command failed: tc qdisc del dev s4-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:48:46 INFO: Cleared root qdisc on s4-eth3
+09:48:46 INFO: Cleared root qdisc on s4-eth2
+09:48:46 INFO: Cleared root qdisc on s1-eth1
+09:48:46 INFO: Cleared root qdisc on s3-eth1
+09:48:46 INFO: Cleared root qdisc on s3-eth4
+09:48:46 INFO: Cleared root qdisc on s2-eth1
+09:48:46 INFO: Cleared root qdisc on s1-eth3
+09:48:46 INFO: Cleared root qdisc on s4-eth1
+09:49:13 INFO: Starting scheduler on s1-eth4 with 3 bands
+09:49:13 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:49:13 ERROR: Command failed: tc qdisc del dev s1-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:49:13 INFO: Starting scheduler on s3-eth3 with 3 bands
+09:49:13 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:49:13 INFO: Installed prio qdisc on s1-eth4 with 3 bands
+09:49:13 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:49:13 INFO: Installed flower filter on s1-eth4: DSCP=46 -> band=0 (flowid=1:1)
+09:49:13 INFO: Installed flower filter on s1-eth4: DSCP=34 -> band=1 (flowid=1:2)
+09:49:13 INFO: Installed prio qdisc on s3-eth3 with 3 bands
+09:49:13 INFO: Starting scheduler on s2-eth3 with 3 bands
+09:49:13 INFO: Starting scheduler on s1-eth1 with 3 bands
+09:49:13 INFO: Installed flower filter on s1-eth4: DSCP=0 -> band=2 (flowid=1:3)
+09:49:13 INFO: Scheduler installed. Running.
+09:49:13 INFO: Installed flower filter on s3-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:49:13 INFO: Starting scheduler on s1-eth2 with 3 bands
+09:49:13 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:49:13 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:49:13 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:49:13 INFO: Installed flower filter on s3-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:49:14 INFO: Starting scheduler on s4-eth3 with 3 bands
+09:49:14 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:49:14 INFO: Starting scheduler on s2-eth1 with 3 bands
+09:49:14 ERROR: Command failed: tc qdisc del dev s1-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:49:14 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:49:14 ERROR: Command failed: tc qdisc del dev s2-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:49:14 INFO: Installed flower filter on s3-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:49:14 INFO: Scheduler installed. Running.
+09:49:14 INFO: Starting scheduler on s2-eth2 with 3 bands
+09:49:14 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:49:14 INFO: Starting scheduler on s4-eth2 with 3 bands
+09:49:14 INFO: Starting scheduler on s4-eth1 with 3 bands
+09:49:14 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:49:14 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:49:14 INFO: Starting scheduler on s3-eth1 with 3 bands
+09:49:14 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:49:14 ERROR: Command failed: tc qdisc del dev s1-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:49:14 INFO: Starting scheduler on s3-eth4 with 3 bands
+09:49:14 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:49:14 INFO: Starting scheduler on s3-eth2 with 3 bands
+09:49:14 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:49:14 ERROR: Command failed: tc qdisc del dev s4-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:49:14 INFO: Starting scheduler on s1-eth3 with 3 bands
+09:49:14 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:49:14 ERROR: Command failed: tc qdisc del dev s4-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:49:14 INFO: Installed prio qdisc on s2-eth3 with 3 bands
+09:49:14 ERROR: Command failed: tc qdisc del dev s2-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:49:14 INFO: Installed prio qdisc on s1-eth1 with 3 bands
+09:49:14 INFO: Installed prio qdisc on s4-eth1 with 3 bands
+09:49:14 ERROR: Command failed: tc qdisc del dev s4-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:49:14 INFO: Installed prio qdisc on s4-eth3 with 3 bands
+09:49:14 INFO: Installed flower filter on s2-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:49:14 ERROR: Command failed: tc qdisc del dev s1-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:49:14 INFO: Installed prio qdisc on s2-eth1 with 3 bands
+09:49:14 INFO: Installed flower filter on s4-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:49:14 INFO: Installed flower filter on s2-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:49:14 ERROR: Command failed: tc qdisc del dev s3-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:49:14 INFO: Installed flower filter on s2-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:49:14 INFO: Installed prio qdisc on s1-eth3 with 3 bands
+09:49:14 INFO: Installed prio qdisc on s1-eth2 with 3 bands
+09:49:14 INFO: Installed flower filter on s2-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:49:14 INFO: Scheduler installed. Running.
+09:49:14 INFO: Installed flower filter on s2-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:49:14 INFO: Installed prio qdisc on s3-eth1 with 3 bands
+09:49:14 INFO: Installed flower filter on s1-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:49:14 INFO: Installed flower filter on s1-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:49:14 ERROR: Command failed: tc qdisc del dev s2-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:49:14 INFO: Installed flower filter on s1-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:49:14 INFO: Installed prio qdisc on s2-eth2 with 3 bands
+09:49:14 INFO: Installed flower filter on s3-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:49:14 INFO: Installed flower filter on s1-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:49:14 INFO: Installed flower filter on s2-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:49:14 INFO: Scheduler installed. Running.
+09:49:14 ERROR: Command failed: tc qdisc del dev s3-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:49:14 ERROR: Command failed: tc filter add dev s1-eth1 protocol ip parent 1: prio 1 flower ip_tos 0xb8 action skbedit priority 0 flowid 1:1
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+09:49:14 ERROR: Command failed: tc qdisc del dev s3-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:49:14 INFO: Installed prio qdisc on s3-eth2 with 3 bands
+09:49:14 INFO: Installed flower filter on s3-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:49:14 INFO: Installed flower filter on s3-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:49:14 ERROR: Command failed: tc filter add dev s1-eth1 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+09:49:14 INFO: Installed flower filter on s4-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:49:14 ERROR: failed to map class voip (DSCP 46) to band 0: Command 'tc filter add dev s1-eth1 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 165, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 118, in add_dscp_to_band
+    run(cmd_u32)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s1-eth1 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+09:49:14 INFO: Installed prio qdisc on s4-eth2 with 3 bands
+09:49:14 INFO: Installed flower filter on s3-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:49:14 INFO: Scheduler installed. Running.
+09:49:14 INFO: Installed flower filter on s4-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:49:14 INFO: Installed flower filter on s1-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:49:14 INFO: Installed flower filter on s4-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:49:14 INFO: Scheduler installed. Running.
+09:49:14 INFO: Installed flower filter on s2-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:49:14 INFO: Installed flower filter on s3-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:49:14 INFO: Installed flower filter on s1-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:49:14 INFO: Installed flower filter on s4-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:49:14 INFO: Scheduler installed. Running.
+09:49:14 INFO: Installed flower filter on s1-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:49:14 INFO: Scheduler installed. Running.
+09:49:14 INFO: Installed flower filter on s4-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:49:14 INFO: Installed flower filter on s1-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:49:14 INFO: Scheduler installed. Running.
+09:49:14 INFO: Installed prio qdisc on s3-eth4 with 3 bands
+09:49:14 INFO: Installed flower filter on s4-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:49:14 INFO: Installed flower filter on s2-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:49:14 INFO: Installed flower filter on s3-eth4: DSCP=46 -> band=0 (flowid=1:1)
+09:49:14 INFO: Installed flower filter on s2-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:49:14 INFO: Scheduler installed. Running.
+09:49:14 INFO: Installed flower filter on s4-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:49:14 INFO: Scheduler installed. Running.
+09:49:14 ERROR: Command failed: tc filter add dev s3-eth4 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+09:49:14 INFO: Installed flower filter on s4-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:49:14 INFO: Scheduler installed. Running.
+09:49:14 INFO: Installed flower filter on s3-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:49:14 INFO: Scheduler installed. Running.
+09:49:14 INFO: Installed u32 filter on s3-eth4: DSCP=34 -> band=1 (flowid=1:2)
+09:49:14 INFO: Installed flower filter on s3-eth4: DSCP=0 -> band=2 (flowid=1:3)
+09:49:14 INFO: Scheduler installed. Running.
+09:51:16 INFO: Starting scheduler on s1-eth1 with 3 bands
+09:51:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:16 INFO: Starting scheduler on s2-eth3 with 3 bands
+09:51:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:16 INFO: Installed prio qdisc on s1-eth1 with 3 bands
+09:51:16 INFO: Installed flower filter on s1-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:51:16 INFO: Starting scheduler on s1-eth3 with 3 bands
+09:51:16 INFO: Installed flower filter on s1-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:51:16 INFO: Starting scheduler on s1-eth2 with 3 bands
+09:51:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:16 INFO: Starting scheduler on s1-eth4 with 3 bands
+09:51:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:16 INFO: Installed flower filter on s1-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:51:16 INFO: Scheduler installed. Running.
+09:51:16 INFO: Installed prio qdisc on s2-eth3 with 3 bands
+09:51:16 ERROR: Command failed: tc qdisc del dev s1-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:51:16 INFO: Installed prio qdisc on s1-eth2 with 3 bands
+09:51:17 INFO: Installed flower filter on s2-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:51:17 INFO: Starting scheduler on s2-eth1 with 3 bands
+09:51:17 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:17 INFO: Installed flower filter on s2-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:51:17 INFO: Installed prio qdisc on s1-eth4 with 3 bands
+09:51:17 INFO: Starting scheduler on s3-eth2 with 3 bands
+09:51:17 INFO: Starting scheduler on s4-eth1 with 3 bands
+09:51:17 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:17 INFO: Installed prio qdisc on s1-eth3 with 3 bands
+09:51:17 INFO: Installed flower filter on s1-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:51:17 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:17 INFO: Installed flower filter on s2-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:51:17 INFO: Scheduler installed. Running.
+09:51:17 INFO: Installed flower filter on s1-eth4: DSCP=46 -> band=0 (flowid=1:1)
+09:51:17 INFO: Starting scheduler on s2-eth2 with 3 bands
+09:51:17 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:17 INFO: Starting scheduler on s3-eth1 with 3 bands
+09:51:17 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:17 INFO: Installed flower filter on s1-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:51:17 ERROR: Command failed: tc filter add dev s1-eth4 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+09:51:17 INFO: Installed flower filter on s1-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:51:17 INFO: Starting scheduler on s4-eth3 with 3 bands
+09:51:17 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:17 INFO: Starting scheduler on s3-eth3 with 3 bands
+09:51:17 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:17 INFO: Installed prio qdisc on s4-eth1 with 3 bands
+09:51:17 INFO: Installed prio qdisc on s2-eth1 with 3 bands
+09:51:17 INFO: Starting scheduler on s4-eth2 with 3 bands
+09:51:17 INFO: Starting scheduler on s3-eth4 with 3 bands
+09:51:17 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:17 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:17 INFO: Installed prio qdisc on s3-eth2 with 3 bands
+09:51:17 INFO: Installed flower filter on s1-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:51:17 INFO: Scheduler installed. Running.
+09:51:17 INFO: Installed prio qdisc on s3-eth1 with 3 bands
+09:51:17 INFO: Installed prio qdisc on s3-eth4 with 3 bands
+09:51:17 INFO: Installed flower filter on s1-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:51:17 INFO: Installed flower filter on s3-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:51:17 INFO: Installed flower filter on s2-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:51:17 INFO: Installed flower filter on s1-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:51:17 INFO: Scheduler installed. Running.
+09:51:17 INFO: Installed prio qdisc on s2-eth2 with 3 bands
+09:51:17 INFO: Installed flower filter on s4-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:51:17 INFO: Installed u32 filter on s1-eth4: DSCP=34 -> band=1 (flowid=1:2)
+09:51:17 INFO: Installed flower filter on s2-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:51:17 INFO: Installed prio qdisc on s4-eth3 with 3 bands
+09:51:17 INFO: Installed prio qdisc on s3-eth3 with 3 bands
+09:51:17 INFO: Installed flower filter on s2-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:51:17 INFO: Installed flower filter on s1-eth4: DSCP=0 -> band=2 (flowid=1:3)
+09:51:17 INFO: Scheduler installed. Running.
+09:51:17 INFO: Installed flower filter on s3-eth4: DSCP=46 -> band=0 (flowid=1:1)
+09:51:17 INFO: Installed flower filter on s4-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:51:17 INFO: Installed flower filter on s3-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:51:17 INFO: Installed flower filter on s3-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:51:17 INFO: Installed flower filter on s2-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:51:17 INFO: Installed flower filter on s3-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:51:17 INFO: Installed flower filter on s2-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:51:17 INFO: Scheduler installed. Running.
+09:51:17 INFO: Installed flower filter on s2-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:51:17 INFO: Scheduler installed. Running.
+09:51:17 INFO: Installed prio qdisc on s4-eth2 with 3 bands
+09:51:17 INFO: Installed flower filter on s3-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:51:17 INFO: Installed flower filter on s4-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:51:17 INFO: Installed flower filter on s4-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:51:17 INFO: Scheduler installed. Running.
+09:51:17 INFO: Installed flower filter on s3-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:51:17 INFO: Installed flower filter on s4-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:51:17 INFO: Scheduler installed. Running.
+09:51:17 INFO: Installed flower filter on s3-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:51:17 INFO: Scheduler installed. Running.
+09:51:17 INFO: Installed flower filter on s4-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:51:17 INFO: Installed flower filter on s4-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:51:17 INFO: Scheduler installed. Running.
+09:51:17 INFO: Installed flower filter on s3-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:51:17 INFO: Installed flower filter on s3-eth4: DSCP=34 -> band=1 (flowid=1:2)
+09:51:17 INFO: Installed flower filter on s3-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:51:17 INFO: Scheduler installed. Running.
+09:51:17 INFO: Installed flower filter on s4-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:51:17 ERROR: Command failed: tc filter add dev s3-eth4 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+09:51:17 INFO: Installed u32 filter on s3-eth4: DSCP=0 -> band=2 (flowid=1:3)
+09:51:17 INFO: Scheduler installed. Running.
+09:51:17 ERROR: Command failed: tc filter add dev s4-eth2 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+09:51:17 ERROR: Command failed: tc filter add dev s4-eth2 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+09:51:17 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s4-eth2 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 165, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 118, in add_dscp_to_band
+    run(cmd_u32)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s4-eth2 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+09:51:17 INFO: Scheduler installed. Running.
+09:51:28 INFO: Stopping scheduler and cleaning qdisc...
+09:51:28 INFO: Stopping scheduler and cleaning qdisc...
+09:51:28 INFO: Stopping scheduler and cleaning qdisc...
+09:51:28 INFO: Stopping scheduler and cleaning qdisc...
+09:51:28 INFO: Stopping scheduler and cleaning qdisc...
+09:51:28 INFO: Stopping scheduler and cleaning qdisc...
+09:51:28 INFO: Stopping scheduler and cleaning qdisc...
+09:51:28 INFO: Stopping scheduler and cleaning qdisc...
+09:51:28 INFO: Stopping scheduler and cleaning qdisc...
+09:51:28 INFO: Stopping scheduler and cleaning qdisc...
+09:51:28 INFO: Stopping scheduler and cleaning qdisc...
+09:51:28 INFO: Stopping scheduler and cleaning qdisc...
+09:51:28 INFO: Stopping scheduler and cleaning qdisc...
+09:51:28 INFO: Stopping scheduler and cleaning qdisc...
+09:51:28 INFO: Cleared root qdisc on s3-eth3
+09:51:28 INFO: Cleared root qdisc on s1-eth3
+09:51:28 INFO: Cleared root qdisc on s2-eth3
+09:51:28 INFO: Cleared root qdisc on s1-eth2
+09:51:28 INFO: Cleared root qdisc on s3-eth2
+09:51:28 INFO: Cleared root qdisc on s3-eth1
+09:51:28 INFO: Cleared root qdisc on s4-eth3
+09:51:28 INFO: Cleared root qdisc on s1-eth4
+09:51:28 INFO: Cleared root qdisc on s3-eth4
+09:51:28 INFO: Cleared root qdisc on s2-eth2
+09:51:28 ERROR: Command failed: tc qdisc del dev s4-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:51:28 INFO: Cleared root qdisc on s4-eth2
+09:51:28 INFO: Cleared root qdisc on s2-eth1
+09:51:28 INFO: Cleared root qdisc on s1-eth1
+09:51:28 ERROR: Command failed: tc qdisc del dev s4-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:51:28 INFO: Cleared root qdisc on s4-eth1
+09:51:43 INFO: Starting scheduler on s1-eth3 with 3 bands
+09:51:43 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:43 INFO: Starting scheduler on s1-eth4 with 3 bands
+09:51:43 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:43 INFO: Starting scheduler on s4-eth1 with 3 bands
+09:51:43 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:43 ERROR: Command failed: tc qdisc del dev s4-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:51:43 ERROR: Command failed: tc qdisc del dev s1-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:51:43 INFO: Installed prio qdisc on s4-eth1 with 3 bands
+09:51:43 ERROR: Command failed: tc qdisc del dev s1-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:51:43 INFO: Installed flower filter on s4-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:51:43 INFO: Installed prio qdisc on s1-eth3 with 3 bands
+09:51:43 INFO: Installed flower filter on s1-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:51:43 INFO: Starting scheduler on s1-eth2 with 3 bands
+09:51:43 INFO: Installed flower filter on s4-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:51:43 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:43 INFO: Starting scheduler on s2-eth2 with 3 bands
+09:51:43 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:43 INFO: Starting scheduler on s3-eth3 with 3 bands
+09:51:43 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:43 INFO: Starting scheduler on s1-eth1 with 3 bands
+09:51:43 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:43 INFO: Installed flower filter on s1-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:51:43 INFO: Installed prio qdisc on s1-eth4 with 3 bands
+09:51:43 INFO: Installed flower filter on s4-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:51:43 INFO: Scheduler installed. Running.
+09:51:43 ERROR: Command failed: tc qdisc del dev s1-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:51:43 INFO: Installed flower filter on s1-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:51:43 ERROR: Command failed: tc qdisc del dev s1-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:51:43 ERROR: Command failed: tc qdisc del dev s2-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:51:43 INFO: Scheduler installed. Running.
+09:51:43 INFO: Installed prio qdisc on s1-eth2 with 3 bands
+09:51:43 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:51:43 INFO: Installed prio qdisc on s1-eth1 with 3 bands
+09:51:43 INFO: Installed flower filter on s1-eth4: DSCP=46 -> band=0 (flowid=1:1)
+09:51:43 INFO: Installed prio qdisc on s3-eth3 with 3 bands
+09:51:43 INFO: Installed flower filter on s1-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:51:43 INFO: Installed flower filter on s1-eth4: DSCP=34 -> band=1 (flowid=1:2)
+09:51:43 INFO: Installed prio qdisc on s2-eth2 with 3 bands
+09:51:43 INFO: Installed flower filter on s1-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:51:43 INFO: Starting scheduler on s3-eth2 with 3 bands
+09:51:43 INFO: Installed flower filter on s1-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:51:43 INFO: Installed flower filter on s1-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:51:43 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:43 INFO: Installed flower filter on s2-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:51:43 ERROR: Command failed: tc filter add dev s1-eth4 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+09:51:43 INFO: Installed flower filter on s3-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:51:43 INFO: Starting scheduler on s3-eth1 with 3 bands
+09:51:43 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:43 INFO: Starting scheduler on s2-eth1 with 3 bands
+09:51:43 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:43 INFO: Starting scheduler on s4-eth2 with 3 bands
+09:51:43 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:43 ERROR: Command failed: tc qdisc del dev s3-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:51:43 INFO: Installed flower filter on s3-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:51:43 INFO: Installed flower filter on s1-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:51:43 INFO: Scheduler installed. Running.
+09:51:43 ERROR: Command failed: tc qdisc del dev s3-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:51:43 INFO: Starting scheduler on s3-eth4 with 3 bands
+09:51:43 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:43 INFO: Installed u32 filter on s1-eth4: DSCP=0 -> band=2 (flowid=1:3)
+09:51:43 INFO: Installed prio qdisc on s3-eth2 with 3 bands
+09:51:43 ERROR: Command failed: tc qdisc del dev s2-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:51:43 INFO: Scheduler installed. Running.
+09:51:43 INFO: Starting scheduler on s2-eth3 with 3 bands
+09:51:43 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:43 ERROR: Command failed: tc qdisc del dev s3-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:51:43 INFO: Installed flower filter on s2-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:51:43 INFO: Installed flower filter on s1-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:51:43 INFO: Scheduler installed. Running.
+09:51:43 INFO: Installed flower filter on s3-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:51:43 INFO: Scheduler installed. Running.
+09:51:43 ERROR: Command failed: tc qdisc del dev s4-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:51:43 INFO: Installed prio qdisc on s3-eth4 with 3 bands
+09:51:43 INFO: Starting scheduler on s4-eth3 with 3 bands
+09:51:43 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:51:43 INFO: Installed prio qdisc on s2-eth1 with 3 bands
+09:51:43 INFO: Installed flower filter on s2-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:51:43 ERROR: Command failed: tc qdisc del dev s4-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:51:43 INFO: Installed prio qdisc on s3-eth1 with 3 bands
+09:51:43 INFO: Installed flower filter on s3-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:51:43 ERROR: Command failed: tc filter add dev s2-eth1 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+09:51:43 INFO: Installed flower filter on s2-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:51:43 INFO: Scheduler installed. Running.
+09:51:43 INFO: Installed prio qdisc on s4-eth2 with 3 bands
+09:51:43 INFO: Installed flower filter on s3-eth4: DSCP=46 -> band=0 (flowid=1:1)
+09:51:43 INFO: Installed u32 filter on s2-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:51:43 INFO: Installed flower filter on s3-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:51:43 ERROR: Command failed: tc qdisc del dev s2-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:51:43 INFO: Installed flower filter on s3-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:51:43 INFO: Installed prio qdisc on s4-eth3 with 3 bands
+09:51:43 INFO: Installed flower filter on s3-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:51:43 INFO: Scheduler installed. Running.
+09:51:43 INFO: Installed flower filter on s3-eth4: DSCP=34 -> band=1 (flowid=1:2)
+09:51:43 INFO: Installed flower filter on s2-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:51:43 INFO: Scheduler installed. Running.
+09:51:43 INFO: Installed flower filter on s4-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:51:43 INFO: Installed flower filter on s3-eth4: DSCP=0 -> band=2 (flowid=1:3)
+09:51:43 INFO: Scheduler installed. Running.
+09:51:43 INFO: Installed flower filter on s3-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:51:43 ERROR: Command failed: tc qdisc add dev s2-eth3 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+09:51:43 INFO: Installed flower filter on s4-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:51:43 INFO: Installed flower filter on s4-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:51:43 INFO: Installed flower filter on s3-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:51:43 INFO: Scheduler installed. Running.
+09:51:43 ERROR: Command failed: tc filter add dev s4-eth2 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+09:51:43 INFO: Installed flower filter on s4-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:51:43 ERROR: Command failed: tc filter add dev s4-eth2 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+09:51:43 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s4-eth2 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 165, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 118, in add_dscp_to_band
+    run(cmd_u32)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s4-eth2 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+09:51:43 INFO: Scheduler installed. Running.
+09:51:43 INFO: Installed flower filter on s4-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:51:43 INFO: Scheduler installed. Running.
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Cleared root qdisc on s3-eth2
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Cleared root qdisc on s2-eth2
+09:52:08 INFO: Cleared root qdisc on s4-eth3
+09:52:08 INFO: Cleared root qdisc on s1-eth3
+09:52:08 INFO: Cleared root qdisc on s2-eth1
+09:52:08 INFO: Cleared root qdisc on s1-eth2
+09:52:08 INFO: Cleared root qdisc on s1-eth4
+09:52:08 INFO: Cleared root qdisc on s1-eth1
+09:52:08 ERROR: Command failed: tc qdisc del dev s4-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:08 INFO: Cleared root qdisc on s4-eth2
+09:52:08 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:08 INFO: Cleared root qdisc on s3-eth3
+09:52:08 INFO: Cleared root qdisc on s3-eth4
+09:52:08 ERROR: Command failed: tc qdisc del dev s3-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:08 INFO: Cleared root qdisc on s3-eth1
+09:52:08 ERROR: Command failed: tc qdisc del dev s4-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:08 INFO: Cleared root qdisc on s4-eth1
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 INFO: Stopping scheduler and cleaning qdisc...
+09:52:08 ERROR: Command failed: tc qdisc del dev s2-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:08 INFO: Cleared root qdisc on s2-eth2
+09:52:08 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:08 INFO: Cleared root qdisc on s3-eth3
+09:52:08 ERROR: Command failed: tc qdisc del dev s1-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:08 INFO: Cleared root qdisc on s1-eth2
+09:52:08 ERROR: Command failed: tc qdisc del dev s1-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:08 INFO: Cleared root qdisc on s1-eth1
+09:52:08 ERROR: Command failed: tc qdisc del dev s3-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:08 INFO: Cleared root qdisc on s3-eth1
+09:52:08 ERROR: Command failed: tc qdisc del dev s4-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:08 INFO: Cleared root qdisc on s4-eth1
+09:52:08 ERROR: Command failed: tc qdisc del dev s1-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:08 INFO: Cleared root qdisc on s1-eth3
+09:52:08 ERROR: Command failed: tc qdisc del dev s1-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:08 INFO: Cleared root qdisc on s1-eth4
+09:52:08 ERROR: Command failed: tc qdisc del dev s2-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:08 INFO: Cleared root qdisc on s2-eth3
+09:52:08 ERROR: Command failed: tc qdisc del dev s4-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:08 INFO: Cleared root qdisc on s4-eth2
+09:52:08 ERROR: Command failed: tc qdisc del dev s4-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:08 INFO: Cleared root qdisc on s4-eth3
+09:52:08 ERROR: Command failed: tc qdisc del dev s3-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:08 ERROR: Command failed: tc qdisc del dev s3-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:08 INFO: Cleared root qdisc on s3-eth4
+09:52:08 ERROR: Command failed: tc qdisc del dev s2-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:08 INFO: Cleared root qdisc on s2-eth1
+09:52:08 INFO: Cleared root qdisc on s3-eth2
+09:52:44 INFO: Starting scheduler on s1-eth3 with 3 bands
+09:52:44 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:52:44 INFO: Starting scheduler on s1-eth1 with 3 bands
+09:52:44 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:52:44 ERROR: Command failed: tc qdisc del dev s1-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:44 ERROR: Command failed: tc qdisc del dev s1-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:44 INFO: Starting scheduler on s3-eth1 with 3 bands
+09:52:44 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:52:44 INFO: Installed prio qdisc on s1-eth1 with 3 bands
+09:52:44 INFO: Installed prio qdisc on s1-eth3 with 3 bands
+09:52:44 ERROR: Command failed: tc qdisc del dev s3-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:44 INFO: Installed flower filter on s1-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:52:44 INFO: Starting scheduler on s2-eth1 with 3 bands
+09:52:44 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:52:44 INFO: Installed flower filter on s1-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:52:44 INFO: Starting scheduler on s1-eth4 with 3 bands
+09:52:44 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:52:44 ERROR: Command failed: tc qdisc del dev s2-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:44 INFO: Installed flower filter on s1-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:52:44 INFO: Installed prio qdisc on s3-eth1 with 3 bands
+09:52:44 INFO: Installed flower filter on s1-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:52:44 INFO: Scheduler installed. Running.
+09:52:44 INFO: Installed flower filter on s1-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:52:44 ERROR: Command failed: tc qdisc del dev s1-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:44 INFO: Installed prio qdisc on s2-eth1 with 3 bands
+09:52:44 INFO: Installed flower filter on s3-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:52:44 INFO: Installed flower filter on s3-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:52:44 INFO: Installed flower filter on s1-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:52:44 INFO: Scheduler installed. Running.
+09:52:44 INFO: Installed flower filter on s2-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:52:44 INFO: Installed flower filter on s3-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:52:44 INFO: Scheduler installed. Running.
+09:52:44 INFO: Installed prio qdisc on s1-eth4 with 3 bands
+09:52:44 INFO: Installed flower filter on s1-eth4: DSCP=46 -> band=0 (flowid=1:1)
+09:52:44 INFO: Installed flower filter on s2-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:52:44 INFO: Starting scheduler on s4-eth1 with 3 bands
+09:52:44 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:52:45 INFO: Installed flower filter on s2-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:52:45 INFO: Scheduler installed. Running.
+09:52:45 ERROR: Command failed: tc qdisc del dev s4-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:45 INFO: Starting scheduler on s4-eth3 with 3 bands
+09:52:45 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:52:45 INFO: Starting scheduler on s3-eth3 with 3 bands
+09:52:45 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:52:45 INFO: Starting scheduler on s2-eth3 with 3 bands
+09:52:45 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:52:45 INFO: Starting scheduler on s1-eth2 with 3 bands
+09:52:45 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:52:45 INFO: Installed flower filter on s1-eth4: DSCP=34 -> band=1 (flowid=1:2)
+09:52:45 ERROR: Command failed: tc qdisc del dev s4-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:45 INFO: Installed prio qdisc on s4-eth1 with 3 bands
+09:52:45 INFO: Installed flower filter on s1-eth4: DSCP=0 -> band=2 (flowid=1:3)
+09:52:45 INFO: Scheduler installed. Running.
+09:52:45 ERROR: Command failed: tc qdisc del dev s1-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:45 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:45 INFO: Starting scheduler on s2-eth2 with 3 bands
+09:52:45 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:52:45 INFO: Starting scheduler on s4-eth2 with 3 bands
+09:52:45 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:52:45 ERROR: Command failed: tc qdisc del dev s2-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:45 INFO: Starting scheduler on s3-eth2 with 3 bands
+09:52:45 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:52:45 INFO: Installed prio qdisc on s4-eth3 with 3 bands
+09:52:45 INFO: Installed prio qdisc on s1-eth2 with 3 bands
+09:52:45 INFO: Installed flower filter on s4-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:52:45 INFO: Installed prio qdisc on s3-eth3 with 3 bands
+09:52:45 INFO: Starting scheduler on s3-eth4 with 3 bands
+09:52:45 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:52:45 INFO: Installed flower filter on s4-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:52:45 ERROR: Command failed: tc qdisc del dev s2-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:45 INFO: Installed flower filter on s4-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:52:45 INFO: Scheduler installed. Running.
+09:52:45 ERROR: Command failed: tc qdisc del dev s3-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:45 INFO: Installed prio qdisc on s4-eth2 with 3 bands
+09:52:45 INFO: Installed prio qdisc on s2-eth3 with 3 bands
+09:52:45 INFO: Installed prio qdisc on s3-eth4 with 3 bands
+09:52:45 INFO: Installed flower filter on s4-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:52:45 ERROR: Command failed: tc qdisc del dev s3-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:52:45 INFO: Installed flower filter on s3-eth4: DSCP=46 -> band=0 (flowid=1:1)
+09:52:45 INFO: Installed flower filter on s2-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:52:45 INFO: Installed flower filter on s3-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:52:45 INFO: Installed prio qdisc on s2-eth2 with 3 bands
+09:52:45 INFO: Installed flower filter on s1-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:52:45 INFO: Installed flower filter on s4-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:52:45 INFO: Installed flower filter on s4-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:52:45 INFO: Installed prio qdisc on s3-eth2 with 3 bands
+09:52:45 INFO: Installed flower filter on s3-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:52:45 INFO: Installed flower filter on s4-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:52:45 INFO: Installed flower filter on s1-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:52:45 INFO: Scheduler installed. Running.
+09:52:45 INFO: Installed flower filter on s2-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:52:45 INFO: Installed flower filter on s3-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:52:45 INFO: Installed flower filter on s4-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:52:45 INFO: Installed flower filter on s3-eth4: DSCP=34 -> band=1 (flowid=1:2)
+09:52:45 INFO: Installed flower filter on s2-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:52:45 INFO: Installed flower filter on s2-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:52:45 INFO: Installed flower filter on s3-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:52:45 INFO: Scheduler installed. Running.
+09:52:45 INFO: Installed flower filter on s4-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:52:45 INFO: Scheduler installed. Running.
+09:52:45 INFO: Installed flower filter on s2-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:52:45 INFO: Scheduler installed. Running.
+09:52:45 INFO: Installed flower filter on s3-eth4: DSCP=0 -> band=2 (flowid=1:3)
+09:52:45 INFO: Scheduler installed. Running.
+09:52:45 INFO: Installed flower filter on s1-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:52:45 INFO: Scheduler installed. Running.
+09:52:45 INFO: Installed flower filter on s2-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:52:45 INFO: Scheduler installed. Running.
+09:52:45 INFO: Installed flower filter on s3-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:52:45 ERROR: Command failed: tc filter add dev s3-eth2 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+09:52:45 INFO: Installed u32 filter on s3-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:52:45 INFO: Scheduler installed. Running.
+09:53:48 INFO: Stopping scheduler and cleaning qdisc...
+09:53:48 INFO: Stopping scheduler and cleaning qdisc...
+09:53:48 INFO: Stopping scheduler and cleaning qdisc...
+09:53:48 INFO: Stopping scheduler and cleaning qdisc...
+09:53:48 INFO: Stopping scheduler and cleaning qdisc...
+09:53:48 INFO: Stopping scheduler and cleaning qdisc...
+09:53:48 INFO: Stopping scheduler and cleaning qdisc...
+09:53:48 INFO: Stopping scheduler and cleaning qdisc...
+09:53:48 INFO: Stopping scheduler and cleaning qdisc...
+09:53:48 INFO: Stopping scheduler and cleaning qdisc...
+09:53:48 INFO: Stopping scheduler and cleaning qdisc...
+09:53:48 INFO: Stopping scheduler and cleaning qdisc...
+09:53:48 INFO: Stopping scheduler and cleaning qdisc...
+09:53:48 INFO: Stopping scheduler and cleaning qdisc...
+09:53:48 INFO: Cleared root qdisc on s2-eth2
+09:53:48 INFO: Cleared root qdisc on s3-eth3
+09:53:48 INFO: Cleared root qdisc on s1-eth1
+09:53:48 INFO: Cleared root qdisc on s3-eth1
+09:53:48 INFO: Cleared root qdisc on s3-eth2
+09:53:48 ERROR: Command failed: tc qdisc del dev s1-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:53:48 INFO: Cleared root qdisc on s1-eth4
+09:53:48 ERROR: Command failed: tc qdisc del dev s2-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:53:48 INFO: Cleared root qdisc on s2-eth3
+09:53:48 INFO: Cleared root qdisc on s4-eth3
+09:53:48 INFO: Cleared root qdisc on s2-eth1
+09:53:48 INFO: Cleared root qdisc on s1-eth3
+09:53:48 INFO: Cleared root qdisc on s4-eth1
+09:53:48 INFO: Cleared root qdisc on s3-eth4
+09:53:48 INFO: Cleared root qdisc on s1-eth2
+09:53:48 ERROR: Command failed: tc qdisc del dev s4-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:53:48 INFO: Cleared root qdisc on s4-eth2
+09:53:50 INFO: Starting scheduler on s2-eth1 with 3 bands
+09:53:50 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:53:50 ERROR: Command failed: tc qdisc del dev s2-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:53:50 INFO: Installed prio qdisc on s2-eth1 with 3 bands
+09:53:50 INFO: Starting scheduler on s2-eth2 with 3 bands
+09:53:50 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:53:50 INFO: Installed flower filter on s2-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:53:50 ERROR: Command failed: tc qdisc del dev s2-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:53:50 INFO: Installed flower filter on s2-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:53:50 INFO: Installed prio qdisc on s2-eth2 with 3 bands
+09:53:50 INFO: Installed flower filter on s2-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:53:50 INFO: Scheduler installed. Running.
+09:53:50 INFO: Starting scheduler on s1-eth2 with 3 bands
+09:53:50 INFO: Installed flower filter on s2-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:53:50 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:53:50 ERROR: Command failed: tc qdisc del dev s1-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:53:50 INFO: Installed flower filter on s2-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:53:50 INFO: Installed flower filter on s2-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:53:50 INFO: Scheduler installed. Running.
+09:53:50 INFO: Installed prio qdisc on s1-eth2 with 3 bands
+09:53:50 INFO: Starting scheduler on s1-eth1 with 3 bands
+09:53:50 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:53:50 INFO: Starting scheduler on s2-eth3 with 3 bands
+09:53:50 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:53:50 INFO: Installed flower filter on s1-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:53:50 ERROR: Command failed: tc qdisc del dev s1-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:53:50 ERROR: Command failed: tc qdisc del dev s2-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:53:50 INFO: Starting scheduler on s1-eth3 with 3 bands
+09:53:50 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:53:50 INFO: Starting scheduler on s4-eth2 with 3 bands
+09:53:50 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:53:50 INFO: Installed prio qdisc on s2-eth3 with 3 bands
+09:53:50 INFO: Installed flower filter on s1-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:53:50 ERROR: Command failed: tc qdisc del dev s4-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:53:50 ERROR: Command failed: tc qdisc del dev s1-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:53:50 INFO: Installed prio qdisc on s1-eth1 with 3 bands
+09:53:50 INFO: Installed flower filter on s2-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:53:50 INFO: Installed prio qdisc on s1-eth3 with 3 bands
+09:53:50 INFO: Installed prio qdisc on s4-eth2 with 3 bands
+09:53:50 INFO: Installed flower filter on s1-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:53:50 INFO: Scheduler installed. Running.
+09:53:50 INFO: Installed flower filter on s1-eth1: DSCP=46 -> band=0 (flowid=1:1)
+09:53:50 INFO: Starting scheduler on s3-eth2 with 3 bands
+09:53:50 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:53:50 INFO: Installed flower filter on s1-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:53:50 INFO: Starting scheduler on s1-eth4 with 3 bands
+09:53:50 INFO: Starting scheduler on s3-eth1 with 3 bands
+09:53:50 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:53:50 INFO: Installed flower filter on s2-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:53:50 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:53:50 INFO: Starting scheduler on s3-eth3 with 3 bands
+09:53:50 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:53:50 INFO: Installed flower filter on s1-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:53:50 INFO: Installed flower filter on s1-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:53:50 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:53:50 INFO: Installed flower filter on s4-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:53:50 ERROR: Command failed: tc filter add dev s1-eth1 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+09:53:50 INFO: Installed prio qdisc on s3-eth3 with 3 bands
+09:53:50 INFO: Starting scheduler on s3-eth4 with 3 bands
+09:53:50 INFO: Installed flower filter on s1-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:53:50 INFO: Scheduler installed. Running.
+09:53:50 INFO: Starting scheduler on s4-eth3 with 3 bands
+09:53:50 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:53:50 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:53:50 INFO: Starting scheduler on s4-eth1 with 3 bands
+09:53:50 INFO: Installed flower filter on s4-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:53:50 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+09:53:50 ERROR: Command failed: tc qdisc del dev s3-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:53:50 INFO: Installed flower filter on s3-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:53:50 INFO: Installed flower filter on s3-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:53:50 INFO: Installed prio qdisc on s1-eth4 with 3 bands
+09:53:50 INFO: Installed u32 filter on s1-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:53:50 INFO: Scheduler installed. Running.
+09:53:50 ERROR: Command failed: tc qdisc del dev s3-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:53:50 INFO: Installed flower filter on s1-eth4: DSCP=46 -> band=0 (flowid=1:1)
+09:53:50 ERROR: Command failed: tc qdisc del dev s4-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:53:50 INFO: Installed prio qdisc on s3-eth2 with 3 bands
+09:53:50 INFO: Installed flower filter on s1-eth4: DSCP=34 -> band=1 (flowid=1:2)
+09:53:50 INFO: Installed flower filter on s2-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:53:50 INFO: Scheduler installed. Running.
+09:53:50 INFO: Installed flower filter on s3-eth2: DSCP=46 -> band=0 (flowid=1:1)
+09:53:50 INFO: Installed flower filter on s4-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:53:50 INFO: Scheduler installed. Running.
+09:53:50 ERROR: Command failed: tc qdisc del dev s4-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+09:53:50 INFO: Installed prio qdisc on s3-eth1 with 3 bands
+09:53:50 INFO: Installed prio qdisc on s3-eth4 with 3 bands
+09:53:50 INFO: Installed prio qdisc on s4-eth3 with 3 bands
+09:53:50 INFO: Installed flower filter on s1-eth4: DSCP=0 -> band=2 (flowid=1:3)
+09:53:50 INFO: Installed flower filter on s3-eth3: DSCP=0 -> band=2 (flowid=1:3)
+09:53:50 INFO: Scheduler installed. Running.
+09:53:50 INFO: Scheduler installed. Running.
+09:53:50 INFO: Installed flower filter on s3-eth2: DSCP=34 -> band=1 (flowid=1:2)
+09:53:50 INFO: Installed flower filter on s4-eth3: DSCP=46 -> band=0 (flowid=1:1)
+09:53:50 INFO: Installed flower filter on s3-eth4: DSCP=46 -> band=0 (flowid=1:1)
+09:53:50 ERROR: Command failed: tc filter add dev s3-eth1 protocol ip parent 1: prio 1 flower ip_tos 0xb8 action skbedit priority 0 flowid 1:1
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+09:53:50 ERROR: Command failed: tc qdisc add dev s4-eth1 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+09:53:50 INFO: Installed flower filter on s3-eth2: DSCP=0 -> band=2 (flowid=1:3)
+09:53:50 INFO: Scheduler installed. Running.
+09:53:50 INFO: Installed flower filter on s4-eth3: DSCP=34 -> band=1 (flowid=1:2)
+09:53:50 ERROR: Command failed: tc filter add dev s3-eth1 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+09:53:50 ERROR: failed to map class voip (DSCP 46) to band 0: Command 'tc filter add dev s3-eth1 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 165, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 118, in add_dscp_to_band
+    run(cmd_u32)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s3-eth1 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+09:53:50 ERROR: Command failed: tc filter add dev s3-eth4 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+09:53:50 ERROR: Command failed: tc filter add dev s4-eth3 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+09:53:50 INFO: Installed u32 filter on s3-eth4: DSCP=34 -> band=1 (flowid=1:2)
+09:53:50 INFO: Installed flower filter on s3-eth1: DSCP=34 -> band=1 (flowid=1:2)
+09:53:51 INFO: Installed flower filter on s3-eth4: DSCP=0 -> band=2 (flowid=1:3)
+09:53:51 INFO: Scheduler installed. Running.
+09:53:51 ERROR: Command failed: tc filter add dev s4-eth3 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+09:53:51 INFO: Installed flower filter on s3-eth1: DSCP=0 -> band=2 (flowid=1:3)
+09:53:51 INFO: Scheduler installed. Running.
+09:53:51 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s4-eth3 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 165, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 118, in add_dscp_to_band
+    run(cmd_u32)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s4-eth3 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+09:53:51 INFO: Scheduler installed. Running.
+10:00:01 INFO: Stopping scheduler and cleaning qdisc...
+10:00:01 INFO: Stopping scheduler and cleaning qdisc...
+10:00:01 INFO: Stopping scheduler and cleaning qdisc...
+10:00:01 INFO: Stopping scheduler and cleaning qdisc...
+10:00:01 INFO: Stopping scheduler and cleaning qdisc...
+10:00:01 INFO: Stopping scheduler and cleaning qdisc...
+10:00:01 INFO: Stopping scheduler and cleaning qdisc...
+10:00:01 INFO: Stopping scheduler and cleaning qdisc...
+10:00:01 INFO: Stopping scheduler and cleaning qdisc...
+10:00:01 INFO: Stopping scheduler and cleaning qdisc...
+10:00:01 INFO: Stopping scheduler and cleaning qdisc...
+10:00:01 INFO: Stopping scheduler and cleaning qdisc...
+10:00:01 INFO: Stopping scheduler and cleaning qdisc...
+10:00:01 INFO: Cleared root qdisc on s4-eth2
+10:00:01 INFO: Cleared root qdisc on s1-eth2
+10:00:01 INFO: Cleared root qdisc on s1-eth1
+10:00:01 ERROR: Command failed: tc qdisc del dev s4-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:00:01 INFO: Cleared root qdisc on s4-eth3
+10:00:01 INFO: Cleared root qdisc on s3-eth2
+10:00:01 INFO: Cleared root qdisc on s3-eth3
+10:00:01 ERROR: Command failed: tc qdisc del dev s3-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:00:01 INFO: Cleared root qdisc on s3-eth4
+10:00:01 ERROR: Command failed: tc qdisc del dev s3-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:00:01 INFO: Cleared root qdisc on s3-eth1
+10:00:01 ERROR: Command failed: tc qdisc del dev s1-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:00:01 INFO: Cleared root qdisc on s1-eth4
+10:00:01 INFO: Cleared root qdisc on s2-eth3
+10:00:01 INFO: Cleared root qdisc on s1-eth3
+10:00:01 ERROR: Command failed: tc qdisc del dev s2-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:00:01 INFO: Cleared root qdisc on s2-eth1
+10:00:01 INFO: Cleared root qdisc on s2-eth2
+10:00:03 INFO: Starting scheduler on s1-eth2 with 3 bands
+10:00:03 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:00:03 ERROR: Command failed: tc qdisc del dev s1-eth2 root
+rc=1
+stdout=
+stderr=Cannot find device "s1-eth2"
+
+10:00:03 ERROR: Command failed: tc qdisc add dev s1-eth2 root handle 1: prio bands 3
+rc=1
+stdout=
+stderr=Cannot find device "s1-eth2"
+
+10:00:03 INFO: Starting scheduler on s2-eth1 with 3 bands
+10:00:03 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:00:03 ERROR: Command failed: tc qdisc del dev s2-eth1 root
+rc=1
+stdout=
+stderr=Cannot find device "s2-eth1"
+
+10:00:03 INFO: Starting scheduler on s4-eth3 with 3 bands
+10:00:03 INFO: Starting scheduler on s1-eth3 with 3 bands
+10:00:03 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:00:03 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:00:03 ERROR: Command failed: tc qdisc add dev s2-eth1 root handle 1: prio bands 3
+rc=1
+stdout=
+stderr=Cannot find device "s2-eth1"
+
+10:00:03 INFO: Starting scheduler on s1-eth4 with 3 bands
+10:00:03 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:00:03 ERROR: Command failed: tc qdisc del dev s1-eth3 root
+rc=1
+stdout=
+stderr=Cannot find device "s1-eth3"
+
+10:00:03 INFO: Starting scheduler on s3-eth4 with 3 bands
+10:00:03 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:00:03 ERROR: Command failed: tc qdisc del dev s4-eth3 root
+rc=1
+stdout=
+stderr=Cannot find device "s4-eth3"
+
+10:00:03 ERROR: Command failed: tc qdisc add dev s1-eth3 root handle 1: prio bands 3
+rc=1
+stdout=
+stderr=Cannot find device "s1-eth3"
+
+10:00:03 INFO: Starting scheduler on s3-eth3 with 3 bands
+10:00:03 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:00:03 ERROR: Command failed: tc qdisc del dev s1-eth4 root
+rc=1
+stdout=
+stderr=Cannot find device "s1-eth4"
+
+10:00:03 INFO: Starting scheduler on s1-eth1 with 3 bands
+10:00:03 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:00:03 ERROR: Command failed: tc qdisc del dev s3-eth4 root
+rc=1
+stdout=
+stderr=Cannot find device "s3-eth4"
+
+10:00:03 INFO: Starting scheduler on s3-eth2 with 3 bands
+10:00:03 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:00:03 ERROR: Command failed: tc qdisc add dev s4-eth3 root handle 1: prio bands 3
+rc=1
+stdout=
+stderr=Cannot find device "s4-eth3"
+
+10:00:03 INFO: Starting scheduler on s2-eth3 with 3 bands
+10:00:03 INFO: Starting scheduler on s2-eth2 with 3 bands
+10:00:03 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:00:03 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:00:03 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=1
+stdout=
+stderr=Cannot find device "s3-eth3"
+
+10:00:04 ERROR: Command failed: tc qdisc del dev s2-eth3 root
+rc=1
+stdout=
+stderr=Cannot find device "s2-eth3"
+
+10:00:04 ERROR: Command failed: tc qdisc del dev s3-eth2 root
+rc=1
+stdout=
+stderr=Cannot find device "s3-eth2"
+
+10:00:04 ERROR: Command failed: tc qdisc del dev s1-eth1 root
+rc=1
+stdout=
+stderr=Cannot find device "s1-eth1"
+
+10:00:04 ERROR: Command failed: tc qdisc add dev s1-eth4 root handle 1: prio bands 3
+rc=1
+stdout=
+stderr=Cannot find device "s1-eth4"
+
+10:00:04 INFO: Starting scheduler on s4-eth2 with 3 bands
+10:00:04 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:00:04 ERROR: Command failed: tc qdisc add dev s3-eth4 root handle 1: prio bands 3
+rc=1
+stdout=
+stderr=Cannot find device "s3-eth4"
+
+10:00:04 ERROR: Command failed: tc qdisc del dev s2-eth2 root
+rc=1
+stdout=
+stderr=Cannot find device "s2-eth2"
+
+10:00:04 ERROR: Command failed: tc qdisc add dev s3-eth3 root handle 1: prio bands 3
+rc=1
+stdout=
+stderr=Cannot find device "s3-eth3"
+
+10:00:04 ERROR: Command failed: tc qdisc add dev s2-eth3 root handle 1: prio bands 3
+rc=1
+stdout=
+stderr=Cannot find device "s2-eth3"
+
+10:00:04 ERROR: Command failed: tc qdisc add dev s3-eth2 root handle 1: prio bands 3
+rc=1
+stdout=
+stderr=Cannot find device "s3-eth2"
+
+10:00:04 ERROR: Command failed: tc qdisc add dev s2-eth2 root handle 1: prio bands 3
+rc=1
+stdout=
+stderr=Cannot find device "s2-eth2"
+
+10:00:04 ERROR: Command failed: tc qdisc add dev s1-eth1 root handle 1: prio bands 3
+rc=1
+stdout=
+stderr=Cannot find device "s1-eth1"
+
+10:00:04 ERROR: Command failed: tc qdisc del dev s4-eth2 root
+rc=1
+stdout=
+stderr=Cannot find device "s4-eth2"
+
+10:00:04 ERROR: Command failed: tc qdisc add dev s4-eth2 root handle 1: prio bands 3
+rc=1
+stdout=
+stderr=Cannot find device "s4-eth2"
+
+10:00:04 INFO: Starting scheduler on s3-eth1 with 3 bands
+10:00:04 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:00:04 ERROR: Command failed: tc qdisc del dev s3-eth1 root
+rc=1
+stdout=
+stderr=Cannot find device "s3-eth1"
+
+10:00:04 INFO: Starting scheduler on s4-eth1 with 3 bands
+10:00:04 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:00:04 ERROR: Command failed: tc qdisc add dev s3-eth1 root handle 1: prio bands 3
+rc=1
+stdout=
+stderr=Cannot find device "s3-eth1"
+
+10:00:04 ERROR: Command failed: tc qdisc del dev s4-eth1 root
+rc=1
+stdout=
+stderr=Cannot find device "s4-eth1"
+
+10:00:04 ERROR: Command failed: tc qdisc add dev s4-eth1 root handle 1: prio bands 3
+rc=1
+stdout=
+stderr=Cannot find device "s4-eth1"
+
+10:05:34 INFO: Starting scheduler on s1-eth3 with 3 bands
+10:05:34 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:05:34 ERROR: Command failed: tc qdisc del dev s1-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:05:34 INFO: Starting scheduler on s1-eth2 with 3 bands
+10:05:34 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:05:34 INFO: Installed prio qdisc on s1-eth3 with 3 bands
+10:05:34 ERROR: Command failed: tc qdisc del dev s1-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:05:34 INFO: Installed flower filter on s1-eth3: DSCP=46 -> band=0 (flowid=1:1)
+10:05:34 INFO: Starting scheduler on s2-eth2 with 3 bands
+10:05:34 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:05:34 INFO: Installed flower filter on s1-eth3: DSCP=34 -> band=1 (flowid=1:2)
+10:05:34 INFO: Installed prio qdisc on s1-eth2 with 3 bands
+10:05:34 INFO: Starting scheduler on s2-eth1 with 3 bands
+10:05:34 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:05:34 INFO: Starting scheduler on s1-eth1 with 3 bands
+10:05:34 INFO: Installed flower filter on s1-eth3: DSCP=0 -> band=2 (flowid=1:3)
+10:05:34 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:05:34 INFO: Scheduler installed. Running.
+10:05:34 ERROR: Command failed: tc qdisc del dev s2-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:05:34 INFO: Installed flower filter on s1-eth2: DSCP=46 -> band=0 (flowid=1:1)
+10:05:34 ERROR: Command failed: tc qdisc del dev s2-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:05:34 INFO: Starting scheduler on s1-eth4 with 3 bands
+10:05:34 INFO: Installed prio qdisc on s2-eth2 with 3 bands
+10:05:34 ERROR: Command failed: tc qdisc del dev s1-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:05:34 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:05:34 INFO: Installed prio qdisc on s2-eth1 with 3 bands
+10:05:34 INFO: Starting scheduler on s2-eth3 with 3 bands
+10:05:34 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:05:34 INFO: Starting scheduler on s4-eth3 with 3 bands
+10:05:34 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:05:34 INFO: Installed flower filter on s1-eth2: DSCP=34 -> band=1 (flowid=1:2)
+10:05:34 ERROR: Command failed: tc qdisc del dev s2-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:05:34 INFO: Installed prio qdisc on s1-eth1 with 3 bands
+10:05:34 INFO: Installed prio qdisc on s2-eth3 with 3 bands
+10:05:34 INFO: Installed flower filter on s2-eth3: DSCP=46 -> band=0 (flowid=1:1)
+10:05:34 INFO: Installed flower filter on s2-eth2: DSCP=46 -> band=0 (flowid=1:1)
+10:05:34 INFO: Starting scheduler on s4-eth1 with 3 bands
+10:05:34 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:05:34 INFO: Installed flower filter on s2-eth3: DSCP=34 -> band=1 (flowid=1:2)
+10:05:34 INFO: Installed flower filter on s1-eth1: DSCP=46 -> band=0 (flowid=1:1)
+10:05:34 ERROR: Command failed: tc qdisc del dev s1-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:05:34 INFO: Starting scheduler on s3-eth2 with 3 bands
+10:05:34 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:05:34 INFO: Installed flower filter on s2-eth2: DSCP=34 -> band=1 (flowid=1:2)
+10:05:34 INFO: Installed flower filter on s2-eth1: DSCP=46 -> band=0 (flowid=1:1)
+10:05:34 INFO: Starting scheduler on s3-eth3 with 3 bands
+10:05:34 ERROR: Command failed: tc qdisc del dev s4-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:05:34 INFO: Installed flower filter on s2-eth3: DSCP=0 -> band=2 (flowid=1:3)
+10:05:34 INFO: Scheduler installed. Running.
+10:05:34 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:05:34 ERROR: Command failed: tc qdisc del dev s3-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:05:34 INFO: Installed prio qdisc on s1-eth4 with 3 bands
+10:05:34 INFO: Installed flower filter on s2-eth1: DSCP=34 -> band=1 (flowid=1:2)
+10:05:34 INFO: Starting scheduler on s4-eth2 with 3 bands
+10:05:34 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:05:34 INFO: Starting scheduler on s3-eth1 with 3 bands
+10:05:34 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:05:34 INFO: Installed prio qdisc on s4-eth1 with 3 bands
+10:05:34 INFO: Installed flower filter on s2-eth1: DSCP=0 -> band=2 (flowid=1:3)
+10:05:34 INFO: Scheduler installed. Running.
+10:05:34 ERROR: Command failed: tc qdisc del dev s3-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:05:34 INFO: Installed flower filter on s1-eth2: DSCP=0 -> band=2 (flowid=1:3)
+10:05:34 INFO: Scheduler installed. Running.
+10:05:34 ERROR: Command failed: tc qdisc del dev s4-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:05:34 INFO: Installed prio qdisc on s3-eth1 with 3 bands
+10:05:34 INFO: Installed flower filter on s2-eth2: DSCP=0 -> band=2 (flowid=1:3)
+10:05:34 INFO: Scheduler installed. Running.
+10:05:34 INFO: Installed prio qdisc on s4-eth3 with 3 bands
+10:05:34 INFO: Installed flower filter on s4-eth1: DSCP=46 -> band=0 (flowid=1:1)
+10:05:34 INFO: Installed flower filter on s1-eth1: DSCP=34 -> band=1 (flowid=1:2)
+10:05:34 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:05:34 ERROR: Command failed: tc filter add dev s4-eth3 protocol ip parent 1: prio 1 flower ip_tos 0xb8 action skbedit priority 0 flowid 1:1
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+10:05:34 INFO: Installed flower filter on s4-eth1: DSCP=34 -> band=1 (flowid=1:2)
+10:05:34 INFO: Installed prio qdisc on s3-eth2 with 3 bands
+10:05:34 INFO: Installed flower filter on s1-eth4: DSCP=46 -> band=0 (flowid=1:1)
+10:05:34 INFO: Installed flower filter on s3-eth1: DSCP=46 -> band=0 (flowid=1:1)
+10:05:34 ERROR: Command failed: tc qdisc del dev s4-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:05:34 ERROR: Command failed: tc filter add dev s4-eth3 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+10:05:34 ERROR: failed to map class voip (DSCP 46) to band 0: Command 'tc filter add dev s4-eth3 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 165, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 118, in add_dscp_to_band
+    run(cmd_u32)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s4-eth3 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+10:05:34 INFO: Starting scheduler on s3-eth4 with 3 bands
+10:05:34 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:05:34 INFO: Installed flower filter on s3-eth1: DSCP=34 -> band=1 (flowid=1:2)
+10:05:34 INFO: Installed flower filter on s4-eth3: DSCP=34 -> band=1 (flowid=1:2)
+10:05:34 INFO: Installed flower filter on s1-eth4: DSCP=34 -> band=1 (flowid=1:2)
+10:05:34 INFO: Installed flower filter on s1-eth1: DSCP=0 -> band=2 (flowid=1:3)
+10:05:34 INFO: Scheduler installed. Running.
+10:05:34 INFO: Installed prio qdisc on s3-eth3 with 3 bands
+10:05:34 INFO: Installed flower filter on s1-eth4: DSCP=0 -> band=2 (flowid=1:3)
+10:05:34 INFO: Scheduler installed. Running.
+10:05:34 INFO: Installed flower filter on s3-eth3: DSCP=46 -> band=0 (flowid=1:1)
+10:05:34 INFO: Installed flower filter on s4-eth1: DSCP=0 -> band=2 (flowid=1:3)
+10:05:34 INFO: Scheduler installed. Running.
+10:05:34 INFO: Installed flower filter on s4-eth3: DSCP=0 -> band=2 (flowid=1:3)
+10:05:34 INFO: Scheduler installed. Running.
+10:05:34 ERROR: Command failed: tc filter add dev s3-eth1 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+10:05:34 INFO: Installed flower filter on s3-eth3: DSCP=34 -> band=1 (flowid=1:2)
+10:05:34 INFO: Installed prio qdisc on s4-eth2 with 3 bands
+10:05:34 INFO: Installed flower filter on s3-eth2: DSCP=46 -> band=0 (flowid=1:1)
+10:05:34 ERROR: Command failed: tc filter add dev s3-eth3 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+10:05:34 INFO: Installed prio qdisc on s3-eth4 with 3 bands
+10:05:34 INFO: Installed u32 filter on s3-eth1: DSCP=0 -> band=2 (flowid=1:3)
+10:05:34 INFO: Scheduler installed. Running.
+10:05:34 INFO: Installed flower filter on s3-eth4: DSCP=46 -> band=0 (flowid=1:1)
+10:05:34 INFO: Installed flower filter on s3-eth2: DSCP=34 -> band=1 (flowid=1:2)
+10:05:34 ERROR: Command failed: tc filter add dev s3-eth3 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+10:05:34 INFO: Installed flower filter on s4-eth2: DSCP=46 -> band=0 (flowid=1:1)
+10:05:34 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s3-eth3 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 165, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 118, in add_dscp_to_band
+    run(cmd_u32)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s3-eth3 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+10:05:34 INFO: Scheduler installed. Running.
+10:05:34 INFO: Installed flower filter on s3-eth2: DSCP=0 -> band=2 (flowid=1:3)
+10:05:34 INFO: Scheduler installed. Running.
+10:05:34 INFO: Installed flower filter on s4-eth2: DSCP=34 -> band=1 (flowid=1:2)
+10:05:34 ERROR: Command failed: tc filter add dev s3-eth4 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+10:05:34 INFO: Installed flower filter on s4-eth2: DSCP=0 -> band=2 (flowid=1:3)
+10:05:34 INFO: Scheduler installed. Running.
+10:05:34 ERROR: Command failed: tc filter add dev s3-eth4 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+10:05:34 ERROR: failed to map class video (DSCP 34) to band 1: Command 'tc filter add dev s3-eth4 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 165, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 118, in add_dscp_to_band
+    run(cmd_u32)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s3-eth4 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+10:05:34 ERROR: Command failed: tc filter add dev s3-eth4 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+10:05:34 ERROR: Command failed: tc filter add dev s3-eth4 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+10:05:34 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s3-eth4 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 165, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 118, in add_dscp_to_band
+    run(cmd_u32)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s3-eth4 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+10:05:34 INFO: Scheduler installed. Running.
+10:07:29 INFO: Starting scheduler on s1-eth2 with 3 bands
+10:07:29 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:07:29 ERROR: Command failed: tc qdisc del dev s1-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:07:29 INFO: Starting scheduler on s2-eth1 with 3 bands
+10:07:29 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:07:29 ERROR: Command failed: tc qdisc del dev s2-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:07:29 INFO: Starting scheduler on s1-eth3 with 3 bands
+10:07:29 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:07:29 INFO: Installed prio qdisc on s1-eth2 with 3 bands
+10:07:29 INFO: Installed prio qdisc on s2-eth1 with 3 bands
+10:07:29 INFO: Installed flower filter on s1-eth2: DSCP=46 -> band=0 (flowid=1:1)
+10:07:29 ERROR: Command failed: tc qdisc del dev s1-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:07:29 INFO: Installed flower filter on s2-eth1: DSCP=46 -> band=0 (flowid=1:1)
+10:07:29 INFO: Installed flower filter on s1-eth2: DSCP=34 -> band=1 (flowid=1:2)
+10:07:29 INFO: Installed prio qdisc on s1-eth3 with 3 bands
+10:07:29 INFO: Installed flower filter on s2-eth1: DSCP=34 -> band=1 (flowid=1:2)
+10:07:29 INFO: Installed flower filter on s1-eth2: DSCP=0 -> band=2 (flowid=1:3)
+10:07:29 INFO: Scheduler installed. Running.
+10:07:29 INFO: Installed flower filter on s1-eth3: DSCP=46 -> band=0 (flowid=1:1)
+10:07:29 INFO: Installed flower filter on s2-eth1: DSCP=0 -> band=2 (flowid=1:3)
+10:07:29 INFO: Scheduler installed. Running.
+10:07:29 INFO: Starting scheduler on s3-eth1 with 3 bands
+10:07:29 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:07:29 INFO: Installed flower filter on s1-eth3: DSCP=34 -> band=1 (flowid=1:2)
+10:07:29 INFO: Starting scheduler on s4-eth3 with 3 bands
+10:07:29 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:07:29 INFO: Starting scheduler on s4-eth2 with 3 bands
+10:07:29 INFO: Installed flower filter on s1-eth3: DSCP=0 -> band=2 (flowid=1:3)
+10:07:29 INFO: Scheduler installed. Running.
+10:07:29 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:07:29 INFO: Starting scheduler on s4-eth1 with 3 bands
+10:07:29 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:07:29 ERROR: Command failed: tc qdisc del dev s3-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:07:29 ERROR: Command failed: tc qdisc del dev s4-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:07:29 INFO: Starting scheduler on s3-eth3 with 3 bands
+10:07:29 ERROR: Command failed: tc qdisc del dev s4-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:07:29 INFO: Starting scheduler on s1-eth1 with 3 bands
+10:07:29 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:07:29 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:07:29 INFO: Starting scheduler on s1-eth4 with 3 bands
+10:07:29 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:07:29 INFO: Installed prio qdisc on s4-eth2 with 3 bands
+10:07:29 INFO: Starting scheduler on s2-eth3 with 3 bands
+10:07:29 ERROR: Command failed: tc qdisc del dev s4-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:07:29 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:07:29 INFO: Starting scheduler on s3-eth4 with 3 bands
+10:07:29 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:07:29 INFO: Installed prio qdisc on s4-eth3 with 3 bands
+10:07:29 INFO: Installed prio qdisc on s3-eth1 with 3 bands
+10:07:29 INFO: Installed flower filter on s4-eth2: DSCP=46 -> band=0 (flowid=1:1)
+10:07:29 ERROR: Command failed: tc qdisc del dev s1-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:07:29 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:07:29 INFO: Starting scheduler on s3-eth2 with 3 bands
+10:07:29 INFO: Starting scheduler on s2-eth2 with 3 bands
+10:07:29 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:07:29 ERROR: Command failed: tc qdisc del dev s1-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:07:29 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:07:29 INFO: Installed prio qdisc on s2-eth3 with 3 bands
+10:07:29 INFO: Installed prio qdisc on s4-eth1 with 3 bands
+10:07:29 INFO: Installed flower filter on s4-eth3: DSCP=46 -> band=0 (flowid=1:1)
+10:07:29 INFO: Installed flower filter on s2-eth3: DSCP=46 -> band=0 (flowid=1:1)
+10:07:29 INFO: Installed flower filter on s4-eth1: DSCP=46 -> band=0 (flowid=1:1)
+10:07:29 ERROR: Command failed: tc qdisc del dev s3-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:07:29 INFO: Installed flower filter on s4-eth3: DSCP=34 -> band=1 (flowid=1:2)
+10:07:29 INFO: Installed prio qdisc on s1-eth1 with 3 bands
+10:07:29 INFO: Installed prio qdisc on s3-eth4 with 3 bands
+10:07:29 INFO: Installed flower filter on s4-eth1: DSCP=34 -> band=1 (flowid=1:2)
+10:07:29 INFO: Installed flower filter on s1-eth1: DSCP=46 -> band=0 (flowid=1:1)
+10:07:29 INFO: Installed flower filter on s4-eth3: DSCP=0 -> band=2 (flowid=1:3)
+10:07:29 INFO: Scheduler installed. Running.
+10:07:29 INFO: Installed prio qdisc on s1-eth4 with 3 bands
+10:07:29 INFO: Installed flower filter on s3-eth1: DSCP=46 -> band=0 (flowid=1:1)
+10:07:29 INFO: Installed flower filter on s4-eth2: DSCP=34 -> band=1 (flowid=1:2)
+10:07:29 INFO: Installed flower filter on s3-eth4: DSCP=46 -> band=0 (flowid=1:1)
+10:07:29 INFO: Installed prio qdisc on s3-eth3 with 3 bands
+10:07:29 INFO: Installed flower filter on s2-eth3: DSCP=34 -> band=1 (flowid=1:2)
+10:07:29 INFO: Installed flower filter on s1-eth1: DSCP=34 -> band=1 (flowid=1:2)
+10:07:29 INFO: Installed flower filter on s4-eth1: DSCP=0 -> band=2 (flowid=1:3)
+10:07:29 INFO: Installed flower filter on s3-eth3: DSCP=46 -> band=0 (flowid=1:1)
+10:07:29 INFO: Scheduler installed. Running.
+10:07:29 INFO: Installed flower filter on s1-eth4: DSCP=46 -> band=0 (flowid=1:1)
+10:07:29 INFO: Installed flower filter on s3-eth1: DSCP=34 -> band=1 (flowid=1:2)
+10:07:29 INFO: Installed flower filter on s4-eth2: DSCP=0 -> band=2 (flowid=1:3)
+10:07:29 ERROR: Command failed: tc filter add dev s3-eth3 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+10:07:29 INFO: Installed flower filter on s1-eth4: DSCP=34 -> band=1 (flowid=1:2)
+10:07:29 INFO: Scheduler installed. Running.
+10:07:29 INFO: Installed flower filter on s2-eth3: DSCP=0 -> band=2 (flowid=1:3)
+10:07:29 INFO: Scheduler installed. Running.
+10:07:29 INFO: Installed flower filter on s3-eth4: DSCP=34 -> band=1 (flowid=1:2)
+10:07:29 ERROR: Command failed: tc qdisc del dev s3-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:07:29 INFO: Installed prio qdisc on s2-eth2 with 3 bands
+10:07:29 INFO: Installed flower filter on s3-eth1: DSCP=0 -> band=2 (flowid=1:3)
+10:07:29 INFO: Scheduler installed. Running.
+10:07:29 INFO: Installed prio qdisc on s3-eth2 with 3 bands
+10:07:29 INFO: Installed u32 filter on s3-eth3: DSCP=34 -> band=1 (flowid=1:2)
+10:07:29 INFO: Installed flower filter on s3-eth2: DSCP=46 -> band=0 (flowid=1:1)
+10:07:29 ERROR: Command failed: tc filter add dev s1-eth1 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+10:07:29 INFO: Installed flower filter on s2-eth2: DSCP=46 -> band=0 (flowid=1:1)
+10:07:29 ERROR: Command failed: tc filter add dev s1-eth4 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+10:07:29 INFO: Installed flower filter on s3-eth4: DSCP=0 -> band=2 (flowid=1:3)
+10:07:29 INFO: Scheduler installed. Running.
+10:07:29 INFO: Installed flower filter on s3-eth2: DSCP=34 -> band=1 (flowid=1:2)
+10:07:29 INFO: Installed flower filter on s3-eth3: DSCP=0 -> band=2 (flowid=1:3)
+10:07:29 INFO: Scheduler installed. Running.
+10:07:29 ERROR: Command failed: tc filter add dev s1-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+10:07:29 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s1-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 165, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 118, in add_dscp_to_band
+    run(cmd_u32)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s1-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+10:07:29 INFO: Scheduler installed. Running.
+10:07:29 INFO: Installed flower filter on s2-eth2: DSCP=34 -> band=1 (flowid=1:2)
+10:07:29 INFO: Installed u32 filter on s1-eth4: DSCP=0 -> band=2 (flowid=1:3)
+10:07:29 INFO: Scheduler installed. Running.
+10:07:29 INFO: Installed flower filter on s2-eth2: DSCP=0 -> band=2 (flowid=1:3)
+10:07:29 INFO: Scheduler installed. Running.
+10:07:29 INFO: Installed flower filter on s3-eth2: DSCP=0 -> band=2 (flowid=1:3)
+10:07:29 INFO: Scheduler installed. Running.
+10:30:36 INFO: Starting scheduler on s1-eth1 with 3 bands
+10:30:36 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:30:36 INFO: Starting scheduler on s3-eth3 with 3 bands
+10:30:36 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:30:36 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:30:36 ERROR: Command failed: tc qdisc del dev s1-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:30:36 INFO: Installed prio qdisc on s3-eth3 with 3 bands
+10:30:36 INFO: Starting scheduler on s3-eth2 with 3 bands
+10:30:36 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:30:36 INFO: Installed flower filter on s3-eth3: DSCP=46 -> band=0 (flowid=1:1)
+10:30:36 ERROR: Command failed: tc qdisc del dev s3-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:30:36 INFO: Installed prio qdisc on s1-eth1 with 3 bands
+10:30:36 INFO: Starting scheduler on s1-eth2 with 3 bands
+10:30:36 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:30:36 INFO: Installed prio qdisc on s3-eth2 with 3 bands
+10:30:36 INFO: Installed flower filter on s1-eth1: DSCP=46 -> band=0 (flowid=1:1)
+10:30:36 INFO: Starting scheduler on s2-eth3 with 3 bands
+10:30:36 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:30:36 INFO: Installed flower filter on s3-eth2: DSCP=46 -> band=0 (flowid=1:1)
+10:30:36 INFO: Installed flower filter on s3-eth3: DSCP=34 -> band=1 (flowid=1:2)
+10:30:36 ERROR: Command failed: tc qdisc del dev s1-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:30:36 ERROR: Command failed: tc qdisc del dev s2-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:30:36 INFO: Starting scheduler on s1-eth4 with 3 bands
+10:30:36 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:30:36 INFO: Installed flower filter on s1-eth1: DSCP=34 -> band=1 (flowid=1:2)
+10:30:36 INFO: Installed flower filter on s3-eth2: DSCP=34 -> band=1 (flowid=1:2)
+10:30:36 INFO: Installed flower filter on s3-eth3: DSCP=0 -> band=2 (flowid=1:3)
+10:30:36 INFO: Scheduler installed. Running.
+10:30:36 INFO: Installed prio qdisc on s1-eth2 with 3 bands
+10:30:36 INFO: Installed flower filter on s1-eth1: DSCP=0 -> band=2 (flowid=1:3)
+10:30:36 INFO: Scheduler installed. Running.
+10:30:36 INFO: Starting scheduler on s1-eth3 with 3 bands
+10:30:36 INFO: Installed flower filter on s3-eth2: DSCP=0 -> band=2 (flowid=1:3)
+10:30:36 INFO: Scheduler installed. Running.
+10:30:36 INFO: Installed prio qdisc on s2-eth3 with 3 bands
+10:30:36 ERROR: Command failed: tc qdisc del dev s1-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:30:36 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:30:36 INFO: Installed flower filter on s1-eth2: DSCP=46 -> band=0 (flowid=1:1)
+10:30:36 INFO: Starting scheduler on s3-eth4 with 3 bands
+10:30:36 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:30:36 INFO: Starting scheduler on s2-eth2 with 3 bands
+10:30:36 INFO: Installed flower filter on s2-eth3: DSCP=46 -> band=0 (flowid=1:1)
+10:30:36 INFO: Installed prio qdisc on s1-eth4 with 3 bands
+10:30:36 INFO: Starting scheduler on s4-eth2 with 3 bands
+10:30:36 INFO: Installed flower filter on s1-eth2: DSCP=34 -> band=1 (flowid=1:2)
+10:30:36 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:30:36 ERROR: Command failed: tc qdisc del dev s3-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:30:36 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:30:36 ERROR: Command failed: tc qdisc del dev s2-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:30:36 INFO: Installed flower filter on s2-eth3: DSCP=34 -> band=1 (flowid=1:2)
+10:30:36 INFO: Installed flower filter on s1-eth4: DSCP=46 -> band=0 (flowid=1:1)
+10:30:36 ERROR: Command failed: tc qdisc del dev s4-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:30:36 INFO: Installed prio qdisc on s3-eth4 with 3 bands
+10:30:36 INFO: Installed flower filter on s1-eth4: DSCP=34 -> band=1 (flowid=1:2)
+10:30:36 INFO: Installed prio qdisc on s1-eth3 with 3 bands
+10:30:36 INFO: Installed flower filter on s2-eth3: DSCP=0 -> band=2 (flowid=1:3)
+10:30:36 INFO: Scheduler installed. Running.
+10:30:36 INFO: Installed flower filter on s1-eth4: DSCP=0 -> band=2 (flowid=1:3)
+10:30:36 INFO: Scheduler installed. Running.
+10:30:36 INFO: Installed prio qdisc on s4-eth2 with 3 bands
+10:30:36 INFO: Installed flower filter on s4-eth2: DSCP=46 -> band=0 (flowid=1:1)
+10:30:36 INFO: Installed flower filter on s1-eth3: DSCP=46 -> band=0 (flowid=1:1)
+10:30:36 INFO: Starting scheduler on s3-eth1 with 3 bands
+10:30:36 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:30:36 INFO: Installed flower filter on s1-eth3: DSCP=34 -> band=1 (flowid=1:2)
+10:30:36 INFO: Installed prio qdisc on s2-eth2 with 3 bands
+10:30:36 INFO: Installed flower filter on s1-eth3: DSCP=0 -> band=2 (flowid=1:3)
+10:30:36 INFO: Scheduler installed. Running.
+10:30:36 INFO: Installed flower filter on s1-eth2: DSCP=0 -> band=2 (flowid=1:3)
+10:30:36 INFO: Scheduler installed. Running.
+10:30:36 INFO: Starting scheduler on s4-eth1 with 3 bands
+10:30:36 INFO: Installed flower filter on s4-eth2: DSCP=34 -> band=1 (flowid=1:2)
+10:30:36 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:30:36 INFO: Installed flower filter on s3-eth4: DSCP=46 -> band=0 (flowid=1:1)
+10:30:36 INFO: Installed flower filter on s3-eth4: DSCP=34 -> band=1 (flowid=1:2)
+10:30:36 INFO: Installed prio qdisc on s3-eth1 with 3 bands
+10:30:36 ERROR: Command failed: tc qdisc del dev s4-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:30:36 INFO: Installed prio qdisc on s4-eth1 with 3 bands
+10:30:36 INFO: Installed flower filter on s2-eth2: DSCP=46 -> band=0 (flowid=1:1)
+10:30:36 INFO: Installed flower filter on s3-eth4: DSCP=0 -> band=2 (flowid=1:3)
+10:30:36 INFO: Installed flower filter on s4-eth2: DSCP=0 -> band=2 (flowid=1:3)
+10:30:36 INFO: Scheduler installed. Running.
+10:30:36 INFO: Scheduler installed. Running.
+10:30:36 INFO: Installed flower filter on s3-eth1: DSCP=46 -> band=0 (flowid=1:1)
+10:30:36 INFO: Starting scheduler on s2-eth1 with 3 bands
+10:30:36 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:30:36 INFO: Starting scheduler on s4-eth3 with 3 bands
+10:30:36 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:30:36 INFO: Installed flower filter on s2-eth2: DSCP=34 -> band=1 (flowid=1:2)
+10:30:36 INFO: Installed flower filter on s4-eth1: DSCP=46 -> band=0 (flowid=1:1)
+10:30:36 ERROR: Command failed: tc qdisc del dev s4-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:30:36 INFO: Installed flower filter on s2-eth2: DSCP=0 -> band=2 (flowid=1:3)
+10:30:36 INFO: Scheduler installed. Running.
+10:30:36 INFO: Installed flower filter on s4-eth1: DSCP=34 -> band=1 (flowid=1:2)
+10:30:36 INFO: Installed prio qdisc on s4-eth3 with 3 bands
+10:30:36 INFO: Installed flower filter on s3-eth1: DSCP=34 -> band=1 (flowid=1:2)
+10:30:36 INFO: Installed flower filter on s4-eth1: DSCP=0 -> band=2 (flowid=1:3)
+10:30:36 ERROR: Command failed: tc filter add dev s4-eth3 protocol ip parent 1: prio 1 flower ip_tos 0xb8 action skbedit priority 0 flowid 1:1
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+10:30:36 INFO: Scheduler installed. Running.
+10:30:36 INFO: Installed flower filter on s3-eth1: DSCP=0 -> band=2 (flowid=1:3)
+10:30:36 INFO: Scheduler installed. Running.
+10:30:36 INFO: Installed prio qdisc on s2-eth1 with 3 bands
+10:30:36 INFO: Installed u32 filter on s4-eth3: DSCP=46 -> band=0 (flowid=1:1)
+10:30:36 INFO: Installed flower filter on s2-eth1: DSCP=46 -> band=0 (flowid=1:1)
+10:30:36 INFO: Installed flower filter on s4-eth3: DSCP=34 -> band=1 (flowid=1:2)
+10:30:36 INFO: Installed flower filter on s4-eth3: DSCP=0 -> band=2 (flowid=1:3)
+10:30:36 INFO: Scheduler installed. Running.
+10:30:36 INFO: Installed flower filter on s2-eth1: DSCP=34 -> band=1 (flowid=1:2)
+10:30:36 INFO: Installed flower filter on s2-eth1: DSCP=0 -> band=2 (flowid=1:3)
+10:30:36 INFO: Scheduler installed. Running.
+10:31:28 INFO: Stopping scheduler and cleaning qdisc...
+10:31:28 INFO: Stopping scheduler and cleaning qdisc...
+10:31:28 INFO: Stopping scheduler and cleaning qdisc...
+10:31:28 INFO: Stopping scheduler and cleaning qdisc...
+10:31:28 INFO: Stopping scheduler and cleaning qdisc...
+10:31:28 INFO: Stopping scheduler and cleaning qdisc...
+10:31:28 INFO: Stopping scheduler and cleaning qdisc...
+10:31:28 INFO: Stopping scheduler and cleaning qdisc...
+10:31:28 INFO: Stopping scheduler and cleaning qdisc...
+10:31:28 INFO: Stopping scheduler and cleaning qdisc...
+10:31:28 INFO: Stopping scheduler and cleaning qdisc...
+10:31:28 INFO: Stopping scheduler and cleaning qdisc...
+10:31:28 INFO: Stopping scheduler and cleaning qdisc...
+10:31:28 INFO: Stopping scheduler and cleaning qdisc...
+10:31:28 INFO: Cleared root qdisc on s4-eth2
+10:31:28 INFO: Cleared root qdisc on s2-eth2
+10:31:28 INFO: Cleared root qdisc on s4-eth3
+10:31:28 INFO: Cleared root qdisc on s1-eth3
+10:31:28 INFO: Cleared root qdisc on s4-eth1
+10:31:28 INFO: Cleared root qdisc on s3-eth4
+10:31:28 INFO: Cleared root qdisc on s1-eth2
+10:31:28 INFO: Cleared root qdisc on s3-eth2
+10:31:28 INFO: Cleared root qdisc on s1-eth4
+10:31:28 INFO: Cleared root qdisc on s2-eth3
+10:31:28 INFO: Cleared root qdisc on s2-eth1
+10:31:28 ERROR: Command failed: tc qdisc del dev s3-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:31:28 ERROR: Command failed: tc qdisc del dev s1-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:31:28 INFO: Cleared root qdisc on s3-eth1
+10:31:28 INFO: Cleared root qdisc on s1-eth1
+10:31:28 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:31:28 INFO: Cleared root qdisc on s3-eth3
+10:31:48 INFO: Starting scheduler on s1-eth2 with 3 bands
+10:31:48 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:31:48 ERROR: Command failed: tc qdisc del dev s1-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:31:48 INFO: Installed prio qdisc on s1-eth2 with 3 bands
+10:31:48 INFO: Installed flower filter on s1-eth2: DSCP=46 -> band=0 (flowid=1:1)
+10:31:48 INFO: Installed flower filter on s1-eth2: DSCP=34 -> band=1 (flowid=1:2)
+10:31:48 INFO: Starting scheduler on s1-eth1 with 3 bands
+10:31:48 INFO: Installed flower filter on s1-eth2: DSCP=0 -> band=2 (flowid=1:3)
+10:31:48 INFO: Scheduler installed. Running.
+10:31:48 INFO: Starting scheduler on s3-eth4 with 3 bands
+10:31:48 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:31:48 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:31:48 ERROR: Command failed: tc qdisc del dev s1-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:31:48 ERROR: Command failed: tc qdisc del dev s3-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:31:48 INFO: Installed prio qdisc on s1-eth1 with 3 bands
+10:31:48 INFO: Installed flower filter on s1-eth1: DSCP=46 -> band=0 (flowid=1:1)
+10:31:48 INFO: Installed prio qdisc on s3-eth4 with 3 bands
+10:31:48 INFO: Starting scheduler on s4-eth3 with 3 bands
+10:31:48 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:31:48 INFO: Starting scheduler on s1-eth3 with 3 bands
+10:31:48 INFO: Starting scheduler on s3-eth2 with 3 bands
+10:31:48 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:31:48 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:31:48 INFO: Installed flower filter on s1-eth1: DSCP=34 -> band=1 (flowid=1:2)
+10:31:48 ERROR: Command failed: tc qdisc del dev s4-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:31:48 INFO: Installed flower filter on s3-eth4: DSCP=46 -> band=0 (flowid=1:1)
+10:31:48 INFO: Starting scheduler on s2-eth2 with 3 bands
+10:31:48 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:31:48 INFO: Installed prio qdisc on s4-eth3 with 3 bands
+10:31:48 ERROR: Command failed: tc qdisc del dev s1-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:31:48 INFO: Installed flower filter on s3-eth4: DSCP=34 -> band=1 (flowid=1:2)
+10:31:48 INFO: Starting scheduler on s2-eth1 with 3 bands
+10:31:48 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:31:48 INFO: Installed flower filter on s1-eth1: DSCP=0 -> band=2 (flowid=1:3)
+10:31:48 INFO: Scheduler installed. Running.
+10:31:48 ERROR: Command failed: tc qdisc del dev s2-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:31:48 INFO: Starting scheduler on s3-eth3 with 3 bands
+10:31:48 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:31:48 ERROR: Command failed: tc qdisc del dev s2-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:31:48 INFO: Starting scheduler on s4-eth2 with 3 bands
+10:31:48 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:31:48 ERROR: Command failed: tc qdisc del dev s3-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:31:48 INFO: Installed prio qdisc on s1-eth3 with 3 bands
+10:31:48 INFO: Installed prio qdisc on s2-eth2 with 3 bands
+10:31:48 INFO: Starting scheduler on s1-eth4 with 3 bands
+10:31:48 ERROR: Command failed: tc qdisc del dev s4-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:31:48 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:31:48 INFO: Installed flower filter on s4-eth3: DSCP=46 -> band=0 (flowid=1:1)
+10:31:48 INFO: Installed flower filter on s3-eth4: DSCP=0 -> band=2 (flowid=1:3)
+10:31:48 INFO: Scheduler installed. Running.
+10:31:48 INFO: Installed flower filter on s1-eth3: DSCP=46 -> band=0 (flowid=1:1)
+10:31:48 INFO: Starting scheduler on s2-eth3 with 3 bands
+10:31:48 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:31:48 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:31:48 INFO: Installed flower filter on s4-eth3: DSCP=34 -> band=1 (flowid=1:2)
+10:31:48 ERROR: Command failed: tc qdisc del dev s1-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:31:48 INFO: Installed prio qdisc on s2-eth1 with 3 bands
+10:31:48 INFO: Installed flower filter on s2-eth2: DSCP=46 -> band=0 (flowid=1:1)
+10:31:48 INFO: Starting scheduler on s3-eth1 with 3 bands
+10:31:48 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:31:48 INFO: Installed prio qdisc on s4-eth2 with 3 bands
+10:31:48 ERROR: Command failed: tc qdisc del dev s2-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:31:48 INFO: Starting scheduler on s4-eth1 with 3 bands
+10:31:48 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+10:31:48 INFO: Installed flower filter on s2-eth1: DSCP=46 -> band=0 (flowid=1:1)
+10:31:48 INFO: Installed flower filter on s1-eth3: DSCP=34 -> band=1 (flowid=1:2)
+10:31:48 INFO: Installed prio qdisc on s3-eth3 with 3 bands
+10:31:48 INFO: Installed flower filter on s4-eth2: DSCP=46 -> band=0 (flowid=1:1)
+10:31:48 INFO: Installed flower filter on s2-eth2: DSCP=34 -> band=1 (flowid=1:2)
+10:31:48 INFO: Installed prio qdisc on s2-eth3 with 3 bands
+10:31:48 ERROR: Command failed: tc qdisc del dev s4-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:31:48 INFO: Installed flower filter on s4-eth2: DSCP=34 -> band=1 (flowid=1:2)
+10:31:48 INFO: Installed flower filter on s4-eth3: DSCP=0 -> band=2 (flowid=1:3)
+10:31:48 INFO: Scheduler installed. Running.
+10:31:48 INFO: Installed flower filter on s4-eth2: DSCP=0 -> band=2 (flowid=1:3)
+10:31:48 INFO: Scheduler installed. Running.
+10:31:48 INFO: Installed prio qdisc on s1-eth4 with 3 bands
+10:31:48 INFO: Installed prio qdisc on s4-eth1 with 3 bands
+10:31:48 INFO: Installed flower filter on s1-eth4: DSCP=46 -> band=0 (flowid=1:1)
+10:31:48 ERROR: Command failed: tc qdisc del dev s3-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:31:48 INFO: Installed prio qdisc on s3-eth1 with 3 bands
+10:31:48 INFO: Installed prio qdisc on s3-eth2 with 3 bands
+10:31:48 INFO: Installed flower filter on s1-eth4: DSCP=34 -> band=1 (flowid=1:2)
+10:31:48 INFO: Installed flower filter on s3-eth3: DSCP=46 -> band=0 (flowid=1:1)
+10:31:48 INFO: Installed flower filter on s2-eth1: DSCP=34 -> band=1 (flowid=1:2)
+10:31:48 INFO: Installed flower filter on s2-eth2: DSCP=0 -> band=2 (flowid=1:3)
+10:31:48 INFO: Scheduler installed. Running.
+10:31:48 INFO: Installed flower filter on s1-eth3: DSCP=0 -> band=2 (flowid=1:3)
+10:31:48 INFO: Scheduler installed. Running.
+10:31:48 INFO: Installed flower filter on s3-eth2: DSCP=46 -> band=0 (flowid=1:1)
+10:31:48 ERROR: Command failed: tc filter add dev s2-eth1 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+10:31:48 INFO: Installed flower filter on s1-eth4: DSCP=0 -> band=2 (flowid=1:3)
+10:31:48 INFO: Scheduler installed. Running.
+10:31:48 ERROR: Command failed: tc filter add dev s3-eth2 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+10:31:48 INFO: Installed flower filter on s2-eth3: DSCP=46 -> band=0 (flowid=1:1)
+10:31:48 INFO: Installed flower filter on s3-eth1: DSCP=46 -> band=0 (flowid=1:1)
+10:31:48 INFO: Installed flower filter on s3-eth3: DSCP=34 -> band=1 (flowid=1:2)
+10:31:48 INFO: Installed u32 filter on s3-eth2: DSCP=34 -> band=1 (flowid=1:2)
+10:31:48 INFO: Installed flower filter on s4-eth1: DSCP=46 -> band=0 (flowid=1:1)
+10:31:48 ERROR: Command failed: tc filter add dev s2-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+10:31:48 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s2-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 165, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 118, in add_dscp_to_band
+    run(cmd_u32)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s2-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+10:31:48 INFO: Scheduler installed. Running.
+10:31:48 INFO: Installed flower filter on s3-eth2: DSCP=0 -> band=2 (flowid=1:3)
+10:31:48 INFO: Installed flower filter on s3-eth3: DSCP=0 -> band=2 (flowid=1:3)
+10:31:48 INFO: Scheduler installed. Running.
+10:31:48 INFO: Scheduler installed. Running.
+10:31:48 INFO: Installed flower filter on s4-eth1: DSCP=34 -> band=1 (flowid=1:2)
+10:31:48 ERROR: Command failed: tc filter add dev s2-eth3 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+10:31:48 INFO: Installed flower filter on s3-eth1: DSCP=34 -> band=1 (flowid=1:2)
+10:31:48 INFO: Installed u32 filter on s2-eth3: DSCP=34 -> band=1 (flowid=1:2)
+10:31:48 ERROR: Command failed: tc filter add dev s3-eth1 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+10:31:48 INFO: Installed flower filter on s4-eth1: DSCP=0 -> band=2 (flowid=1:3)
+10:31:48 INFO: Scheduler installed. Running.
+10:31:48 INFO: Installed flower filter on s2-eth3: DSCP=0 -> band=2 (flowid=1:3)
+10:31:48 INFO: Scheduler installed. Running.
+10:31:48 ERROR: Command failed: tc filter add dev s3-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+10:31:48 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s3-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 165, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 118, in add_dscp_to_band
+    run(cmd_u32)
+  File "/home/pedromatos48/4ano/QSI/QSI-TP3/scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s3-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+10:31:48 INFO: Scheduler installed. Running.
+10:33:06 INFO: Stopping scheduler and cleaning qdisc...
+10:33:06 INFO: Stopping scheduler and cleaning qdisc...
+10:33:06 INFO: Stopping scheduler and cleaning qdisc...
+10:33:06 INFO: Stopping scheduler and cleaning qdisc...
+10:33:06 INFO: Stopping scheduler and cleaning qdisc...
+10:33:06 INFO: Stopping scheduler and cleaning qdisc...
+10:33:06 INFO: Stopping scheduler and cleaning qdisc...
+10:33:06 INFO: Stopping scheduler and cleaning qdisc...
+10:33:06 INFO: Stopping scheduler and cleaning qdisc...
+10:33:06 INFO: Stopping scheduler and cleaning qdisc...
+10:33:06 INFO: Stopping scheduler and cleaning qdisc...
+10:33:06 INFO: Stopping scheduler and cleaning qdisc...
+10:33:06 INFO: Stopping scheduler and cleaning qdisc...
+10:33:06 INFO: Stopping scheduler and cleaning qdisc...
+10:33:06 INFO: Cleared root qdisc on s4-eth3
+10:33:06 INFO: Cleared root qdisc on s1-eth4
+10:33:06 INFO: Cleared root qdisc on s3-eth3
+10:33:06 INFO: Cleared root qdisc on s1-eth1
+10:33:06 INFO: Cleared root qdisc on s2-eth2
+10:33:06 ERROR: Command failed: tc qdisc del dev s4-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:33:06 INFO: Cleared root qdisc on s4-eth2
+10:33:06 INFO: Cleared root qdisc on s2-eth3
+10:33:06 INFO: Cleared root qdisc on s3-eth4
+10:33:06 INFO: Cleared root qdisc on s2-eth1
+10:33:06 INFO: Cleared root qdisc on s3-eth2
+10:33:06 ERROR: Command failed: tc qdisc del dev s4-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:33:06 INFO: Cleared root qdisc on s4-eth1
+10:33:07 ERROR: Command failed: tc qdisc del dev s3-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+10:33:07 INFO: Cleared root qdisc on s3-eth1
+10:33:07 INFO: Cleared root qdisc on s1-eth3
+10:33:07 INFO: Cleared root qdisc on s1-eth2

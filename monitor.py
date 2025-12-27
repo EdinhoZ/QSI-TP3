@@ -1,243 +1,204 @@
 #!/usr/bin/env python3
+"""
+Simple network metrics collector for QSI-TP3.
+Collects interface statistics and exports Prometheus metrics.
+"""
+
 import time
 import logging
 import argparse
-import socket
-import struct
-from prometheus_client import Gauge, start_http_server
+import subprocess
+from prometheus_client import start_http_server, Gauge
+
+# ============================================================
+#                       CONFIGURATION
+# ============================================================
 
 SCRAPE_PORT = 9100
-STATS_INTERVAL = 1
-LOGFILE = f"vnf_logs/monitor.log{time.strftime('%Y%m%d')}"
+POLL_INTERVAL = 1.0  # seconds
+LOG_LEVEL = logging.INFO
 
-throughput_g = Gauge("vnf_throughput_mbps", "Total throughput (Mbps)")
-flow_count_g = Gauge("vnf_flow_count", "Number of active flows")
-avg_packet_size_g = Gauge("vnf_avg_packet_size_bytes", "Average packet size in bytes")
-
-logging.basicConfig(filename=LOGFILE, level=logging.INFO,
-                    format='[%(asctime)s] %(message)s', datefmt='%H:%M:%S')
-
-
-# ============================================================
-#                 Minimal sFlow PARSER
-# ============================================================
-
-class SFlowParser:
-    """
-    Minimal sFlow v5 parser:
-      - extracts samples
-      - extracts flow records
-      - extracts src/dst IP and header length
-    Enough for your monitoring logic.
-    """
-
-    FLOW_SAMPLE = 1
-    FLOW_SAMPLE_EXPANDED = 3
-    HEADER_PROTOCOL_ETHERNET = 1
-
-    def parse(self, data: bytes):
-        """
-        Returns a list of parsed flow samples.
-        """
-        samples = []
-        offset = 0
-
-        # sFlow v5 header is fixed: version, agent, sub-agent, sequence, uptime, num samples
-        if len(data) < 28:
-            return samples
-
-        version, = struct.unpack_from("!I", data, offset)
-        offset += 4
-        if version != 5:
-            return samples
-
-        # skip agent address type + address + sub-agent ID + sequence + uptime
-        offset += 4 + 4 + 4 + 4 + 4
-
-        num_samples, = struct.unpack_from("!I", data, offset)
-        offset += 4
-
-        for _ in range(num_samples):
-            if offset + 8 > len(data):
-                break
-
-            sample_type, sample_len = struct.unpack_from("!II", data, offset)
-            offset += 8
-
-            sample_end = offset + sample_len
-            if sample_end > len(data):
-                break
-
-            # Tag is high 20 bits
-            format_type = sample_type & 0x0FFF_FFFF
-
-            if format_type in (self.FLOW_SAMPLE, self.FLOW_SAMPLE_EXPANDED):
-                sample = self._parse_flow_sample(data[offset:sample_end])
-                if sample:
-                    samples.append(sample)
-
-            offset = sample_end
-
-        return samples
-
-    def _parse_flow_sample(self, buf: bytes):
-        """
-        Extracts flow records from a flow sample.
-        """
-        off = 0
-        if len(buf) < 16:
-            return None
-
-        # skip ingress/egress, sampling rate, etc.
-        off += 16
-
-        # number of flow records
-        if off + 4 > len(buf):
-            return None
-        num_records, = struct.unpack_from("!I", buf, off)
-        off += 4
-
-        records = []
-
-        for _ in range(num_records):
-            if off + 8 > len(buf):
-                break
-
-            rec_type, rec_len = struct.unpack_from("!II", buf, off)
-            off += 8
-
-            rec_end = off + rec_len
-            if rec_end > len(buf):
-                break
-
-            # Only handle flow sample "raw header" records (type 1)
-            if (rec_type & 0x0FFF_FFFF) == 1:
-                rec = self._parse_header_record(buf[off:rec_end])
-                if rec:
-                    records.append(rec)
-
-            off = rec_end
-
-        return records
-
-    def _parse_header_record(self, buf: bytes):
-        """
-        Extract IP header information from HEADER protocol record.
-        """
-        off = 0
-        if len(buf) < 16:
-            return None
-
-        proto, header_len, frame_len, stripped = struct.unpack_from("!IIII", buf, off)
-        off += 16
-
-        if proto != self.HEADER_PROTOCOL_ETHERNET:
-            return None
-
-        # skip next fields to reach Ethernet + IP header
-        if off + header_len > len(buf):
-            return None
-
-        eth = buf[off:off + header_len]
-
-        # Parse Ethernet + IP
-        # Ethernet header = 14 bytes
-        if len(eth) < 34:
-            return None
-
-        eth_type = struct.unpack_from("!H", eth, 12)[0]
-        if eth_type != 0x0800:  # IPv4
-            return None
-
-        # IPv4 header: bytes 26-29 src, 30-33 dst
-        src = socket.inet_ntoa(eth[26:30])
-        dst = socket.inet_ntoa(eth[30:34])
-
-        return {
-            "header_len": frame_len,
-            "src_ip": src,
-            "dst_ip": dst
-        }
-
+logging.basicConfig(
+    level=LOG_LEVEL,
+    format='[%(asctime)s] %(levelname)s: %(message)s',
+    datefmt='%H:%M:%S'
+)
+logger = logging.getLogger(__name__)
 
 # ============================================================
-#                       MONITOR LOGIC
+#                   PROMETHEUS METRICS
+# ============================================================
+
+throughput_g = Gauge('network_throughput_mbps', 'Network throughput in Mbps')
+packet_rate_g = Gauge('network_packet_rate_pps', 'Packet rate in packets/sec')
+byte_count_g = Gauge('network_bytes_total', 'Total bytes transferred')
+packet_count_g = Gauge('network_packets_total', 'Total packets transferred')
+
+# ============================================================
+#                    METRIC COLLECTOR
 # ============================================================
 
 class Monitor:
-    def __init__(self):
-        self.total_bytes = 0
-        self.total_packets = 0
-        self.flow_counts = {}
-        self.last_time = time.time()
-        self.parser = SFlowParser()
+    """Collect network metrics from OVS switches."""
+    
+    def __init__(self, switches=None):
+        self.switches = switches or ['s1', 's2', 's3', 's4']
+        # Track previous stats per-port to avoid negative deltas when ports reset/disappear
+        self.prev_ports = {}
+        self.prev_time = time.time()
+        logger.info(f"Monitoring switches: {', '.join(self.switches)}")
+    
+    def get_ovs_port_stats(self):
+        """Return per-port stats across switches: {key: {rx_bytes, tx_bytes, rx_packets, tx_packets}}.
+        Key format: '<switch>:<port_index>'
+        """
+        ports = {}
+        for switch in self.switches:
+            try:
+                cmd = ['sudo', 'ovs-ofctl', 'dump-ports', switch]
+                result = subprocess.run(cmd, capture_output=True, text=True, timeout=2)
+                if result.returncode != 0:
+                    continue
+                current_port = None
+                for line in result.stdout.split('\n'):
+                    line = line.strip()
+                    if line.startswith('port '):
+                        # Extract port index
+                        try:
+                            # e.g., 'port 1: rx pkts=..., bytes=..., ...'
+                            prefix, rest = line.split(':', 1)
+                            _, idx_str = prefix.split(' ', 1)
+                            current_port = f"{switch}:{idx_str.strip()}"
+                        except Exception:
+                            current_port = None
+                        # Initialize dict for port if not exists
+                        if current_port and current_port not in ports:
+                            ports[current_port] = {'rx_bytes': 0, 'tx_bytes': 0, 'rx_packets': 0, 'tx_packets': 0}
+                        # Parse rx metrics on the same line
+                        if current_port and 'rx pkts' in line:
+                            parts = [p.strip() for p in rest.split(',')]
+                            for part in parts:
+                                if part.startswith('rx pkts='):
+                                    try:
+                                        ports[current_port]['rx_packets'] += int(part.split('=')[1])
+                                    except Exception:
+                                        pass
+                                elif part.startswith(' bytes=') or part.startswith('bytes='):
+                                    try:
+                                        ports[current_port]['rx_bytes'] += int(part.split('=')[1])
+                                    except Exception:
+                                        pass
+                    elif 'tx pkts' in line and current_port:
+                        # Parse tx metrics for the last seen port
+                        try:
+                            _, rest = line.split(':', 1)
+                        except Exception:
+                            rest = line
+                        parts = [p.strip() for p in rest.split(',')]
+                        for part in parts:
+                            if part.startswith('tx pkts='):
+                                try:
+                                    ports[current_port]['tx_packets'] += int(part.split('=')[1])
+                                except Exception:
+                                    pass
+                            elif part.startswith(' bytes=') or part.startswith('bytes='):
+                                try:
+                                    ports[current_port]['tx_bytes'] += int(part.split('=')[1])
+                                except Exception:
+                                    pass
+            except Exception as e:
+                logger.warning(f"Error reading stats from {switch}: {e}")
+                continue
+        return ports
+    
+    def collect_and_export(self):
+        """Collect metrics and export to Prometheus."""
+        try:
+            ports = self.get_ovs_port_stats()
+            current_time = time.time()
+            
+            # Calculate deltas per-port to avoid negative totals on resets/disappearing ports
+            total_bytes = 0
+            total_packets = 0
+            for key, st in ports.items():
+                total_bytes += (st['rx_bytes'] + st['tx_bytes'])
+                total_packets += (st['rx_packets'] + st['tx_packets'])
 
-    def handle(self, data: bytes):
-        samples = self.parser.parse(data)
-        for records in samples:
-            for rec in records:
-                self.total_bytes += rec["header_len"]
-                self.total_packets += 1
-                key = (rec["src_ip"], rec["dst_ip"])
-                self.flow_counts[key] = self.flow_counts.get(key, 0) + 1
-
-    def export_metrics(self):
-        now = time.time()
-        interval = now - self.last_time
-        if interval <= 0:
-            interval = 1
-
-        throughput_mbps = (self.total_bytes * 8) / (interval * 1e6)
-        throughput_g.set(throughput_mbps)
-        flow_count_g.set(len(self.flow_counts))
-        avg_size = self.total_bytes / max(self.total_packets, 1)
-        avg_packet_size_g.set(avg_size)
-
-        logging.info(f"Throughput: {throughput_mbps:.3f} Mbps | "
-                     f"Flows: {len(self.flow_counts)} | "
-                     f"Avg pkt: {avg_size:.1f} bytes")
-
-        self.total_bytes = 0
-        self.total_packets = 0
-        self.flow_counts.clear()
-        self.last_time = now
-
+            if self.prev_ports:
+                interval = current_time - self.prev_time
+                if interval > 0:
+                    delta_bytes = 0
+                    delta_packets = 0
+                    for key, st in ports.items():
+                        cur_b = st['rx_bytes'] + st['tx_bytes']
+                        cur_p = st['rx_packets'] + st['tx_packets']
+                        prev = self.prev_ports.get(key)
+                        if prev:
+                            prev_b = prev['rx_bytes'] + prev['tx_bytes']
+                            prev_p = prev['rx_packets'] + prev['tx_packets']
+                            # Only add positive deltas; treat resets/wraps as zero delta
+                            if cur_b >= prev_b:
+                                delta_bytes += (cur_b - prev_b)
+                            if cur_p >= prev_p:
+                                delta_packets += (cur_p - prev_p)
+                    
+                    # Calculate rates
+                    throughput_mbps = (delta_bytes * 8) / (interval * 1e6)
+                    packet_rate_pps = delta_packets / interval
+                    
+                    # Update metrics
+                    thr = max(0, throughput_mbps)
+                    pps = max(0, packet_rate_pps)
+                    throughput_g.set(thr)
+                    packet_rate_g.set(pps)
+                    byte_count_g.set(total_bytes)
+                    packet_count_g.set(total_packets)
+                    
+                    logger.info(
+                        f"Throughput: {thr:.3f} Mbps | "
+                        f"Packet rate: {pps:.1f} pps | "
+                        f"Total: {total_bytes} bytes"
+                    )
+            else:
+                logger.info("First collection - establishing baseline")
+            
+            # Store current stats for next iteration
+            self.prev_ports = ports
+            self.prev_time = current_time
+        
+        except Exception as e:
+            logger.error(f"Error collecting metrics: {e}")
 
 # ============================================================
-#                          MAIN
+#                         MAIN
 # ============================================================
 
-def main(addr: str, port: int):
-    monitor = Monitor()
-
-    start_http_server(SCRAPE_PORT)
-    logging.info(f"[Monitor] Prometheus exposed on {SCRAPE_PORT}")
-
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.bind((addr, port))
-
-    logging.info(f"[Monitor] Listening for sFlow datagrams on {addr}:{port}")
-
-    sock.setblocking(False)
-
+def main(switches=None):
+    """Main monitoring loop."""
+    monitor = Monitor(switches)
+    
+    # Start Prometheus HTTP server
+    try:
+        start_http_server(SCRAPE_PORT)
+        logger.info(f"Prometheus endpoint started on http://0.0.0.0:{SCRAPE_PORT}/metrics")
+    except Exception as e:
+        logger.error(f"Failed to start Prometheus server: {e}")
+        return
+    
+    logger.info(f"Starting metric collection (polling every {POLL_INTERVAL}s)")
+    
     try:
         while True:
-            try:
-                data, src = sock.recvfrom(65535)
-                monitor.handle(data)
-            except BlockingIOError:
-                pass
-
-            time.sleep(STATS_INTERVAL)
-            monitor.export_metrics()
-
+            monitor.collect_and_export()
+            time.sleep(POLL_INTERVAL)
+    
     except KeyboardInterrupt:
-        logging.info("[Monitor] Shutting down...")
-
+        logger.info("Shutting down")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="sFlow-based monitor VNF")
-    parser.add_argument("--addr", default="0.0.0.0", help="IP address to listen for sFlow")
-    parser.add_argument("--port", default=6343, type=int, help="UDP port for sFlow datagrams")
+    parser = argparse.ArgumentParser(description="Network metrics collector")
+    parser.add_argument("--switches", nargs='+', default=['s1', 's2', 's3', 's4'],
+                        help="List of OVS switches to monitor")
     args = parser.parse_args()
-    main(args.addr, args.port)
+    
+    main(args.switches)

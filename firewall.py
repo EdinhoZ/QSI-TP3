@@ -24,12 +24,17 @@ console.setLevel(logging.INFO)
 console.setFormatter(logging.Formatter("%(asctime)s %(levelname)s: %(message)s", "%H:%M:%S"))
 logging.getLogger().addHandler(console)
 
-def run_cmd(cmd, dry_run=False):
+def run_cmd(cmd, dry_run=False, fail_ok=False):
     if dry_run:
         print(f"[DRY RUN] {cmd}")
         return
-    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
-    return proc.stdout.strip()
+    try:
+        proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+        return proc.stdout.strip()
+    except subprocess.CalledProcessError as e:
+        if not fail_ok:
+            raise
+        return ""
 
 def nft_hook_chain():
         try:
@@ -110,13 +115,16 @@ class FirewallVNF:
             cmd += f"sport {sport} "
         if dport:
             cmd += f"dport {dport} "
-        if dscp is not None:
-            cmd += f"ip dscp set {dscp} "
+        # Note: nft cannot set DSCP in rules; DSCP is set by classifier VNF via OpenFlow
+        # if dscp is not None:
+        #     cmd += f"ip dscp set {dscp} "
 
         # Use accept/drop/etc. in lowercase
         cmd += f"counter {action.lower()}"
-
-        run_cmd(cmd, dry_run=self.dry_run)
+        try:
+            run_cmd(cmd, dry_run=self.dry_run)
+        except subprocess.CalledProcessError as e:
+            logging.warning(f"nft add rule failed for {name}: {e}")
 
 
     def nft_cleanup(self):

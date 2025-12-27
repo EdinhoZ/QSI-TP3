@@ -9,6 +9,8 @@ import ipaddress
 import time
 import sys
 from collections import deque, defaultdict
+import json
+import os
 
 class Router(Node):
     def config(self, **params):
@@ -233,6 +235,16 @@ def run(flag):
     net.start()
 
     ip_assign(net)
+
+    # Export host PIDs so external scripts (e.g., test_script.py) can run tc inside host namespaces safely
+    host_pid_path = "/tmp/mininet_hosts.json"
+    try:
+        data = {h.name: h.pid for h in net.hosts}
+        with open(host_pid_path, "w") as f:
+            json.dump(data, f)
+        info(f"\n*** Host PID map written to {host_pid_path}\n")
+    except Exception as e:
+        info(f"\n*** WARNING: failed to write host PID map: {e}\n")
 
     info("\n*** intf dump\n")
     for r in ["r1", "r2", "r3", "r4", "r5"]:
