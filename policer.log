@@ -3751,3 +3751,1627 @@ rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
 10:33:07 ERROR: Command failed: tc qdisc del dev s3-eth4 root
 rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
 10:33:07 INFO: cleared tc qdiscs on s3-eth4
+13:00:23 INFO: Starting policer on interface s2-eth1
+13:00:23 INFO: Starting policer on interface s1-eth1
+13:00:23 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:00:23 INFO: Enable egress shaping: True
+13:00:24 INFO: Starting policer on interface s1-eth2
+13:00:24 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:00:24 INFO: Enable egress shaping: True
+13:00:24 ERROR: Command failed: tc filter del dev s2-eth1 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:00:24 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:00:24 INFO: Enable egress shaping: True
+13:00:24 ERROR: Command failed: tc filter del dev s1-eth1 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:00:24 INFO: Starting policer on interface s3-eth4
+13:00:24 INFO: Starting policer on interface s1-eth4
+13:00:24 INFO: Starting policer on interface s2-eth3
+13:00:24 ERROR: Command failed: tc qdisc del dev s2-eth1 ingress
+rc=2 stdout= stderr=Error: Cannot find specified qdisc on specified device.
+13:00:25 INFO: Starting policer on interface s3-eth1
+13:00:25 ERROR: Command failed: tc filter del dev s1-eth2 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:00:25 INFO: Starting policer on interface s3-eth3
+13:00:25 ERROR: Command failed: tc qdisc del dev s1-eth1 ingress
+rc=2 stdout= stderr=Error: Cannot find specified qdisc on specified device.
+13:00:25 INFO: Starting policer on interface s1-eth3
+13:00:25 INFO: ingress qdisc added on s2-eth1
+13:00:25 INFO: Starting policer on interface s4-eth1
+13:00:25 INFO: Starting policer on interface s4-eth3
+13:00:25 INFO: Starting policer on interface s2-eth2
+13:00:25 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:00:25 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:00:25 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:00:25 INFO: Enable egress shaping: True
+13:00:25 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:00:25 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:00:25 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:00:25 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:00:25 INFO: Enable egress shaping: True
+13:00:25 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:00:25 INFO: Enable egress shaping: True
+13:00:25 INFO: Enable egress shaping: True
+13:00:25 ERROR: Command failed: tc filter del dev s1-eth3 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:00:25 INFO: ingress qdisc added on s1-eth1
+13:00:25 INFO: Starting policer on interface s3-eth2
+13:00:25 ERROR: Command failed: tc qdisc del dev s1-eth2 ingress
+rc=2 stdout= stderr=Error: Cannot find specified qdisc on specified device.
+13:00:25 ERROR: Command failed: tc filter del dev s4-eth1 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:00:25 ERROR: Command failed: tc filter del dev s3-eth1 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:00:25 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:00:25 INFO: Enable egress shaping: True
+13:00:25 INFO: Enable egress shaping: True
+13:00:25 INFO: Enable egress shaping: True
+13:00:25 INFO: Enable egress shaping: True
+13:00:25 INFO: Enable egress shaping: True
+13:00:25 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:00:25 INFO: Starting policer on interface s4-eth2
+13:00:25 INFO: Enable egress shaping: True
+13:00:26 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:00:26 INFO: Enable egress shaping: True
+13:00:26 ERROR: Command failed: tc qdisc del dev s1-eth3 ingress
+rc=2 stdout= stderr=Error: Cannot find specified qdisc on specified device.
+13:00:26 ERROR: Command failed: tc qdisc del dev s4-eth1 ingress
+rc=2 stdout= stderr=Error: Cannot find specified qdisc on specified device.
+13:00:26 ERROR: Command failed: tc filter del dev s4-eth3 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:00:26 ERROR: Command failed: tc filter del dev s3-eth4 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:00:26 ERROR: Command failed: tc filter del dev s1-eth4 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:00:26 ERROR: Command failed: tc filter del dev s2-eth3 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:00:26 ERROR: Command failed: tc filter del dev s2-eth2 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:00:26 ERROR: Command failed: tc filter del dev s3-eth2 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:00:26 ERROR: Command failed: tc qdisc del dev s3-eth1 ingress
+rc=2 stdout= stderr=Error: Cannot find specified qdisc on specified device.
+13:00:26 INFO: ingress qdisc added on s1-eth2
+13:00:26 ERROR: Command failed: tc filter del dev s3-eth3 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:00:26 ERROR: Command failed: tc filter del dev s4-eth2 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:00:26 INFO: egress HTB installed on s2-eth1, class 1:10 rate=5mbit burst=10kb
+13:00:26 INFO: ingress qdisc added on s1-eth3
+13:00:26 ERROR: Command failed: tc qdisc del dev s3-eth4 ingress
+rc=2 stdout= stderr=Error: Cannot find specified qdisc on specified device.
+13:00:26 ERROR: Command failed: tc qdisc del dev s1-eth4 ingress
+rc=2 stdout= stderr=Error: Cannot find specified qdisc on specified device.
+13:00:26 INFO: ingress qdisc added on s4-eth1
+13:00:26 ERROR: Command failed: tc qdisc del dev s4-eth3 ingress
+rc=2 stdout= stderr=Error: Cannot find specified qdisc on specified device.
+13:00:26 ERROR: Command failed: tc qdisc del dev s2-eth2 ingress
+rc=2 stdout= stderr=Error: Cannot find specified qdisc on specified device.
+13:00:26 ERROR: Command failed: tc qdisc del dev s2-eth3 ingress
+rc=2 stdout= stderr=Error: Cannot find specified qdisc on specified device.
+13:00:26 ERROR: Command failed: tc qdisc del dev s4-eth2 ingress
+rc=2 stdout= stderr=Error: Cannot find specified qdisc on specified device.
+13:00:26 ERROR: Command failed: tc qdisc del dev s3-eth2 ingress
+rc=2 stdout= stderr=Error: Cannot find specified qdisc on specified device.
+13:00:26 ERROR: Command failed: tc qdisc del dev s3-eth3 ingress
+rc=2 stdout= stderr=Error: Cannot find specified qdisc on specified device.
+13:00:26 INFO: egress HTB installed on s1-eth1, class 1:10 rate=5mbit burst=10kb
+13:00:26 INFO: ingress qdisc added on s3-eth4
+13:00:26 INFO: Installed ingress police (u32) on s2-eth1 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:00:26 INFO: ingress qdisc added on s3-eth1
+13:00:26 INFO: ingress qdisc added on s1-eth4
+13:00:27 INFO: ingress qdisc added on s4-eth3
+13:00:27 INFO: ingress qdisc added on s2-eth2
+13:00:27 INFO: ingress qdisc added on s3-eth3
+13:00:27 INFO: ingress qdisc added on s4-eth2
+13:00:27 INFO: ingress qdisc added on s3-eth2
+13:00:27 INFO: Installed ingress police (u32) on s1-eth1 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:00:27 INFO: ingress qdisc added on s2-eth3
+13:00:27 INFO: Installed ingress police (u32) on s2-eth1 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:00:27 INFO: egress HTB installed on s1-eth2, class 1:10 rate=5mbit burst=10kb
+13:00:27 INFO: egress HTB installed on s1-eth3, class 1:10 rate=5mbit burst=10kb
+13:00:27 INFO: Installed ingress police (u32) on s1-eth1 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:00:27 INFO: Installed ingress police (u32) on s2-eth1 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:00:27 INFO: egress HTB installed on s4-eth1, class 1:10 rate=5mbit burst=10kb
+13:00:27 INFO: egress HTB installed on s3-eth4, class 1:10 rate=5mbit burst=10kb
+13:00:27 INFO: Installed ingress police (u32) on s1-eth2 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:00:27 INFO: egress HTB installed on s1-eth4, class 1:10 rate=5mbit burst=10kb
+13:00:27 INFO: Installed ingress police (u32) on s1-eth3 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:00:27 INFO: egress HTB installed on s3-eth1, class 1:10 rate=5mbit burst=10kb
+13:00:27 INFO: Installed ingress police (u32) on s2-eth1 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:00:27 INFO: Policer installed. Running...
+13:00:28 INFO: egress HTB installed on s2-eth2, class 1:10 rate=5mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s4-eth1 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:00:28 INFO: egress HTB installed on s3-eth3, class 1:10 rate=5mbit burst=10kb
+13:00:28 INFO: egress HTB installed on s4-eth3, class 1:10 rate=5mbit burst=10kb
+13:00:28 INFO: egress HTB installed on s4-eth2, class 1:10 rate=5mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s1-eth1 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:00:28 INFO: Installed ingress police (u32) on s3-eth4 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:00:28 INFO: egress HTB installed on s3-eth2, class 1:10 rate=5mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s1-eth2 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s1-eth3 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s1-eth4 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:00:28 INFO: egress HTB installed on s2-eth3, class 1:10 rate=5mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s3-eth1 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s3-eth3 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s4-eth1 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s4-eth2 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s1-eth1 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:00:28 INFO: Policer installed. Running...
+13:00:28 INFO: Installed ingress police (u32) on s4-eth3 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s2-eth2 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s3-eth1 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s1-eth2 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:00:28 INFO: Installed ingress police (u32) on s2-eth3 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s3-eth4 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s1-eth3 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:00:28 INFO: Installed ingress police (u32) on s1-eth4 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s3-eth2 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s3-eth3 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s4-eth2 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s4-eth1 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:00:28 INFO: Installed ingress police (u32) on s1-eth3 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:00:28 INFO: Policer installed. Running...
+13:00:28 INFO: Installed ingress police (u32) on s1-eth2 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:00:28 INFO: Policer installed. Running...
+13:00:28 INFO: Installed ingress police (u32) on s3-eth1 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:00:28 INFO: Installed ingress police (u32) on s4-eth3 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s2-eth3 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s1-eth4 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:00:28 INFO: Installed ingress police (u32) on s2-eth2 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s3-eth4 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:00:28 INFO: Installed ingress police (u32) on s3-eth3 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:00:28 INFO: Installed ingress police (u32) on s4-eth2 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:00:28 INFO: Installed ingress police (u32) on s3-eth2 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:00:28 INFO: Installed ingress police (u32) on s4-eth1 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:00:28 INFO: Policer installed. Running...
+13:00:28 INFO: Installed ingress police (u32) on s1-eth4 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:00:28 INFO: Policer installed. Running...
+13:00:28 INFO: Installed ingress police (u32) on s3-eth1 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:00:28 INFO: Policer installed. Running...
+13:00:28 INFO: Installed ingress police (u32) on s4-eth3 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:00:28 INFO: Installed ingress police (u32) on s2-eth3 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:00:28 INFO: Installed ingress police (u32) on s3-eth4 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:00:28 INFO: Policer installed. Running...
+13:00:28 INFO: Installed ingress police (u32) on s2-eth2 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:00:28 INFO: Installed ingress police (u32) on s3-eth3 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:00:28 INFO: Policer installed. Running...
+13:00:28 INFO: Installed ingress police (u32) on s4-eth2 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:00:28 INFO: Policer installed. Running...
+13:00:28 INFO: Installed ingress police (u32) on s3-eth2 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:00:29 INFO: Installed ingress police (u32) on s4-eth3 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:00:29 INFO: Policer installed. Running...
+13:00:29 INFO: Installed ingress police (u32) on s2-eth3 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:00:29 INFO: Policer installed. Running...
+13:00:29 INFO: Installed ingress police (u32) on s2-eth2 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:00:29 INFO: Policer installed. Running...
+13:00:29 INFO: Installed ingress police (u32) on s3-eth2 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:00:29 INFO: Policer installed. Running...
+13:01:10 INFO: Received stop signal, cleaning up...
+13:01:10 INFO: Received stop signal, cleaning up...
+13:01:10 INFO: Received stop signal, cleaning up...
+13:01:10 INFO: Received stop signal, cleaning up...
+13:01:10 INFO: Received stop signal, cleaning up...
+13:01:10 INFO: Received stop signal, cleaning up...
+13:01:10 INFO: Received stop signal, cleaning up...
+13:01:10 INFO: Received stop signal, cleaning up...
+13:01:10 INFO: Received stop signal, cleaning up...
+13:01:10 INFO: Received stop signal, cleaning up...
+13:01:10 INFO: Received stop signal, cleaning up...
+13:01:10 INFO: Received stop signal, cleaning up...
+13:01:10 INFO: Received stop signal, cleaning up...
+13:01:10 INFO: Received stop signal, cleaning up...
+13:01:12 ERROR: Command failed: tc qdisc del dev s4-eth2 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:01:12 INFO: cleared tc qdiscs on s4-eth2
+13:01:12 ERROR: Command failed: tc qdisc del dev s2-eth3 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:01:12 INFO: cleared tc qdiscs on s2-eth3
+13:01:12 ERROR: Command failed: tc qdisc del dev s4-eth1 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:01:12 INFO: cleared tc qdiscs on s4-eth1
+13:01:12 ERROR: Command failed: tc qdisc del dev s1-eth3 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:01:12 INFO: cleared tc qdiscs on s1-eth3
+13:01:12 ERROR: Command failed: tc qdisc del dev s2-eth1 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:01:12 INFO: cleared tc qdiscs on s2-eth1
+13:01:12 ERROR: Command failed: tc qdisc del dev s1-eth4 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:01:12 INFO: cleared tc qdiscs on s1-eth4
+13:01:12 ERROR: Command failed: tc qdisc del dev s3-eth2 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:01:12 INFO: cleared tc qdiscs on s3-eth2
+13:01:12 ERROR: Command failed: tc qdisc del dev s4-eth3 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:01:12 INFO: cleared tc qdiscs on s4-eth3
+13:01:12 ERROR: Command failed: tc qdisc del dev s1-eth1 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:01:12 INFO: cleared tc qdiscs on s1-eth1
+13:01:12 ERROR: Command failed: tc qdisc del dev s3-eth1 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:01:12 INFO: cleared tc qdiscs on s3-eth1
+13:01:12 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:01:12 INFO: cleared tc qdiscs on s3-eth3
+13:01:12 ERROR: Command failed: tc qdisc del dev s2-eth2 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:01:12 INFO: cleared tc qdiscs on s2-eth2
+13:01:12 ERROR: Command failed: tc qdisc del dev s1-eth2 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:01:12 INFO: cleared tc qdiscs on s1-eth2
+13:01:12 ERROR: Command failed: tc qdisc del dev s3-eth4 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:01:12 INFO: cleared tc qdiscs on s3-eth4
+13:03:03 INFO: Starting policer on interface s1-eth1
+13:03:03 INFO: Starting policer on interface s3-eth1
+13:03:03 INFO: Starting policer on interface s2-eth3
+13:03:03 INFO: Starting policer on interface s1-eth2
+13:03:03 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:03:03 INFO: Starting policer on interface s4-eth3
+13:03:03 INFO: Enable egress shaping: True
+13:03:04 INFO: Starting policer on interface s4-eth1
+13:03:04 INFO: Starting policer on interface s2-eth1
+13:03:04 INFO: Starting policer on interface s1-eth3
+13:03:04 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:03:04 INFO: Enable egress shaping: True
+13:03:04 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:03:04 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:03:04 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:03:04 INFO: Enable egress shaping: True
+13:03:04 ERROR: Command failed: tc filter del dev s1-eth1 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:03:04 INFO: Enable egress shaping: True
+13:03:04 INFO: Enable egress shaping: True
+13:03:04 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:03:04 INFO: Starting policer on interface s3-eth2
+13:03:04 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:03:04 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:03:04 INFO: Starting policer on interface s4-eth2
+13:03:04 INFO: Enable egress shaping: True
+13:03:04 INFO: Enable egress shaping: True
+13:03:04 INFO: Enable egress shaping: True
+13:03:04 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:03:04 INFO: Enable egress shaping: True
+13:03:04 ERROR: Command failed: tc qdisc del dev s1-eth1 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:03:04 INFO: Starting policer on interface s2-eth2
+13:03:04 ERROR: Command failed: tc filter del dev s1-eth3 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:03:04 INFO: Starting policer on interface s1-eth4
+13:03:04 ERROR: Command failed: tc filter del dev s1-eth2 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:03:04 ERROR: Command failed: tc filter del dev s3-eth1 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:03:04 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:03:04 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:03:04 ERROR: Command failed: tc filter del dev s2-eth1 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:03:05 INFO: Enable egress shaping: True
+13:03:05 INFO: Enable egress shaping: True
+13:03:05 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:03:05 INFO: Starting policer on interface s3-eth4
+13:03:05 ERROR: Command failed: tc filter del dev s2-eth3 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:03:05 ERROR: Command failed: tc filter del dev s4-eth1 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:03:05 ERROR: Command failed: tc filter del dev s4-eth3 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:03:05 INFO: Enable egress shaping: True
+13:03:05 ERROR: Command failed: tc filter del dev s3-eth2 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:03:05 ERROR: Command failed: tc qdisc del dev s1-eth3 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:03:05 INFO: Starting policer on interface s3-eth3
+13:03:05 INFO: ingress qdisc added on s1-eth1
+13:03:05 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:03:05 INFO: Enable egress shaping: True
+13:03:05 ERROR: Command failed: tc qdisc del dev s1-eth2 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:03:05 ERROR: Command failed: tc qdisc del dev s3-eth1 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:03:05 ERROR: Command failed: tc qdisc del dev s2-eth1 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:03:05 ERROR: Command failed: tc filter del dev s4-eth2 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:03:05 ERROR: Command failed: tc qdisc del dev s4-eth3 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:03:05 ERROR: Command failed: tc qdisc del dev s2-eth3 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:03:05 ERROR: Command failed: tc filter del dev s2-eth2 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:03:05 ERROR: Command failed: tc qdisc del dev s4-eth1 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:03:05 ERROR: Command failed: tc filter del dev s1-eth4 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:03:05 ERROR: Command failed: tc qdisc del dev s3-eth2 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:03:05 INFO: ingress qdisc added on s1-eth3
+13:03:05 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:03:05 INFO: Enable egress shaping: True
+13:03:05 INFO: ingress qdisc added on s3-eth1
+13:03:05 INFO: ingress qdisc added on s1-eth2
+13:03:05 INFO: ingress qdisc added on s3-eth2
+13:03:05 ERROR: Command failed: tc filter del dev s3-eth4 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:03:05 ERROR: Command failed: tc qdisc del dev s1-eth4 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:03:05 ERROR: Command failed: tc qdisc del dev s2-eth2 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:03:05 ERROR: Command failed: tc qdisc del dev s4-eth2 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:03:05 INFO: ingress qdisc added on s2-eth3
+13:03:05 INFO: ingress qdisc added on s2-eth1
+13:03:05 INFO: ingress qdisc added on s4-eth3
+13:03:05 INFO: ingress qdisc added on s4-eth1
+13:03:05 ERROR: Command failed: tc filter del dev s3-eth3 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:03:06 INFO: ingress qdisc added on s1-eth4
+13:03:06 ERROR: Command failed: tc qdisc del dev s3-eth4 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:03:06 INFO: ingress qdisc added on s4-eth2
+13:03:06 ERROR: Command failed: tc qdisc del dev s3-eth3 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:03:06 INFO: egress HTB installed on s1-eth1, class 1:10 rate=5mbit burst=10kb
+13:03:06 INFO: ingress qdisc added on s2-eth2
+13:03:06 INFO: egress HTB installed on s1-eth3, class 1:10 rate=5mbit burst=10kb
+13:03:06 INFO: ingress qdisc added on s3-eth4
+13:03:06 INFO: Installed ingress police (u32) on s1-eth1 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:03:06 INFO: egress HTB installed on s4-eth1, class 1:10 rate=5mbit burst=10kb
+13:03:06 INFO: egress HTB installed on s3-eth1, class 1:10 rate=5mbit burst=10kb
+13:03:06 INFO: egress HTB installed on s3-eth2, class 1:10 rate=5mbit burst=10kb
+13:03:06 INFO: ingress qdisc added on s3-eth3
+13:03:06 INFO: Installed ingress police (u32) on s1-eth3 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:03:06 INFO: egress HTB installed on s2-eth1, class 1:10 rate=5mbit burst=10kb
+13:03:06 INFO: egress HTB installed on s4-eth3, class 1:10 rate=5mbit burst=10kb
+13:03:06 INFO: egress HTB installed on s1-eth2, class 1:10 rate=5mbit burst=10kb
+13:03:06 INFO: egress HTB installed on s2-eth3, class 1:10 rate=5mbit burst=10kb
+13:03:06 INFO: egress HTB installed on s1-eth4, class 1:10 rate=5mbit burst=10kb
+13:03:06 INFO: Installed ingress police (u32) on s4-eth1 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:03:06 INFO: Installed ingress police (u32) on s3-eth2 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:03:06 INFO: egress HTB installed on s4-eth2, class 1:10 rate=5mbit burst=10kb
+13:03:06 INFO: Installed ingress police (u32) on s1-eth1 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:03:06 INFO: Installed ingress police (u32) on s4-eth3 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:03:06 INFO: Installed ingress police (u32) on s2-eth1 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:03:06 INFO: Installed ingress police (u32) on s1-eth3 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:03:06 INFO: Installed ingress police (u32) on s1-eth2 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:03:06 INFO: Installed ingress police (u32) on s2-eth3 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:03:06 INFO: Installed ingress police (u32) on s3-eth1 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:03:06 INFO: Installed ingress police (u32) on s1-eth4 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:03:07 INFO: Installed ingress police (u32) on s4-eth2 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:03:07 INFO: egress HTB installed on s2-eth2, class 1:10 rate=5mbit burst=10kb
+13:03:07 INFO: egress HTB installed on s3-eth4, class 1:10 rate=5mbit burst=10kb
+13:03:07 INFO: Installed ingress police (u32) on s2-eth3 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:03:07 INFO: Installed ingress police (u32) on s3-eth2 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:03:07 INFO: Installed ingress police (u32) on s1-eth1 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:03:07 INFO: Installed ingress police (u32) on s1-eth4 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:03:07 INFO: Installed ingress police (u32) on s4-eth3 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:03:07 INFO: Installed ingress police (u32) on s3-eth1 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:03:07 INFO: Installed ingress police (u32) on s1-eth2 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:03:07 INFO: Installed ingress police (u32) on s4-eth1 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:03:07 INFO: Installed ingress police (u32) on s2-eth1 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:03:07 INFO: Installed ingress police (u32) on s1-eth3 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:03:07 INFO: Installed ingress police (u32) on s3-eth4 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:03:07 INFO: Installed ingress police (u32) on s4-eth2 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:03:07 INFO: Installed ingress police (u32) on s1-eth1 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:03:07 INFO: Installed ingress police (u32) on s2-eth1 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:03:07 INFO: Installed ingress police (u32) on s4-eth1 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:03:07 INFO: Installed ingress police (u32) on s1-eth2 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:03:07 INFO: Installed ingress police (u32) on s1-eth3 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:03:07 INFO: Installed ingress police (u32) on s2-eth3 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:03:07 INFO: Installed ingress police (u32) on s3-eth2 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:03:07 INFO: Installed ingress police (u32) on s4-eth3 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:03:07 INFO: Installed ingress police (u32) on s1-eth4 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:03:07 INFO: Installed ingress police (u32) on s3-eth1 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:03:07 INFO: Policer installed. Running...
+13:03:07 INFO: Policer installed. Running...
+13:03:07 INFO: egress HTB installed on s3-eth3, class 1:10 rate=5mbit burst=10kb
+13:03:07 INFO: Installed ingress police (u32) on s2-eth2 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:03:07 INFO: Installed ingress police (u32) on s2-eth1 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:03:07 INFO: Policer installed. Running...
+13:03:07 INFO: Installed ingress police (u32) on s4-eth1 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:03:07 INFO: Policer installed. Running...
+13:03:07 INFO: Installed ingress police (u32) on s3-eth3 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:03:07 INFO: Installed ingress police (u32) on s4-eth3 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:03:07 INFO: Policer installed. Running...
+13:03:07 INFO: Installed ingress police (u32) on s3-eth2 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:03:07 INFO: Policer installed. Running...
+13:03:07 INFO: Installed ingress police (u32) on s1-eth4 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:03:07 INFO: Policer installed. Running...
+13:03:07 INFO: Installed ingress police (u32) on s2-eth2 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:03:07 INFO: Installed ingress police (u32) on s4-eth2 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:03:07 INFO: Installed ingress police (u32) on s2-eth3 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:03:07 INFO: Policer installed. Running...
+13:03:07 INFO: Installed ingress police (u32) on s1-eth2 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:03:07 INFO: Policer installed. Running...
+13:03:07 INFO: Installed ingress police (u32) on s3-eth1 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:03:07 INFO: Policer installed. Running...
+13:03:07 INFO: Installed ingress police (u32) on s3-eth4 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:03:07 INFO: Installed ingress police (u32) on s3-eth3 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:03:07 INFO: Installed ingress police (u32) on s4-eth2 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:03:07 INFO: Policer installed. Running...
+13:03:07 INFO: Installed ingress police (u32) on s2-eth2 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:03:07 INFO: Installed ingress police (u32) on s3-eth4 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:03:07 INFO: Installed ingress police (u32) on s3-eth3 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:03:07 INFO: Installed ingress police (u32) on s2-eth2 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:03:07 INFO: Policer installed. Running...
+13:03:07 INFO: Installed ingress police (u32) on s3-eth4 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:03:07 INFO: Policer installed. Running...
+13:03:07 INFO: Installed ingress police (u32) on s3-eth3 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:03:07 INFO: Policer installed. Running...
+13:04:13 INFO: Received stop signal, cleaning up...
+13:04:13 INFO: Received stop signal, cleaning up...
+13:04:13 INFO: Received stop signal, cleaning up...
+13:04:13 INFO: Received stop signal, cleaning up...
+13:04:13 INFO: Received stop signal, cleaning up...
+13:04:13 INFO: Received stop signal, cleaning up...
+13:04:13 INFO: Received stop signal, cleaning up...
+13:04:13 INFO: Received stop signal, cleaning up...
+13:04:13 INFO: Received stop signal, cleaning up...
+13:04:13 INFO: Received stop signal, cleaning up...
+13:04:13 INFO: Received stop signal, cleaning up...
+13:04:13 INFO: Received stop signal, cleaning up...
+13:04:13 INFO: Received stop signal, cleaning up...
+13:04:13 INFO: Received stop signal, cleaning up...
+13:04:14 ERROR: Command failed: tc qdisc del dev s2-eth2 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:04:14 ERROR: Command failed: tc qdisc del dev s2-eth1 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:04:14 INFO: cleared tc qdiscs on s2-eth1
+13:04:14 ERROR: Command failed: tc qdisc del dev s4-eth2 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:04:14 INFO: cleared tc qdiscs on s4-eth2
+13:04:14 ERROR: Command failed: tc qdisc del dev s3-eth4 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:04:14 INFO: cleared tc qdiscs on s3-eth4
+13:04:14 INFO: cleared tc qdiscs on s2-eth2
+13:04:14 ERROR: Command failed: tc qdisc del dev s3-eth2 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:04:14 INFO: cleared tc qdiscs on s3-eth2
+13:04:14 ERROR: Command failed: tc qdisc del dev s1-eth4 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:04:14 INFO: cleared tc qdiscs on s1-eth4
+13:04:14 ERROR: Command failed: tc qdisc del dev s1-eth1 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:04:14 INFO: cleared tc qdiscs on s1-eth1
+13:04:14 ERROR: Command failed: tc qdisc del dev s2-eth3 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:04:14 INFO: cleared tc qdiscs on s2-eth3
+13:04:14 ERROR: Command failed: tc qdisc del dev s4-eth1 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:04:14 INFO: cleared tc qdiscs on s4-eth1
+13:04:14 ERROR: Command failed: tc qdisc del dev s3-eth1 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:04:14 INFO: cleared tc qdiscs on s3-eth1
+13:04:14 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:04:14 INFO: cleared tc qdiscs on s3-eth3
+13:04:14 ERROR: Command failed: tc qdisc del dev s1-eth3 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:04:14 INFO: cleared tc qdiscs on s1-eth3
+13:04:14 ERROR: Command failed: tc qdisc del dev s4-eth3 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:04:14 INFO: cleared tc qdiscs on s4-eth3
+13:04:14 ERROR: Command failed: tc qdisc del dev s1-eth2 root
+rc=2 stdout= stderr=Error: Cannot delete qdisc with handle of zero.
+13:04:14 INFO: cleared tc qdiscs on s1-eth2
+13:09:17 INFO: Starting policer on interface s1-eth3
+13:09:17 INFO: Starting policer on interface s1-eth2
+13:09:17 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:09:17 INFO: Enable egress shaping: True
+13:09:17 INFO: Starting policer on interface s2-eth1
+13:09:17 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:09:17 INFO: Enable egress shaping: True
+13:09:17 INFO: Starting policer on interface s2-eth2
+13:09:18 INFO: Starting policer on interface s3-eth3
+13:09:18 INFO: Starting policer on interface s3-eth2
+13:09:18 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:09:18 INFO: Starting policer on interface s3-eth4
+13:09:18 INFO: Enable egress shaping: True
+13:09:18 INFO: Starting policer on interface s1-eth1
+13:09:18 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:09:18 INFO: Enable egress shaping: True
+13:09:18 INFO: Starting policer on interface s1-eth4
+13:09:18 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:09:18 INFO: Enable egress shaping: True
+13:09:18 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:09:18 INFO: Enable egress shaping: True
+13:09:18 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:09:18 INFO: Enable egress shaping: True
+13:09:18 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:09:18 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:09:18 INFO: Enable egress shaping: True
+13:09:18 INFO: Starting policer on interface s4-eth1
+13:09:18 INFO: Enable egress shaping: True
+13:09:18 ERROR: Command failed: tc filter del dev s2-eth1 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:09:18 ERROR: Command failed: tc filter del dev s1-eth2 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:09:18 INFO: Starting policer on interface s4-eth3
+13:09:18 INFO: Starting policer on interface s3-eth1
+13:09:18 INFO: Starting policer on interface s2-eth3
+13:09:18 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:09:18 INFO: Enable egress shaping: True
+13:09:19 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:09:19 INFO: Enable egress shaping: True
+13:09:19 INFO: Starting policer on interface s4-eth2
+13:09:19 ERROR: Command failed: tc qdisc del dev s1-eth2 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:09:19 ERROR: Command failed: tc qdisc del dev s2-eth1 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:09:19 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:09:19 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:09:19 INFO: Enable egress shaping: True
+13:09:19 ERROR: Command failed: tc filter del dev s3-eth3 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:09:19 ERROR: Command failed: tc filter del dev s1-eth3 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:09:19 ERROR: Command failed: tc filter del dev s3-eth4 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:09:19 INFO: Enable egress shaping: True
+13:09:19 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:09:19 INFO: Enable egress shaping: True
+13:09:19 ERROR: Command failed: tc filter del dev s2-eth2 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:09:19 ERROR: Command failed: tc filter del dev s1-eth1 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:09:19 ERROR: Command failed: tc filter del dev s3-eth2 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:09:19 ERROR: Command failed: tc filter del dev s1-eth4 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:09:19 ERROR: Command failed: tc qdisc del dev s3-eth4 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:09:19 INFO: ingress qdisc added on s2-eth1
+13:09:19 INFO: ingress qdisc added on s1-eth2
+13:09:19 ERROR: Command failed: tc qdisc del dev s1-eth3 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:09:19 ERROR: Command failed: tc qdisc del dev s3-eth3 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:09:19 ERROR: Command failed: tc qdisc del dev s2-eth2 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:09:19 ERROR: Command failed: tc qdisc del dev s1-eth1 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:09:19 ERROR: Command failed: tc qdisc del dev s1-eth4 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:09:19 ERROR: Command failed: tc filter del dev s4-eth3 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:09:19 ERROR: Command failed: tc qdisc del dev s3-eth2 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:09:19 ERROR: Command failed: tc filter del dev s4-eth1 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:09:19 INFO: ingress qdisc added on s3-eth4
+13:09:19 ERROR: Command failed: tc filter del dev s2-eth3 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:09:19 ERROR: Command failed: tc filter del dev s4-eth2 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:09:19 INFO: ingress qdisc added on s1-eth3
+13:09:19 INFO: ingress qdisc added on s3-eth3
+13:09:19 ERROR: Command failed: tc filter del dev s3-eth1 parent ffff:
+rc=2 stdout= stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+13:09:19 INFO: ingress qdisc added on s1-eth4
+13:09:19 INFO: ingress qdisc added on s2-eth2
+13:09:19 INFO: ingress qdisc added on s1-eth1
+13:09:19 ERROR: Command failed: tc qdisc del dev s4-eth3 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:09:19 ERROR: Command failed: tc qdisc del dev s4-eth1 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:09:19 ERROR: Command failed: tc qdisc add dev s2-eth1 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:09:19 ERROR: Unhandled error: Command 'tc qdisc add dev s2-eth1 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 144, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 108, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 85, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s2-eth1 root handle 1: htb default 10' returned non-zero exit status 2.
+13:09:20 INFO: ingress qdisc added on s3-eth2
+13:09:20 ERROR: Command failed: tc qdisc del dev s2-eth3 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:09:20 ERROR: Command failed: tc qdisc del dev s4-eth2 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:09:20 ERROR: Command failed: tc qdisc add dev s1-eth2 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:09:20 ERROR: Unhandled error: Command 'tc qdisc add dev s1-eth2 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 144, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 108, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 85, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s1-eth2 root handle 1: htb default 10' returned non-zero exit status 2.
+13:09:20 ERROR: Command failed: tc qdisc del dev s3-eth1 ingress
+rc=2 stdout= stderr=Error: Invalid handle.
+13:09:20 ERROR: Command failed: tc qdisc add dev s1-eth3 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:09:20 ERROR: Unhandled error: Command 'tc qdisc add dev s1-eth3 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 144, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 108, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 85, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s1-eth3 root handle 1: htb default 10' returned non-zero exit status 2.
+13:09:20 ERROR: Command failed: tc qdisc add dev s3-eth4 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:09:20 INFO: ingress qdisc added on s4-eth3
+13:09:20 INFO: ingress qdisc added on s4-eth1
+13:09:20 ERROR: Unhandled error: Command 'tc qdisc add dev s3-eth4 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 144, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 108, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 85, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s3-eth4 root handle 1: htb default 10' returned non-zero exit status 2.
+13:09:20 INFO: ingress qdisc added on s2-eth3
+13:09:20 ERROR: Command failed: tc qdisc add dev s3-eth3 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:09:20 ERROR: Unhandled error: Command 'tc qdisc add dev s3-eth3 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 144, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 108, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 85, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s3-eth3 root handle 1: htb default 10' returned non-zero exit status 2.
+13:09:20 INFO: ingress qdisc added on s4-eth2
+13:09:20 INFO: ingress qdisc added on s3-eth1
+13:09:20 ERROR: Command failed: tc qdisc add dev s1-eth4 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:09:20 ERROR: Unhandled error: Command 'tc qdisc add dev s1-eth4 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 144, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 108, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 85, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s1-eth4 root handle 1: htb default 10' returned non-zero exit status 2.
+13:09:20 ERROR: Command failed: tc qdisc add dev s2-eth2 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:09:20 ERROR: Unhandled error: Command 'tc qdisc add dev s2-eth2 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 144, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 108, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 85, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s2-eth2 root handle 1: htb default 10' returned non-zero exit status 2.
+13:09:20 ERROR: Command failed: tc qdisc add dev s3-eth2 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:09:20 ERROR: Unhandled error: Command 'tc qdisc add dev s3-eth2 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 144, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 108, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 85, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s3-eth2 root handle 1: htb default 10' returned non-zero exit status 2.
+13:09:20 ERROR: Command failed: tc qdisc add dev s1-eth1 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:09:20 ERROR: Unhandled error: Command 'tc qdisc add dev s1-eth1 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 144, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 108, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 85, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s1-eth1 root handle 1: htb default 10' returned non-zero exit status 2.
+13:09:20 ERROR: Command failed: tc qdisc add dev s4-eth3 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:09:20 ERROR: Unhandled error: Command 'tc qdisc add dev s4-eth3 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 144, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 108, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 85, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s4-eth3 root handle 1: htb default 10' returned non-zero exit status 2.
+13:09:20 ERROR: Command failed: tc qdisc add dev s3-eth1 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:09:20 ERROR: Command failed: tc qdisc add dev s4-eth1 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:09:20 ERROR: Command failed: tc qdisc add dev s2-eth3 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:09:20 ERROR: Command failed: tc qdisc add dev s4-eth2 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:09:20 ERROR: Unhandled error: Command 'tc qdisc add dev s4-eth1 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 144, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 108, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 85, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s4-eth1 root handle 1: htb default 10' returned non-zero exit status 2.
+13:09:20 ERROR: Unhandled error: Command 'tc qdisc add dev s3-eth1 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 144, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 108, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 85, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s3-eth1 root handle 1: htb default 10' returned non-zero exit status 2.
+13:09:20 ERROR: Unhandled error: Command 'tc qdisc add dev s2-eth3 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 144, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 108, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 85, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s2-eth3 root handle 1: htb default 10' returned non-zero exit status 2.
+13:09:21 ERROR: Unhandled error: Command 'tc qdisc add dev s4-eth2 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 144, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 108, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 85, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s4-eth2 root handle 1: htb default 10' returned non-zero exit status 2.
+13:09:21 INFO: cleared tc qdiscs on s2-eth1
+13:09:21 INFO: cleared tc qdiscs on s1-eth2
+13:09:21 INFO: cleared tc qdiscs on s3-eth4
+13:09:21 INFO: cleared tc qdiscs on s1-eth3
+13:09:21 INFO: cleared tc qdiscs on s3-eth3
+13:09:21 INFO: cleared tc qdiscs on s2-eth2
+13:09:21 INFO: cleared tc qdiscs on s1-eth4
+13:09:21 INFO: cleared tc qdiscs on s3-eth2
+13:09:21 INFO: cleared tc qdiscs on s1-eth1
+13:09:21 INFO: cleared tc qdiscs on s4-eth2
+13:09:21 INFO: cleared tc qdiscs on s4-eth1
+13:09:21 INFO: cleared tc qdiscs on s4-eth3
+13:09:21 INFO: cleared tc qdiscs on s2-eth3
+13:09:21 INFO: cleared tc qdiscs on s3-eth1
+13:11:24 INFO: Starting policer on interface s1-eth3
+13:11:24 INFO: Starting policer on interface s3-eth2
+13:11:24 INFO: Starting policer on interface s1-eth2
+13:11:24 INFO: Starting policer on interface s1-eth4
+13:11:24 INFO: Starting policer on interface s1-eth1
+13:11:24 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:11:24 INFO: Enable egress shaping: True
+13:11:24 INFO: Starting policer on interface s2-eth1
+13:11:24 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:11:24 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:11:24 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:11:24 INFO: Enable egress shaping: True
+13:11:24 INFO: Enable egress shaping: True
+13:11:24 INFO: Enable egress shaping: True
+13:11:24 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:11:24 INFO: Starting policer on interface s4-eth1
+13:11:25 INFO: Enable egress shaping: True
+13:11:25 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:11:25 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:11:25 INFO: Enable egress shaping: True
+13:11:25 INFO: Enable egress shaping: True
+13:11:25 INFO: ingress qdisc added on s1-eth4
+13:11:25 INFO: Starting policer on interface s2-eth3
+13:11:25 INFO: Starting policer on interface s4-eth3
+13:11:25 INFO: Starting policer on interface s3-eth4
+13:11:25 INFO: Starting policer on interface s2-eth2
+13:11:25 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:11:25 INFO: Enable egress shaping: True
+13:11:25 INFO: ingress qdisc added on s1-eth2
+13:11:25 INFO: ingress qdisc added on s2-eth1
+13:11:25 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:11:25 INFO: ingress qdisc added on s3-eth2
+13:11:25 INFO: Enable egress shaping: True
+13:11:25 INFO: Starting policer on interface s3-eth1
+13:11:25 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:11:25 INFO: Enable egress shaping: True
+13:11:26 INFO: ingress qdisc added on s1-eth3
+13:11:26 INFO: ingress qdisc added on s4-eth1
+13:11:26 INFO: Starting policer on interface s3-eth3
+13:11:26 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:11:26 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:11:26 INFO: ingress qdisc added on s1-eth1
+13:11:26 ERROR: Command failed: tc qdisc add dev s1-eth4 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:11:26 ERROR: Unhandled error: Command 'tc qdisc add dev s1-eth4 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 153, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 117, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 94, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s1-eth4 root handle 1: htb default 10' returned non-zero exit status 2.
+13:11:26 INFO: Enable egress shaping: True
+13:11:26 INFO: Enable egress shaping: True
+13:11:26 INFO: Starting policer on interface s4-eth2
+13:11:26 ERROR: Command failed: tc qdisc add dev s1-eth2 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:11:26 ERROR: Unhandled error: Command 'tc qdisc add dev s1-eth2 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 153, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 117, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 94, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s1-eth2 root handle 1: htb default 10' returned non-zero exit status 2.
+13:11:26 INFO: ingress qdisc added on s2-eth3
+13:11:26 ERROR: Command failed: tc qdisc add dev s3-eth2 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:11:26 ERROR: Unhandled error: Command 'tc qdisc add dev s3-eth2 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 153, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 117, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 94, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s3-eth2 root handle 1: htb default 10' returned non-zero exit status 2.
+13:11:26 INFO: ingress qdisc added on s2-eth2
+13:11:26 ERROR: Command failed: tc qdisc add dev s2-eth1 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:11:26 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:11:26 ERROR: Unhandled error: Command 'tc qdisc add dev s2-eth1 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 153, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 117, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 94, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s2-eth1 root handle 1: htb default 10' returned non-zero exit status 2.
+13:11:26 INFO: Enable egress shaping: True
+13:11:27 ERROR: Command failed: tc qdisc add dev s1-eth3 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:11:27 ERROR: Unhandled error: Command 'tc qdisc add dev s1-eth3 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 153, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 117, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 94, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s1-eth3 root handle 1: htb default 10' returned non-zero exit status 2.
+13:11:27 ERROR: Command failed: tc qdisc add dev s4-eth1 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:11:27 ERROR: Unhandled error: Command 'tc qdisc add dev s4-eth1 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 153, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 117, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 94, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s4-eth1 root handle 1: htb default 10' returned non-zero exit status 2.
+13:11:27 INFO: ingress qdisc added on s3-eth4
+13:11:27 ERROR: Command failed: tc qdisc add dev s1-eth1 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:11:27 ERROR: Unhandled error: Command 'tc qdisc add dev s1-eth1 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 153, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 117, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 94, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s1-eth1 root handle 1: htb default 10' returned non-zero exit status 2.
+13:11:27 INFO: ingress qdisc added on s3-eth3
+13:11:27 INFO: ingress qdisc added on s4-eth3
+13:11:27 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:11:27 INFO: Enable egress shaping: True
+13:11:27 ERROR: Command failed: tc qdisc add dev s2-eth2 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:11:27 ERROR: Unhandled error: Command 'tc qdisc add dev s2-eth2 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 153, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 117, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 94, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s2-eth2 root handle 1: htb default 10' returned non-zero exit status 2.
+13:11:27 ERROR: Command failed: tc qdisc add dev s2-eth3 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:11:27 ERROR: Unhandled error: Command 'tc qdisc add dev s2-eth3 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 153, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 117, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 94, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s2-eth3 root handle 1: htb default 10' returned non-zero exit status 2.
+13:11:27 INFO: cleared tc qdiscs on s1-eth4
+13:11:27 ERROR: Command failed: tc qdisc add dev s3-eth4 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:11:27 ERROR: Unhandled error: Command 'tc qdisc add dev s3-eth4 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 153, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 117, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 94, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s3-eth4 root handle 1: htb default 10' returned non-zero exit status 2.
+13:11:27 INFO: ingress qdisc added on s3-eth1
+13:11:27 INFO: cleared tc qdiscs on s1-eth2
+13:11:27 INFO: cleared tc qdiscs on s3-eth2
+13:11:27 ERROR: Command failed: tc qdisc add dev s3-eth3 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:11:27 ERROR: Unhandled error: Command 'tc qdisc add dev s3-eth3 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 153, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 117, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 94, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s3-eth3 root handle 1: htb default 10' returned non-zero exit status 2.
+13:11:27 ERROR: Command failed: tc qdisc add dev s4-eth3 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:11:27 INFO: cleared tc qdiscs on s2-eth1
+13:11:27 ERROR: Unhandled error: Command 'tc qdisc add dev s4-eth3 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 153, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 117, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 94, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s4-eth3 root handle 1: htb default 10' returned non-zero exit status 2.
+13:11:28 INFO: cleared tc qdiscs on s1-eth1
+13:11:28 INFO: cleared tc qdiscs on s4-eth1
+13:11:28 INFO: ingress qdisc added on s4-eth2
+13:11:28 INFO: cleared tc qdiscs on s1-eth3
+13:11:28 ERROR: Command failed: tc qdisc add dev s3-eth1 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:11:28 ERROR: Unhandled error: Command 'tc qdisc add dev s3-eth1 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 153, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 117, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 94, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s3-eth1 root handle 1: htb default 10' returned non-zero exit status 2.
+13:11:28 INFO: cleared tc qdiscs on s2-eth2
+13:11:28 INFO: cleared tc qdiscs on s2-eth3
+13:11:28 INFO: cleared tc qdiscs on s3-eth4
+13:11:28 ERROR: Command failed: tc qdisc add dev s4-eth2 root handle 1: htb default 10
+rc=2 stdout= stderr=Error: Exclusivity flag on, cannot modify.
+13:11:28 ERROR: Unhandled error: Command 'tc qdisc add dev s4-eth2 root handle 1: htb default 10' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "policer.py", line 153, in main
+    install_policers(dev, classes, do_egress_shaping=args.shaping)
+  File "policer.py", line 117, in install_policers
+    setup_egress_shaper(dev)
+  File "policer.py", line 94, in setup_egress_shaper
+    run_cmd(f"tc qdisc add dev {dev} root handle 1: htb default 10")
+  File "policer.py", line 29, in run_cmd
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc qdisc add dev s4-eth2 root handle 1: htb default 10' returned non-zero exit status 2.
+13:11:28 INFO: cleared tc qdiscs on s4-eth3
+13:11:28 INFO: cleared tc qdiscs on s3-eth3
+13:11:28 INFO: cleared tc qdiscs on s3-eth1
+13:11:29 INFO: cleared tc qdiscs on s4-eth2
+13:13:16 INFO: Starting policer on interface s1-eth1
+13:13:16 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:13:16 INFO: Enable egress shaping: False
+13:13:17 INFO: Starting policer on interface s1-eth2
+13:13:17 INFO: Starting policer on interface s1-eth3
+13:13:17 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:13:17 INFO: Starting policer on interface s2-eth3
+13:13:17 INFO: Enable egress shaping: False
+13:13:17 INFO: Starting policer on interface s3-eth4
+13:13:17 INFO: Starting policer on interface s1-eth4
+13:13:17 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:13:17 INFO: Enable egress shaping: False
+13:13:17 INFO: ingress qdisc added on s1-eth1
+13:13:17 INFO: Starting policer on interface s3-eth1
+13:13:17 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:13:17 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:13:17 INFO: Enable egress shaping: False
+13:13:17 INFO: Enable egress shaping: False
+13:13:17 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:13:18 INFO: Starting policer on interface s2-eth2
+13:13:18 INFO: Enable egress shaping: False
+13:13:18 INFO: Installed ingress police (u32) on s1-eth1 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:13:18 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:13:18 INFO: ingress qdisc added on s1-eth2
+13:13:18 INFO: Enable egress shaping: False
+13:13:18 INFO: Starting policer on interface s3-eth2
+13:13:18 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:13:18 INFO: Enable egress shaping: False
+13:13:18 INFO: Starting policer on interface s2-eth1
+13:13:18 INFO: ingress qdisc added on s1-eth3
+13:13:18 INFO: Installed ingress police (u32) on s1-eth1 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:13:18 INFO: Starting policer on interface s4-eth2
+13:13:18 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:13:18 INFO: Enable egress shaping: False
+13:13:18 INFO: Installed ingress police (u32) on s1-eth2 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:13:18 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:13:18 INFO: Enable egress shaping: False
+13:13:18 INFO: ingress qdisc added on s1-eth4
+13:13:18 INFO: ingress qdisc added on s2-eth3
+13:13:18 INFO: Installed ingress police (u32) on s1-eth3 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:13:18 INFO: ingress qdisc added on s3-eth4
+13:13:18 INFO: Installed ingress police (u32) on s1-eth1 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:13:18 INFO: Starting policer on interface s4-eth1
+13:13:19 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:13:19 INFO: Enable egress shaping: False
+13:13:19 INFO: ingress qdisc added on s3-eth1
+13:13:19 INFO: Installed ingress police (u32) on s1-eth2 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:13:19 INFO: Installed ingress police (u32) on s1-eth4 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:13:19 INFO: Starting policer on interface s3-eth3
+13:13:19 INFO: Installed ingress police (u32) on s1-eth3 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:13:19 INFO: Installed ingress police (u32) on s2-eth3 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:13:19 INFO: ingress qdisc added on s2-eth2
+13:13:19 INFO: Installed ingress police (u32) on s3-eth4 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:13:19 INFO: Installed ingress police (u32) on s1-eth1 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:13:19 INFO: Policer installed. Running...
+13:13:19 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:13:19 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:13:19 INFO: Enable egress shaping: False
+13:13:19 INFO: Enable egress shaping: False
+13:13:19 INFO: ingress qdisc added on s2-eth1
+13:13:19 INFO: ingress qdisc added on s3-eth2
+13:13:19 INFO: Installed ingress police (u32) on s3-eth1 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:13:19 INFO: Installed ingress police (u32) on s1-eth2 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:13:19 INFO: Installed ingress police (u32) on s1-eth4 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:13:19 INFO: Installed ingress police (u32) on s2-eth3 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:13:19 INFO: Installed ingress police (u32) on s1-eth3 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:13:19 INFO: Installed ingress police (u32) on s3-eth4 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:13:19 INFO: Installed ingress police (u32) on s2-eth2 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:13:19 INFO: Starting policer on interface s4-eth3
+13:13:19 INFO: Installed ingress police (u32) on s2-eth1 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:13:19 INFO: Installed ingress police (u32) on s3-eth1 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:13:19 INFO: Installed ingress police (u32) on s1-eth2 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:13:19 INFO: Policer installed. Running...
+13:13:19 INFO: Installed ingress police (u32) on s3-eth2 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:13:19 INFO: Installed ingress police (u32) on s1-eth3 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:13:19 INFO: Policer installed. Running...
+13:13:19 INFO: Installed ingress police (u32) on s2-eth3 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:13:19 INFO: ingress qdisc added on s4-eth2
+13:13:19 INFO: Installed ingress police (u32) on s1-eth4 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:13:20 INFO: ingress qdisc added on s3-eth3
+13:13:20 INFO: ingress qdisc added on s4-eth1
+13:13:20 INFO: Installed ingress police (u32) on s3-eth4 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:13:20 INFO: Installed ingress police (u32) on s2-eth2 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:13:20 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:13:20 INFO: Enable egress shaping: False
+13:13:20 INFO: Installed ingress police (u32) on s3-eth1 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:13:20 INFO: Installed ingress police (u32) on s3-eth2 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:13:20 INFO: Installed ingress police (u32) on s2-eth1 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:13:20 INFO: Installed ingress police (u32) on s3-eth3 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:13:20 INFO: Installed ingress police (u32) on s1-eth4 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:13:20 INFO: Policer installed. Running...
+13:13:20 INFO: Installed ingress police (u32) on s4-eth1 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:13:20 INFO: Installed ingress police (u32) on s2-eth3 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:13:20 INFO: Policer installed. Running...
+13:13:20 INFO: Installed ingress police (u32) on s3-eth4 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:13:20 INFO: Policer installed. Running...
+13:13:20 INFO: Installed ingress police (u32) on s4-eth2 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:13:20 INFO: Installed ingress police (u32) on s2-eth2 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:13:20 INFO: Installed ingress police (u32) on s3-eth2 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:13:20 INFO: Installed ingress police (u32) on s3-eth1 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:13:20 INFO: Policer installed. Running...
+13:13:20 INFO: Installed ingress police (u32) on s3-eth3 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:13:20 INFO: Installed ingress police (u32) on s2-eth1 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:13:20 INFO: Installed ingress police (u32) on s4-eth2 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:13:20 INFO: Installed ingress police (u32) on s4-eth1 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:13:20 INFO: ingress qdisc added on s4-eth3
+13:13:20 INFO: Installed ingress police (u32) on s2-eth2 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:13:20 INFO: Policer installed. Running...
+13:13:20 INFO: Installed ingress police (u32) on s3-eth2 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:13:20 INFO: Policer installed. Running...
+13:13:20 INFO: Installed ingress police (u32) on s2-eth1 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:13:20 INFO: Policer installed. Running...
+13:13:20 INFO: Installed ingress police (u32) on s3-eth3 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:13:20 INFO: Installed ingress police (u32) on s4-eth2 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:13:20 INFO: Installed ingress police (u32) on s4-eth1 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:13:20 INFO: Installed ingress police (u32) on s4-eth3 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:13:21 INFO: Installed ingress police (u32) on s4-eth2 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:13:21 INFO: Policer installed. Running...
+13:13:21 INFO: Installed ingress police (u32) on s3-eth3 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:13:21 INFO: Policer installed. Running...
+13:13:21 INFO: Installed ingress police (u32) on s4-eth3 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:13:21 INFO: Installed ingress police (u32) on s4-eth1 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:13:21 INFO: Policer installed. Running...
+13:13:21 INFO: Installed ingress police (u32) on s4-eth3 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:13:21 INFO: Installed ingress police (u32) on s4-eth3 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:13:21 INFO: Policer installed. Running...
+13:13:30 INFO: Received stop signal, cleaning up...
+13:13:30 INFO: Received stop signal, cleaning up...
+13:13:30 INFO: Received stop signal, cleaning up...
+13:13:30 INFO: Received stop signal, cleaning up...
+13:13:30 INFO: Received stop signal, cleaning up...
+13:13:30 INFO: Received stop signal, cleaning up...
+13:13:30 INFO: Received stop signal, cleaning up...
+13:13:30 INFO: Received stop signal, cleaning up...
+13:13:30 INFO: Received stop signal, cleaning up...
+13:13:30 INFO: Received stop signal, cleaning up...
+13:13:30 INFO: Received stop signal, cleaning up...
+13:13:30 INFO: Received stop signal, cleaning up...
+13:13:30 INFO: Received stop signal, cleaning up...
+13:13:30 INFO: Received stop signal, cleaning up...
+13:13:31 INFO: cleared tc qdiscs on s4-eth3
+13:13:31 INFO: cleared tc qdiscs on s3-eth2
+13:13:31 INFO: cleared tc qdiscs on s1-eth3
+13:13:31 INFO: cleared tc qdiscs on s4-eth2
+13:13:31 INFO: cleared tc qdiscs on s2-eth2
+13:13:31 INFO: cleared tc qdiscs on s3-eth3
+13:13:31 INFO: cleared tc qdiscs on s1-eth4
+13:13:31 INFO: cleared tc qdiscs on s3-eth4
+13:13:31 INFO: cleared tc qdiscs on s2-eth1
+13:13:31 INFO: cleared tc qdiscs on s4-eth1
+13:13:31 INFO: cleared tc qdiscs on s3-eth1
+13:13:31 INFO: cleared tc qdiscs on s1-eth2
+13:13:31 INFO: cleared tc qdiscs on s2-eth3
+13:13:31 INFO: cleared tc qdiscs on s1-eth1
+13:14:46 INFO: Starting policer on interface s1-eth3
+13:14:47 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:14:47 INFO: Enable egress shaping: False
+13:14:47 INFO: Starting policer on interface s1-eth2
+13:14:47 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:14:47 INFO: Starting policer on interface s3-eth1
+13:14:47 INFO: Starting policer on interface s1-eth4
+13:14:47 INFO: Enable egress shaping: False
+13:14:47 INFO: Starting policer on interface s1-eth1
+13:14:48 INFO: Starting policer on interface s2-eth1
+13:14:48 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:14:48 INFO: ingress qdisc added on s1-eth3
+13:14:48 INFO: Starting policer on interface s2-eth3
+13:14:48 INFO: Enable egress shaping: False
+13:14:48 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:14:48 INFO: Enable egress shaping: False
+13:14:48 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:14:48 INFO: Enable egress shaping: False
+13:14:48 INFO: Starting policer on interface s2-eth2
+13:14:48 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:14:48 INFO: Enable egress shaping: False
+13:14:48 INFO: Installed ingress police (u32) on s1-eth3 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:14:48 INFO: ingress qdisc added on s1-eth2
+13:14:48 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:14:48 INFO: Enable egress shaping: False
+13:14:48 INFO: Starting policer on interface s3-eth2
+13:14:49 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:14:49 INFO: Starting policer on interface s4-eth2
+13:14:49 INFO: Enable egress shaping: False
+13:14:49 INFO: Starting policer on interface s3-eth4
+13:14:49 INFO: Installed ingress police (u32) on s1-eth3 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:14:49 INFO: Installed ingress police (u32) on s1-eth2 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:14:49 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:14:49 INFO: ingress qdisc added on s1-eth1
+13:14:49 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:14:49 INFO: Starting policer on interface s4-eth1
+13:14:49 INFO: ingress qdisc added on s1-eth4
+13:14:49 INFO: Enable egress shaping: False
+13:14:49 INFO: Enable egress shaping: False
+13:14:49 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:14:49 INFO: ingress qdisc added on s3-eth1
+13:14:49 INFO: Enable egress shaping: False
+13:14:49 INFO: Starting policer on interface s4-eth3
+13:14:49 INFO: Starting policer on interface s3-eth3
+13:14:49 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:14:49 INFO: Enable egress shaping: False
+13:14:49 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:14:49 INFO: Enable egress shaping: False
+13:14:49 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:14:49 INFO: Installed ingress police (u32) on s1-eth2 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:14:49 INFO: ingress qdisc added on s2-eth1
+13:14:49 INFO: ingress qdisc added on s2-eth2
+13:14:49 INFO: Installed ingress police (u32) on s1-eth1 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:14:49 INFO: Enable egress shaping: False
+13:14:49 INFO: Installed ingress police (u32) on s3-eth1 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:14:49 INFO: Installed ingress police (u32) on s1-eth3 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:14:49 INFO: Installed ingress police (u32) on s1-eth4 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:14:49 INFO: ingress qdisc added on s2-eth3
+13:14:49 INFO: Installed ingress police (u32) on s1-eth2 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:14:49 INFO: Installed ingress police (u32) on s1-eth1 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:14:49 INFO: Installed ingress police (u32) on s2-eth1 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:14:49 INFO: Installed ingress police (u32) on s1-eth3 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:14:49 INFO: Policer installed. Running...
+13:14:49 INFO: Installed ingress police (u32) on s2-eth2 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:14:50 INFO: Installed ingress police (u32) on s3-eth1 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:14:50 INFO: Installed ingress police (u32) on s1-eth4 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:14:50 INFO: ingress qdisc added on s3-eth2
+13:14:50 INFO: ingress qdisc added on s4-eth2
+13:14:50 INFO: ingress qdisc added on s3-eth4
+13:14:50 INFO: ingress qdisc added on s4-eth3
+13:14:50 INFO: Installed ingress police (u32) on s2-eth3 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:14:50 INFO: ingress qdisc added on s4-eth1
+13:14:50 INFO: Installed ingress police (u32) on s1-eth2 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:14:50 INFO: Policer installed. Running...
+13:14:50 INFO: Installed ingress police (u32) on s2-eth1 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:14:50 INFO: Installed ingress police (u32) on s2-eth2 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:14:50 INFO: ingress qdisc added on s3-eth3
+13:14:50 INFO: Installed ingress police (u32) on s3-eth1 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:14:50 INFO: Installed ingress police (u32) on s3-eth4 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:14:50 INFO: Installed ingress police (u32) on s3-eth2 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:14:50 INFO: Installed ingress police (u32) on s1-eth4 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:14:50 INFO: Installed ingress police (u32) on s4-eth2 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:14:50 INFO: Installed ingress police (u32) on s1-eth1 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:14:50 INFO: Installed ingress police (u32) on s4-eth3 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:14:50 INFO: Installed ingress police (u32) on s2-eth3 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:14:50 INFO: Installed ingress police (u32) on s3-eth1 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:14:50 INFO: Policer installed. Running...
+13:14:50 INFO: Installed ingress police (u32) on s3-eth3 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:14:50 INFO: Installed ingress police (u32) on s4-eth1 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:14:50 INFO: Installed ingress police (u32) on s2-eth1 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:14:50 INFO: Installed ingress police (u32) on s2-eth2 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:14:50 INFO: Installed ingress police (u32) on s3-eth4 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:14:50 INFO: Installed ingress police (u32) on s4-eth2 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:14:50 INFO: Installed ingress police (u32) on s1-eth4 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:14:50 INFO: Policer installed. Running...
+13:14:50 INFO: Installed ingress police (u32) on s2-eth3 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:14:50 INFO: Installed ingress police (u32) on s3-eth2 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:14:50 INFO: Installed ingress police (u32) on s4-eth3 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:14:50 INFO: Installed ingress police (u32) on s1-eth1 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:14:50 INFO: Policer installed. Running...
+13:14:51 INFO: Installed ingress police (u32) on s2-eth2 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:14:51 INFO: Policer installed. Running...
+13:14:51 INFO: Installed ingress police (u32) on s4-eth1 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:14:51 INFO: Installed ingress police (u32) on s2-eth3 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:14:51 INFO: Policer installed. Running...
+13:14:51 INFO: Installed ingress police (u32) on s3-eth4 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:14:51 INFO: Installed ingress police (u32) on s3-eth3 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:14:51 INFO: Installed ingress police (u32) on s2-eth1 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:14:51 INFO: Policer installed. Running...
+13:14:51 INFO: Installed ingress police (u32) on s3-eth2 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:14:51 INFO: Installed ingress police (u32) on s4-eth2 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:14:51 INFO: Installed ingress police (u32) on s4-eth3 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:14:51 INFO: Installed ingress police (u32) on s3-eth3 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:14:51 INFO: Installed ingress police (u32) on s3-eth4 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:14:51 INFO: Policer installed. Running...
+13:14:51 INFO: Installed ingress police (u32) on s4-eth2 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:14:51 INFO: Policer installed. Running...
+13:14:51 INFO: Installed ingress police (u32) on s4-eth1 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:14:51 INFO: Installed ingress police (u32) on s3-eth2 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:14:51 INFO: Policer installed. Running...
+13:14:51 INFO: Installed ingress police (u32) on s4-eth3 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:14:51 INFO: Policer installed. Running...
+13:14:51 INFO: Installed ingress police (u32) on s3-eth3 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:14:51 INFO: Policer installed. Running...
+13:14:51 INFO: Installed ingress police (u32) on s4-eth1 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:14:51 INFO: Policer installed. Running...
+13:15:01 INFO: Received stop signal, cleaning up...
+13:15:01 INFO: Received stop signal, cleaning up...
+13:15:01 INFO: Received stop signal, cleaning up...
+13:15:01 INFO: Received stop signal, cleaning up...
+13:15:01 INFO: Received stop signal, cleaning up...
+13:15:01 INFO: Received stop signal, cleaning up...
+13:15:01 INFO: Received stop signal, cleaning up...
+13:15:01 INFO: Received stop signal, cleaning up...
+13:15:01 INFO: Received stop signal, cleaning up...
+13:15:01 INFO: Received stop signal, cleaning up...
+13:15:01 INFO: Received stop signal, cleaning up...
+13:15:01 INFO: Received stop signal, cleaning up...
+13:15:01 INFO: Received stop signal, cleaning up...
+13:15:01 INFO: Received stop signal, cleaning up...
+13:15:02 INFO: cleared tc qdiscs on s4-eth1
+13:15:02 INFO: cleared tc qdiscs on s1-eth1
+13:15:02 INFO: cleared tc qdiscs on s4-eth2
+13:15:02 INFO: cleared tc qdiscs on s2-eth2
+13:15:02 INFO: cleared tc qdiscs on s3-eth3
+13:15:02 INFO: cleared tc qdiscs on s3-eth4
+13:15:02 INFO: cleared tc qdiscs on s3-eth2
+13:15:02 INFO: cleared tc qdiscs on s1-eth2
+13:15:02 INFO: cleared tc qdiscs on s2-eth3
+13:15:02 INFO: cleared tc qdiscs on s4-eth3
+13:15:02 INFO: cleared tc qdiscs on s1-eth3
+13:15:02 INFO: cleared tc qdiscs on s3-eth1
+13:15:03 INFO: cleared tc qdiscs on s2-eth1
+13:15:03 INFO: cleared tc qdiscs on s1-eth4
+13:16:44 INFO: Starting policer on interface s2-eth2
+13:16:45 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:16:45 INFO: Starting policer on interface s2-eth1
+13:16:45 INFO: Enable egress shaping: False
+13:16:45 INFO: Starting policer on interface s1-eth1
+13:16:45 INFO: Starting policer on interface s1-eth3
+13:16:45 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:16:45 INFO: Enable egress shaping: False
+13:16:45 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:16:45 INFO: Starting policer on interface s3-eth4
+13:16:45 INFO: Starting policer on interface s4-eth2
+13:16:45 INFO: Enable egress shaping: False
+13:16:45 INFO: Starting policer on interface s4-eth1
+13:16:45 INFO: Starting policer on interface s2-eth3
+13:16:45 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:16:45 INFO: Starting policer on interface s1-eth2
+13:16:46 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:16:46 INFO: Enable egress shaping: False
+13:16:46 INFO: ingress qdisc added on s2-eth2
+13:16:46 INFO: Enable egress shaping: False
+13:16:46 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:16:46 INFO: Enable egress shaping: False
+13:16:46 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:16:46 INFO: Enable egress shaping: False
+13:16:46 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:16:46 INFO: Enable egress shaping: False
+13:16:46 INFO: Starting policer on interface s3-eth2
+13:16:46 INFO: Starting policer on interface s1-eth4
+13:16:46 INFO: Starting policer on interface s3-eth1
+13:16:46 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:16:46 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:16:46 INFO: Enable egress shaping: False
+13:16:46 INFO: Enable egress shaping: False
+13:16:46 INFO: Installed ingress police (u32) on s2-eth2 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:16:46 INFO: ingress qdisc added on s1-eth3
+13:16:46 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:16:47 INFO: Enable egress shaping: False
+13:16:47 INFO: ingress qdisc added on s1-eth1
+13:16:47 INFO: Starting policer on interface s4-eth3
+13:16:47 INFO: ingress qdisc added on s1-eth2
+13:16:47 INFO: ingress qdisc added on s2-eth3
+13:16:47 INFO: Installed ingress police (u32) on s2-eth2 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:16:47 INFO: ingress qdisc added on s2-eth1
+13:16:47 INFO: Installed ingress police (u32) on s1-eth3 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:16:47 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:16:47 INFO: Starting policer on interface s3-eth3
+13:16:47 INFO: Enable egress shaping: False
+13:16:47 INFO: ingress qdisc added on s4-eth1
+13:16:47 INFO: ingress qdisc added on s3-eth4
+13:16:47 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:16:47 INFO: Enable egress shaping: False
+13:16:47 INFO: Installed ingress police (u32) on s1-eth2 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:16:47 INFO: Classes: [('HTTP', 34, '5mbit', '10kb'), ('RTP', 46, '10mbit', '10kb'), ('DNS', 8, '1mbit', '5kb'), ('SSH', 16, '2mbit', '5kb')]
+13:16:47 INFO: Installed ingress police (u32) on s1-eth1 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:16:47 INFO: Enable egress shaping: False
+13:16:47 INFO: Installed ingress police (u32) on s2-eth2 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:16:47 INFO: Installed ingress police (u32) on s2-eth3 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:16:47 INFO: ingress qdisc added on s3-eth1
+13:16:47 INFO: ingress qdisc added on s4-eth2
+13:16:47 INFO: Installed ingress police (u32) on s2-eth1 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:16:47 INFO: Installed ingress police (u32) on s1-eth3 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:16:47 INFO: Installed ingress police (u32) on s3-eth4 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:16:48 INFO: Installed ingress police (u32) on s4-eth1 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:16:48 INFO: ingress qdisc added on s1-eth4
+13:16:48 INFO: Installed ingress police (u32) on s1-eth2 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:16:48 INFO: ingress qdisc added on s3-eth2
+13:16:48 INFO: Installed ingress police (u32) on s2-eth2 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:16:48 INFO: Policer installed. Running...
+13:16:48 INFO: Installed ingress police (u32) on s2-eth3 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:16:48 INFO: Installed ingress police (u32) on s3-eth1 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:16:48 INFO: Installed ingress police (u32) on s1-eth3 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:16:48 INFO: Installed ingress police (u32) on s1-eth1 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:16:48 INFO: Installed ingress police (u32) on s4-eth1 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:16:48 INFO: Installed ingress police (u32) on s3-eth4 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:16:48 INFO: Installed ingress police (u32) on s2-eth1 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:16:48 INFO: Installed ingress police (u32) on s4-eth2 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:16:48 INFO: Installed ingress police (u32) on s1-eth4 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:16:48 INFO: ingress qdisc added on s4-eth3
+13:16:48 INFO: Installed ingress police (u32) on s1-eth2 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:16:49 INFO: Installed ingress police (u32) on s2-eth3 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:16:49 INFO: Installed ingress police (u32) on s1-eth3 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:16:49 INFO: Policer installed. Running...
+13:16:49 INFO: Installed ingress police (u32) on s3-eth1 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:16:49 INFO: Installed ingress police (u32) on s3-eth2 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:16:49 INFO: Installed ingress police (u32) on s1-eth1 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:16:49 INFO: Installed ingress police (u32) on s3-eth4 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:16:49 INFO: ingress qdisc added on s3-eth3
+13:16:49 INFO: Installed ingress police (u32) on s2-eth1 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:16:49 INFO: Installed ingress police (u32) on s1-eth2 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:16:49 INFO: Installed ingress police (u32) on s4-eth2 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:16:49 INFO: Installed ingress police (u32) on s4-eth1 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:16:49 INFO: Installed ingress police (u32) on s2-eth3 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:16:49 INFO: Installed ingress police (u32) on s3-eth1 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:16:49 INFO: Installed ingress police (u32) on s4-eth3 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:16:49 INFO: Installed ingress police (u32) on s1-eth4 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:16:49 INFO: Policer installed. Running...
+13:16:49 INFO: Policer installed. Running...
+13:16:49 INFO: Installed ingress police (u32) on s2-eth1 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:16:49 INFO: Policer installed. Running...
+13:16:49 INFO: Installed ingress police (u32) on s4-eth2 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:16:49 INFO: Installed ingress police (u32) on s1-eth1 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:16:49 INFO: Policer installed. Running...
+13:16:49 INFO: Installed ingress police (u32) on s3-eth2 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:16:49 INFO: Installed ingress police (u32) on s3-eth1 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:16:49 INFO: Policer installed. Running...
+13:16:49 INFO: Installed ingress police (u32) on s3-eth4 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:16:49 INFO: Policer installed. Running...
+13:16:49 INFO: Installed ingress police (u32) on s3-eth3 for DSCP=34 (tos=0x88) rate=5mbit burst=10kb
+13:16:49 INFO: Installed ingress police (u32) on s1-eth4 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:16:49 INFO: Installed ingress police (u32) on s4-eth3 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:16:49 INFO: Installed ingress police (u32) on s4-eth1 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:16:49 INFO: Policer installed. Running...
+13:16:49 INFO: Installed ingress police (u32) on s4-eth2 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:16:49 INFO: Policer installed. Running...
+13:16:49 INFO: Installed ingress police (u32) on s3-eth3 for DSCP=46 (tos=0xb8) rate=10mbit burst=10kb
+13:16:49 INFO: Installed ingress police (u32) on s3-eth2 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:16:49 INFO: Installed ingress police (u32) on s1-eth4 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:16:49 INFO: Policer installed. Running...
+13:16:49 INFO: Installed ingress police (u32) on s4-eth3 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:16:49 INFO: Installed ingress police (u32) on s3-eth3 for DSCP=8 (tos=0x20) rate=1mbit burst=5kb
+13:16:49 INFO: Installed ingress police (u32) on s3-eth2 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:16:49 INFO: Policer installed. Running...
+13:16:49 INFO: Installed ingress police (u32) on s4-eth3 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:16:49 INFO: Policer installed. Running...
+13:16:49 INFO: Installed ingress police (u32) on s3-eth3 for DSCP=16 (tos=0x40) rate=2mbit burst=5kb
+13:16:49 INFO: Policer installed. Running...
+13:16:55 INFO: Received stop signal, cleaning up...
+13:16:55 INFO: Received stop signal, cleaning up...
+13:16:55 INFO: Received stop signal, cleaning up...
+13:16:55 INFO: Received stop signal, cleaning up...
+13:16:55 INFO: Received stop signal, cleaning up...
+13:16:55 INFO: Received stop signal, cleaning up...
+13:16:55 INFO: Received stop signal, cleaning up...
+13:16:55 INFO: Received stop signal, cleaning up...
+13:16:55 INFO: Received stop signal, cleaning up...
+13:16:55 INFO: Received stop signal, cleaning up...
+13:16:55 INFO: Received stop signal, cleaning up...
+13:16:55 INFO: Received stop signal, cleaning up...
+13:16:55 INFO: Received stop signal, cleaning up...
+13:16:55 INFO: Received stop signal, cleaning up...
+13:16:56 INFO: cleared tc qdiscs on s3-eth4
+13:16:56 INFO: cleared tc qdiscs on s3-eth3
+13:16:56 INFO: cleared tc qdiscs on s1-eth1
+13:16:56 INFO: cleared tc qdiscs on s2-eth3
+13:16:56 INFO: cleared tc qdiscs on s3-eth2
+13:16:56 INFO: cleared tc qdiscs on s4-eth3
+13:16:57 INFO: cleared tc qdiscs on s2-eth1
+13:16:57 INFO: cleared tc qdiscs on s3-eth1
+13:16:57 INFO: cleared tc qdiscs on s1-eth2
+13:16:57 INFO: cleared tc qdiscs on s1-eth4
+13:16:57 INFO: cleared tc qdiscs on s2-eth2
+13:16:57 INFO: cleared tc qdiscs on s1-eth3
+13:16:57 INFO: cleared tc qdiscs on s4-eth1
+13:16:57 INFO: cleared tc qdiscs on s4-eth2

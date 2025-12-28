@@ -157,6 +157,73 @@ def cleanup_host_policing(pids: dict):
         except subprocess.TimeoutExpired:
             pass
 
+def apply_host_scheduling(pids: dict, policer_enabled: bool):
+    """Apply priority scheduling inside host namespaces for traffic prioritization.
+    Integrates with policer HTB if both are enabled, otherwise uses standalone prio qdisc."""
+    if not pids:
+        print("[ORC] Scheduler skipped: no host PID map found (run topology first)")
+        return
+
+    if not _has_command("mnexec"):
+        print("[ORC] Scheduler skipped: 'mnexec' not found on system")
+        return
+
+    is_root = (os.geteuid() == 0)
+    tos_stream = (46 << 2)  # DSCP 46 for RTP/VoIP
+
+    for host, pid in pids.items():
+        iface = f"{host}-eth0"
+        
+        if policer_enabled:
+            # Policer already set up HTB - just add prio scheduling to the high-priority class
+            # Replace the default pfifo_fast on class 1:10 (streaming) with prio qdisc
+            cmds = [
+                # Add prio qdisc to the high-priority streaming class (1:10)
+                f"tc qdisc add dev {{iface}} parent 1:10 handle 10: prio bands {SCHEDULER_BANDS}",
+            ]
+            
+            # Add DSCP filters to map traffic to priority bands within the high-priority class
+            prio_counter = 1
+            for name, dscp, band in SCHEDULER_CLASSES:
+                tos_val = (dscp << 2) & 0xff
+                flowid = f"10:{band + 1}"
+                cmds.append(
+                    f"tc filter add dev {{iface}} parent 10: protocol ip prio {prio_counter} "
+                    f"u32 match ip tos {tos_val} 0xff flowid {flowid}"
+                )
+                prio_counter += 1
+            
+            print(f"[ORC] Applying scheduling on {host} ({iface}) - integrated with policer")
+        else:
+            # No policer - set up standalone prio qdisc on root
+            cmds = [
+                "tc qdisc del dev {iface} root || true",
+                f"tc qdisc add dev {{iface}} root handle 1: prio bands {SCHEDULER_BANDS}",
+            ]
+            
+            # Add DSCP filters to map traffic to priority bands
+            prio_counter = 1
+            for name, dscp, band in SCHEDULER_CLASSES:
+                tos_val = (dscp << 2) & 0xff
+                flowid = f"1:{band + 1}"
+                cmds.append(
+                    f"tc filter add dev {{iface}} parent 1: protocol ip prio {prio_counter} "
+                    f"u32 match ip tos {tos_val} 0xff flowid {flowid}"
+                )
+                prio_counter += 1
+            
+            print(f"[ORC] Applying scheduling on {host} ({iface}) - standalone mode")
+        
+        joined = "; ".join(cmds).format(iface=iface)
+        base = "mnexec" if is_root else "sudo mnexec"
+        full_cmd = f"{base} -a {pid} sh -c \"{joined}\""
+        try:
+            proc = subprocess.run(full_cmd, shell=True, capture_output=True, text=True, timeout=10)
+            if proc.returncode != 0:
+                print(f"[ORC] Scheduling failed on {host}: {proc.stderr.strip()}")
+        except subprocess.TimeoutExpired:
+            print(f"[ORC] Scheduling timed out on {host}")
+
 def detect_bridges():
     """
     Prefer OVS bridges via ovs-vsctl; fallback to sysfs heuristic (s[0-9]+).
@@ -219,8 +286,15 @@ def main(argv=None):
 
     # Apply host-level policing inside namespaces (safe for OVS) only if policer enabled
     host_pids = load_host_pids()
-    if "policer" in enabled:
+    policer_enabled = "policer" in enabled
+    
+    if policer_enabled:
         apply_host_policing(host_pids)
+    
+    # Apply host-level scheduling inside namespaces for traffic prioritization
+    # Integrates with policer if both are enabled
+    if "scheduler" in enabled and ENABLE_SCHEDULER:
+        apply_host_scheduling(host_pids, policer_enabled)
 
     # --- CLASSIFIER (DSCP Marking) ---
     if "classifier" in enabled:
@@ -240,14 +314,8 @@ def main(argv=None):
             print(f"[ORC] Firewall enabled but rules file not found: {FIREWALL_RULES_FILE}")
 
     # --- SCHEDULER (Priority Queueing) ---
-    if "scheduler" in enabled and ENABLE_SCHEDULER:
-        # Attach scheduler to each host-facing interface for traffic prioritization
-        for br, ifaces in bridge_ifaces.items():
-            for iface in ifaces:
-                class_args = " ".join([f"-c {c[0]}:{c[1]}:{c[2]}" for c in SCHEDULER_CLASSES])
-                cmd = f"python3 scheduler.py --interface {iface} --bands {SCHEDULER_BANDS} {class_args}"
-                p = run(cmd)
-                VNFS.append(p)
+    # Scheduler is now applied directly to host interfaces via apply_host_scheduling()
+    # No separate scheduler.py VNF process needed when using host namespace approach
 
     # --- POLICER (Rate Limiting) ---
     # Only run if we have host-facing interfaces; skip silently otherwise to avoid breaking OVS forwarding.
@@ -315,10 +383,11 @@ def main(argv=None):
     # --- KEEP ORCHESTRATOR RUNNING ---
     def handle_sig(signum, frame):
         print("[ORC] Stopping all VNFs...")
-        # Clean host policing to restore link defaults when policer had been enabled
-        if "policer" in enabled:
+        # Clean host policing/scheduling to restore link defaults
+        pids = load_host_pids()
+        if "policer" in enabled or "scheduler" in enabled:
             try:
-                cleanup_host_policing(load_host_pids())
+                cleanup_host_policing(pids)
             except Exception:
                 pass
         terminate_vnfs()

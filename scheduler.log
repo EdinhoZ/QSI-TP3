@@ -2921,3 +2921,1865 @@ stderr=Error: Cannot delete qdisc with handle of zero.
 10:33:07 INFO: Cleared root qdisc on s3-eth1
 10:33:07 INFO: Cleared root qdisc on s1-eth3
 10:33:07 INFO: Cleared root qdisc on s1-eth2
+13:00:22 INFO: Starting scheduler on s2-eth1 with 3 bands
+13:00:22 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:00:22 INFO: Starting scheduler on s1-eth4 with 3 bands
+13:00:22 INFO: Starting scheduler on s2-eth3 with 3 bands
+13:00:22 INFO: Starting scheduler on s4-eth1 with 3 bands
+13:00:22 INFO: Starting scheduler on s4-eth2 with 3 bands
+13:00:22 ERROR: Command failed: tc qdisc del dev s2-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:00:22 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:00:22 INFO: Starting scheduler on s3-eth2 with 3 bands
+13:00:23 INFO: Installed prio qdisc on s2-eth1 with 3 bands
+13:00:23 INFO: Starting scheduler on s3-eth1 with 3 bands
+13:00:23 ERROR: Command failed: tc qdisc del dev s1-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:00:23 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:00:23 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:00:23 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:00:23 INFO: Starting scheduler on s1-eth1 with 3 bands
+13:00:23 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:00:23 ERROR: Command failed: tc qdisc del dev s2-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:00:23 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:00:23 INFO: Installed flower filter on s2-eth1: DSCP=46 -> band=0 (flowid=1:1)
+13:00:23 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:00:23 INFO: Installed prio qdisc on s1-eth4 with 3 bands
+13:00:23 ERROR: Command failed: tc qdisc del dev s4-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:00:23 INFO: Starting scheduler on s3-eth3 with 3 bands
+13:00:23 ERROR: Command failed: tc qdisc del dev s4-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:00:24 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:00:24 ERROR: Command failed: tc qdisc del dev s3-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:00:24 ERROR: Command failed: tc qdisc del dev s1-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:00:24 INFO: Installed prio qdisc on s2-eth3 with 3 bands
+13:00:24 INFO: Installed flower filter on s2-eth1: DSCP=34 -> band=1 (flowid=1:2)
+13:00:24 INFO: Starting scheduler on s1-eth3 with 3 bands
+13:00:24 INFO: Installed prio qdisc on s4-eth1 with 3 bands
+13:00:24 INFO: Installed flower filter on s1-eth4: DSCP=46 -> band=0 (flowid=1:1)
+13:00:24 ERROR: Command failed: tc qdisc del dev s3-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:00:24 INFO: Installed prio qdisc on s4-eth2 with 3 bands
+13:00:24 INFO: Starting scheduler on s4-eth3 with 3 bands
+13:00:24 INFO: Starting scheduler on s1-eth2 with 3 bands
+13:00:24 INFO: Installed flower filter on s2-eth3: DSCP=46 -> band=0 (flowid=1:1)
+13:00:24 INFO: Installed flower filter on s2-eth1: DSCP=0 -> band=2 (flowid=1:3)
+13:00:24 INFO: Scheduler installed. Running.
+13:00:24 INFO: Installed prio qdisc on s3-eth2 with 3 bands
+13:00:24 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:00:24 INFO: Installed prio qdisc on s1-eth1 with 3 bands
+13:00:24 INFO: Installed flower filter on s4-eth1: DSCP=46 -> band=0 (flowid=1:1)
+13:00:24 INFO: Installed flower filter on s1-eth4: DSCP=34 -> band=1 (flowid=1:2)
+13:00:24 INFO: Installed prio qdisc on s3-eth1 with 3 bands
+13:00:24 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:00:24 INFO: Starting scheduler on s3-eth4 with 3 bands
+13:00:24 INFO: Installed flower filter on s4-eth2: DSCP=46 -> band=0 (flowid=1:1)
+13:00:24 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:00:24 INFO: Starting scheduler on s2-eth2 with 3 bands
+13:00:24 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:00:24 INFO: Installed flower filter on s4-eth1: DSCP=34 -> band=1 (flowid=1:2)
+13:00:24 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:00:24 INFO: Installed flower filter on s2-eth3: DSCP=34 -> band=1 (flowid=1:2)
+13:00:24 INFO: Installed flower filter on s1-eth1: DSCP=46 -> band=0 (flowid=1:1)
+13:00:24 INFO: Installed flower filter on s3-eth2: DSCP=46 -> band=0 (flowid=1:1)
+13:00:25 INFO: Installed flower filter on s3-eth1: DSCP=46 -> band=0 (flowid=1:1)
+13:00:25 ERROR: Command failed: tc qdisc del dev s1-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:00:25 ERROR: Command failed: tc qdisc del dev s1-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:00:25 INFO: Installed flower filter on s4-eth2: DSCP=34 -> band=1 (flowid=1:2)
+13:00:25 INFO: Installed flower filter on s1-eth4: DSCP=0 -> band=2 (flowid=1:3)
+13:00:25 ERROR: Command failed: tc qdisc del dev s4-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:00:25 INFO: Installed flower filter on s4-eth1: DSCP=0 -> band=2 (flowid=1:3)
+13:00:25 INFO: Installed flower filter on s3-eth2: DSCP=34 -> band=1 (flowid=1:2)
+13:00:25 INFO: Installed flower filter on s1-eth1: DSCP=34 -> band=1 (flowid=1:2)
+13:00:25 ERROR: Command failed: tc qdisc del dev s3-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:00:25 INFO: Installed flower filter on s3-eth1: DSCP=34 -> band=1 (flowid=1:2)
+13:00:25 INFO: Installed prio qdisc on s1-eth2 with 3 bands
+13:00:25 INFO: Scheduler installed. Running.
+13:00:25 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:00:25 INFO: Scheduler installed. Running.
+13:00:25 INFO: Installed prio qdisc on s3-eth3 with 3 bands
+13:00:25 INFO: Installed prio qdisc on s3-eth4 with 3 bands
+13:00:25 INFO: Installed prio qdisc on s1-eth3 with 3 bands
+13:00:25 INFO: Installed flower filter on s3-eth2: DSCP=0 -> band=2 (flowid=1:3)
+13:00:25 INFO: Scheduler installed. Running.
+13:00:25 INFO: Installed prio qdisc on s4-eth3 with 3 bands
+13:00:25 INFO: Installed flower filter on s2-eth3: DSCP=0 -> band=2 (flowid=1:3)
+13:00:25 INFO: Installed flower filter on s4-eth2: DSCP=0 -> band=2 (flowid=1:3)
+13:00:25 INFO: Installed flower filter on s1-eth1: DSCP=0 -> band=2 (flowid=1:3)
+13:00:25 INFO: Scheduler installed. Running.
+13:00:25 INFO: Scheduler installed. Running.
+13:00:25 INFO: Scheduler installed. Running.
+13:00:26 INFO: Installed flower filter on s3-eth4: DSCP=46 -> band=0 (flowid=1:1)
+13:00:26 INFO: Installed flower filter on s3-eth3: DSCP=46 -> band=0 (flowid=1:1)
+13:00:26 INFO: Installed flower filter on s4-eth3: DSCP=46 -> band=0 (flowid=1:1)
+13:00:26 INFO: Installed flower filter on s1-eth3: DSCP=46 -> band=0 (flowid=1:1)
+13:00:26 INFO: Installed flower filter on s3-eth1: DSCP=0 -> band=2 (flowid=1:3)
+13:00:26 ERROR: Command failed: tc qdisc del dev s2-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:00:26 INFO: Installed flower filter on s1-eth2: DSCP=46 -> band=0 (flowid=1:1)
+13:00:26 INFO: Scheduler installed. Running.
+13:00:26 INFO: Installed flower filter on s3-eth4: DSCP=34 -> band=1 (flowid=1:2)
+13:00:26 INFO: Installed flower filter on s4-eth3: DSCP=34 -> band=1 (flowid=1:2)
+13:00:26 INFO: Installed flower filter on s3-eth3: DSCP=34 -> band=1 (flowid=1:2)
+13:00:26 INFO: Installed flower filter on s1-eth3: DSCP=34 -> band=1 (flowid=1:2)
+13:00:26 ERROR: Command failed: tc filter add dev s1-eth2 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+13:00:26 INFO: Installed prio qdisc on s2-eth2 with 3 bands
+13:00:26 INFO: Installed flower filter on s3-eth4: DSCP=0 -> band=2 (flowid=1:3)
+13:00:26 INFO: Scheduler installed. Running.
+13:00:26 INFO: Installed flower filter on s3-eth3: DSCP=0 -> band=2 (flowid=1:3)
+13:00:26 INFO: Scheduler installed. Running.
+13:00:26 INFO: Installed flower filter on s4-eth3: DSCP=0 -> band=2 (flowid=1:3)
+13:00:26 INFO: Scheduler installed. Running.
+13:00:27 ERROR: Command failed: tc filter add dev s1-eth3 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+13:00:27 INFO: Installed flower filter on s2-eth2: DSCP=46 -> band=0 (flowid=1:1)
+13:00:27 ERROR: Command failed: tc filter add dev s1-eth2 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2
+rc=2
+stdout=
+stderr=Error: Parent Qdisc doesn't exists.
+We have an error talking to the kernel
+
+13:00:27 ERROR: failed to map class video (DSCP 34) to band 1: Command 'tc filter add dev s1-eth2 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 165, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 118, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s1-eth2 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+13:00:27 INFO: Installed flower filter on s2-eth2: DSCP=34 -> band=1 (flowid=1:2)
+13:00:27 INFO: Installed u32 filter on s1-eth3: DSCP=0 -> band=2 (flowid=1:3)
+13:00:27 INFO: Scheduler installed. Running.
+13:00:27 INFO: Installed flower filter on s1-eth2: DSCP=0 -> band=2 (flowid=1:3)
+13:00:27 INFO: Scheduler installed. Running.
+13:00:27 INFO: Installed flower filter on s2-eth2: DSCP=0 -> band=2 (flowid=1:3)
+13:00:27 INFO: Scheduler installed. Running.
+13:01:10 INFO: Stopping scheduler and cleaning qdisc...
+13:01:10 INFO: Stopping scheduler and cleaning qdisc...
+13:01:10 INFO: Stopping scheduler and cleaning qdisc...
+13:01:10 INFO: Stopping scheduler and cleaning qdisc...
+13:01:10 INFO: Stopping scheduler and cleaning qdisc...
+13:01:10 INFO: Stopping scheduler and cleaning qdisc...
+13:01:10 INFO: Stopping scheduler and cleaning qdisc...
+13:01:10 INFO: Stopping scheduler and cleaning qdisc...
+13:01:10 INFO: Stopping scheduler and cleaning qdisc...
+13:01:10 INFO: Stopping scheduler and cleaning qdisc...
+13:01:10 INFO: Stopping scheduler and cleaning qdisc...
+13:01:10 INFO: Stopping scheduler and cleaning qdisc...
+13:01:10 INFO: Stopping scheduler and cleaning qdisc...
+13:01:10 INFO: Stopping scheduler and cleaning qdisc...
+13:01:11 INFO: Cleared root qdisc on s3-eth4
+13:01:11 INFO: Cleared root qdisc on s3-eth2
+13:01:11 INFO: Cleared root qdisc on s4-eth3
+13:01:11 INFO: Cleared root qdisc on s4-eth2
+13:01:11 INFO: Cleared root qdisc on s2-eth2
+13:01:11 INFO: Cleared root qdisc on s1-eth4
+13:01:11 INFO: Cleared root qdisc on s3-eth3
+13:01:11 INFO: Cleared root qdisc on s4-eth1
+13:01:11 INFO: Cleared root qdisc on s1-eth2
+13:01:11 INFO: Cleared root qdisc on s2-eth1
+13:01:11 INFO: Cleared root qdisc on s3-eth1
+13:01:11 INFO: Cleared root qdisc on s1-eth3
+13:01:11 INFO: Cleared root qdisc on s1-eth1
+13:01:11 INFO: Cleared root qdisc on s2-eth3
+13:03:01 INFO: Starting scheduler on s1-eth1 with 3 bands
+13:03:01 INFO: Starting scheduler on s2-eth2 with 3 bands
+13:03:01 INFO: Starting scheduler on s1-eth2 with 3 bands
+13:03:01 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:03:02 ERROR: Command failed: tc qdisc del dev s1-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:03:02 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:03:02 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:03:02 INFO: Starting scheduler on s2-eth1 with 3 bands
+13:03:02 INFO: Starting scheduler on s3-eth4 with 3 bands
+13:03:02 INFO: Starting scheduler on s1-eth3 with 3 bands
+13:03:02 INFO: Starting scheduler on s4-eth2 with 3 bands
+13:03:02 INFO: Starting scheduler on s3-eth1 with 3 bands
+13:03:02 INFO: Starting scheduler on s3-eth2 with 3 bands
+13:03:02 ERROR: Command failed: tc qdisc del dev s1-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:03:02 INFO: Installed prio qdisc on s1-eth1 with 3 bands
+13:03:02 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:03:02 ERROR: Command failed: tc qdisc del dev s2-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:03:02 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:03:02 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:03:02 INFO: Starting scheduler on s1-eth4 with 3 bands
+13:03:02 INFO: Starting scheduler on s4-eth3 with 3 bands
+13:03:02 INFO: Starting scheduler on s2-eth3 with 3 bands
+13:03:02 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:03:02 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:03:02 ERROR: Command failed: tc qdisc del dev s3-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:03:02 INFO: Installed prio qdisc on s1-eth2 with 3 bands
+13:03:02 INFO: Installed prio qdisc on s2-eth2 with 3 bands
+13:03:02 INFO: Installed flower filter on s1-eth1: DSCP=46 -> band=0 (flowid=1:1)
+13:03:02 ERROR: Command failed: tc qdisc del dev s1-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:03:02 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:03:03 INFO: Starting scheduler on s3-eth3 with 3 bands
+13:03:03 ERROR: Command failed: tc qdisc del dev s4-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:03:03 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:03:03 INFO: Starting scheduler on s4-eth1 with 3 bands
+13:03:03 ERROR: Command failed: tc qdisc del dev s3-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:03:03 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:03:03 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:03:03 ERROR: Command failed: tc qdisc del dev s3-eth2 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:03:03 INFO: Installed prio qdisc on s3-eth4 with 3 bands
+13:03:03 INFO: Installed flower filter on s2-eth2: DSCP=46 -> band=0 (flowid=1:1)
+13:03:03 INFO: Installed flower filter on s1-eth1: DSCP=34 -> band=1 (flowid=1:2)
+13:03:03 ERROR: Command failed: tc qdisc del dev s2-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:03:03 INFO: Installed flower filter on s1-eth2: DSCP=46 -> band=0 (flowid=1:1)
+13:03:03 INFO: Installed prio qdisc on s1-eth3 with 3 bands
+13:03:03 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:03:03 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:03:03 INFO: Installed prio qdisc on s4-eth2 with 3 bands
+13:03:03 INFO: Installed prio qdisc on s3-eth1 with 3 bands
+13:03:03 INFO: Installed prio qdisc on s3-eth2 with 3 bands
+13:03:03 ERROR: Command failed: tc qdisc del dev s4-eth1 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:03:03 ERROR: Command failed: tc qdisc del dev s1-eth4 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:03:03 ERROR: Command failed: tc qdisc del dev s2-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:03:03 INFO: Installed flower filter on s2-eth2: DSCP=34 -> band=1 (flowid=1:2)
+13:03:03 INFO: Installed flower filter on s3-eth4: DSCP=46 -> band=0 (flowid=1:1)
+13:03:03 INFO: Installed flower filter on s1-eth1: DSCP=0 -> band=2 (flowid=1:3)
+13:03:03 INFO: Scheduler installed. Running.
+13:03:03 INFO: Installed prio qdisc on s2-eth1 with 3 bands
+13:03:03 ERROR: Command failed: tc qdisc del dev s3-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:03:03 INFO: Installed flower filter on s1-eth3: DSCP=46 -> band=0 (flowid=1:1)
+13:03:03 INFO: Installed flower filter on s1-eth2: DSCP=34 -> band=1 (flowid=1:2)
+13:03:03 INFO: Installed flower filter on s4-eth2: DSCP=46 -> band=0 (flowid=1:1)
+13:03:03 ERROR: Command failed: tc qdisc del dev s4-eth3 root
+rc=2
+stdout=
+stderr=Error: Cannot delete qdisc with handle of zero.
+
+13:03:04 INFO: Installed flower filter on s3-eth2: DSCP=46 -> band=0 (flowid=1:1)
+13:03:04 INFO: Installed flower filter on s3-eth1: DSCP=46 -> band=0 (flowid=1:1)
+13:03:04 INFO: Installed flower filter on s2-eth2: DSCP=0 -> band=2 (flowid=1:3)
+13:03:04 INFO: Scheduler installed. Running.
+13:03:04 INFO: Installed prio qdisc on s4-eth1 with 3 bands
+13:03:04 INFO: Installed prio qdisc on s1-eth4 with 3 bands
+13:03:04 INFO: Installed prio qdisc on s2-eth3 with 3 bands
+13:03:04 INFO: Installed flower filter on s2-eth1: DSCP=46 -> band=0 (flowid=1:1)
+13:03:04 INFO: Installed flower filter on s3-eth4: DSCP=34 -> band=1 (flowid=1:2)
+13:03:04 INFO: Installed prio qdisc on s3-eth3 with 3 bands
+13:03:04 INFO: Installed flower filter on s1-eth3: DSCP=34 -> band=1 (flowid=1:2)
+13:03:04 INFO: Installed flower filter on s1-eth2: DSCP=0 -> band=2 (flowid=1:3)
+13:03:04 INFO: Scheduler installed. Running.
+13:03:04 INFO: Installed flower filter on s4-eth2: DSCP=34 -> band=1 (flowid=1:2)
+13:03:04 INFO: Installed prio qdisc on s4-eth3 with 3 bands
+13:03:04 INFO: Installed flower filter on s3-eth2: DSCP=34 -> band=1 (flowid=1:2)
+13:03:04 INFO: Installed flower filter on s1-eth4: DSCP=46 -> band=0 (flowid=1:1)
+13:03:04 INFO: Installed flower filter on s3-eth1: DSCP=34 -> band=1 (flowid=1:2)
+13:03:04 INFO: Installed flower filter on s4-eth2: DSCP=0 -> band=2 (flowid=1:3)
+13:03:04 INFO: Scheduler installed. Running.
+13:03:04 INFO: Installed flower filter on s3-eth3: DSCP=46 -> band=0 (flowid=1:1)
+13:03:04 INFO: Installed flower filter on s1-eth3: DSCP=0 -> band=2 (flowid=1:3)
+13:03:04 INFO: Scheduler installed. Running.
+13:03:04 INFO: Installed flower filter on s2-eth3: DSCP=46 -> band=0 (flowid=1:1)
+13:03:04 INFO: Installed flower filter on s3-eth4: DSCP=0 -> band=2 (flowid=1:3)
+13:03:04 INFO: Scheduler installed. Running.
+13:03:04 INFO: Installed flower filter on s4-eth1: DSCP=46 -> band=0 (flowid=1:1)
+13:03:05 INFO: Installed flower filter on s2-eth1: DSCP=34 -> band=1 (flowid=1:2)
+13:03:05 INFO: Installed flower filter on s4-eth3: DSCP=46 -> band=0 (flowid=1:1)
+13:03:05 INFO: Installed flower filter on s3-eth2: DSCP=0 -> band=2 (flowid=1:3)
+13:03:05 INFO: Scheduler installed. Running.
+13:03:05 INFO: Installed flower filter on s1-eth4: DSCP=34 -> band=1 (flowid=1:2)
+13:03:05 INFO: Installed flower filter on s3-eth1: DSCP=0 -> band=2 (flowid=1:3)
+13:03:05 INFO: Scheduler installed. Running.
+13:03:05 INFO: Installed flower filter on s2-eth3: DSCP=34 -> band=1 (flowid=1:2)
+13:03:05 INFO: Installed flower filter on s3-eth3: DSCP=34 -> band=1 (flowid=1:2)
+13:03:05 INFO: Installed flower filter on s4-eth1: DSCP=34 -> band=1 (flowid=1:2)
+13:03:05 INFO: Installed flower filter on s4-eth3: DSCP=34 -> band=1 (flowid=1:2)
+13:03:05 INFO: Installed flower filter on s2-eth1: DSCP=0 -> band=2 (flowid=1:3)
+13:03:05 INFO: Scheduler installed. Running.
+13:03:05 INFO: Installed flower filter on s1-eth4: DSCP=0 -> band=2 (flowid=1:3)
+13:03:05 INFO: Scheduler installed. Running.
+13:03:05 INFO: Installed flower filter on s2-eth3: DSCP=0 -> band=2 (flowid=1:3)
+13:03:05 INFO: Scheduler installed. Running.
+13:03:05 INFO: Installed flower filter on s3-eth3: DSCP=0 -> band=2 (flowid=1:3)
+13:03:05 INFO: Scheduler installed. Running.
+13:03:05 INFO: Installed flower filter on s4-eth1: DSCP=0 -> band=2 (flowid=1:3)
+13:03:05 INFO: Installed flower filter on s4-eth3: DSCP=0 -> band=2 (flowid=1:3)
+13:03:05 INFO: Scheduler installed. Running.
+13:03:05 INFO: Scheduler installed. Running.
+13:04:13 INFO: Stopping scheduler and cleaning qdisc...
+13:04:13 INFO: Stopping scheduler and cleaning qdisc...
+13:04:13 INFO: Stopping scheduler and cleaning qdisc...
+13:04:13 INFO: Stopping scheduler and cleaning qdisc...
+13:04:13 INFO: Stopping scheduler and cleaning qdisc...
+13:04:13 INFO: Stopping scheduler and cleaning qdisc...
+13:04:13 INFO: Stopping scheduler and cleaning qdisc...
+13:04:13 INFO: Stopping scheduler and cleaning qdisc...
+13:04:13 INFO: Stopping scheduler and cleaning qdisc...
+13:04:13 INFO: Stopping scheduler and cleaning qdisc...
+13:04:13 INFO: Stopping scheduler and cleaning qdisc...
+13:04:13 INFO: Stopping scheduler and cleaning qdisc...
+13:04:13 INFO: Stopping scheduler and cleaning qdisc...
+13:04:13 INFO: Stopping scheduler and cleaning qdisc...
+13:04:13 INFO: Cleared root qdisc on s1-eth2
+13:04:13 INFO: Cleared root qdisc on s4-eth2
+13:04:13 INFO: Cleared root qdisc on s2-eth3
+13:04:13 INFO: Cleared root qdisc on s3-eth1
+13:04:13 INFO: Cleared root qdisc on s2-eth2
+13:04:13 INFO: Cleared root qdisc on s1-eth4
+13:04:13 INFO: Cleared root qdisc on s3-eth4
+13:04:13 INFO: Cleared root qdisc on s4-eth3
+13:04:13 INFO: Cleared root qdisc on s2-eth1
+13:04:13 INFO: Cleared root qdisc on s1-eth3
+13:04:13 INFO: Cleared root qdisc on s3-eth2
+13:04:13 INFO: Cleared root qdisc on s1-eth1
+13:04:13 INFO: Cleared root qdisc on s3-eth3
+13:04:14 INFO: Cleared root qdisc on s4-eth1
+13:09:15 INFO: Starting scheduler on s1-eth3 with 3 bands
+13:09:15 INFO: Starting scheduler on s1-eth1 with 3 bands
+13:09:15 INFO: Starting scheduler on s1-eth2 with 3 bands
+13:09:15 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:09:15 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:09:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:09:16 INFO: Starting scheduler on s2-eth1 with 3 bands
+13:09:16 INFO: Starting scheduler on s3-eth1 with 3 bands
+13:09:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:09:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:09:16 INFO: Starting scheduler on s3-eth4 with 3 bands
+13:09:16 INFO: Starting scheduler on s4-eth3 with 3 bands
+13:09:16 INFO: Starting scheduler on s2-eth3 with 3 bands
+13:09:16 INFO: Starting scheduler on s3-eth3 with 3 bands
+13:09:16 INFO: Starting scheduler on s3-eth2 with 3 bands
+13:09:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:09:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:09:16 INFO: Installed prio qdisc on s1-eth2 with 3 bands
+13:09:16 INFO: Installed prio qdisc on s1-eth1 with 3 bands
+13:09:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:09:16 INFO: Installed prio qdisc on s1-eth3 with 3 bands
+13:09:16 INFO: Installed prio qdisc on s2-eth1 with 3 bands
+13:09:16 INFO: Starting scheduler on s1-eth4 with 3 bands
+13:09:17 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:09:17 INFO: Starting scheduler on s2-eth2 with 3 bands
+13:09:17 INFO: Starting scheduler on s4-eth2 with 3 bands
+13:09:17 INFO: Starting scheduler on s4-eth1 with 3 bands
+13:09:17 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:09:17 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:09:17 INFO: Installed prio qdisc on s3-eth1 with 3 bands
+13:09:17 INFO: Installed flower filter on s1-eth2: DSCP=46 -> band=0 (flowid=1:1)
+13:09:17 INFO: Installed flower filter on s2-eth1: DSCP=46 -> band=0 (flowid=1:1)
+13:09:17 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:09:17 INFO: Installed flower filter on s1-eth3: DSCP=46 -> band=0 (flowid=1:1)
+13:09:17 INFO: Installed flower filter on s1-eth1: DSCP=46 -> band=0 (flowid=1:1)
+13:09:17 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:09:17 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:09:17 INFO: Installed prio qdisc on s3-eth4 with 3 bands
+13:09:17 INFO: Installed flower filter on s3-eth1: DSCP=46 -> band=0 (flowid=1:1)
+13:09:18 INFO: Installed prio qdisc on s2-eth3 with 3 bands
+13:09:18 INFO: Installed flower filter on s2-eth1: DSCP=34 -> band=1 (flowid=1:2)
+13:09:18 INFO: Installed prio qdisc on s3-eth3 with 3 bands
+13:09:18 INFO: Installed flower filter on s1-eth2: DSCP=34 -> band=1 (flowid=1:2)
+13:09:18 INFO: Installed flower filter on s1-eth3: DSCP=34 -> band=1 (flowid=1:2)
+13:09:18 INFO: Installed flower filter on s1-eth1: DSCP=34 -> band=1 (flowid=1:2)
+13:09:18 INFO: Installed prio qdisc on s1-eth4 with 3 bands
+13:09:18 INFO: Installed prio qdisc on s3-eth2 with 3 bands
+13:09:18 INFO: Installed prio qdisc on s2-eth2 with 3 bands
+13:09:18 INFO: Installed flower filter on s3-eth4: DSCP=46 -> band=0 (flowid=1:1)
+13:09:18 INFO: Installed flower filter on s2-eth3: DSCP=46 -> band=0 (flowid=1:1)
+13:09:18 INFO: Installed flower filter on s3-eth1: DSCP=34 -> band=1 (flowid=1:2)
+13:09:18 INFO: Installed flower filter on s2-eth1: DSCP=0 -> band=2 (flowid=1:3)
+13:09:18 INFO: Installed flower filter on s3-eth3: DSCP=46 -> band=0 (flowid=1:1)
+13:09:18 INFO: Scheduler installed. Running.
+13:09:18 INFO: Installed flower filter on s1-eth2: DSCP=0 -> band=2 (flowid=1:3)
+13:09:18 INFO: Scheduler installed. Running.
+13:09:18 INFO: Installed prio qdisc on s4-eth3 with 3 bands
+13:09:18 INFO: Installed prio qdisc on s4-eth1 with 3 bands
+13:09:18 INFO: Installed flower filter on s1-eth3: DSCP=0 -> band=2 (flowid=1:3)
+13:09:18 INFO: Installed flower filter on s1-eth4: DSCP=46 -> band=0 (flowid=1:1)
+13:09:18 INFO: Installed flower filter on s1-eth1: DSCP=0 -> band=2 (flowid=1:3)
+13:09:18 INFO: Scheduler installed. Running.
+13:09:18 INFO: Scheduler installed. Running.
+13:09:18 INFO: Installed flower filter on s3-eth2: DSCP=46 -> band=0 (flowid=1:1)
+13:09:18 INFO: Installed prio qdisc on s4-eth2 with 3 bands
+13:09:18 INFO: Installed flower filter on s3-eth4: DSCP=34 -> band=1 (flowid=1:2)
+13:09:18 INFO: Installed flower filter on s2-eth2: DSCP=46 -> band=0 (flowid=1:1)
+13:09:18 INFO: Installed flower filter on s2-eth3: DSCP=34 -> band=1 (flowid=1:2)
+13:09:18 INFO: Installed flower filter on s3-eth1: DSCP=0 -> band=2 (flowid=1:3)
+13:09:18 INFO: Scheduler installed. Running.
+13:09:18 INFO: Installed flower filter on s3-eth3: DSCP=34 -> band=1 (flowid=1:2)
+13:09:18 INFO: Installed flower filter on s4-eth3: DSCP=46 -> band=0 (flowid=1:1)
+13:09:19 INFO: Installed flower filter on s4-eth1: DSCP=46 -> band=0 (flowid=1:1)
+13:09:19 INFO: Installed flower filter on s3-eth2: DSCP=34 -> band=1 (flowid=1:2)
+13:09:19 INFO: Installed flower filter on s1-eth4: DSCP=34 -> band=1 (flowid=1:2)
+13:09:19 INFO: Installed flower filter on s4-eth2: DSCP=46 -> band=0 (flowid=1:1)
+13:09:19 INFO: Installed flower filter on s2-eth2: DSCP=34 -> band=1 (flowid=1:2)
+13:09:19 INFO: Installed flower filter on s2-eth3: DSCP=0 -> band=2 (flowid=1:3)
+13:09:19 INFO: Scheduler installed. Running.
+13:09:19 INFO: Installed flower filter on s3-eth3: DSCP=0 -> band=2 (flowid=1:3)
+13:09:19 INFO: Scheduler installed. Running.
+13:09:19 INFO: Installed flower filter on s3-eth4: DSCP=0 -> band=2 (flowid=1:3)
+13:09:19 INFO: Scheduler installed. Running.
+13:09:19 INFO: Installed flower filter on s4-eth3: DSCP=34 -> band=1 (flowid=1:2)
+13:09:19 INFO: Installed flower filter on s2-eth2: DSCP=0 -> band=2 (flowid=1:3)
+13:09:19 INFO: Scheduler installed. Running.
+13:09:19 INFO: Installed flower filter on s1-eth4: DSCP=0 -> band=2 (flowid=1:3)
+13:09:19 INFO: Scheduler installed. Running.
+13:09:19 INFO: Installed flower filter on s4-eth2: DSCP=34 -> band=1 (flowid=1:2)
+13:09:19 INFO: Installed flower filter on s3-eth2: DSCP=0 -> band=2 (flowid=1:3)
+13:09:19 INFO: Scheduler installed. Running.
+13:09:19 INFO: Installed flower filter on s4-eth1: DSCP=34 -> band=1 (flowid=1:2)
+13:09:19 INFO: Installed flower filter on s4-eth3: DSCP=0 -> band=2 (flowid=1:3)
+13:09:19 INFO: Scheduler installed. Running.
+13:09:19 INFO: Installed flower filter on s4-eth2: DSCP=0 -> band=2 (flowid=1:3)
+13:09:19 INFO: Scheduler installed. Running.
+13:09:19 INFO: Installed flower filter on s4-eth1: DSCP=0 -> band=2 (flowid=1:3)
+13:09:19 INFO: Scheduler installed. Running.
+13:09:28 INFO: Stopping scheduler and cleaning qdisc...
+13:09:28 INFO: Stopping scheduler and cleaning qdisc...
+13:09:28 INFO: Stopping scheduler and cleaning qdisc...
+13:09:28 INFO: Stopping scheduler and cleaning qdisc...
+13:09:28 INFO: Stopping scheduler and cleaning qdisc...
+13:09:28 INFO: Stopping scheduler and cleaning qdisc...
+13:09:28 INFO: Stopping scheduler and cleaning qdisc...
+13:09:28 INFO: Stopping scheduler and cleaning qdisc...
+13:09:28 INFO: Stopping scheduler and cleaning qdisc...
+13:09:28 INFO: Stopping scheduler and cleaning qdisc...
+13:09:28 INFO: Stopping scheduler and cleaning qdisc...
+13:09:28 INFO: Stopping scheduler and cleaning qdisc...
+13:09:28 INFO: Stopping scheduler and cleaning qdisc...
+13:09:28 INFO: Stopping scheduler and cleaning qdisc...
+13:11:22 INFO: Starting scheduler on s1-eth3 with 3 bands
+13:11:22 INFO: Starting scheduler on s3-eth4 with 3 bands
+13:11:22 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:11:23 INFO: Starting scheduler on s2-eth2 with 3 bands
+13:11:23 INFO: Starting scheduler on s1-eth1 with 3 bands
+13:11:23 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:11:23 INFO: Starting scheduler on s1-eth4 with 3 bands
+13:11:23 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:11:23 INFO: Starting scheduler on s2-eth3 with 3 bands
+13:11:23 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:11:23 ERROR: Command failed: tc qdisc add dev s1-eth3 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:11:23 INFO: Starting scheduler on s1-eth2 with 3 bands
+13:11:23 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:11:23 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:11:23 INFO: Starting scheduler on s3-eth1 with 3 bands
+13:11:23 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:11:23 INFO: Starting scheduler on s2-eth1 with 3 bands
+13:11:23 INFO: Starting scheduler on s3-eth3 with 3 bands
+13:11:24 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:11:24 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:11:24 ERROR: Command failed: tc qdisc add dev s3-eth4 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:11:23 INFO: Starting scheduler on s3-eth2 with 3 bands
+13:11:24 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:11:24 ERROR: Command failed: tc qdisc add dev s1-eth4 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:11:24 ERROR: Command failed: tc qdisc add dev s2-eth2 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:11:24 ERROR: Command failed: tc qdisc add dev s2-eth3 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:11:24 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:11:24 ERROR: Command failed: tc qdisc add dev s1-eth2 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:11:24 INFO: Starting scheduler on s4-eth3 with 3 bands
+13:11:24 ERROR: Command failed: tc qdisc add dev s1-eth1 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:11:25 INFO: Starting scheduler on s4-eth2 with 3 bands
+13:11:25 ERROR: Command failed: tc qdisc add dev s3-eth3 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:11:25 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:11:25 ERROR: Command failed: tc qdisc add dev s3-eth2 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:11:25 ERROR: Command failed: tc qdisc add dev s3-eth1 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:11:25 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:11:25 INFO: Starting scheduler on s4-eth1 with 3 bands
+13:11:25 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:11:25 ERROR: Command failed: tc qdisc add dev s2-eth1 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:11:26 ERROR: Command failed: tc qdisc add dev s4-eth3 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:11:26 ERROR: Command failed: tc qdisc add dev s4-eth2 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:11:26 ERROR: Command failed: tc qdisc add dev s4-eth1 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:13:14 INFO: Starting scheduler on s1-eth4 with 3 bands
+13:13:15 INFO: Starting scheduler on s3-eth1 with 3 bands
+13:13:15 INFO: Starting scheduler on s1-eth3 with 3 bands
+13:13:15 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:13:15 INFO: Starting scheduler on s2-eth2 with 3 bands
+13:13:15 INFO: Starting scheduler on s2-eth1 with 3 bands
+13:13:15 INFO: Starting scheduler on s2-eth3 with 3 bands
+13:13:15 INFO: Starting scheduler on s1-eth1 with 3 bands
+13:13:15 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:13:16 INFO: Starting scheduler on s1-eth2 with 3 bands
+13:13:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:13:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:13:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:13:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:13:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:13:16 ERROR: Command failed: tc qdisc add dev s1-eth4 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:13:16 INFO: Starting scheduler on s3-eth2 with 3 bands
+13:13:16 INFO: Starting scheduler on s4-eth1 with 3 bands
+13:13:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:13:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:13:16 INFO: Starting scheduler on s4-eth2 with 3 bands
+13:13:16 ERROR: Command failed: tc qdisc add dev s2-eth1 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:13:16 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:13:16 INFO: Starting scheduler on s3-eth3 with 3 bands
+13:13:17 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:13:17 ERROR: Command failed: tc qdisc add dev s3-eth1 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:13:17 ERROR: Command failed: tc qdisc add dev s1-eth3 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:13:17 ERROR: Command failed: tc qdisc add dev s2-eth2 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:13:17 ERROR: Command failed: tc qdisc add dev s1-eth2 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:13:17 ERROR: Command failed: tc qdisc add dev s2-eth3 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:13:17 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:13:17 INFO: Starting scheduler on s3-eth4 with 3 bands
+13:13:17 ERROR: Command failed: tc qdisc add dev s1-eth1 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:13:17 ERROR: Command failed: tc qdisc add dev s4-eth1 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:13:17 ERROR: Command failed: tc qdisc add dev s3-eth2 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:13:17 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:13:17 ERROR: Command failed: tc qdisc add dev s3-eth3 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:13:18 ERROR: Command failed: tc qdisc add dev s4-eth2 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:13:18 INFO: Starting scheduler on s4-eth3 with 3 bands
+13:13:18 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:13:18 ERROR: Command failed: tc qdisc add dev s3-eth4 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:13:19 ERROR: Command failed: tc qdisc add dev s4-eth3 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:14:45 INFO: Starting scheduler on s1-eth1 with 3 bands
+13:14:45 INFO: Starting scheduler on s1-eth3 with 3 bands
+13:14:45 INFO: Starting scheduler on s1-eth4 with 3 bands
+13:14:46 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:14:46 INFO: Starting scheduler on s1-eth2 with 3 bands
+13:14:46 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:14:46 INFO: Starting scheduler on s2-eth1 with 3 bands
+13:14:46 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:14:46 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:14:46 INFO: Starting scheduler on s2-eth2 with 3 bands
+13:14:46 ERROR: Command failed: tc qdisc add dev s1-eth1 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:14:46 INFO: Starting scheduler on s3-eth3 with 3 bands
+13:14:46 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:14:46 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:14:47 INFO: Starting scheduler on s3-eth2 with 3 bands
+13:14:47 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:14:47 ERROR: Command failed: tc qdisc add dev s1-eth3 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:14:47 ERROR: Command failed: tc qdisc add dev s1-eth2 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:14:47 ERROR: Command failed: tc qdisc add dev s1-eth4 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:14:47 INFO: Starting scheduler on s4-eth2 with 3 bands
+13:14:47 INFO: Starting scheduler on s4-eth3 with 3 bands
+13:14:47 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:14:47 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:14:47 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:14:47 INFO: Starting scheduler on s2-eth3 with 3 bands
+13:14:47 INFO: Starting scheduler on s4-eth1 with 3 bands
+13:14:47 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:14:47 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:14:47 ERROR: Command failed: tc qdisc add dev s2-eth2 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:14:47 ERROR: Command failed: tc qdisc add dev s2-eth1 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:14:47 INFO: Starting scheduler on s3-eth1 with 3 bands
+13:14:48 ERROR: Command failed: tc qdisc add dev s3-eth3 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:14:48 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:14:48 ERROR: Command failed: tc qdisc add dev s3-eth2 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:14:48 ERROR: Command failed: tc qdisc add dev s4-eth3 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:14:48 ERROR: Command failed: tc qdisc add dev s4-eth2 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:14:48 ERROR: Command failed: tc qdisc add dev s2-eth3 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:14:48 INFO: Starting scheduler on s3-eth4 with 3 bands
+13:14:48 ERROR: Command failed: tc qdisc add dev s4-eth1 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:14:48 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:14:48 ERROR: Command failed: tc qdisc add dev s3-eth1 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:14:49 ERROR: Command failed: tc qdisc add dev s3-eth4 root handle 1: prio bands 3
+rc=2
+stdout=
+stderr=Error: Exclusivity flag on, cannot modify.
+
+13:16:43 INFO: Starting scheduler on s1-eth4 with 3 bands
+13:16:43 INFO: Starting scheduler on s1-eth1 with 3 bands
+13:16:43 INFO: Starting scheduler on s1-eth2 with 3 bands
+13:16:43 INFO: Starting scheduler on s2-eth3 with 3 bands
+13:16:43 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:16:43 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:16:43 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:16:44 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:16:44 INFO: Starting scheduler on s3-eth1 with 3 bands
+13:16:44 INFO: Installed prio qdisc on s1-eth2 with 3 bands
+13:16:44 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:16:44 INFO: Installed prio qdisc on s2-eth3 with 3 bands
+13:16:44 INFO: Starting scheduler on s3-eth3 with 3 bands
+13:16:44 INFO: Installed prio qdisc on s1-eth4 with 3 bands
+13:16:44 INFO: Starting scheduler on s2-eth1 with 3 bands
+13:16:44 INFO: Installed prio qdisc on s1-eth1 with 3 bands
+13:16:44 INFO: Starting scheduler on s1-eth3 with 3 bands
+13:16:44 ERROR: Command failed: tc filter add dev s1-eth2 protocol ip parent 1: prio 1 flower ip_tos 0xb8 action skbedit priority 0 flowid 1:1
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:44 INFO: Starting scheduler on s3-eth4 with 3 bands
+13:16:44 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:16:44 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:16:44 ERROR: Command failed: tc filter add dev s2-eth3 protocol ip parent 1: prio 1 flower ip_tos 0xb8 action skbedit priority 0 flowid 1:1
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:44 ERROR: Command failed: tc filter add dev s1-eth4 protocol ip parent 1: prio 1 flower ip_tos 0xb8 action skbedit priority 0 flowid 1:1
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:44 INFO: Installed prio qdisc on s3-eth1 with 3 bands
+13:16:44 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:16:44 INFO: Starting scheduler on s4-eth3 with 3 bands
+13:16:45 INFO: Starting scheduler on s4-eth1 with 3 bands
+13:16:45 INFO: Starting scheduler on s2-eth2 with 3 bands
+13:16:45 INFO: Starting scheduler on s3-eth2 with 3 bands
+13:16:45 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:16:45 ERROR: Command failed: tc filter add dev s1-eth1 protocol ip parent 1: prio 1 flower ip_tos 0xb8 action skbedit priority 0 flowid 1:1
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:45 ERROR: Command failed: tc filter add dev s3-eth1 protocol ip parent 1: prio 1 flower ip_tos 0xb8 action skbedit priority 0 flowid 1:1
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:45 ERROR: Command failed: tc filter add dev s1-eth2 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:45 ERROR: failed to map class voip (DSCP 46) to band 0: Command 'tc filter add dev s1-eth2 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s1-eth2 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+13:16:45 INFO: Installed prio qdisc on s2-eth1 with 3 bands
+13:16:45 ERROR: Command failed: tc filter add dev s1-eth4 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:45 ERROR: failed to map class voip (DSCP 46) to band 0: Command 'tc filter add dev s1-eth4 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s1-eth4 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+13:16:45 INFO: Installed prio qdisc on s3-eth3 with 3 bands
+13:16:45 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:16:45 ERROR: Command failed: tc filter add dev s2-eth3 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:45 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:16:45 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:16:45 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:16:45 INFO: Installed prio qdisc on s1-eth3 with 3 bands
+13:16:45 ERROR: Command failed: tc filter add dev s1-eth1 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:45 ERROR: failed to map class voip (DSCP 46) to band 0: Command 'tc filter add dev s1-eth1 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s1-eth1 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+13:16:45 ERROR: Command failed: tc filter add dev s1-eth2 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:45 ERROR: Command failed: tc filter add dev s3-eth1 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:45 ERROR: Command failed: tc filter add dev s2-eth1 protocol ip parent 1: prio 1 flower ip_tos 0xb8 action skbedit priority 0 flowid 1:1
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:45 ERROR: Command failed: tc filter add dev s1-eth4 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:45 INFO: Installed prio qdisc on s3-eth4 with 3 bands
+13:16:45 ERROR: failed to map class voip (DSCP 46) to band 0: Command 'tc filter add dev s2-eth3 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s2-eth3 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+13:16:45 ERROR: failed to map class voip (DSCP 46) to band 0: Command 'tc filter add dev s3-eth1 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s3-eth1 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+13:16:45 INFO: Installed prio qdisc on s3-eth2 with 3 bands
+13:16:45 ERROR: Command failed: tc filter add dev s1-eth2 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:46 INFO: Installed prio qdisc on s4-eth3 with 3 bands
+13:16:46 ERROR: Command failed: tc filter add dev s1-eth1 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:46 ERROR: failed to map class video (DSCP 34) to band 1: Command 'tc filter add dev s1-eth2 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s1-eth2 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+13:16:46 INFO: Starting scheduler on s4-eth2 with 3 bands
+13:16:46 ERROR: Command failed: tc filter add dev s1-eth4 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:46 ERROR: failed to map class video (DSCP 34) to band 1: Command 'tc filter add dev s1-eth4 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s1-eth4 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+13:16:46 INFO: Installed prio qdisc on s4-eth1 with 3 bands
+13:16:46 ERROR: Command failed: tc filter add dev s3-eth4 protocol ip parent 1: prio 1 flower ip_tos 0xb8 action skbedit priority 0 flowid 1:1
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:46 INFO: Class mappings: [('voip', 46, 0), ('video', 34, 1), ('bulk', 0, 2)]
+13:16:46 ERROR: Command failed: tc filter add dev s1-eth3 protocol ip parent 1: prio 1 flower ip_tos 0xb8 action skbedit priority 0 flowid 1:1
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:46 ERROR: Command failed: tc filter add dev s2-eth1 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:46 ERROR: failed to map class voip (DSCP 46) to band 0: Command 'tc filter add dev s2-eth1 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s2-eth1 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+13:16:46 INFO: Installed prio qdisc on s2-eth2 with 3 bands
+13:16:46 ERROR: Command failed: tc filter add dev s1-eth1 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:46 ERROR: failed to map class video (DSCP 34) to band 1: Command 'tc filter add dev s1-eth1 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s1-eth1 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+13:16:46 ERROR: Command failed: tc filter add dev s3-eth3 protocol ip parent 1: prio 1 flower ip_tos 0xb8 action skbedit priority 0 flowid 1:1
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:46 ERROR: Command failed: tc filter add dev s1-eth2 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:46 ERROR: Command failed: tc filter add dev s3-eth2 protocol ip parent 1: prio 1 flower ip_tos 0xb8 action skbedit priority 0 flowid 1:1
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:46 ERROR: Command failed: tc filter add dev s2-eth3 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:46 ERROR: Command failed: tc filter add dev s3-eth1 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:46 ERROR: Command failed: tc filter add dev s4-eth3 protocol ip parent 1: prio 1 flower ip_tos 0xb8 action skbedit priority 0 flowid 1:1
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:47 ERROR: Command failed: tc filter add dev s3-eth4 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:47 ERROR: failed to map class voip (DSCP 46) to band 0: Command 'tc filter add dev s3-eth4 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s3-eth4 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+13:16:47 ERROR: Command failed: tc filter add dev s4-eth1 protocol ip parent 1: prio 1 flower ip_tos 0xb8 action skbedit priority 0 flowid 1:1
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:47 ERROR: Command failed: tc filter add dev s1-eth4 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:47 ERROR: Command failed: tc filter add dev s2-eth2 protocol ip parent 1: prio 1 flower ip_tos 0xb8 action skbedit priority 0 flowid 1:1
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:47 ERROR: Command failed: tc filter add dev s1-eth3 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:47 ERROR: failed to map class voip (DSCP 46) to band 0: Command 'tc filter add dev s1-eth3 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s1-eth3 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+13:16:47 INFO: Installed prio qdisc on s4-eth2 with 3 bands
+13:16:47 ERROR: Command failed: tc filter add dev s2-eth3 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:47 ERROR: Command failed: tc filter add dev s3-eth3 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:47 ERROR: Command failed: tc filter add dev s1-eth1 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:47 ERROR: failed to map class video (DSCP 34) to band 1: Command 'tc filter add dev s2-eth3 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s2-eth3 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+13:16:47 ERROR: failed to map class voip (DSCP 46) to band 0: Command 'tc filter add dev s3-eth3 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s3-eth3 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+13:16:47 ERROR: Command failed: tc filter add dev s3-eth2 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:47 ERROR: failed to map class voip (DSCP 46) to band 0: Command 'tc filter add dev s3-eth2 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s3-eth2 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+13:16:47 ERROR: Command failed: tc filter add dev s1-eth2 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:47 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s1-eth2 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s1-eth2 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+13:16:47 ERROR: Command failed: tc filter add dev s2-eth1 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:47 ERROR: Command failed: tc filter add dev s3-eth1 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:47 ERROR: failed to map class video (DSCP 34) to band 1: Command 'tc filter add dev s3-eth1 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s3-eth1 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+13:16:47 INFO: Scheduler installed. Running.
+13:16:47 ERROR: Command failed: tc filter add dev s4-eth1 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:47 ERROR: failed to map class voip (DSCP 46) to band 0: Command 'tc filter add dev s4-eth1 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s4-eth1 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+13:16:47 ERROR: Command failed: tc filter add dev s1-eth4 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:47 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s1-eth4 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s1-eth4 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+13:16:47 INFO: Scheduler installed. Running.
+13:16:47 ERROR: Command failed: tc filter add dev s4-eth2 protocol ip parent 1: prio 1 flower ip_tos 0xb8 action skbedit priority 0 flowid 1:1
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:47 ERROR: Command failed: tc filter add dev s4-eth3 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:47 ERROR: Command failed: tc filter add dev s3-eth4 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:47 ERROR: failed to map class voip (DSCP 46) to band 0: Command 'tc filter add dev s4-eth3 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s4-eth3 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+13:16:47 ERROR: Command failed: tc filter add dev s2-eth3 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:47 ERROR: Command failed: tc filter add dev s2-eth2 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:47 ERROR: Command failed: tc filter add dev s2-eth1 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:47 ERROR: Command failed: tc filter add dev s1-eth3 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:47 ERROR: failed to map class voip (DSCP 46) to band 0: Command 'tc filter add dev s2-eth2 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s2-eth2 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+13:16:47 ERROR: failed to map class video (DSCP 34) to band 1: Command 'tc filter add dev s2-eth1 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s2-eth1 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+13:16:47 ERROR: Command failed: tc filter add dev s3-eth1 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:47 ERROR: Command failed: tc filter add dev s1-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:47 ERROR: Command failed: tc filter add dev s3-eth3 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:47 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s1-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s1-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+13:16:47 INFO: Scheduler installed. Running.
+13:16:48 ERROR: Command failed: tc filter add dev s3-eth2 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:48 ERROR: Command failed: tc filter add dev s4-eth1 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:48 ERROR: Command failed: tc filter add dev s4-eth2 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:48 ERROR: failed to map class voip (DSCP 46) to band 0: Command 'tc filter add dev s4-eth2 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s4-eth2 parent 1: protocol ip prio 1 u32 match ip tos 184 0xff flowid 1:1' returned non-zero exit status 2.
+13:16:48 ERROR: Command failed: tc filter add dev s3-eth3 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:48 ERROR: failed to map class video (DSCP 34) to band 1: Command 'tc filter add dev s3-eth3 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s3-eth3 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+13:16:48 ERROR: Command failed: tc filter add dev s2-eth3 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:48 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s2-eth3 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s2-eth3 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+13:16:48 INFO: Scheduler installed. Running.
+13:16:48 ERROR: Command failed: tc filter add dev s3-eth4 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:48 ERROR: failed to map class video (DSCP 34) to band 1: Command 'tc filter add dev s3-eth4 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s3-eth4 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+13:16:48 ERROR: Command failed: tc filter add dev s3-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:48 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s3-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s3-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+13:16:48 INFO: Scheduler installed. Running.
+13:16:48 ERROR: Command failed: tc filter add dev s4-eth3 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:48 ERROR: Command failed: tc filter add dev s2-eth2 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:48 ERROR: Command failed: tc filter add dev s2-eth1 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:48 ERROR: Command failed: tc filter add dev s1-eth3 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:48 ERROR: failed to map class video (DSCP 34) to band 1: Command 'tc filter add dev s1-eth3 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s1-eth3 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+13:16:48 ERROR: Command failed: tc filter add dev s3-eth2 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:48 ERROR: failed to map class video (DSCP 34) to band 1: Command 'tc filter add dev s3-eth2 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s3-eth2 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+13:16:48 ERROR: Command failed: tc filter add dev s4-eth1 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:48 ERROR: failed to map class video (DSCP 34) to band 1: Command 'tc filter add dev s4-eth1 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s4-eth1 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+13:16:48 ERROR: Command failed: tc filter add dev s4-eth2 protocol ip parent 1: prio 2 flower ip_tos 0x88 action skbedit priority 0 flowid 1:2
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:48 ERROR: Command failed: tc filter add dev s3-eth3 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:49 ERROR: Command failed: tc filter add dev s2-eth2 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:49 ERROR: Command failed: tc filter add dev s2-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:49 ERROR: Command failed: tc filter add dev s4-eth3 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:49 ERROR: Command failed: tc filter add dev s3-eth4 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:49 ERROR: Command failed: tc filter add dev s3-eth2 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:49 ERROR: Command failed: tc filter add dev s1-eth3 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:49 ERROR: Command failed: tc filter add dev s4-eth1 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:49 ERROR: failed to map class video (DSCP 34) to band 1: Command 'tc filter add dev s2-eth2 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s2-eth2 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+13:16:49 ERROR: Command failed: tc filter add dev s3-eth3 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:49 ERROR: Command failed: tc filter add dev s4-eth2 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:49 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s2-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s2-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+13:16:49 ERROR: failed to map class video (DSCP 34) to band 1: Command 'tc filter add dev s4-eth3 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s4-eth3 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+13:16:49 ERROR: failed to map class video (DSCP 34) to band 1: Command 'tc filter add dev s4-eth2 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s4-eth2 parent 1: protocol ip prio 2 u32 match ip tos 136 0xff flowid 1:2' returned non-zero exit status 2.
+13:16:49 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s3-eth3 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s3-eth3 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+13:16:49 INFO: Scheduler installed. Running.
+13:16:49 INFO: Scheduler installed. Running.
+13:16:49 ERROR: Command failed: tc filter add dev s3-eth4 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:49 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s3-eth4 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s3-eth4 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+13:16:49 INFO: Scheduler installed. Running.
+13:16:49 ERROR: Command failed: tc filter add dev s2-eth2 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:49 ERROR: Command failed: tc filter add dev s1-eth3 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:49 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s1-eth3 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s1-eth3 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+13:16:49 INFO: Scheduler installed. Running.
+13:16:49 ERROR: Command failed: tc filter add dev s4-eth3 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:49 ERROR: Command failed: tc filter add dev s4-eth2 protocol ip parent 1: prio 3 flower ip_tos 0x0 action skbedit priority 0 flowid 1:3
+rc=2
+stdout=
+stderr=RTNETLINK answers: File exists
+We have an error talking to the kernel
+
+13:16:49 ERROR: Command failed: tc filter add dev s3-eth2 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:49 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s3-eth2 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s3-eth2 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+13:16:49 INFO: Scheduler installed. Running.
+13:16:49 ERROR: Command failed: tc filter add dev s4-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:49 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s4-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s4-eth1 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+13:16:49 INFO: Scheduler installed. Running.
+13:16:49 ERROR: Command failed: tc filter add dev s2-eth2 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:49 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s2-eth2 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s2-eth2 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+13:16:49 INFO: Scheduler installed. Running.
+13:16:49 ERROR: Command failed: tc filter add dev s4-eth2 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:49 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s4-eth2 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s4-eth2 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+13:16:49 INFO: Scheduler installed. Running.
+13:16:49 ERROR: Command failed: tc filter add dev s4-eth3 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3
+rc=2
+stdout=
+stderr=Error: Specified filter kind does not match existing one.
+We have an error talking to the kernel
+
+13:16:49 ERROR: failed to map class bulk (DSCP 0) to band 2: Command 'tc filter add dev s4-eth3 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+Traceback (most recent call last):
+  File "scheduler.py", line 181, in main
+    add_dscp_to_band(dev, dscp, band, prio=prio_counter)
+  File "scheduler.py", line 134, in add_dscp_to_band
+    run(cmd_u32)
+  File "scheduler.py", line 43, in run
+    proc = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+  File "/usr/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'tc filter add dev s4-eth3 parent 1: protocol ip prio 3 u32 match ip tos 0 0xff flowid 1:3' returned non-zero exit status 2.
+13:16:49 INFO: Scheduler installed. Running.
+13:16:55 INFO: Stopping scheduler and cleaning qdisc...
+13:16:55 INFO: Stopping scheduler and cleaning qdisc...
+13:16:55 INFO: Stopping scheduler and cleaning qdisc...
+13:16:55 INFO: Stopping scheduler and cleaning qdisc...
+13:16:55 INFO: Stopping scheduler and cleaning qdisc...
+13:16:55 INFO: Stopping scheduler and cleaning qdisc...
+13:16:55 INFO: Stopping scheduler and cleaning qdisc...
+13:16:55 INFO: Stopping scheduler and cleaning qdisc...
+13:16:55 INFO: Stopping scheduler and cleaning qdisc...
+13:16:55 INFO: Stopping scheduler and cleaning qdisc...
+13:16:55 INFO: Stopping scheduler and cleaning qdisc...
+13:16:55 INFO: Stopping scheduler and cleaning qdisc...
+13:16:55 INFO: Stopping scheduler and cleaning qdisc...
+13:16:55 INFO: Stopping scheduler and cleaning qdisc...

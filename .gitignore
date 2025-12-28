@@ -5,3 +5,5 @@ traffic_logs/
 
 # Temporary files
 index.html
+
+e2e_test.py
