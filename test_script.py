@@ -61,12 +61,7 @@ def _run_capture(cmd: str) -> str:
 
 
 def parse_vnf_args(argv):
-    """Parse CLI args to select which VNFs to run.
-    No args => all VNFs.
-    Args without '-' => include only those VNFs.
-    Args prefixed with '-' => exclude those VNFs from the full set.
-    Unknown names are ignored with a hint.
-    """
+    """Parse CLI args to select which VNFs to run."""
     selects = set()
     excludes = set()
     for raw in argv:
@@ -102,17 +97,13 @@ def apply_host_policing(pids: dict):
         print("[ORC] Policer skipped: no host PID map found (run topology first)")
         return
 
-    # Ensure mnexec is available; otherwise skip safely
     if not _has_command("mnexec"):
         print("[ORC] Policer skipped: 'mnexec' not found on system")
         return
 
-    # Drop sudo if already running as root
     is_root = (os.geteuid() == 0)
-
     tos_stream = (46 << 2)  # DSCP to TOS value
     for host, pid in pids.items():
-        # Commands run inside the host namespace via mnexec -a <pid>
         cmds = [
             "tc qdisc del dev {iface} root || true",
             "tc qdisc del dev {iface} ingress || true",
@@ -130,17 +121,13 @@ def apply_host_policing(pids: dict):
         full_cmd = f"{base} -a {pid} sh -c \"{joined}\""
         print(f"[ORC] Applying policing on {host} ({iface})")
         try:
-            proc = subprocess.run(full_cmd, shell=True, capture_output=True, text=True, timeout=10)
-            if proc.returncode != 0:
-                print(f"[ORC] Policing failed on {host}: {proc.stderr.strip()}")
+            subprocess.run(full_cmd, shell=True, timeout=10, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         except subprocess.TimeoutExpired:
             print(f"[ORC] Policing timed out on {host}")
 
 def cleanup_host_policing(pids: dict):
-    """Remove tc settings inside host namespaces to restore defaults."""
-    if not pids:
-        return
-    if not _has_command("mnexec"):
+    """Remove tc settings inside host namespaces."""
+    if not pids or not _has_command("mnexec"):
         return
     is_root = (os.geteuid() == 0)
     for host, pid in pids.items():
@@ -158,31 +145,22 @@ def cleanup_host_policing(pids: dict):
             pass
 
 def apply_host_scheduling(pids: dict, policer_enabled: bool):
-    """Apply priority scheduling inside host namespaces for traffic prioritization.
-    Integrates with policer HTB if both are enabled, otherwise uses standalone prio qdisc."""
+    """Apply priority scheduling inside host namespaces."""
     if not pids:
-        print("[ORC] Scheduler skipped: no host PID map found (run topology first)")
+        print("[ORC] Scheduler skipped: no host PID map found")
         return
-
     if not _has_command("mnexec"):
-        print("[ORC] Scheduler skipped: 'mnexec' not found on system")
         return
 
     is_root = (os.geteuid() == 0)
-    tos_stream = (46 << 2)  # DSCP 46 for RTP/VoIP
-
+    
     for host, pid in pids.items():
         iface = f"{host}-eth0"
         
         if policer_enabled:
-            # Policer already set up HTB - just add prio scheduling to the high-priority class
-            # Replace the default pfifo_fast on class 1:10 (streaming) with prio qdisc
             cmds = [
-                # Add prio qdisc to the high-priority streaming class (1:10)
                 f"tc qdisc add dev {{iface}} parent 1:10 handle 10: prio bands {SCHEDULER_BANDS}",
             ]
-            
-            # Add DSCP filters to map traffic to priority bands within the high-priority class
             prio_counter = 1
             for name, dscp, band in SCHEDULER_CLASSES:
                 tos_val = (dscp << 2) & 0xff
@@ -192,16 +170,12 @@ def apply_host_scheduling(pids: dict, policer_enabled: bool):
                     f"u32 match ip tos {tos_val} 0xff flowid {flowid}"
                 )
                 prio_counter += 1
-            
-            print(f"[ORC] Applying scheduling on {host} ({iface}) - integrated with policer")
+            print(f"[ORC] Applying scheduling on {host} ({iface}) - integrated")
         else:
-            # No policer - set up standalone prio qdisc on root
             cmds = [
                 "tc qdisc del dev {iface} root || true",
                 f"tc qdisc add dev {{iface}} root handle 1: prio bands {SCHEDULER_BANDS}",
             ]
-            
-            # Add DSCP filters to map traffic to priority bands
             prio_counter = 1
             for name, dscp, band in SCHEDULER_CLASSES:
                 tos_val = (dscp << 2) & 0xff
@@ -211,49 +185,31 @@ def apply_host_scheduling(pids: dict, policer_enabled: bool):
                     f"u32 match ip tos {tos_val} 0xff flowid {flowid}"
                 )
                 prio_counter += 1
-            
-            print(f"[ORC] Applying scheduling on {host} ({iface}) - standalone mode")
+            print(f"[ORC] Applying scheduling on {host} ({iface}) - standalone")
         
         joined = "; ".join(cmds).format(iface=iface)
         base = "mnexec" if is_root else "sudo mnexec"
         full_cmd = f"{base} -a {pid} sh -c \"{joined}\""
         try:
-            proc = subprocess.run(full_cmd, shell=True, capture_output=True, text=True, timeout=10)
-            if proc.returncode != 0:
-                print(f"[ORC] Scheduling failed on {host}: {proc.stderr.strip()}")
+            subprocess.run(full_cmd, shell=True, timeout=10, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         except subprocess.TimeoutExpired:
             print(f"[ORC] Scheduling timed out on {host}")
 
 def detect_bridges():
-    """
-    Prefer OVS bridges via ovs-vsctl; fallback to sysfs heuristic (s[0-9]+).
-    """
     if _has_command("ovs-vsctl"):
         out = _run_capture("ovs-vsctl list-br")
         bridges = [line.strip() for line in out.splitlines() if line.strip()]
         if bridges:
             return bridges
-    # Fallback: heuristic based on Mininet naming
     return [dev for dev in os.listdir("/sys/class/net") if dev.startswith("s") and dev[1:].isdigit()]
 
 def detect_host_ifaces():
-    """
-    Return dict { bridge: [port1, port2, ...] }.
-    Uses `ovs-vsctl list-ports <bridge>` when available; otherwise falls back to Linux bridge sysfs.
-    NOTE: Returns empty list for now - Policer/Scheduler are disabled to avoid breaking OVS forwarding.
-    TC modifications to OVS bridge ports can break packet forwarding.
-    """
     bridge_ifaces = {}
     bridges = detect_bridges()
-
     if _has_command("ovs-vsctl"):
         for br in bridges:
-            # Disabled: returning empty port lists to avoid applying tc rules to OVS ports
-            # TC modifications break OVS forwarding (deleting noqueue qdisc)
             bridge_ifaces[br] = []
         return bridge_ifaces
-
-    # Fallback to Linux bridge sysfs (may not work for OVS bridges)
     for br in bridges:
         ports = []
         path = f"/sys/class/net/{br}/brif"
@@ -261,8 +217,6 @@ def detect_host_ifaces():
             ports = [p for p in os.listdir(path) if not p.startswith("lo")]
         bridge_ifaces[br] = ports
     return bridge_ifaces
-
-
 
 def terminate_vnfs():
     for p in VNFS:
@@ -276,6 +230,20 @@ def terminate_vnfs():
 # LAUNCH VNFS
 # =========================
 def main(argv=None):
+    # ========================================================
+    # 1. SETUP AUTOMÁTICO DE DEPENDÊNCIAS
+    # ========================================================
+    setup_script = "dependencies.py"
+    if os.path.exists(setup_script):
+        try:
+            subprocess.check_call([sys.executable, setup_script])
+        except subprocess.CalledProcessError:
+            print(f"[ORC] ERRO: Falha ao executar {setup_script}")
+            sys.exit(1)
+    else:
+        print(f"[ORC] AVISO: {setup_script} não encontrado.")
+    # ========================================================
+
     if argv is None:
         argv = sys.argv[1:]
     enabled = parse_vnf_args(argv)
@@ -284,15 +252,12 @@ def main(argv=None):
     print("[ORC] Detected bridges and interfaces:", bridge_ifaces)
     print("[ORC] VNFs enabled:", ", ".join(sorted(enabled)))
 
-    # Apply host-level policing inside namespaces (safe for OVS) only if policer enabled
     host_pids = load_host_pids()
     policer_enabled = "policer" in enabled
     
     if policer_enabled:
         apply_host_policing(host_pids)
     
-    # Apply host-level scheduling inside namespaces for traffic prioritization
-    # Integrates with policer if both are enabled
     if "scheduler" in enabled and ENABLE_SCHEDULER:
         apply_host_scheduling(host_pids, policer_enabled)
 
@@ -315,10 +280,8 @@ def main(argv=None):
 
     # --- SCHEDULER (Priority Queueing) ---
     # Scheduler is now applied directly to host interfaces via apply_host_scheduling()
-    # No separate scheduler.py VNF process needed when using host namespace approach
 
     # --- POLICER (Rate Limiting) ---
-    # Only run if we have host-facing interfaces; skip silently otherwise to avoid breaking OVS forwarding.
     if "policer" in enabled:
         any_ifaces = any(bool(ifaces) for ifaces in bridge_ifaces.values())
         if any_ifaces:
@@ -330,7 +293,7 @@ def main(argv=None):
                     p = run(cmd)
                     VNFS.append(p)
         else:
-            print("[ORC] Policer skipped: no host-facing interfaces detected (avoiding OVS bridge ports)")
+            print("[ORC] Policer skipped: no host-facing interfaces detected")
 
     # --- MONITOR (OVS stats → Prometheus) ---
     if "monitor" in enabled:
@@ -342,7 +305,6 @@ def main(argv=None):
     def poll_metrics():
         port = globals().get("SCRAPE_PORT", 9100)
         url = f"http://127.0.0.1:{port}/metrics"
-        # monitor.py uses SCRAPE_PORT=9100; keep fallback consistent
         end = time.time() + METRICS_POLL_SECONDS
         last_vals = {}
         print(f"[ORC] Polling metrics for ~{METRICS_POLL_SECONDS}s from {url}")
@@ -358,13 +320,9 @@ def main(argv=None):
                             except Exception:
                                 return None
                     return None
-                thr = get_val("vnf_throughput_mbps")
-                flows = get_val("vnf_flow_count")
-                avg = get_val("vnf_avg_packet_size_bytes")
-                cur = {"thr": thr, "flows": flows, "avg": avg}
-                if cur != last_vals:
-                    print(f"[ORC] metrics: throughput={thr} Mbps, flows={flows}, avg_pkt={avg} bytes")
-                    last_vals = cur
+                thr = get_val("network_throughput_mbps")
+                if thr is not None:
+                     print(f"[ORC] Metrics: throughput={thr} Mbps")
             except Exception:
                 pass
             time.sleep(1)
@@ -383,7 +341,6 @@ def main(argv=None):
     # --- KEEP ORCHESTRATOR RUNNING ---
     def handle_sig(signum, frame):
         print("[ORC] Stopping all VNFs...")
-        # Clean host policing/scheduling to restore link defaults
         pids = load_host_pids()
         if "policer" in enabled or "scheduler" in enabled:
             try:
