@@ -27,21 +27,6 @@ def log(msg: str):
     print(f"[StressTest {time.strftime('%H:%M:%S')}] {msg}")
 
 
-def purge_log_dir(log_dir: str):
-    if not os.path.isdir(log_dir):
-        return
-    removed = 0
-    for name in os.listdir(log_dir):
-        if name.endswith(".log"):
-            try:
-                os.remove(os.path.join(log_dir, name))
-                removed += 1
-            except OSError:
-                pass
-    if removed:
-        log(f"Cleared {removed} old log files in {log_dir}")
-
-
 def exec_in_host(host_pid: int, cmd: str, background: bool = False):
     is_root = os.geteuid() == 0
     mnexec = "mnexec" if is_root else "sudo mnexec"
@@ -91,39 +76,20 @@ def start_iperf_server(host_pid: int, port: int, udp: bool):
 
 def start_udp_flow(client_pid: int, server_ip: str, port: int, bw: str, duration: int, label: str, log_dir: str):
     logfile_ns = f"/tmp/{label.replace(' ', '_')}.log"
-    cmd = f"iperf -c {server_ip} -p {port} -u -b {bw} -t {duration} -i 1"
-    
-    # Stream output live to console and also save to log
-    full_cmd = f"{cmd} | tee {logfile_ns}"
-    proc = exec_in_host(client_pid, full_cmd, background=True)
-    
+    cmd = f"iperf -c {server_ip} -p {port} -u -b {bw} -t {duration} > {logfile_ns} 2>&1"
+    proc = exec_in_host(client_pid, cmd, background=True)
     proc.log_info = (client_pid, logfile_ns, f"{log_dir}/{label}.log")
-    log(f"Started UDP flow {label} -> {server_ip}:{port} @ {bw} for {duration}s (live console + log)")
+    log(f"Started UDP flow {label} -> {server_ip}:{port} @ {bw} for {duration}s")
     return proc
 
 
 def start_tcp_flow(client_pid: int, server_ip: str, port: int, duration: int, label: str, log_dir: str, parallel: int = 1):
     logfile_ns = f"/tmp/{label.replace(' ', '_')}.log"
     par_flag = f"-P {parallel}" if parallel > 1 else ""
-    cmd = f"iperf -c {server_ip} -p {port} {par_flag} -t {duration} -i 1"
-    
-    # Stream output live to console and also save to log
-    full_cmd = f"{cmd} | tee {logfile_ns}"
-    proc = exec_in_host(client_pid, full_cmd, background=True)
-    
-    proc.log_info = (client_pid, logfile_ns, f"{log_dir}/{label}.log")
-    log(f"Started TCP flow {label} -> {server_ip}:{port} for {duration}s (P={parallel}, live console + log)")
-    return proc
-
-
-def start_ping(client_pid: int, target_ip: str, duration: int, interval: float, label: str, log_dir: str):
-    # Ping to approximate RTT during traffic; count derived from duration/interval
-    count = max(1, int(duration / interval) + 1)
-    logfile_ns = f"/tmp/{label.replace(' ', '_')}.log"
-    cmd = f"ping -i {interval} -c {count} {target_ip} > {logfile_ns} 2>&1"
+    cmd = f"iperf -c {server_ip} -p {port} {par_flag} -t {duration} > {logfile_ns} 2>&1"
     proc = exec_in_host(client_pid, cmd, background=True)
     proc.log_info = (client_pid, logfile_ns, f"{log_dir}/{label}.log")
-    log(f"Started ping {label} -> {target_ip} for ~{duration}s (interval {interval}s)")
+    log(f"Started TCP flow {label} -> {server_ip}:{port} for {duration}s (P={parallel})")
     return proc
 
 
@@ -142,25 +108,6 @@ def retrieve_logs():
                     log(f"Failed to save {dst_log}: {e}")
             else:
                 log(f"No output for {src_log}")
-
-
-def validate_logs(log_dir: str) -> bool:
-    missing = False
-    expected = []
-    for proc in processes:
-        if hasattr(proc, "log_info"):
-            _, _, dst_log = proc.log_info
-            expected.append(dst_log)
-    if not expected:
-        log("No expected logs recorded; nothing to validate")
-        return False
-    for path in expected:
-        if not os.path.exists(path) or os.path.getsize(path) == 0:
-            log(f"Missing or empty log: {path}")
-            missing = True
-    if missing:
-        log("Some logs missing/empty; ensure iperf ran and sudo had no prompts")
-    return not missing
 
 
 def apply_netem(host_pid: int, iface: str, delay_ms: Optional[int] = None, loss_pct: Optional[float] = None):
@@ -182,14 +129,12 @@ def clear_netem(host_pid: int, iface: str):
     log(f"Cleared netem on {iface}")
 
 
-def cleanup(server_pid: int, client_pids: List[int], client_ifaces: List[str]):
+def cleanup(server_pid: int, client_pid: int, client_iface: str):
     global stop_flag
     stop_flag = True
-    for iface, pid in zip(client_ifaces, client_pids):
-        clear_netem(pid, iface)
+    clear_netem(client_pid, client_iface)
     kill_iperf(server_pid)
-    for pid in client_pids:
-        kill_iperf(pid)
+    kill_iperf(client_pid)
     time.sleep(0.2)
 
 
@@ -197,30 +142,20 @@ def print_results(log_dir: str):
     log("\n" + "=" * 70)
     log("STRESS TEST RESULTS")
     log("=" * 70)
-    try:
-        names = sorted(os.listdir(log_dir))
-    except FileNotFoundError:
-        log(f"Log directory missing: {log_dir}")
-        return
-
-    categories = [
-        ("Streaming", lambda n: n.startswith("stream_")),
-        ("HTTP", lambda n: n.startswith("http_")),
-        ("Bulk", lambda n: n.startswith("bulk_")),
-        ("Variable Load", lambda n: n.startswith("var_load_")),
-        ("Failure UDP", lambda n: n.startswith("failure_udp_")),
-        ("Failure TCP", lambda n: n.startswith("failure_tcp_")),
+    files = [
+        ("stream_5004.log", "Streaming 5004"),
+        ("stream_5005.log", "Streaming 5005"),
+        ("http.log", "HTTP"),
+        ("bulk.log", "Bulk"),
+        ("var_load.log", "Variable Load"),
+        ("failure_udp.log", "Failure UDP"),
+        ("failure_tcp.log", "Failure TCP"),
     ]
-
-    for title, pred in categories:
-        matched = [n for n in names if pred(n)]
-        if not matched:
-            log(f"\n{title}: no log files")
-            continue
-        for fname in matched:
-            path = os.path.join(log_dir, fname)
-            log(f"\n{title} ({path}):")
-            log("-" * 70)
+    for fname, title in files:
+        path = os.path.join(log_dir, fname)
+        log(f"\n{title} ({path}):")
+        log("-" * 70)
+        if os.path.exists(path):
             with open(path) as f:
                 lines = f.read().splitlines()
             printed = False
@@ -232,63 +167,54 @@ def print_results(log_dir: str):
             if not printed and lines:
                 for l in lines[-3:]:
                     log(l.strip())
+        else:
+            log("No log file")
 
 
-def run_scenarios(server_pid: int, client_entries: List[Dict], server_ip: str, log_dir: str, args):
-    # Phase 1: Congestion (sustained streams + bulk + http) from all clients
+def run_scenarios(server_pid: int, client_pid: int, server_ip: str, client_iface: str, log_dir: str, args):
+    # Phase 1: Congestion (sustained streams + bulk + http)
     log("=" * 70)
-    log("PHASE 1: Sustained congestion (single or multi-host)")
-    for entry in client_entries:
-        cpid = entry["pid"]
-        cname = entry["name"]
-        start_udp_flow(cpid, server_ip, STREAM_PORTS[0], args.stream_bw, args.phase1_duration, f"stream_{cname}_5004", log_dir)
-        start_udp_flow(cpid, server_ip, STREAM_PORTS[1], args.stream_bw, args.phase1_duration, f"stream_{cname}_5005", log_dir)
-        start_tcp_flow(cpid, server_ip, HTTP_PORT, args.phase1_duration, f"http_{cname}", log_dir, parallel=2)
-        start_tcp_flow(cpid, server_ip, BULK_PORT, args.phase1_duration, f"bulk_{cname}", log_dir, parallel=3)
-        if args.ping:
-            start_ping(cpid, server_ip, args.phase1_duration, args.ping_interval, f"ping_{cname}", log_dir)
+    log("PHASE 1: Sustained congestion")
+    phase1 = [
+        start_udp_flow(client_pid, server_ip, STREAM_PORTS[0], args.stream_bw, args.phase1_duration, "stream_5004", log_dir),
+        start_udp_flow(client_pid, server_ip, STREAM_PORTS[1], args.stream_bw, args.phase1_duration, "stream_5005", log_dir),
+        start_tcp_flow(client_pid, server_ip, HTTP_PORT, args.phase1_duration, "http", log_dir, parallel=2),
+        start_tcp_flow(client_pid, server_ip, BULK_PORT, args.phase1_duration, "bulk", log_dir, parallel=3),
+    ]
     time.sleep(args.phase1_duration)
 
-    if args.phase1_only:
-        log("Phase1-only flag set; skipping variable load and failure phases")
-        return
-
-    # Phase 2: Variable load (bursty UDP) using first client only (to keep runtime moderate)
+    # Phase 2: Variable load (bursty UDP)
     log("=" * 70)
     log("PHASE 2: Variable load (bursty)")
-    first = client_entries[0]
-    var_label = f"var_load_{first['name']}"
-    logfile_ns = f"/tmp/{var_label}_{int(time.time())}.log"
+    var_label = "var_load"
+    logfile_ns = f"/tmp/{var_label}.log"
     seq = [("2M", 8), ("8M", 8), ("1M", 8), ("6M", 8), ("10M", 8)]
     with open(logfile_ns, "w") as _:
         pass
     for bw, dur in seq:
         cmd = f"iperf -c {server_ip} -p {STREAM_PORTS[0]} -u -b {bw} -t {dur} >> {logfile_ns} 2>&1"
-        exec_in_host(first["pid"], cmd, background=False)
+        exec_in_host(client_pid, cmd, background=False)
         time.sleep(1)
     proc = subprocess.CompletedProcess([], 0)
-    proc.log_info = (first["pid"], logfile_ns, f"{log_dir}/{var_label}.log")
+    proc.log_info = (client_pid, logfile_ns, f"{log_dir}/{var_label}.log")
     processes.append(proc)
 
-    # Phase 3: Failures (delay + loss) during traffic on first client
+    # Phase 3: Failures (delay + loss) during traffic
     log("=" * 70)
-    log("PHASE 3: Failure injection (delay+loss) on first client")
-    apply_netem(first["pid"], first["iface"], delay_ms=args.failure_delay, loss_pct=args.failure_loss)
-    start_udp_flow(first["pid"], server_ip, STREAM_PORTS[0], args.stream_bw, args.failure_duration, f"failure_udp_{first['name']}", log_dir)
-    start_tcp_flow(first["pid"], server_ip, BULK_PORT, args.failure_duration, f"failure_tcp_{first['name']}", log_dir, parallel=2)
+    log("PHASE 3: Failure injection (delay+loss)")
+    apply_netem(client_pid, client_iface, delay_ms=args.failure_delay, loss_pct=args.failure_loss)
+    failure_udp = start_udp_flow(client_pid, server_ip, STREAM_PORTS[0], args.stream_bw, args.failure_duration, "failure_udp", log_dir)
+    failure_tcp = start_tcp_flow(client_pid, server_ip, BULK_PORT, args.failure_duration, "failure_tcp", log_dir, parallel=2)
     time.sleep(args.failure_duration)
-    clear_netem(first["pid"], first["iface"])
+    clear_netem(client_pid, client_iface)
 
 
 def main():
     parser = argparse.ArgumentParser(description="Stress test VNFs with congestion, variable load, and induced failures")
     parser.add_argument("--server", default="h1", help="Server host (default: h1)")
-    parser.add_argument("--clients", default="h4", help="Comma-separated client hosts (default: h4)")
+    parser.add_argument("--client", default="h4", help="Client host (default: h4)")
     parser.add_argument("--stream-bw", default="5M", help="Streaming UDP bandwidth (each stream)")
     parser.add_argument("--phase1-duration", type=int, default=30, help="Duration for congestion phase")
-    parser.add_argument("--phase1-only", action="store_true", help="Run only congestion phase (skip variable/failure)")
-    parser.add_argument("--ping", action="store_true", help="Also run pings from each client to server during phase 1")
-    parser.add_argument("--ping-interval", type=float, default=0.2, help="Ping interval seconds (default 0.2)")
     parser.add_argument("--failure-duration", type=int, default=20, help="Duration for failure phase")
     parser.add_argument("--failure-delay", type=int, default=50, help="Netem delay ms during failure phase")
     parser.add_argument("--failure-loss", type=float, default=5.0, help="Netem loss %% during failure phase")
@@ -297,30 +223,17 @@ def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     log_dir = os.path.join(script_dir, LOG_DIR_NAME)
     os.makedirs(log_dir, exist_ok=True)
-    purge_log_dir(log_dir)
 
     host_pids = load_host_pids()
-    client_names = [c.strip() for c in args.clients.split(',') if c.strip()]
-    if args.server not in host_pids:
-        log(f"Server not found. Available: {list(host_pids.keys())}")
+    if args.server not in host_pids or args.client not in host_pids:
+        log(f"Hosts not found. Available: {list(host_pids.keys())}")
         sys.exit(1)
-    for c in client_names:
-        if c not in host_pids:
-            log(f"Client {c} not found. Available: {list(host_pids.keys())}")
-            sys.exit(1)
 
     server_pid = host_pids[args.server]
-    client_entries = []
-    for c in client_names:
-        pid = host_pids[c]
-        client_entries.append({
-            "name": c,
-            "pid": pid,
-            "iface": f"{c}-eth0",
-        })
+    client_pid = host_pids[args.client]
+    client_iface = f"{args.client}-eth0"
 
-    # Check iperf presence
-    if not check_iperf(server_pid) or any(not check_iperf(e["pid"]) for e in client_entries):
+    if not check_iperf(server_pid) or not check_iperf(client_pid):
         log("iperf not found in namespace; install with apt-get install iperf")
         sys.exit(1)
 
@@ -330,13 +243,12 @@ def main():
         sys.exit(1)
 
     log(f"Server {args.server} IP: {server_ip}")
-    log(f"Clients: {[e['name'] for e in client_entries]}")
+    log(f"Client: {args.client} iface: {client_iface}")
 
     # Ensure clean state
     kill_iperf(server_pid)
-    for e in client_entries:
-        kill_iperf(e["pid"])
-        clear_netem(e["pid"], e["iface"])
+    kill_iperf(client_pid)
+    clear_netem(client_pid, client_iface)
 
     # Start servers
     for p in STREAM_PORTS:
@@ -345,7 +257,7 @@ def main():
     start_iperf_server(server_pid, BULK_PORT, udp=False)
 
     def handle_sig(signum, frame):
-        cleanup(server_pid, [e["pid"] for e in client_entries], [e["iface"] for e in client_entries])
+        cleanup(server_pid, client_pid, client_iface)
         retrieve_logs()
         print_results(log_dir)
         sys.exit(0)
@@ -354,13 +266,11 @@ def main():
     signal.signal(signal.SIGTERM, handle_sig)
 
     try:
-        run_scenarios(server_pid, client_entries, server_ip, log_dir, args)
+        run_scenarios(server_pid, client_pid, server_ip, client_iface, log_dir, args)
         retrieve_logs()
-        if not validate_logs(log_dir):
-            sys.exit(1)
         print_results(log_dir)
     finally:
-        cleanup(server_pid, [e["pid"] for e in client_entries], [e["iface"] for e in client_entries])
+        cleanup(server_pid, client_pid, client_iface)
 
 
 if __name__ == "__main__":

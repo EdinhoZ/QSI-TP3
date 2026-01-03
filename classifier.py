@@ -1,61 +1,73 @@
 #!/usr/bin/env python3
-import argparse
 import subprocess
-import sys
-import os
+import re
 
-def run(cmd: str):
-    print(f"[Classifier] Running: {cmd}")
-    proc = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-    if proc.returncode != 0:
-        print(f"[Classifier] ERROR running '{cmd}': {proc.stderr.strip()}")
-    return proc.returncode, proc.stdout, proc.stderr
+RTP_DSCP = 46  # EF
+RTP_PORT_RANGE = "16384:32767"
 
-def detect_bridge_name() -> str:
-    bridges = [dev for dev in os.listdir("/sys/class/net") if dev.startswith("s") and dev[1:].isdigit()]
+def run(cmd):
+    print(f"[Classifier] {cmd}")
+    subprocess.run(cmd, shell=True, check=False)
 
-    if not bridges:
-        raise RuntimeError("Could not auto-detect any Mininet OVS bridge.")
+def list_lan_interfaces():
+    """
+    Detect LAN-facing interfaces:
+    - Exclude loopback
+    - Exclude router-to-router /30 links (192.168.x.x)
+    """
+    output = subprocess.check_output("ip -o -4 addr show", shell=True, text=True)
+    lan_ifaces = []
 
-    if len(bridges) == 1:
-        print(f"[Classifier] Auto-detected bridge: {bridges[0]}")
-        return bridges[0]
+    for line in output.splitlines():
+        parts = line.split()
+        iface = parts[1]
+        ip = parts[3]
 
-    print(f"[Classifier] Multiple bridges detected: {bridges}. Using 's1' by default.")
-    return "s1"
+        if iface == "lo":
+            continue
 
-def install_flows(bridge: str):
-    # Don't delete all flows - OVS needs its learning flows for connectivity
-    # Instead, we just add our DSCP marking flows with lower priority so they don't interfere
-    print(f"[Classifier] Installing DSCP classifier rules (preserving existing flows)...")
+        # Exclude inter-router links
+        if ip.startswith("192.168."):
+            continue
 
-    # DSCP rules
-    dscp_policies = [
-        ("HTTP",    "ip,nw_proto=6,tp_dst=80",    34),  # AF41
-        ("RTP1",    "udp,tp_dst=5004",            46),  # EF (streaming)
-        ("RTP2",    "udp,tp_dst=5005",            46),  # EF (streaming)
-        ("DNS",     "udp,tp_dst=53",               8),
-        ("SSH",     "tcp,tp_dst=22",              16),
-        ("DEFAULT", "ip",                           0),
-    ]
+        lan_ifaces.append(iface)
 
-    for name, match, dscp in dscp_policies:
-        flow = f"priority=10,{match},actions=set_field:{dscp}->ip_dscp,normal"
-        ret, _, _ = run(f'ovs-ofctl add-flow {bridge} "{flow}"')
-        if ret == 0:
-            print(f"[Classifier] Installed {name} rule with DSCP {dscp}")
+    return lan_ifaces
 
-    print(f"[Classifier] Flow installation complete.")
+def reset_mangle():
+    run("iptables -t mangle -F")
+    run("iptables -t mangle -X")
+
+def install_rtp_rules(iface):
+    # RTP port range
+    run(
+        f"iptables -t mangle -A PREROUTING "
+        f"-i {iface} -p udp --dport {RTP_PORT_RANGE} "
+        f"-j DSCP --set-dscp {RTP_DSCP}"
+    )
+
+    # Optional explicit RTP ports
+    for port in (5004, 5005):
+        run(
+            f"iptables -t mangle -A PREROUTING "
+            f"-i {iface} -p udp --dport {port} "
+            f"-j DSCP --set-dscp {RTP_DSCP}"
+        )
 
 def main():
-    parser = argparse.ArgumentParser(description="OVS QoS Classifier (DSCP setter)")
-    parser.add_argument("-b", "--bridge", help="OVS bridge name (default: auto-detect)")
-    args = parser.parse_args()
+    print("[Classifier] Initializing RTP classifier VNF (router-based)")
+    reset_mangle()
 
-    bridge = args.bridge or detect_bridge_name()
-    print(f"[Classifier] Installing flows on bridge: {bridge}")
-    install_flows(bridge)
-    print(f"[Classifier] DSCP classification rules successfully installed.")
+    lan_ifaces = list_lan_interfaces()
+    if not lan_ifaces:
+        print("[Classifier] WARNING: No LAN interfaces detected")
+        return
+
+    for iface in lan_ifaces:
+        print(f"[Classifier] Installing RTP rules on {iface}")
+        install_rtp_rules(iface)
+
+    print("[Classifier] RTP classification active (DSCP EF)")
 
 if __name__ == "__main__":
     main()
