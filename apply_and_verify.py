@@ -24,14 +24,17 @@ RATE_LIMITS = {
 # Default hosts to apply VNF configuration (can be overridden via args)
 DEFAULT_TARGET_HOSTS = ["h1", "h4"]
 
-ENABLE_FIREWALL = True
-
 # =========================
 # GLOBAL STATE
 # =========================
 
 VNFS: List[subprocess.Popen] = []
 TARGET_HOSTS: List[str] = DEFAULT_TARGET_HOSTS
+ENABLE_CLASSIFIER = True
+ENABLE_POLICER = True
+ENABLE_SCHEDULER = True
+ENABLE_FIREWALL = True
+ENABLE_MONITOR = True
 
 # =========================
 # UTILS
@@ -142,6 +145,9 @@ def get_host_pid(host: str) -> str:
 
 def apply_host_classifier(host: str):
     """Apply DSCP marking in host namespace using iptables"""
+    if not ENABLE_CLASSIFIER:
+        return
+        
     log(f"Configuring classifier on {host}")
     
     pid = get_host_pid(host)
@@ -180,6 +186,9 @@ def apply_host_classifier(host: str):
 
 def apply_host_policing(host: str):
     """Apply HTB+prio qdisc hierarchy on host interface"""
+    if not ENABLE_POLICER:
+        return
+        
     log(f"Configuring policer+scheduler on {host}")
     iface = f"{host}-eth0"
     
@@ -226,12 +235,13 @@ def apply_host_policing(host: str):
         stderr=subprocess.DEVNULL
     )
     
-    # Add prio qdisc to RTP class
-    subprocess.run(
-        f"mnexec -a {pid} tc qdisc add dev {iface} parent 1:10 handle 10: prio bands 3",
-        shell=True,
-        stderr=subprocess.DEVNULL
-    )
+    # Add prio qdisc to RTP class (scheduler)
+    if ENABLE_SCHEDULER:
+        subprocess.run(
+            f"mnexec -a {pid} tc qdisc add dev {iface} parent 1:10 handle 10: prio bands 3",
+            shell=True,
+            stderr=subprocess.DEVNULL
+        )
     
     # Add filters
     subprocess.run(
@@ -279,18 +289,22 @@ def launch_firewall():
     if ENABLE_FIREWALL and os.path.exists(FIREWALL):
         log("Launching firewall")
         VNFS.append(run(f"python3 {FIREWALL}"))
+    elif ENABLE_FIREWALL:
+        log(f"Warning: Firewall enabled but {FIREWALL} not found")
 
 def launch_monitor():
-    if os.path.exists(MONITOR):
+    if ENABLE_MONITOR and os.path.exists(MONITOR):
         log("Launching monitor")
         VNFS.append(run(f"python3 {MONITOR}"))
+    elif ENABLE_MONITOR:
+        log(f"Warning: Monitor enabled but {MONITOR} not found")
 
 # =========================
 # MAIN
 # =========================
 
 def main():
-    global TARGET_HOSTS
+    global TARGET_HOSTS, ENABLE_CLASSIFIER, ENABLE_POLICER, ENABLE_SCHEDULER, ENABLE_FIREWALL, ENABLE_MONITOR
     
     # Parse command-line arguments
     parser = argparse.ArgumentParser(
@@ -302,9 +316,19 @@ def main():
         default=DEFAULT_TARGET_HOSTS,
         help=f"Target hosts to configure (default: {' '.join(DEFAULT_TARGET_HOSTS)})"
     )
+    parser.add_argument("--no-classifier", action="store_true", help="Disable DSCP classifier")
+    parser.add_argument("--no-policer", action="store_true", help="Disable rate limiting policer")
+    parser.add_argument("--no-scheduler", action="store_true", help="Disable prio scheduler")
+    parser.add_argument("--no-firewall", action="store_true", help="Disable firewall VNF")
+    parser.add_argument("--no-monitor", action="store_true", help="Disable monitor VNF")
     args = parser.parse_args()
     
     TARGET_HOSTS = args.hosts if args.hosts else DEFAULT_TARGET_HOSTS
+    ENABLE_CLASSIFIER = not args.no_classifier
+    ENABLE_POLICER = not args.no_policer
+    ENABLE_SCHEDULER = not args.no_scheduler
+    ENABLE_FIREWALL = not args.no_firewall
+    ENABLE_MONITOR = not args.no_monitor
     
     if os.geteuid() != 0:
         log("Must be run as root")
