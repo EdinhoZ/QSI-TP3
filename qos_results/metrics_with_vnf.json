@@ -1,0 +1,33 @@
+{
+  "streaming": {
+    "throughput_mbps": 10.49,
+    "throughput_avg_per_flow": 5.245,
+    "throughput_min": 5.24,
+    "throughput_max": 5.25,
+    "jitter_avg_ms": 0.9675,
+    "jitter_min_ms": 0.286,
+    "jitter_max_ms": 1.649,
+    "packet_loss_avg_pct": 0.0,
+    "packet_loss_min_pct": 0.0,
+    "packet_loss_max_pct": 0.0,
+    "total_packet_loss_pct": 0.0,
+    "num_flows": 2
+  },
+  "http": {
+    "throughput_mbps": 13.6,
+    "throughput_avg_per_flow": 13.6,
+    "throughput_min": 13.6,
+    "throughput_max": 13.6,
+    "num_flows": 1
+  },
+  "bulk": {
+    "throughput_mbps": 8.86,
+    "throughput_avg_per_flow": 8.86,
+    "throughput_min": 8.86,
+    "throughput_max": 8.86,
+    "num_flows": 1
+  },
+  "ping": {},
+  "variable_load": {},
+  "failure": {}
+}
