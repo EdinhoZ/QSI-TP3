@@ -1,8 +1,4 @@
 #!/usr/bin/env python3
-"""
-QoS Metrics Comparison Script
-Compares metrics from VNF-disabled vs VNF-enabled scenarios and calculates improvement/degradation.
-"""
 import argparse
 import json
 import sys
@@ -18,7 +14,6 @@ class MetricsComparator:
         self.vnf_metrics = None
         
     def load_metrics(self) -> bool:
-        """Load metrics from both JSON files."""
         try:
             with open(self.baseline_file, 'r') as f:
                 self.baseline_metrics = json.load(f)
@@ -97,7 +92,6 @@ class MetricsComparator:
     
     def compare_traffic_class(self, class_name: str, baseline_data: Dict, 
                              vnf_data: Dict) -> Dict:
-        """Compare metrics for a specific traffic class."""
         comparison = {}
         
         # Throughput (higher is better)
@@ -143,7 +137,6 @@ class MetricsComparator:
         return comparison
     
     def compare_all_metrics(self) -> Dict:
-        """Compare all metrics between baseline and VNF scenarios."""
         comparison = {}
         
         # Compare each traffic class
@@ -177,7 +170,6 @@ class MetricsComparator:
         return comparison
     
     def print_comparison(self, comparison: Dict):
-        """Print comparison results in a readable format."""
         print("\n" + "=" * 80)
         print("QoS METRICS COMPARISON: VNF Impact Analysis")
         print("=" * 80)
@@ -186,7 +178,6 @@ class MetricsComparator:
         print("=" * 80)
         
         def print_metric(name: str, data: Dict, indent: int = 0):
-            """Print a single metric comparison."""
             prefix = "  " * indent
             
             if data['status'] == 'N/A':
@@ -276,7 +267,6 @@ class MetricsComparator:
                 print("Assessment: VNFs cause DEGRADATION")
     
     def save_comparison(self, comparison: Dict, output_file: str):
-        """Save comparison results to a JSON file."""
         output = {
             'timestamp': datetime.now().isoformat(),
             'baseline_file': self.baseline_file,

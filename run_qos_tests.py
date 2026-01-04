@@ -1,8 +1,4 @@
 #!/usr/bin/env python3
-"""
-QoS Test Runner
-Runs stress tests with VNFs enabled/disabled and saves metrics to JSON files.
-"""
 import argparse
 import os
 import subprocess
@@ -28,7 +24,6 @@ class QoSTestRunner:
         print(f"[QoSTestRunner {time.strftime('%H:%M:%S')}] {msg}")
     
     def check_mininet_running(self) -> bool:
-        """Check if Mininet is running."""
         result = subprocess.run(
             "pgrep -f 'mininet'",
             shell=True,
@@ -38,7 +33,6 @@ class QoSTestRunner:
         return result.returncode == 0
     
     def start_vnfs(self, hosts: str) -> Optional[subprocess.Popen]:
-        """Start VNFs using apply_and_verify.py"""
         if not os.path.exists(self.apply_vnf_script):
             self.log(f"Error: VNF script not found: {self.apply_vnf_script}")
             return None
@@ -70,7 +64,6 @@ class QoSTestRunner:
             return None
     
     def stop_vnfs(self):
-        """Stop VNFs."""
         if self.vnf_process:
             self.log("Stopping VNFs...")
             try:
@@ -88,7 +81,6 @@ class QoSTestRunner:
             self.log("VNFs stopped")
     
     def cleanup_tc_rules(self, hosts: str):
-        """Clean up traffic control rules from hosts."""
         self.log("Cleaning up TC rules...")
         for host in hosts.split(','):
             host = host.strip()
@@ -113,7 +105,6 @@ class QoSTestRunner:
                 )
     
     def run_stress_test(self, args: argparse.Namespace) -> bool:
-        """Run the stress test script."""
         if not os.path.exists(self.stress_test_script):
             self.log(f"Error: Stress test script not found: {self.stress_test_script}")
             return False
@@ -160,7 +151,6 @@ class QoSTestRunner:
             return False
     
     def extract_and_save_metrics(self, output_file: str) -> bool:
-        """Extract metrics from logs and save to JSON."""
         if not os.path.isdir(self.traffic_logs_dir):
             self.log(f"Error: Traffic logs directory not found: {self.traffic_logs_dir}")
             return False
@@ -186,7 +176,6 @@ class QoSTestRunner:
             return False
     
     def run_test_scenario(self, args: argparse.Namespace, vnf_enabled: bool, output_file: str) -> bool:
-        """Run a complete test scenario (with or without VNFs)."""
         scenario_name = "WITH VNFs" if vnf_enabled else "WITHOUT VNFs"
         self.log("=" * 70)
         self.log(f"RUNNING SCENARIO: {scenario_name}")

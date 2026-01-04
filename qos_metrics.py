@@ -1,8 +1,4 @@
 #!/usr/bin/env python3
-"""
-QoS Metrics Extraction Module
-Extracts throughput, latency, packet loss, and jitter from iperf and ping logs.
-"""
 import os
 import re
 import json
@@ -11,12 +7,6 @@ import statistics
 
 
 def parse_iperf_udp_receiver(log_content: str) -> Optional[Dict]:
-    """
-    Parse iperf UDP receiver summary to extract throughput, packet loss, and jitter.
-    
-    Expected format:
-    [  3]  0.0-30.1 sec   18.0 MBytes  5.03 Mbits/sec   0.123 ms  123/12820 (0.96%)
-    """
     result = {
         'throughput_mbps': None,
         'packet_loss_pct': None,
@@ -56,14 +46,6 @@ def parse_iperf_udp_receiver(log_content: str) -> Optional[Dict]:
 
 
 def parse_iperf_tcp(log_content: str) -> Optional[Dict]:
-    """
-    Parse iperf TCP summary to extract throughput.
-    
-    Expected format:
-    [SUM]  0.0-30.0 sec   150 MBytes  41.9 Mbits/sec
-    or
-    [  3]  0.0-30.0 sec   150 MBytes  41.9 Mbits/sec
-    """
     result = {
         'throughput_mbps': None
     }
@@ -106,12 +88,6 @@ def parse_iperf_tcp(log_content: str) -> Optional[Dict]:
 
 
 def parse_ping_log(log_content: str) -> Optional[Dict]:
-    """
-    Parse ping output to extract RTT statistics.
-    
-    Expected format:
-    rtt min/avg/max/mdev = 0.123/0.456/0.789/0.012 ms
-    """
     result = {
         'rtt_min_ms': None,
         'rtt_avg_ms': None,
@@ -145,16 +121,6 @@ def parse_ping_log(log_content: str) -> Optional[Dict]:
 
 
 def extract_metrics_from_log_file(log_file: str, log_type: str) -> Optional[Dict]:
-    """
-    Extract metrics from a single log file.
-    
-    Args:
-        log_file: Path to the log file
-        log_type: Type of log ('udp', 'tcp', or 'ping')
-    
-    Returns:
-        Dictionary with extracted metrics or None if parsing failed
-    """
     if not os.path.exists(log_file):
         return None
     
@@ -176,17 +142,6 @@ def extract_metrics_from_log_file(log_file: str, log_type: str) -> Optional[Dict
 
 
 def aggregate_flow_metrics(log_dir: str, flow_prefix: str, log_type: str) -> Optional[Dict]:
-    """
-    Aggregate metrics from multiple flows with the same prefix.
-    
-    Args:
-        log_dir: Directory containing log files
-        flow_prefix: Prefix of log files to aggregate (e.g., 'stream_')
-        log_type: Type of logs ('udp', 'tcp', or 'ping')
-    
-    Returns:
-        Aggregated metrics dictionary
-    """
     if not os.path.isdir(log_dir):
         return None
     
@@ -255,17 +210,6 @@ def aggregate_flow_metrics(log_dir: str, flow_prefix: str, log_type: str) -> Opt
 
 
 def extract_all_metrics(log_dir: str) -> Dict:
-    """
-    Extract all QoS metrics from a stress test run.
-    
-    Returns a structured dictionary with metrics for different traffic types:
-    - streaming (UDP)
-    - http (TCP)
-    - bulk (TCP)
-    - ping (ICMP)
-    - variable_load (UDP)
-    - failure scenarios
-    """
     metrics = {
         'streaming': {},
         'http': {},
