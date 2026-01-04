@@ -5,12 +5,14 @@ from mininet.net import Mininet
 from mininet.node import Node, OVSBridge
 from mininet.cli import CLI
 from mininet.log import setLogLevel, info
+from mininet.link import TCLink
 import ipaddress
 import time
 import sys
 from collections import deque, defaultdict
 import json
 import os
+
 
 class Router(Node):
     def config(self, **params):
@@ -20,6 +22,7 @@ class Router(Node):
     def terminate(self):
         self.cmd("sysctl net.ipv4.ip_forward=0")
         super().terminate()
+
 
 class Topology(Topo):
 
@@ -67,6 +70,12 @@ class Topology(Topo):
 
         self.addLink(routers["r5"], h11)
 
+        # =========================
+        # CORE ROUTER LINKS (CAPPED)
+        # =========================
+        CORE_BW = 35      # Mbps
+        CORE_DELAY = "5ms"
+
         router_links = [
             ("r1", "r2"),
             ("r1", "r3"),
@@ -79,12 +88,20 @@ class Topology(Topo):
         self.p2p_links = []
         for (a, b) in router_links:
             self.p2p_links.append((a, b))
-            self.addLink(routers[a], routers[b])
+            self.addLink(
+                routers[a],
+                routers[b],
+                cls=TCLink,
+                bw=CORE_BW,
+                delay=CORE_DELAY
+            )
 
+        # Router–LAN links (UNCAPPED)
         self.addLink(routers["r1"], s1)
         self.addLink(routers["r2"], s2)
         self.addLink(routers["r3"], s3)
         self.addLink(routers["r4"], s4)
+
 
 topos = {"topology": (lambda: Topology())}
 
@@ -114,42 +131,25 @@ def ip_assign(net):
         if switch_name:
             sw = net.get(switch_name)
             r_intf, sw_intf = connected_intf(router, sw)
-            if r_intf is None:
-                info(f"WARNING: router {rname} has no connection to switch {switch_name}; using defaultintf()\n")
-                r_intf_name = router.defaultintf().name
-            else:
-                r_intf_name = r_intf.name
             r_ip = next(ip_iter)
-            router.setIP(str(r_ip), prefixLen=24, intf=r_intf_name)
+            router.setIP(str(r_ip), prefixLen=24, intf=r_intf.name)
 
-            hosts_on_sw = []
             for h in net.hosts:
-                conns = h.connectionsTo(sw)
-                if conns:
-                    hosts_on_sw.append(h)
-
-            for h in hosts_on_sw:
-                hip = next(ip_iter)
-                h.setIP(str(hip), prefixLen=24)
-                h.cmd(f"ip route add default via {r_ip}")
+                if h.connectionsTo(sw):
+                    hip = next(ip_iter)
+                    h.setIP(str(hip), prefixLen=24)
+                    h.cmd(f"ip route add default via {r_ip}")
 
         else:
-            # caso do r5 (nenhum switch)
-            found = False
             for h in net.hosts:
                 intf_r, intf_h = connected_intf(router, h)
-                if intf_r is not None:
+                if intf_r:
                     r_ip = next(ip_iter)
                     router.setIP(str(r_ip), prefixLen=24, intf=intf_r.name)
                     hip = next(ip_iter)
                     h.setIP(str(hip), prefixLen=24)
                     h.cmd(f"ip route add default via {r_ip}")
-                    found = True
                     break
-            if not found:
-                info(f"WARNING: r5 had no direct host connection found; assigned IP to defaultintf()\n")
-                r_ip = next(ip_iter)
-                router.setIP(str(r_ip), prefixLen=24, intf=router.defaultintf().name)
 
     info("*** Assigning p2p links (/30)\n")
 
@@ -157,23 +157,18 @@ def ip_assign(net):
     sub_iter = base.subnets(new_prefix=30)
 
     r_adj = defaultdict(set)
-    link_ip = {}   # (r1, r2) -> (ip1, ip2, subnet)
+    link_ip = {}
 
     topo = net.topo
 
     for (a, b) in topo.p2p_links:
         subnet = next(sub_iter)
-        hosts = list(subnet.hosts())
-        ipA, ipB = hosts[0], hosts[1]
+        ipA, ipB = list(subnet.hosts())
 
         ra = net.get(a)
         rb = net.get(b)
 
         intfA, intfB = connected_intf(ra, rb)
-        if intfA is None or intfB is None:
-            info(f"ERROR: no intf between {a} and {b} detected\n")
-            continue
-
         ra.setIP(str(ipA), prefixLen=30, intf=intfA.name)
         rb.setIP(str(ipB), prefixLen=30, intf=intfB.name)
 
@@ -191,43 +186,34 @@ def ip_assign(net):
         seen = {src}
         while q:
             path = q.popleft()
-            cur = path[-1]
-            if cur == dst:
+            if path[-1] == dst:
                 return path
-            for nb in r_adj[cur]:
+            for nb in r_adj[path[-1]]:
                 if nb not in seen:
                     seen.add(nb)
                     q.append(path + [nb])
         return None
 
-    # Add routes to all LAN subnets AND all p2p /30s
-    for rname in ["r1", "r2", "r3", "r4", "r5"]:
+    for rname in router_subnet:
         r = net.get(rname)
-
-        for target in ["r1", "r2", "r3", "r4", "r5"]:
+        for target in router_subnet:
             if target == rname:
                 continue
 
-            # 1. Route to target LAN (10.x.0.0/24)
             path = bfs(rname, target)
             if not path:
                 continue
 
-            next_hop = path[1]
-            nh_entry = link_ip.get((rname, next_hop))
-            if not nh_entry:
-                continue
-            nh_ip = nh_entry[1]
-
-            # LAN route
+            nh = path[1]
+            nh_ip = link_ip[(rname, nh)][1]
             r.cmd(f"ip route add {router_subnet[target]} via {nh_ip}")
 
-            # 2. Route to every p2p /30 subnet attached to 'target'
-            for (a, b), (ipa, ipb, subnet) in link_ip.items():
-                if a == target:          # subnets connected to 'target'
+            for (a, _), (_, _, subnet) in link_ip.items():
+                if a == target:
                     r.cmd(f"ip route add {subnet} via {nh_ip}")
 
     info("*** Routing installed\n")
+
 
 def run(flag):
     topo = Topology()
@@ -236,22 +222,6 @@ def run(flag):
 
     ip_assign(net)
 
-    # Export host PIDs so external scripts (e.g., test_script.py) can run tc inside host namespaces safely
-    host_pid_path = "/tmp/mininet_hosts.json"
-    try:
-        data = {h.name: h.pid for h in net.hosts}
-        with open(host_pid_path, "w") as f:
-            json.dump(data, f)
-        info(f"\n*** Host PID map written to {host_pid_path}\n")
-    except Exception as e:
-        info(f"\n*** WARNING: failed to write host PID map: {e}\n")
-
-    info("\n*** intf dump\n")
-    for r in ["r1", "r2", "r3", "r4", "r5"]:
-        info(f"\n=== {r} ===\n")
-        info(net.get(r).cmd("ip -4 addr show"))
-        info(net.get(r).cmd("ip route show"))
-
     if flag == "test":
         info("\n*** Running pingAll\n")
         loss = net.pingAll()
@@ -259,6 +229,7 @@ def run(flag):
 
     CLI(net)
     net.stop()
+
 
 if __name__ == "__main__":
     setLogLevel("info")

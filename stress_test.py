@@ -2,18 +2,17 @@
 """
 Stress test script for VNFs: congestion, variable load, and failure scenarios.
 - Uses iperf (v2) for traffic generation inside Mininet namespaces.
-- Uses tc/netem to inject delay/loss (failures) on client interface.
+- Uses tc/netem to inject delay/loss (failures) on client interfaces.
 """
 import argparse
-import json
 import os
 import signal
 import subprocess
 import sys
 import time
 from typing import Dict, List, Optional
+import psutil  # pip install psutil
 
-HOST_PID_FILE = "/tmp/mininet_hosts.json"
 LOG_DIR_NAME = "traffic_logs"
 STREAM_PORTS = [5004, 5005]  # UDP streaming
 HTTP_PORT = 80               # TCP medium priority
@@ -54,21 +53,38 @@ def exec_in_host(host_pid: int, cmd: str, background: bool = False):
     return subprocess.run(full_cmd, shell=True, capture_output=True, text=True)
 
 
-def load_host_pids() -> Dict[str, int]:
-    if not os.path.exists(HOST_PID_FILE):
-        raise FileNotFoundError(f"Host PID file not found: {HOST_PID_FILE}")
-    with open(HOST_PID_FILE, "r") as f:
-        return json.load(f)
+def get_host_pid(hostname: str) -> int:
+    """Return the PID of a running Mininet host process."""
+    for proc in psutil.process_iter(["pid", "cmdline"]):
+        cmdline = proc.info["cmdline"]
+        if cmdline and any(f"mininet:{hostname}" in s for s in cmdline):
+            return proc.info["pid"]
+    raise RuntimeError(f"Host {hostname} is not running in Mininet or PID not found")
 
 
-def get_host_ip(host_pid: int, iface: str = "eth0") -> Optional[str]:
-    res = exec_in_host(host_pid, f"ip -4 addr show {iface}")
+def get_host_ip(host_pid: int, iface: Optional[str] = None) -> Optional[str]:
+    """
+    Get the IPv4 address of a Mininet host.
+    If iface is None, automatically detect the first usable interface.
+    """
+    if iface:
+        cmd = f"ip -4 addr show {iface}"
+    else:
+        cmd = "ip -4 addr show | grep inet"
+    res = exec_in_host(host_pid, cmd)
     if res.returncode != 0:
         return None
+
+    # parse output for inet address
     for line in res.stdout.splitlines():
+        line = line.strip()
         if "inet " in line:
-            return line.strip().split()[1].split('/')[0]
+            ip = line.split()[1].split("/")[0]
+            # skip loopback
+            if ip != "127.0.0.1":
+                return ip
     return None
+
 
 
 def check_iperf(host_pid: int) -> bool:
@@ -92,11 +108,8 @@ def start_iperf_server(host_pid: int, port: int, udp: bool):
 def start_udp_flow(client_pid: int, server_ip: str, port: int, bw: str, duration: int, label: str, log_dir: str):
     logfile_ns = f"/tmp/{label.replace(' ', '_')}.log"
     cmd = f"iperf -c {server_ip} -p {port} -u -b {bw} -t {duration} -i 1"
-    
-    # Stream output live to console and also save to log
     full_cmd = f"{cmd} | tee {logfile_ns}"
     proc = exec_in_host(client_pid, full_cmd, background=True)
-    
     proc.log_info = (client_pid, logfile_ns, f"{log_dir}/{label}.log")
     log(f"Started UDP flow {label} -> {server_ip}:{port} @ {bw} for {duration}s (live console + log)")
     return proc
@@ -106,18 +119,14 @@ def start_tcp_flow(client_pid: int, server_ip: str, port: int, duration: int, la
     logfile_ns = f"/tmp/{label.replace(' ', '_')}.log"
     par_flag = f"-P {parallel}" if parallel > 1 else ""
     cmd = f"iperf -c {server_ip} -p {port} {par_flag} -t {duration} -i 1"
-    
-    # Stream output live to console and also save to log
     full_cmd = f"{cmd} | tee {logfile_ns}"
     proc = exec_in_host(client_pid, full_cmd, background=True)
-    
     proc.log_info = (client_pid, logfile_ns, f"{log_dir}/{label}.log")
     log(f"Started TCP flow {label} -> {server_ip}:{port} for {duration}s (P={parallel}, live console + log)")
     return proc
 
 
 def start_ping(client_pid: int, target_ip: str, duration: int, interval: float, label: str, log_dir: str):
-    # Ping to approximate RTT during traffic; count derived from duration/interval
     count = max(1, int(duration / interval) + 1)
     logfile_ns = f"/tmp/{label.replace(' ', '_')}.log"
     cmd = f"ping -i {interval} -c {count} {target_ip} > {logfile_ns} 2>&1"
@@ -253,7 +262,7 @@ def run_scenarios(server_pid: int, client_entries: List[Dict], server_ip: str, l
         log("Phase1-only flag set; skipping variable load and failure phases")
         return
 
-    # Phase 2: Variable load (bursty UDP) using first client only (to keep runtime moderate)
+    # Phase 2: Variable load (bursty UDP) using first client only
     log("=" * 70)
     log("PHASE 2: Variable load (bursty)")
     first = client_entries[0]
@@ -299,34 +308,27 @@ def main():
     os.makedirs(log_dir, exist_ok=True)
     purge_log_dir(log_dir)
 
-    host_pids = load_host_pids()
     client_names = [c.strip() for c in args.clients.split(',') if c.strip()]
-    if args.server not in host_pids:
-        log(f"Server not found. Available: {list(host_pids.keys())}")
+
+    try:
+        host_pids = {args.server: get_host_pid(args.server)}
+        for c in client_names:
+            host_pids[c] = get_host_pid(c)
+    except RuntimeError as e:
+        log(f"FATAL: {e}")
         sys.exit(1)
-    for c in client_names:
-        if c not in host_pids:
-            log(f"Client {c} not found. Available: {list(host_pids.keys())}")
-            sys.exit(1)
 
     server_pid = host_pids[args.server]
-    client_entries = []
-    for c in client_names:
-        pid = host_pids[c]
-        client_entries.append({
-            "name": c,
-            "pid": pid,
-            "iface": f"{c}-eth0",
-        })
+    client_entries = [{"name": c, "pid": host_pids[c], "iface": "eth0"} for c in client_names]
 
     # Check iperf presence
     if not check_iperf(server_pid) or any(not check_iperf(e["pid"]) for e in client_entries):
         log("iperf not found in namespace; install with apt-get install iperf")
         sys.exit(1)
 
-    server_ip = get_host_ip(server_pid, f"{args.server}-eth0")
+    server_ip = get_host_ip(server_pid, iface=None)
     if not server_ip:
-        log("Could not determine server IP")
+        log("Could not determine server IP on any interface")
         sys.exit(1)
 
     log(f"Server {args.server} IP: {server_ip}")

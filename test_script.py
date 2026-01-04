@@ -10,28 +10,21 @@ from typing import List
 # CONFIG
 # =========================
 
-CLASSIFIER = "classifier.py"
-POLICER = "policer.py"
-SCHEDULER = "scheduler.py"
 MONITOR = "monitor.py"
 FIREWALL = "firewall.py"
 
-# Scheduler
-SCHEDULER_BANDS = 3
-SCHEDULER_CLASSES = [
-    ("voip", 46, 0),
-    ("video", 34, 1),
-    ("bulk", 0, 2),
-]
+# HTB+prio configuration for host interfaces
+# Rate limits per DSCP class
+RATE_LIMITS = {
+    46: "20mbit",  # RTP/VoIP (DSCP EF)
+    34: "10mbit",  # HTTP (DSCP AF41)
+    0: "5mbit",    # Bulk/Default
+}
 
-# Policer
-POLICER_CLASSES = [
-    ("RTP", 46, "20mbit", "50kb"),
-    ("HTTP", 34, "10mbit", "50kb"),
-    ("BULK", 0, "5mbit", "50kb"),
-]
+# Hosts to apply VNF configuration
+TARGET_HOSTS = ["h1", "h4"]  # Modify this list as needed
 
-ENABLE_EGRESS_SHAPING = False
+ENABLE_FIREWALL = False
 
 # =========================
 # GLOBAL STATE
@@ -66,22 +59,39 @@ def has_cmd(cmd: str) -> bool:
 # TOPOLOGY DISCOVERY
 # =========================
 
-def detect_bridges() -> List[str]:
-    if has_cmd("ovs-vsctl"):
-        out = subprocess.run(
-            "ovs-vsctl list-br",
+def get_mininet_hosts() -> List[str]:
+    """Get list of Mininet hosts from running processes"""
+    try:
+        # Check for Mininet host processes
+        result = subprocess.run(
+            "ps aux | grep 'mininet:h' | grep -v grep | awk '{print $NF}'",
             shell=True,
             capture_output=True,
             text=True
-        ).stdout
-        bridges = [b.strip() for b in out.splitlines() if b.strip()]
-        if bridges:
-            return bridges
-
-    return [
-        d for d in os.listdir("/sys/class/net")
-        if d.startswith("s") and d[1:].isdigit()
-    ]
+        )
+        # Extract host names like h1, h2, h3 from "mininet:h1" format
+        hosts = []
+        for line in result.stdout.splitlines():
+            if 'mininet:h' in line:
+                host = line.split(':')[-1].strip()
+                if host.startswith('h') and host[1:].replace('h', '').isdigit():
+                    hosts.append(host)
+        
+        if hosts:
+            return sorted(set(hosts))
+        
+        # Fallback: check for host interfaces in root namespace
+        result = subprocess.run(
+            "ip link show | grep -oE 'h[0-9]+-eth0'",
+            shell=True,
+            capture_output=True,
+            text=True
+        )
+        hosts = [iface.replace('-eth0', '') for iface in result.stdout.splitlines()]
+        return sorted(set(hosts))
+    except Exception as e:
+        log(f"Error detecting hosts: {e}")
+        return []
 
 # =========================
 # CLEANUP
@@ -95,9 +105,21 @@ def cleanup():
         except Exception:
             pass
 
-    for br in detect_bridges():
-        subprocess.run(f"tc qdisc del dev {br} root", shell=True, stderr=subprocess.DEVNULL)
-        subprocess.run(f"tc qdisc del dev {br} ingress", shell=True, stderr=subprocess.DEVNULL)
+    # Clean up host interface tc rules
+    for host in TARGET_HOSTS:
+        iface = f"{host}-eth0"
+        pid = get_host_pid(host)
+        if pid:
+            subprocess.run(
+                f"mnexec -a {pid} tc qdisc del dev {iface} root",
+                shell=True,
+                stderr=subprocess.DEVNULL
+            )
+            subprocess.run(
+                f"mnexec -a {pid} iptables -t mangle -F",
+                shell=True,
+                stderr=subprocess.DEVNULL
+            )
 
     log("Cleanup complete")
 
@@ -106,42 +128,144 @@ def handle_signal(sig, frame):
     sys.exit(0)
 
 # =========================
-# VNF LAUNCHERS
+# VNF CONFIGURATION
 # =========================
 
-def launch_classifier(bridges):
-    for br in bridges:
-        VNFS.append(run(f"python3 {CLASSIFIER} -b {br}"))
+def get_host_pid(host: str) -> str:
+    """Get the PID of a Mininet host process"""
+    try:
+        result = subprocess.run(
+            f"pgrep -f 'mininet:{host}$'",
+            shell=True,
+            capture_output=True,
+            text=True
+        )
+        pid = result.stdout.strip().split('\n')[0]  # Get first PID if multiple
+        if pid:
+            return pid
+        return None
+    except Exception:
+        return None
+
+def apply_host_classifier(host: str):
+    """Apply DSCP marking in host namespace using iptables"""
+    log(f"Configuring classifier on {host}")
+    iface = f"{host}-eth0"
+    
+    pid = get_host_pid(host)
+    if not pid:
+        log(f"Error: Cannot find PID for {host}")
+        return
+    
+    # Clear existing mangle rules
+    subprocess.run(
+        f"mnexec -a {pid} iptables -t mangle -F",
+        shell=True,
+        stderr=subprocess.DEVNULL
+    )
+    
+    # Mark RTP traffic (ports 5004, 5005 and RTP range) with DSCP EF (46)
+    subprocess.run(
+        f"mnexec -a {pid} iptables -t mangle -A OUTPUT -p udp --dport 16384:32767 -j DSCP --set-dscp 46",
+        shell=True
+    )
+    subprocess.run(
+        f"mnexec -a {pid} iptables -t mangle -A OUTPUT -p udp --dport 5004 -j DSCP --set-dscp 46",
+        shell=True
+    )
+    subprocess.run(
+        f"mnexec -a {pid} iptables -t mangle -A OUTPUT -p udp --dport 5005 -j DSCP --set-dscp 46",
+        shell=True
+    )
+    
+    # Mark HTTP traffic (port 80) with DSCP AF41 (34)
+    subprocess.run(
+        f"mnexec -a {pid} iptables -t mangle -A OUTPUT -p tcp --dport 80 -j DSCP --set-dscp 34",
+        shell=True
+    )
+    
+    log(f"Classifier configured on {host}")
+
+def apply_host_policing(host: str):
+    """Apply HTB+prio qdisc hierarchy on host interface for rate limiting + prioritization"""
+    log(f"Configuring policer+scheduler on {host}")
+    iface = f"{host}-eth0"
+    
+    pid = get_host_pid(host)
+    if not pid:
+        log(f"Error: Cannot find PID for {host}")
+        return
+    
+    # Remove existing qdiscs
+    subprocess.run(
+        f"mnexec -a {pid} tc qdisc del dev {iface} root",
+        shell=True,
+        stderr=subprocess.DEVNULL
+    )
+    
+    # Create HTB root qdisc
+    subprocess.run(
+        f"mnexec -a {pid} tc qdisc add dev {iface} root handle 1: htb default 30",
+        shell=True
+    )
+    
+    # Create root class
+    subprocess.run(
+        f"mnexec -a {pid} tc class add dev {iface} parent 1: classid 1:1 htb rate 100mbit ceil 100mbit",
+        shell=True
+    )
+    
+    # Create rate-limited classes for each DSCP
+    # Class 1:10 - RTP (DSCP 46) - 20mbit
+    subprocess.run(
+        f"mnexec -a {pid} tc class add dev {iface} parent 1:1 classid 1:10 htb rate 20mbit ceil 20mbit prio 0",
+        shell=True
+    )
+    
+    # Class 1:20 - HTTP (DSCP 34) - 10mbit
+    subprocess.run(
+        f"mnexec -a {pid} tc class add dev {iface} parent 1:1 classid 1:20 htb rate 10mbit ceil 10mbit prio 1",
+        shell=True
+    )
+    
+    # Class 1:30 - Bulk (DSCP 0) - 5mbit
+    subprocess.run(
+        f"mnexec -a {pid} tc class add dev {iface} parent 1:1 classid 1:30 htb rate 5mbit ceil 5mbit prio 2",
+        shell=True
+    )
+    
+    # Add prio qdisc to RTP class for internal prioritization
+    subprocess.run(
+        f"mnexec -a {pid} tc qdisc add dev {iface} parent 1:10 handle 10: prio bands 3",
+        shell=True
+    )
+    
+    # Add filters to classify traffic by DSCP
+    # DSCP 46 (184 in TOS) -> class 1:10
+    subprocess.run(
+        f"mnexec -a {pid} tc filter add dev {iface} protocol ip parent 1: prio 1 u32 match ip tos 0xb8 0xff flowid 1:10",
+        shell=True
+    )
+    
+    # DSCP 34 (136 in TOS) -> class 1:20
+    subprocess.run(
+        f"mnexec -a {pid} tc filter add dev {iface} protocol ip parent 1: prio 2 u32 match ip tos 0x88 0xff flowid 1:20",
+        shell=True
+    )
+    
+    # Default traffic -> class 1:30 (handled by default 30)
+    
+    log(f"Policer+scheduler configured on {host}")
 
 def launch_firewall():
-    if os.path.exists(FIREWALL):
+    if ENABLE_FIREWALL and os.path.exists(FIREWALL):
+        log("Launching firewall")
         VNFS.append(run(f"python3 {FIREWALL}"))
 
-def launch_policer(bridges):
-    for br in bridges:
-        args = " ".join(
-            f"-c {n}:{d}:{r}:{b}"
-            for n, d, r, b in POLICER_CLASSES
-        )
-        cmd = f"python3 {POLICER} -i {br} {args}"
-        if ENABLE_EGRESS_SHAPING:
-            cmd += " --shaping"
-        VNFS.append(run(cmd))
-
-def launch_scheduler(bridges):
-    for br in bridges:
-        args = " ".join(
-            f"-c {n}:{d}:{b}"
-            for n, d, b in SCHEDULER_CLASSES
-        )
-        VNFS.append(
-            run(
-                f"python3 {SCHEDULER} -i {br} -b {SCHEDULER_BANDS} {args}"
-            )
-        )
-
 def launch_monitor():
-    VNFS.append(run(f"python3 {MONITOR}"))
+    if os.path.exists(MONITOR):
+        log("Launching monitor")
+        VNFS.append(run(f"python3 {MONITOR}"))
 
 # =========================
 # MAIN
@@ -155,39 +279,45 @@ def main():
     signal.signal(signal.SIGINT, handle_signal)
     signal.signal(signal.SIGTERM, handle_signal)
 
-    bridges = detect_bridges()
-    if not bridges:
-        log("No OVS bridges detected")
+    # Check if Mininet is running
+    hosts = get_mininet_hosts()
+    if not hosts:
+        log("No Mininet hosts detected. Is Mininet running?")
         sys.exit(1)
 
-    log(f"Detected bridges: {bridges}")
+    log(f"Detected Mininet hosts: {hosts}")
+    log(f"Configuring VNFs on: {TARGET_HOSTS}")
 
     # ------------------------------------------------
-    # ORDERED VNF CHAIN
+    # APPLY VNF CONFIGURATION TO TARGET HOSTS
     # ------------------------------------------------
-    log("Launching classifier")
-    launch_classifier(bridges)
+    for host in TARGET_HOSTS:
+        if host not in hosts:
+            log(f"Warning: {host} not found in running Mininet topology")
+            continue
+            
+        log(f"Configuring {host}...")
+        apply_host_classifier(host)
+        apply_host_policing(host)
+    
     time.sleep(1)
 
-    log("Launching firewall")
+    # ------------------------------------------------
+    # LAUNCH BACKGROUND VNFS
+    # ------------------------------------------------
     launch_firewall()
-    time.sleep(1)
-
-    log("Launching policer (ingress)")
-    launch_policer(bridges)
-    time.sleep(1)
-
-    log("Launching scheduler (egress)")
-    launch_scheduler(bridges)
-    time.sleep(1)
-
-    log("Launching monitor")
+    time.sleep(0.5)
+    
     launch_monitor()
 
-    log("All VNFs running")
+    log("All VNFs configured and running")
+    log("Press Ctrl+C to stop")
 
-    while True:
-        time.sleep(1)
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        pass
 
 if __name__ == "__main__":
     main()
