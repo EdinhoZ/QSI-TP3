@@ -257,6 +257,10 @@ def run_scenarios(server_pid: int, client_entries: List[Dict], server_ip: str, l
         if args.ping:
             start_ping(cpid, server_ip, args.phase1_duration, args.ping_interval, f"ping_{cname}", log_dir)
     time.sleep(args.phase1_duration)
+    
+    # Give iperf time to write final summary lines
+    log("Waiting for iperf to write final summaries...")
+    time.sleep(3)
 
     if args.phase1_only:
         log("Phase1-only flag set; skipping variable load and failure phases")
@@ -286,6 +290,11 @@ def run_scenarios(server_pid: int, client_entries: List[Dict], server_ip: str, l
     start_udp_flow(first["pid"], server_ip, STREAM_PORTS[0], args.stream_bw, args.failure_duration, f"failure_udp_{first['name']}", log_dir)
     start_tcp_flow(first["pid"], server_ip, BULK_PORT, args.failure_duration, f"failure_tcp_{first['name']}", log_dir, parallel=2)
     time.sleep(args.failure_duration)
+    
+    # Give iperf time to write final summaries
+    log("Waiting for iperf to write final summaries...")
+    time.sleep(3)
+    
     clear_netem(first["pid"], first["iface"])
 
 
