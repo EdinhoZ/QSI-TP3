@@ -2,8 +2,7 @@
 
 vnf_logs/
 traffic_logs/
+qos_results/
 
 # Temporary files
 index.html
-
-e2e_test.py

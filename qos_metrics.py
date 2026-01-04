@@ -153,6 +153,24 @@ def aggregate_flow_metrics(log_dir: str, flow_prefix: str, log_type: str) -> Opt
             if metrics:
                 metrics_list.append(metrics)
     
+    # For UDP streaming, also check server logs (server_5004.log, server_5005.log)
+    if log_type == 'udp' and flow_prefix == 'stream_':
+        for port in [5004, 5005]:
+            server_log = os.path.join(log_dir, f'server_{port}.log')
+            if os.path.exists(server_log):
+                server_metrics = extract_metrics_from_log_file(server_log, log_type)
+                if server_metrics:
+                    # Server logs have jitter and packet loss - merge with client metrics
+                    for i, m in enumerate(metrics_list):
+                        # Match by similar throughput
+                        if m.get('throughput_mbps') and server_metrics.get('throughput_mbps'):
+                            if abs(m['throughput_mbps'] - server_metrics['throughput_mbps']) < 1.0:
+                                m.update({k: v for k, v in server_metrics.items() if v is not None})
+                                break
+                    else:
+                        # No match, add as new
+                        metrics_list.append(server_metrics)
+    
     if not metrics_list:
         return None
     
