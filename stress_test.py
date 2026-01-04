@@ -181,9 +181,55 @@ def apply_netem(host_pid: int, iface: str, delay_ms: Optional[int] = None, loss_
     if not parts:
         return
     spec = " ".join(parts)
-    exec_in_host(host_pid, f"tc qdisc del dev {iface} root || true")
-    exec_in_host(host_pid, f"tc qdisc add dev {iface} root netem {spec}")
-    log(f"Applied netem on {iface}: {spec}")
+    
+    # Clear any existing qdisc first
+    del_res = exec_in_host(host_pid, f"tc qdisc del dev {iface} root 2>/dev/null || true")
+    
+    # Add netem qdisc
+    add_res = exec_in_host(host_pid, f"tc qdisc add dev {iface} root netem {spec}")
+    if add_res.returncode != 0:
+        log(f"ERROR: Failed to add netem on {iface}")
+        log(f"  Command stderr: {add_res.stderr.strip()}")
+        return
+    
+    # Verify netem was applied and log the configuration
+    res = exec_in_host(host_pid, f"tc qdisc show dev {iface}")
+    if res.returncode == 0 and res.stdout.strip():
+        log(f"Applied netem on {iface}: {spec}")
+        log(f"  Verified qdisc config: {res.stdout.strip()}")
+    else:
+        log(f"ERROR: Failed to verify netem on {iface}")
+        log(f"  tc qdisc output: '{res.stdout.strip()}'")
+        if res.stderr:
+            log(f"  tc stderr: {res.stderr.strip()}")
+
+
+def verify_netem(host_pid: int, iface: str) -> bool:
+    """Verify that netem is actually applied to the interface."""
+    res = exec_in_host(host_pid, f"tc qdisc show dev {iface}")
+    if res.returncode == 0 and "netem" in res.stdout:
+        log(f"Netem verification for {iface}: {res.stdout.strip()}")
+        return True
+    else:
+        log(f"WARNING: Netem NOT found on {iface}. tc output: {res.stdout}")
+        return False
+
+
+def get_interface_stats(host_pid: int, iface: str, label: str = ""):
+    """Get interface packet/loss statistics."""
+    res = exec_in_host(host_pid, f"ip -s link show {iface}")
+    if res.returncode == 0:
+        lines = res.stdout.splitlines()
+        for i, line in enumerate(lines):
+            if "RX" in line or "TX" in line or "dropped" in line.lower():
+                log(f"  {label} {iface} stats: {line.strip()}")
+    return res.returncode == 0
+
+
+def clear_netem(host_pid: int, iface: str):
+    """Remove netem qdisc from interface."""
+    exec_in_host(host_pid, f"tc qdisc del dev {iface} root")
+    log(f"Cleared netem from {iface}")
 
 
 def clear_netem(host_pid: int, iface: str):
@@ -200,6 +246,252 @@ def cleanup(server_pid: int, client_pids: List[int], client_ifaces: List[str]):
     for pid in client_pids:
         kill_iperf(pid)
     time.sleep(0.2)
+
+
+def parse_metrics_from_logs(log_dir: str) -> Dict[str, Dict[str, str]]:
+    """
+    Extract and compare baseline (Phase 1/2) vs failure (Phase 3) metrics.
+    Returns dict with RTP loss, HTTP throughput/times, Bulk throughput, jitter stats, and recovery time.
+    """
+    metrics = {
+        "baseline_rtp_loss": {},
+        "baseline_http": {},
+        "baseline_bulk": {},
+        "baseline_jitter": {},
+        "failure_rtp_loss": {},
+        "failure_http": {},
+        "failure_bulk": {},
+        "failure_jitter_range": {},
+        "failure_recovery_time": {},
+    }
+    
+    try:
+        names = sorted(os.listdir(log_dir))
+    except FileNotFoundError:
+        return metrics
+    
+    # Extract RTP loss from baseline and failure
+    for fname in names:
+        if fname.startswith("stream_"):
+            host = fname.replace("stream_", "").replace(".log", "")
+            path = os.path.join(log_dir, fname)
+            try:
+                with open(path) as f:
+                    content = f.read()
+                    for line in content.splitlines():
+                        if "datagrams received" in line.lower() and "lost" in line.lower():
+                            metrics["baseline_rtp_loss"][host] = line.strip()
+                            break
+            except Exception:
+                pass
+        
+        elif fname.startswith("failure_udp_"):
+            host = fname.replace("failure_udp_", "").replace(".log", "")
+            path = os.path.join(log_dir, fname)
+            try:
+                with open(path) as f:
+                    content = f.read()
+                    for line in content.splitlines():
+                        if "datagrams received" in line.lower() and "lost" in line.lower():
+                            metrics["failure_rtp_loss"][host] = line.strip()
+                            break
+            except Exception:
+                pass
+    
+    # Extract HTTP metrics (throughput and connection times)
+    for fname in names:
+        if fname.startswith("http_"):
+            host = fname.replace("http_", "").replace(".log", "")
+            path = os.path.join(log_dir, fname)
+            try:
+                with open(path) as f:
+                    lines = f.read().splitlines()
+                    # Find total throughput line (ends with receiver)
+                    for line in reversed(lines):
+                        if "0.0000-" in line and "sec" in line and "Mbits" in line:
+                            metrics["baseline_http"][host] = line.strip()
+                            break
+                    # Find connection times
+                    for line in lines:
+                        if "[ CT]" in line and "final" in line:
+                            metrics["baseline_http"][host + "_CT"] = line.strip()
+                            break
+            except Exception:
+                pass
+        
+        elif fname.startswith("failure_tcp_"):
+            host = fname.replace("failure_tcp_", "").replace(".log", "")
+            path = os.path.join(log_dir, fname)
+            try:
+                with open(path) as f:
+                    lines = f.read().splitlines()
+                    # Find total throughput
+                    for line in reversed(lines):
+                        if "0.0000-" in line and "sec" in line and "Mbits" in line:
+                            metrics["failure_http"][host] = line.strip()
+                            break
+                    # Find connection times under failure
+                    for line in lines:
+                        if "[ CT]" in line and "final" in line:
+                            metrics["failure_http"][host + "_CT"] = line.strip()
+                            break
+            except Exception:
+                pass
+    
+    # Extract Bulk metrics (average throughput)
+    for fname in names:
+        if fname.startswith("bulk_"):
+            host = fname.replace("bulk_", "").replace(".log", "")
+            path = os.path.join(log_dir, fname)
+            try:
+                with open(path) as f:
+                    total = 0.0
+                    count = 0
+                    for line in f:
+                        if line.startswith("[SUM]"):
+                            parts = line.split()
+                            # Extract bandwidth (7th column in [SUM] lines)
+                            if len(parts) >= 7:
+                                try:
+                                    bw = float(parts[6])
+                                    total += bw
+                                    count += 1
+                                except ValueError:
+                                    pass
+                    if count > 0:
+                        avg = total / count
+                        metrics["baseline_bulk"][host] = f"{avg:.2f} Mbits/sec avg ({count} intervals)"
+            except Exception:
+                pass
+    
+    # Extract Jitter and Recovery Time from RTP failure logs
+    for fname in names:
+        if fname.startswith("failure_udp_"):
+            host = fname.replace("failure_udp_", "").replace(".log", "")
+            path = os.path.join(log_dir, fname)
+            try:
+                with open(path) as f:
+                    lines = f.read().splitlines()
+                    jitters = []
+                    # Extract all jitter values from per-second intervals
+                    for line in lines:
+                        if "0.0000-" in line and "ms" in line and "Lost" in line:
+                            parts = line.split()
+                            for i, part in enumerate(parts):
+                                if "ms" in part and i > 0:
+                                    try:
+                                        jitter = float(parts[i-1])
+                                        jitters.append(jitter)
+                                    except (ValueError, IndexError):
+                                        pass
+                    if jitters:
+                        min_j = min(jitters)
+                        max_j = max(jitters)
+                        avg_j = sum(jitters) / len(jitters)
+                        metrics["failure_jitter_range"][host] = f"min={min_j:.3f}ms, avg={avg_j:.3f}ms, max={max_j:.3f}ms"
+                    
+                    # Estimate recovery time: find when throughput stabilizes at high rate
+                    throughs = []
+                    for line in lines:
+                        if "0.0000-" in line and "Mbits" in line and "[" not in line:
+                            parts = line.split()
+                            for i, part in enumerate(parts):
+                                if "Mbits/sec" in part and i > 0:
+                                    try:
+                                        through = float(parts[i-1])
+                                        throughs.append(through)
+                                    except (ValueError, IndexError):
+                                        pass
+                    if len(throughs) > 2:
+                        baseline_through = throughs[-1]  # Final throughput (stable)
+                        # Find first interval that reaches 80% of baseline
+                        recovery_intervals = 0
+                        for t in throughs:
+                            if t >= baseline_through * 0.8:
+                                break
+                            recovery_intervals += 1
+                        recovery_time = recovery_intervals * 1.0  # 1 second per interval
+                        metrics["failure_recovery_time"][host] = f"{recovery_time:.0f}s to 80% throughput"
+            except Exception:
+                pass
+    
+    return metrics
+
+
+def print_comparison_table(metrics: Dict[str, Dict[str, str]]):
+    """Print a comparison table of baseline vs failure metrics."""
+    log("\n" + "=" * 90)
+    log("BASELINE vs FAILURE COMPARISON")
+    log("=" * 90)
+    
+    # RTP Loss Comparison
+    log("\nRTP (Streaming) - Packet Loss:")
+    log("-" * 90)
+    hosts_with_baseline_rtp = set(metrics.get("baseline_rtp_loss", {}).keys())
+    hosts_with_failure_rtp = set(metrics.get("failure_rtp_loss", {}).keys())
+    hosts_rtp = hosts_with_baseline_rtp | hosts_with_failure_rtp
+    
+    if hosts_rtp:
+        for host in sorted(hosts_rtp):
+            baseline = metrics.get("baseline_rtp_loss", {}).get(host, "No data")
+            failure = metrics.get("failure_rtp_loss", {}).get(host, "No data")
+            log(f"  {host} (baseline): {baseline}")
+            log(f"  {host} (failure):  {failure}")
+            log("")
+    else:
+        log("  No RTP data collected")
+    
+    # HTTP Throughput Comparison
+    log("\nHTTP (Medium Priority) - Throughput & Connection Times:")
+    log("-" * 90)
+    hosts_http = set()
+    for key in metrics.get("baseline_http", {}).keys():
+        if not key.endswith("_CT"):
+            hosts_http.add(key)
+    
+    if hosts_http:
+        for host in sorted(hosts_http):
+            baseline_bw = metrics.get("baseline_http", {}).get(host, "No data")
+            failure_bw = metrics.get("failure_http", {}).get(host, "No data")
+            baseline_ct = metrics.get("baseline_http", {}).get(host + "_CT", "No data")
+            failure_ct = metrics.get("failure_http", {}).get(host + "_CT", "No data")
+            
+            log(f"  {host} (baseline throughput): {baseline_bw}")
+            log(f"  {host} (failure throughput):  {failure_bw}")
+            log(f"  {host} (baseline conn times): {baseline_ct}")
+            log(f"  {host} (failure conn times):  {failure_ct}")
+            log("")
+    else:
+        log("  No HTTP data collected")
+    
+    # Bulk Throughput Comparison
+    log("\nBulk (Background Traffic) - Throughput:")
+    log("-" * 90)
+    hosts_bulk = set(metrics.get("baseline_bulk", {}).keys())
+    
+    if hosts_bulk:
+        for host in sorted(hosts_bulk):
+            baseline = metrics.get("baseline_bulk", {}).get(host, "No data")
+            log(f"  {host} (baseline): {baseline}")
+    else:
+        log("  No Bulk data collected")
+    
+    # RTP Jitter and Recovery Time Under Failure
+    log("\nRTP (Streaming) - Jitter Range & Recovery Under Failure:")
+    log("-" * 90)
+    hosts_jitter = set(metrics.get("failure_jitter_range", {}).keys())
+    
+    if hosts_jitter:
+        for host in sorted(hosts_jitter):
+            jitter = metrics.get("failure_jitter_range", {}).get(host, "No data")
+            recovery = metrics.get("failure_recovery_time", {}).get(host, "No data")
+            log(f"  {host} (jitter range):  {jitter}")
+            log(f"  {host} (recovery time): {recovery}")
+            log("")
+    else:
+        log("  No jitter/recovery data collected")
+    
+    log("\n" + "=" * 90)
 
 
 def print_results(log_dir: str):
@@ -243,57 +535,188 @@ def print_results(log_dir: str):
                     log(l.strip())
 
 
-def run_scenarios(server_pid: int, client_entries: List[Dict], server_ip: str, log_dir: str, args):
-    # Phase 1: Congestion (sustained streams + bulk + http) from all clients
-    log("=" * 70)
-    log("PHASE 1: Sustained congestion (single or multi-host)")
-    for entry in client_entries:
-        cpid = entry["pid"]
-        cname = entry["name"]
-        start_udp_flow(cpid, server_ip, STREAM_PORTS[0], args.stream_bw, args.phase1_duration, f"stream_{cname}_5004", log_dir)
-        start_udp_flow(cpid, server_ip, STREAM_PORTS[1], args.stream_bw, args.phase1_duration, f"stream_{cname}_5005", log_dir)
-        start_tcp_flow(cpid, server_ip, HTTP_PORT, args.phase1_duration, f"http_{cname}", log_dir, parallel=2)
-        start_tcp_flow(cpid, server_ip, BULK_PORT, args.phase1_duration, f"bulk_{cname}", log_dir, parallel=3)
-        if args.ping:
-            start_ping(cpid, server_ip, args.phase1_duration, args.ping_interval, f"ping_{cname}", log_dir)
-    time.sleep(args.phase1_duration)
+def run_phase2_alternating(client_pid: int, server_ip: str, log_dir: str, duration: int = 60):
+    """Phase 2a: Alternating RTP bursts (2M ↔ 10M) + concurrent HTTP & Bulk"""
+    log("PHASE 2a: Alternating bursts (2M ↔ 10M) with concurrent HTTP & Bulk")
     
-    # Give iperf time to write final summary lines
-    log("Waiting for iperf to write final summaries...")
-    time.sleep(3)
-
-    if args.phase1_only:
-        log("Phase1-only flag set; skipping variable load and failure phases")
-        return
-
-    # Phase 2: Variable load (bursty UDP) using first client only
-    log("=" * 70)
-    log("PHASE 2: Variable load (bursty)")
-    first = client_entries[0]
-    var_label = f"var_load_{first['name']}"
-    logfile_ns = f"/tmp/{var_label}_{int(time.time())}.log"
-    seq = [("2M", 8), ("8M", 8), ("1M", 8), ("6M", 8), ("10M", 8)]
+    # Start HTTP and Bulk in background for the entire duration
+    start_tcp_flow(client_pid, server_ip, HTTP_PORT, duration, f"http_phase2a", log_dir, parallel=2)
+    start_tcp_flow(client_pid, server_ip, BULK_PORT, duration, f"bulk_phase2a", log_dir, parallel=3)
+    
+    # Run variable RTP load
+    label = f"var_load_alternating"
+    logfile_ns = f"/tmp/{label}_{int(time.time())}.log"
     with open(logfile_ns, "w") as _:
         pass
-    for bw, dur in seq:
-        cmd = f"iperf -c {server_ip} -p {STREAM_PORTS[0]} -u -b {bw} -t {dur} >> {logfile_ns} 2>&1"
-        exec_in_host(first["pid"], cmd, background=False)
+    
+    start_time = time.time()
+    burst_duration = 8  # 8 seconds per burst
+    is_high = True
+    
+    while time.time() - start_time < duration:
+        bw = "10M" if is_high else "2M"
+        cmd = f"iperf -c {server_ip} -p {STREAM_PORTS[0]} -u -b {bw} -t {burst_duration} >> {logfile_ns} 2>&1"
+        log(f"  RTP: {bw} for {burst_duration}s")
+        exec_in_host(client_pid, cmd, background=False)
+        is_high = not is_high
         time.sleep(1)
+    
     proc = subprocess.CompletedProcess([], 0)
-    proc.log_info = (first["pid"], logfile_ns, f"{log_dir}/{var_label}.log")
+    proc.log_info = (client_pid, logfile_ns, f"{log_dir}/{label}.log")
     processes.append(proc)
+
+
+def run_phase2_progressive(client_pid: int, server_ip: str, log_dir: str, duration: int = 30):
+    """Phase 2b: Progressive RTP ramp (1M → 10M) + concurrent HTTP & Bulk"""
+    log(f"PHASE 2b: Progressive ramp (1M → 10M over {duration}s) with concurrent HTTP & Bulk")
+    
+    # Start HTTP and Bulk in background for the entire duration
+    start_tcp_flow(client_pid, server_ip, HTTP_PORT, duration, f"http_phase2b", log_dir, parallel=2)
+    start_tcp_flow(client_pid, server_ip, BULK_PORT, duration, f"bulk_phase2b", log_dir, parallel=3)
+    
+    # Run variable RTP load
+    label = f"var_load_progressive"
+    logfile_ns = f"/tmp/{label}_{int(time.time())}.log"
+    with open(logfile_ns, "w") as _:
+        pass
+    
+    step_duration = 2  # 2 seconds per step
+    num_steps = int(duration / step_duration)
+    bw_min, bw_max = 1, 10
+    
+    for i in range(num_steps):
+        # Linear interpolation from 1M to 10M
+        bw = bw_min + (bw_max - bw_min) * (i / max(1, num_steps - 1))
+        cmd = f"iperf -c {server_ip} -p {STREAM_PORTS[0]} -u -b {bw:.1f}M -t {step_duration} >> {logfile_ns} 2>&1"
+        log(f"  RTP: {bw:.1f}M for {step_duration}s")
+        exec_in_host(client_pid, cmd, background=False)
+        time.sleep(0.5)
+    
+    proc = subprocess.CompletedProcess([], 0)
+    proc.log_info = (client_pid, logfile_ns, f"{log_dir}/{label}.log")
+    processes.append(proc)
+
+
+def run_phase2_sinusoidal(client_pid: int, server_ip: str, log_dir: str, duration: int = 60):
+    """Phase 2c: Sinusoidal RTP load (2M ↔ 8M) + concurrent HTTP & Bulk"""
+    import math
+    log(f"PHASE 2c: Sinusoidal load (2M ↔ 8M over {duration}s) with concurrent HTTP & Bulk")
+    
+    # Start HTTP and Bulk in background for the entire duration
+    start_tcp_flow(client_pid, server_ip, HTTP_PORT, duration, f"http_phase2c", log_dir, parallel=2)
+    start_tcp_flow(client_pid, server_ip, BULK_PORT, duration, f"bulk_phase2c", log_dir, parallel=3)
+    
+    # Run variable RTP load
+    label = f"var_load_sinusoidal"
+    logfile_ns = f"/tmp/{label}_{int(time.time())}.log"
+    with open(logfile_ns, "w") as _:
+        pass
+    
+    step_duration = 2  # 2 seconds per step
+    num_steps = int(duration / step_duration)
+    bw_min, bw_max = 2, 8
+    center = (bw_min + bw_max) / 2
+    amplitude = (bw_max - bw_min) / 2
+    
+    for i in range(num_steps):
+        # Sinusoidal: center + amplitude * sin(phase)
+        phase = (i / num_steps) * 2 * math.pi
+        bw = center + amplitude * math.sin(phase)
+        cmd = f"iperf -c {server_ip} -p {STREAM_PORTS[0]} -u -b {bw:.1f}M -t {step_duration} >> {logfile_ns} 2>&1"
+        log(f"  RTP: {bw:.1f}M for {step_duration}s")
+        exec_in_host(client_pid, cmd, background=False)
+        time.sleep(0.5)
+    
+    proc = subprocess.CompletedProcess([], 0)
+    proc.log_info = (client_pid, logfile_ns, f"{log_dir}/{label}.log")
+    processes.append(proc)
+
+
+def run_scenarios(server_pid: int, client_entries: List[Dict], server_ip: str, log_dir: str, args):
+    """Execute phases 1-3 of stress testing."""
+    # Phase 1: Congestion (sustained streams + bulk + http) from all clients
+    if not args.skip_phase1 and not args.phase3_only:
+        log("=" * 70)
+        log("PHASE 1: Sustained congestion (single or multi-host)")
+        for entry in client_entries:
+            cpid = entry["pid"]
+            cname = entry["name"]
+            start_udp_flow(cpid, server_ip, STREAM_PORTS[0], args.stream_bw, args.phase1_duration, f"stream_{cname}_5004", log_dir)
+            start_udp_flow(cpid, server_ip, STREAM_PORTS[1], args.stream_bw, args.phase1_duration, f"stream_{cname}_5005", log_dir)
+            start_tcp_flow(cpid, server_ip, HTTP_PORT, args.phase1_duration, f"http_{cname}", log_dir, parallel=2)
+            start_tcp_flow(cpid, server_ip, BULK_PORT, args.phase1_duration, f"bulk_{cname}", log_dir, parallel=3)
+            if args.ping:
+                start_ping(cpid, server_ip, args.phase1_duration, args.ping_interval, f"ping_{cname}", log_dir)
+        time.sleep(args.phase1_duration)
+        
+        # Give iperf time to write final summary lines (increased wait)
+        log("Waiting for iperf to write final summaries...")
+        time.sleep(15)  # Longer wait to let iperf finish gracefully
+    elif args.phase3_only:
+        log("=" * 70)
+        log("PHASE 1: Skipped (--phase3-only flag set)")
+    else:
+        log("=" * 70)
+        log("PHASE 1: Skipped (--skip-phase1 flag set)")
+
+    if args.phase1_only:
+        log("Phase1-only flag set; skipping variable/failure phases")
+        return
+
+    # Phase 2: Variable load patterns
+    if not args.phase3_only:
+        log("=" * 70)
+        first = client_entries[0]
+        
+        if args.phase2_alternating:
+            run_phase2_alternating(first["pid"], server_ip, log_dir, duration=args.phase2_duration)
+            time.sleep(15)  # Wait for iperf to finish
+        
+        if args.phase2_progressive:
+            run_phase2_progressive(first["pid"], server_ip, log_dir, duration=args.phase2_duration)
+            time.sleep(15)
+        
+        if args.phase2_sinusoidal:
+            run_phase2_sinusoidal(first["pid"], server_ip, log_dir, duration=args.phase2_duration)
+            time.sleep(15)
+        
+        if not (args.phase2_alternating or args.phase2_progressive or args.phase2_sinusoidal):
+            log("No Phase 2 patterns selected; skipping Phase 2")
+            # If phase3_only is set, continue to Phase 3; otherwise return
+            if not args.phase3_only:
+                return
+    else:
+        log("=" * 70)
+        log("PHASE 2: Skipped (--phase3-only flag set)")
 
     # Phase 3: Failures (delay + loss) during traffic on first client
     log("=" * 70)
     log("PHASE 3: Failure injection (delay+loss) on first client")
+    first = client_entries[0]
+    
+    # Capture baseline stats before netem
+    log("Baseline interface stats (before netem):")
+    get_interface_stats(first["pid"], first["iface"], "BEFORE")
+    
     apply_netem(first["pid"], first["iface"], delay_ms=args.failure_delay, loss_pct=args.failure_loss)
+    
+    # Verify netem was actually applied
+    time.sleep(0.5)
+    if not verify_netem(first["pid"], first["iface"]):
+        log("WARNING: Netem verification failed; loss/delay may not be applied!")
+    
+    log(f"Starting traffic with netem active (delay={args.failure_delay}ms, loss={args.failure_loss}%)")
     start_udp_flow(first["pid"], server_ip, STREAM_PORTS[0], args.stream_bw, args.failure_duration, f"failure_udp_{first['name']}", log_dir)
     start_tcp_flow(first["pid"], server_ip, BULK_PORT, args.failure_duration, f"failure_tcp_{first['name']}", log_dir, parallel=2)
     time.sleep(args.failure_duration)
     
+    # Capture stats after traffic
+    log("Interface stats (after traffic with netem):")
+    get_interface_stats(first["pid"], first["iface"], "AFTER")
+    
     # Give iperf time to write final summaries
     log("Waiting for iperf to write final summaries...")
-    time.sleep(3)
+    time.sleep(15)  # Longer wait to let iperf finish gracefully
     
     clear_netem(first["pid"], first["iface"])
 
@@ -305,8 +728,14 @@ def main():
     parser.add_argument("--stream-bw", default="5M", help="Streaming UDP bandwidth (each stream)")
     parser.add_argument("--phase1-duration", type=int, default=30, help="Duration for congestion phase")
     parser.add_argument("--phase1-only", action="store_true", help="Run only congestion phase (skip variable/failure)")
+    parser.add_argument("--skip-phase1", action="store_true", help="Skip congestion phase (jump directly to phase 2 or 3)")
+    parser.add_argument("--phase3-only", action="store_true", help="Run only failure injection phase (skip congestion/variable)")
     parser.add_argument("--ping", action="store_true", help="Also run pings from each client to server during phase 1")
     parser.add_argument("--ping-interval", type=float, default=0.2, help="Ping interval seconds (default 0.2)")
+    parser.add_argument("--phase2-duration", type=int, default=60, help="Duration for each Phase 2 pattern (default 60s)")
+    parser.add_argument("--phase2-alternating", action="store_true", help="Run Phase 2a: Alternating bursts (2M ↔ 10M)")
+    parser.add_argument("--phase2-progressive", action="store_true", help="Run Phase 2b: Progressive ramp (1M → 10M)")
+    parser.add_argument("--phase2-sinusoidal", action="store_true", help="Run Phase 2c: Sinusoidal load (2M ↔ 8M)")
     parser.add_argument("--failure-duration", type=int, default=20, help="Duration for failure phase")
     parser.add_argument("--failure-delay", type=int, default=50, help="Netem delay ms during failure phase")
     parser.add_argument("--failure-loss", type=float, default=5.0, help="Netem loss %% during failure phase")
@@ -328,7 +757,7 @@ def main():
         sys.exit(1)
 
     server_pid = host_pids[args.server]
-    client_entries = [{"name": c, "pid": host_pids[c], "iface": "eth0"} for c in client_names]
+    client_entries = [{"name": c, "pid": host_pids[c], "iface": f"{c}-eth0"} for c in client_names]
 
     # Check iperf presence
     if not check_iperf(server_pid) or any(not check_iperf(e["pid"]) for e in client_entries):
@@ -369,6 +798,9 @@ def main():
         retrieve_logs()
         if not validate_logs(log_dir):
             sys.exit(1)
+        # Parse and display metrics comparison
+        metrics = parse_metrics_from_logs(log_dir)
+        print_comparison_table(metrics)
         print_results(log_dir)
     finally:
         cleanup(server_pid, [e["pid"] for e in client_entries], [e["iface"] for e in client_entries])
