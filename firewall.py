@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import subprocess
 import time
+import signal
+import sys
 
 CHAIN = "VNF_FW"
 RTP_DSCP = 46
@@ -92,6 +94,12 @@ def main():
 
     default_accept()
     print("[Firewall] Firewall active")
+
+    def signal_handler(sig, frame):
+        sys.exit(0)
+
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
 
     # keep alive
     while True:

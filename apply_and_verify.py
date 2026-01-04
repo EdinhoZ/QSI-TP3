@@ -31,6 +31,7 @@ ENABLE_FIREWALL = True
 # =========================
 
 VNFS: List[subprocess.Popen] = []
+TARGET_HOSTS: List[str] = DEFAULT_TARGET_HOSTS
 
 # =========================
 # UTILS
@@ -289,6 +290,8 @@ def launch_monitor():
 # =========================
 
 def main():
+    global TARGET_HOSTS
+    
     # Parse command-line arguments
     parser = argparse.ArgumentParser(
         description="VNF orchestrator: Apply classifier, policer, and scheduler to Mininet hosts"

@@ -3,6 +3,8 @@ import time
 import argparse
 import subprocess
 import logging
+import signal
+import sys
 from collections import defaultdict
 from prometheus_client import start_http_server, Gauge, Counter
 
@@ -211,6 +213,12 @@ def main():
     log.info(f"Exporter on :{PROM_PORT}/metrics")
 
     mon = MonitorVNF(args.switches)
+
+    def signal_handler(sig, frame):
+        sys.exit(0)
+
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
 
     while True:
         mon.collect()
