@@ -7,10 +7,6 @@ import signal
 import argparse
 from typing import List
 
-# =========================
-# CONFIG
-# =========================
-
 MONITOR = "monitor.py"
 FIREWALL = "firewall.py"
 
@@ -24,10 +20,6 @@ RATE_LIMITS = {
 # Default hosts to apply VNF configuration (can be overridden via args)
 DEFAULT_TARGET_HOSTS = ["h1", "h4"]
 
-# =========================
-# GLOBAL STATE
-# =========================
-
 VNFS: List[subprocess.Popen] = []
 TARGET_HOSTS: List[str] = DEFAULT_TARGET_HOSTS
 ENABLE_CLASSIFIER = True
@@ -35,10 +27,6 @@ ENABLE_POLICER = True
 ENABLE_SCHEDULER = True
 ENABLE_FIREWALL = True
 ENABLE_MONITOR = True
-
-# =========================
-# UTILS
-# =========================
 
 def log(msg):
     print(f"[ORC] {msg}")
@@ -50,10 +38,6 @@ def run(cmd: str) -> subprocess.Popen:
 def run_blocking(cmd: str):
     log(cmd)
     subprocess.check_call(cmd, shell=True)
-
-# =========================
-# TOPOLOGY DISCOVERY
-# =========================
 
 def get_mininet_hosts() -> List[str]:
     """Get list of Mininet hosts from running processes"""
@@ -89,10 +73,6 @@ def get_mininet_hosts() -> List[str]:
         log(f"Error detecting hosts: {e}")
         return []
 
-# =========================
-# CLEANUP & SIGNAL HANDLING
-# =========================
-
 def cleanup():
     log("Stopping VNFs...")
     for p in VNFS:
@@ -123,12 +103,8 @@ def handle_signal(sig, frame):
     cleanup()
     sys.exit(0)
 
-# =========================
-# VNF CONFIGURATION
-# =========================
 
 def get_host_pid(host: str) -> str:
-    """Get the PID of a Mininet host process"""
     try:
         result = subprocess.run(
             f"pgrep -f 'mininet:{host}$'",
@@ -144,7 +120,6 @@ def get_host_pid(host: str) -> str:
         return None
 
 def apply_host_classifier(host: str):
-    """Apply DSCP marking in host namespace using iptables"""
     if not ENABLE_CLASSIFIER:
         return
         
@@ -258,7 +233,6 @@ def apply_host_policing(host: str):
     log(f"Policer+scheduler configured on {host}")
 
 def verify_config(host: str):
-    """Verify VNF configuration"""
     print(f"\n=== Verifying {host} ===")
     iface = f"{host}-eth0"
     
@@ -298,10 +272,6 @@ def launch_monitor():
         VNFS.append(run(f"python3 {MONITOR}"))
     elif ENABLE_MONITOR:
         log(f"Warning: Monitor enabled but {MONITOR} not found")
-
-# =========================
-# MAIN
-# =========================
 
 def main():
     global TARGET_HOSTS, ENABLE_CLASSIFIER, ENABLE_POLICER, ENABLE_SCHEDULER, ENABLE_FIREWALL, ENABLE_MONITOR

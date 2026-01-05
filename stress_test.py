@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""
-Stress test script for VNFs: congestion, variable load, and failure scenarios.
-- Uses iperf (v2) for traffic generation inside Mininet namespaces.
-- Uses tc/netem to inject delay/loss (failures) on client interfaces.
-"""
 import argparse
 import os
 import signal
@@ -63,10 +58,6 @@ def get_host_pid(hostname: str) -> int:
 
 
 def get_host_ip(host_pid: int, iface: Optional[str] = None) -> Optional[str]:
-    """
-    Get the IPv4 address of a Mininet host.
-    If iface is None, automatically detect the first usable interface.
-    """
     if iface:
         cmd = f"ip -4 addr show {iface}"
     else:

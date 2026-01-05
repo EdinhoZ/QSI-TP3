@@ -5,6 +5,8 @@ import signal
 import sys
 
 RTP_DSCP = 46
+RTP_PORT_RANGE = "16384:32767"
+RTP_PORTS = (5004, 5005)
 DEFAULT_RATE = "20mbit"
 DEFAULT_BURST = "100kb"
 
@@ -13,9 +15,6 @@ def run(cmd):
     subprocess.run(cmd, shell=True, check=False)
 
 def detect_lan_interfaces():
-    """
-    LAN-facing = non-loopback, non-192.168.x.x
-    """
     out = subprocess.check_output("ip -o -4 addr show", shell=True, text=True)
     ifaces = []
     for ln in out.splitlines():
@@ -34,10 +33,6 @@ def setup_ingress(dev):
     run(f"tc qdisc add dev {dev} handle ffff: ingress")
 
 def install_policer(dev):
-    """
-    Police non-EF UDP traffic entering the core.
-    EF traffic is explicitly excluded.
-    """
     tos_ef = (RTP_DSCP << 2) & 0xff
 
     # Allow EF (RTP) unconditionally
@@ -46,6 +41,21 @@ def install_policer(dev):
         f"u32 match ip tos {tos_ef} 0xff "
         f"action pass"
     )
+
+    # Allow RTP by ports (catches unmarked RTP before classification)
+    run(
+        f"tc filter add dev {dev} parent ffff: protocol ip prio 5 "
+        f"u32 match ip protocol 17 0xff "
+        f"match ip dport {RTP_PORT_RANGE} 0xffff "
+        f"action pass"
+    )
+    for port in RTP_PORTS:
+        run(
+            f"tc filter add dev {dev} parent ffff: protocol ip prio 6 "
+            f"u32 match ip protocol 17 0xff "
+            f"match ip dport {port} 0xffff "
+            f"action pass"
+        )
 
     # Police all other UDP
     run(

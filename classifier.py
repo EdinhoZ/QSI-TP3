@@ -3,18 +3,15 @@ import subprocess
 import re
 
 RTP_DSCP = 46  # EF
-RTP_PORT_RANGE = "16384:32767"
+AF_DSCP = 34   # AF41
+RTP_PORT_RANGE = "16384:32767" # Common RTP port range
 
 def run(cmd):
     print(f"[Classifier] {cmd}")
     subprocess.run(cmd, shell=True, check=False)
 
 def list_lan_interfaces():
-    """
-    Detect LAN-facing interfaces:
-    - Exclude loopback
-    - Exclude router-to-router /30 links (192.168.x.x)
-    """
+    # Get all IPv4 interfaces
     output = subprocess.check_output("ip -o -4 addr show", shell=True, text=True)
     lan_ifaces = []
 
@@ -23,6 +20,7 @@ def list_lan_interfaces():
         iface = parts[1]
         ip = parts[3]
 
+        # Exclude loopback interface
         if iface == "lo":
             continue
 
@@ -54,8 +52,17 @@ def install_rtp_rules(iface):
             f"-j DSCP --set-dscp {RTP_DSCP}"
         )
 
+def install_http_rules(iface):
+    # HTTP/HTTPS traffic as AF41
+    for port in (80, 443):
+        run(
+            f"iptables -t mangle -A PREROUTING "
+            f"-i {iface} -p tcp --dport {port} "
+            f"-j DSCP --set-dscp {AF_DSCP}"
+        )
+
 def main():
-    print("[Classifier] Initializing RTP classifier VNF (router-based)")
+    print("[Classifier] Initializing RTP classifier VNF")
     reset_mangle()
 
     lan_ifaces = list_lan_interfaces()
@@ -66,8 +73,9 @@ def main():
     for iface in lan_ifaces:
         print(f"[Classifier] Installing RTP rules on {iface}")
         install_rtp_rules(iface)
+        install_http_rules(iface)
 
-    print("[Classifier] RTP classification active (DSCP EF)")
+    print("[Classifier] RTP and HTTP classification active (DSCP EF/AF41)")
 
 if __name__ == "__main__":
     main()

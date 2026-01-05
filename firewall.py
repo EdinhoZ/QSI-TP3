@@ -13,9 +13,6 @@ def run(cmd):
     subprocess.run(cmd, shell=True, check=False)
 
 def detect_lan_interfaces():
-    """
-    LAN-facing = non-loopback, non-192.168.x.x
-    """
     out = subprocess.check_output("ip -o -4 addr show", shell=True, text=True)
     ifaces = []
     for ln in out.splitlines():
@@ -44,7 +41,7 @@ def allow_established():
     )
 
 def allow_rtp(iface):
-    # DSCP-based (preferred)
+    # DSCP-based
     run(
         f"iptables -A {CHAIN} -i {iface} "
         f"-m dscp --dscp {RTP_DSCP} "

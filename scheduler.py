@@ -17,9 +17,6 @@ def run(cmd):
     subprocess.run(cmd, shell=True, check=False)
 
 def detect_core_interfaces():
-    """
-    Core-facing = interfaces with 192.168.x.x addresses
-    """
     out = subprocess.check_output("ip -o -4 addr show", shell=True, text=True)
     ifaces = []
     for ln in out.splitlines():

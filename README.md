@@ -1,8 +1,18 @@
-# QSI-TP3
+# Introdução (Objetivo)
 
-## Introdução: Arquitetura e VNFs
+A implementação de medidas de Qualidade de Serviço ou _Quality of Service_ (QoS) é um elemento essencial no funcionamento das redes modernas, otimizando os processos intervenientes para atingir o desempenho apropriado de acordo com os requisitos distintos das diversas aplicações que hoje existem. 
 
-Para este trabalho, decidimos focar-nos nos seguintes aspetos de QoS:
+Este projeto tem como objetivo desenvolver e testar uma cadeia de _Virtual Network Functions_ (VNFs) capaz de aplicar políticas de gestão de tráfego, introduzindo assim QoS para um objetivo específico numa rede simulada. 
+
+Nomeadamente, o alvo de QoS é o _streaming_ VoIP, especificamente através da priorização de pacotes RTP e, secundariamente, HTTP (usado em algumas aplicações para as interfaces web). A intenção é que, ao enviar pacotes RTP, sejam mantidos os valores pretendidos de débito da conexão e minimizados o _jitter_ e _packet loss_, mesmo com condições adversas na rede.
+
+# Metodologia e Implementação
+
+Nesta secção, além de detalhar as decisões finais sobre a arquitetura e a implementação, é referenciada a evolução das decisões sobre cada etapa, detalhando o processo de desenvolvimento, especialmente em comparação com o relatório submetido para a primeira entrega. 
+
+## Arquitetura e VNFs
+
+Esta solução abrange os seguintes aspetos:
 
 - Classificação
 - Controlo de Acesso
@@ -10,79 +20,62 @@ Para este trabalho, decidimos focar-nos nos seguintes aspetos de QoS:
 - Policiamento
 - Monitorização
 
-O objetivo principal de definir estas VNFs é priorizar dados relacionados com _streaming_ de vídeos.
+As VNFs são implementadas em **Python**.
 
-### VNF de Classificação
+Inicialmente, o agendamento não seria abordado, mas as VNFs sofreram inúmeras mudanças durante o desenvolvimento e, ao longo deste processo, o _scheduler_ foi capaz de ser implementado. 
 
-A classificação é feita diretamente no _switch_ OVS através da instalação de regras OpenFlow que marcam o campo DSCP dos pacotes (não usa _Scapy_ nem analisa tamanho/TTL). 
+### VNF de Classificação (_Classifier_)
 
-A VNF adiciona fluxos que identificam classes de tráfego e atribuem marcas DSCP específicas, por exemplo: RTP em UDP 5004/5005 com DSCP 46 (EF) para _streaming_, HTTP (TCP 80) com DSCP 34 (AF41), DNS com DSCP 8, SSH com DSCP 16 e, por omissão, DSCP 0. As regras são instaladas com prioridade baixa para preservar os fluxos de aprendizagem existentes e encaminhamento normal. 
+A classificação é feita através do comando Linux `iptables`, criando regras na tabela `mangle` que marcam o tráfego RTP com o valor DSCP 46 (_Expedited Forwarding_, ou EF) e HTTP com DSCP 34 (_Assured Forwarding_, AF). Os pacotes são identificados como RTP de acordo com a utilização do protocolo UDP nas portas 16384 a 32767 (comuns para RTP na indústria VoIP) bem como 5004 e 5005, usadas na nossa geração de tráfego simulado para RTP e RTCP respetivamente. Já HTTP é identificado pela porta 80 ou 443 (HTTPS). 
 
-Esta VNF faz apenas a marcação/classificação; a priorização efetiva depende de outras VNFs na cadeia.
+A marcação é feita (na _chain_ `PREROUTING`, ou seja, antes de qualquer decisão de routing) para indicar aos próximos processos na cadeia que estes são os pacotes que devem ser priorizados. Portanto, esta VNF faz apenas a marcação/classificação; a priorização efetiva depende de outras VNFs na cadeia.
 
-### VNF de Controlo de Acesso
+O _classifier_ teria inicialmente uma abordagem baseada em **OpenFlow** e **OVS**, marcando múltiplos tipos de tráfego com prioridades diferentes. No entanto, foi decidido que, exceto para o RTP, as prioridades eram supérfluas, tendo sido escolhidas de forma arbitrária. A decisão de abandonar o OpenFlow veio da sua complexidade em comparação com `iptables`, que é melhor documentado e estável/funcional em qualquer router Linux. 
 
-Esta VNF implementa uma _firewall_ baseada em `nftables` que filtra tráfego com base em regras personalizadas. Utiliza uma tabela `inet filter` com uma cadeia personalizada (`VNF-FW`) que é inserida na cadeia `forward` do kernel. As regras podem filtrar por protocolo, endereços IP de origem/destino, portas e valores DSCP, permitindo ações como `accept` (aceitar pacote) ou `drop` (descartar). 
+=== VNF de Controlo de Acesso (_Firewall_)
 
-Assim, esta VNF controla quais fluxos podem passar através da rede, permitindo ou bloqueando tráfego específico conforme as regras definidas no ficheiro de configuração. Garante que apenas tráfego autorizado (como RTP ou HTTP para _streaming_) seja permitido.
+Esta VNF implementa uma _firewall_ baseada em `iptables` que filtra tráfego a partir de regras personalizadas. Constitui uma cadeia personalizada "VNF_FW" na tabela `filter`, inserida na cadeia `FORWARD`.
 
-### VNF de Agendamento
+As regras são as seguintes:
+- Permitir conexões previamente estabelecidas (`allow_established`);
+- Permitir tráfego marcado como RTP através do DSCP 46, ou das portas 16384 a 32767 caso este falhe (`allow_rtp`);
+- Limitar o _rate_ de tráfego UDP não-RTP para 50 pacotes por segundo, descartando o que estiver acima para proteger contra _floods_ UDP ou ataques DDoS (`drop_suspicious_udp`);
+- Aceitar todos os outros tipos de tráfego (`default_accept`). 
 
-Esta VNF implementa enfileiramento por prioridade usando a disciplina `prio` do `tc`, mapeando valores DSCP para bandas de prioridade. Cria uma _qdisc_ com múltiplas bandas (por omissão 3: 0 = alta, 1 = média, 2 = baixa) e instala filtros `u32` que identificam pacotes pelo campo ToS (derivado do DSCP) e os direcionam para a banda correspondente. 
+Uma versão anterior desta VNF filtrava de forma mais complexa, classificando HTTP, RTP, DNS e SSH através de um ficheiro de configuração e descartando qualquer outro tipo de tráfego. Essa implementação foi descartada quando foi feita a decisão de que o propósito da _firewall_ seria proteger contra tráfego UDP potencialmente malicioso, e não abandonar tráfego sem relação com RTP; este tráfego não deve ser descartado, pois compromete o funcionamento de outros serviços na rede.
 
-Pacotes em bandas de maior prioridade são transmitidos primeiro, implementando assim a priorização efetiva do tráfego marcado pela VNF de Classificação. Por exemplo, RTP com DSCP 46 pode ser mapeado para banda 0 (prioridade máxima), HTTP com DSCP 34 para banda 1, e tráfego genérico para banda 2, garantindo que _streaming_ seja servido preferencialmente.
+### VNF de Agendamento (_Scheduler_)
 
-### VNF de Policiamento
+Esta VNF implementa escalonamento hierárquico usando _Hierarchical Token Bucket_ (HTB) do `tc`, que combina reserva de largura de banda com priorização. Cria três classes HTB nas interfaces do núcleo da rede: RTP (30 Mbps garantidos, teto 100 Mbps, prioridade 0), AF (20 Mbps garantidos, teto 80 Mbps, prioridade 1) e _Best-Effort_ (10 Mbps garantidos, teto 100 Mbps, prioridade 2). Filtros `u32` mapeiam DSCP 46 para a classe RTP e DSCP 34 para AF, com todo o resto direcionado para _Best-Effort_. Assim, o tráfego RTP recebe não só prioridade máxima mas também largura de banda garantida, enquanto classes inferiores podem "emprestar" largura de banda não utilizada até aos seus tetos.
 
-Esta VNF usa a ferramenta `tc` (_traffic control_) do Linux para aplicar limitações de débito (_rate limiting_) com base nos valores DSCP marcados anteriormente. Implementa duas abordagens: 
+A implementação inicial do _scheduler_ utilizava _priority queuing_ mais simples, sem garantias de largura de banda para prevenir _starvation_. Em comparação com o `prio` da versão inicial, HTB utiliza de forma mais eficiente os recursos e não permite que uma classe monopolize a largura de banda, fornecendo um mínimo de 10 Mbps mesmo para o tráfego sem prioridade. 
 
-- _ingress policing_ usando filtros `u32` que identificam pacotes por DSCP (convertido para o campo ToS) e aplica ações de _police_ com taxa (_rate_) e _burst_ configuráveis, descartando pacotes que excedam os limites; 
--  _egress shaping_ com disciplina HTB (_Hierarchical Token Bucket_) para controlar a largura de banda de saída. 
+### VNF de Policiamento (_Policer_)
 
-A VNF deteta automaticamente a interface de rede e permite configurar políticas diferentes para cada classe de tráfego, limitando o débito de fluxos específicos para simular condições de rede com capacidade restrita.
+Esta VNF implementa _ingress policing_ nas interfaces LAN, usando o comando `tc` para proteger o núcleo da rede contra ataques UDP. Cria uma `qdisc` _ingress_ e instala dois filtros `u32`: o primeiro permite tráfego RTP (DSCP 46) sem limites; o segundo aplica _policing_ a todo o tráfego UDP não-RTP, limitando a 20 Mbps com burst de 100 KB e descartando pacotes que excedam esse limite. Esta VNF aplica-se apenas ao tráfego de entrada (_ingress_) vindo das LANs, não realizando controlo de saída (_egress shaping_). Assim, limita as taxas de tráfego em UDP não-RTP enquanto garante passagem livre para _streaming_ RTP.
 
-### VNF de Monitorização
+O _policer_ foi essencialmente dividido da sua implementação inicial para o atual _scheduler_ e _policer_, em que o primeiro é o que agora realiza _egress shaping_, limitando tráfego não-UDP. Existe agora alguma sobreposição entre as funções do _firewall_ e do _policer_, no entanto, o primeiro é mais destinado à proteção contra ataques DoS enquanto que o segundo apenas diminui a carga na rede do tráfego UDP que não é classificado como RTP. 
 
-Esta VNF coleta estatísticas de tráfego dos _switches_ OVS usando o comando `ovs-ofctl dump-ports`, processa as métricas de bytes e pacotes recebidos/transmitidos por porta, e exporta-as através de um servidor HTTP compatível com _Prometheus_. As métricas incluem: débito em Mbps (_throughput_), taxa de pacotes por segundo (_packet rate_), e contadores totais de bytes e pacotes. 
+### VNF de Monitorização (_Monitor_)
 
-A VNF calcula taxas instantâneas baseadas em deltas entre leituras sucessivas, evitando valores negativos quando portas são reiniciadas. O servidor exporta métricas na porta 9100 (por omissão) que podem ser consumidas pelo _Prometheus_ e visualizadas no _Grafana_ para monitorização em tempo real do tráfego na rede.
+Esta VNF coleta estatísticas de tráfego das disciplinas de enfileiramento do kernel Linux usando `tc -s qdisc show`. Processa as métricas de bytes e pacotes recebidos/transmitidos por porta, calcula débito em bps e pacotes por segundo baseado em deltas entre leituras sucessivas, e monitoriza o _backlog_ e _drops_ das filas de tráfego. Todas as métricas são exportadas através de um servidor HTTP compatível com **Prometheus** na porta 9100, permitindo visualização em tempo real no **Grafana**. 
 
-Assim, a cadeia de VNFs é **Classificação -> Controlo de Acesso -> Agendamento -> Policiamento -> Monitorização**.
+A implementação anterior fazia o mesmo, mas com as métricas obtidas de _switches_ OVS, que já não são utilizados.
 
-## Metodologia
-
-### Topologia
+## Topologia
 
 A seguinte topologia serve de base para o trabalho.
 
-![topologia](topologia.png "topologia")
+![Topologia da rede](topologia.png)
 
-O diagrama foi desenhado no GUI do **CORE**, para efeitos de ilustração, mas a implementação concreta realizada através do API **Mininet** em Python. A intenção é representar uma versão simplificada de uma topologia de um ISP, com _switches_, _routers_ e _hosts_.
+O diagrama foi desenhado no GUI do **CORE**, para efeitos de ilustração, mas a implementação concreta foi realizada através da API **Mininet**. A intenção é representar uma versão simplificada de uma topologia de um ISP, com _switches_, _routers_ e _hosts_.
 
-### Tráfego de Exemplo
+A topologia cria um ambiente com diversas fontes de tráfego, um núcleo de rede com _bottleneck_ de 35 Mbps para induzir congestionamento nos testes, e múltiplos caminhos pelos diversos routers. Pode ser inicializada ao correr o _script_ com o comando `sudo python3 topologiaMininet.py`. 
 
-Para gerar tráfego de exemplo, utilizamos também as funcionalidades do **Mininet**. Para fazer isso simulamos as diferentes caraterísticas dos três tipos de tráfego pedidos como exemplo.
+## Orquestração e Integração na Topologia
 
-- VoIP requer baixa largura de banda, mas precisa de baixa latência e jitter.
-- Streaming precisa de uso alto de largura de banda e jitter moderado.
-- Dados em massa não permitem perdas.
+A cadeia de VNFs é **Classificação → Controlo de Acesso → Agendamento → Policiamento**, com a **Monitorização** tecnicamente acontecendo por fora da cadeia. 
 
-Com essas carateristicas, fazemos um iperf que obriga o uso específico desses três casos para funcionar como um exemplo válido de tráfego.
+No _script_ desenvolvido para inicializar as VNFs, `launch_vnfs.py`, a integração na topologia é feita de forma dinâmica com deteção dos _hosts_ Mininet em execução. O _script_, que deve ser executado num terminal separado da topologia, assume que esta está a correr, terminando o processo se não for o caso, e seleciona os _hosts_ alvo conforme argumentos passados na linha de comandos (por omissão, escolhe h1 e h4). A classificação é realizada no _namespace_ de cada _host_ alvo e as regras de agendamento e policiamento são aplicadas nas suas interfaces eth0, enquanto que o _firewall_ e a monitorização correm no _root namespace_, cobrindo os routers.
 
-- VoIP: iperf -u -b 100K
-- Streaming: iperf -u -b 5M
-- Transferência de Dados: iperf -t 20
-
-## Resultados
-
-
-
-### Discussão
-
-
-
-## Conclusão
-
-O diagrama de Gantt abaixo representa o fluxo de trabalho para as restantes semanas, tendo em conta as fases descritas no enunciado, os requisitos e a divisão por elementos de grupo para cada tarefa.
-
-![Gantt](gantt.png "Diagrama de Gantt")
+O _script_ pode ser chamado com argumentos que determinam quais VNFs serão lançadas, permitindo o teste dos efeitos com diferentes combinações de VNFs.
