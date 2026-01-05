@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""
-Stress test script for VNFs: congestion, variable load, and failure scenarios.
-- Uses iperf (v2) for traffic generation inside Mininet namespaces.
-- Uses tc/netem to inject delay/loss (failures) on client interfaces.
-"""
 import argparse
 import os
 import signal
@@ -63,10 +58,6 @@ def get_host_pid(hostname: str) -> int:
 
 
 def get_host_ip(host_pid: int, iface: Optional[str] = None) -> Optional[str]:
-    """
-    Get the IPv4 address of a Mininet host.
-    If iface is None, automatically detect the first usable interface.
-    """
     if iface:
         cmd = f"ip -4 addr show {iface}"
     else:
@@ -92,15 +83,26 @@ def check_iperf(host_pid: int) -> bool:
     return res.returncode == 0
 
 
+# Track server log files for retrieval
+server_logs = []
+
 def kill_iperf(host_pid: int):
     exec_in_host(host_pid, "pkill -9 iperf", background=False)
 
 
-def start_iperf_server(host_pid: int, port: int, udp: bool):
+def start_iperf_server(host_pid: int, port: int, udp: bool, log_dir: str = None):
     flag = "-u" if udp else ""
     mode = "UDP" if udp else "TCP"
     log(f"Starting iperf {mode} server on port {port}")
-    cmd = f"nohup iperf -s -p {port} {flag} > /dev/null 2>&1 &"
+    
+    # For UDP servers, log output to capture jitter and packet loss
+    if udp and log_dir:
+        logfile_ns = f"/tmp/server_{port}.log"
+        cmd = f"nohup iperf -s -p {port} {flag} > {logfile_ns} 2>&1 &"
+        server_logs.append((host_pid, logfile_ns, f"{log_dir}/server_{port}.log"))
+    else:
+        cmd = f"nohup iperf -s -p {port} {flag} > /dev/null 2>&1 &"
+    
     exec_in_host(host_pid, cmd, background=False)
     time.sleep(0.2)
 
@@ -151,6 +153,17 @@ def retrieve_logs():
                     log(f"Failed to save {dst_log}: {e}")
             else:
                 log(f"No output for {src_log}")
+    
+    # Retrieve server logs
+    for server_pid, src_log, dst_log in server_logs:
+        res = exec_in_host(server_pid, f"cat {src_log}")
+        if res.returncode == 0:
+            try:
+                with open(dst_log, "w") as f:
+                    f.write(res.stdout)
+                log(f"Saved {dst_log}")
+            except Exception as e:
+                log(f"Failed to save {dst_log}: {e}")
 
 
 def validate_logs(log_dir: str) -> bool:
@@ -780,7 +793,7 @@ def main():
 
     # Start servers
     for p in STREAM_PORTS:
-        start_iperf_server(server_pid, p, udp=True)
+        start_iperf_server(server_pid, p, udp=True, log_dir=log_dir)
     start_iperf_server(server_pid, HTTP_PORT, udp=False)
     start_iperf_server(server_pid, BULK_PORT, udp=False)
 
