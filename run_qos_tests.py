@@ -16,7 +16,7 @@ class QoSTestRunner:
     def __init__(self, script_dir: str):
         self.script_dir = script_dir
         self.stress_test_script = os.path.join(script_dir, "stress_test.py")
-        self.apply_vnf_script = os.path.join(script_dir, "apply_and_verify.py")
+        self.apply_vnf_script = os.path.join(script_dir, "launch_vnfs.py")
         self.traffic_logs_dir = os.path.join(script_dir, "traffic_logs")
         self.vnf_process = None
         
